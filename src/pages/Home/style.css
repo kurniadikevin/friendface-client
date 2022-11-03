@@ -1,10 +1,5 @@
-.App{
+#home-page{
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr;
-    height: 100vh;
+    grid-template-rows: 1.5fr 10fr;
 }
-    .home-main{
-        border: 1px solid grey;
-        
-    }
+

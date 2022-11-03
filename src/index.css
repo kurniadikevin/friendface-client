@@ -14,3 +14,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
+
+.App{
+  display: grid;
+  grid-template-columns: 2fr 6fr 2.5fr;
+  grid-template-rows: 1fr;
+  height: 100vh;
+}
+  .main{
+      border: 1px solid grey;
+      
+  }

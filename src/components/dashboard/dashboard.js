@@ -13,10 +13,10 @@ function Dashboard(){
                     <Link to='./'><div  id='dash-link'>Home</div></Link>
                 </div>
                 <div>
-                    <Link to='/'><div  id='dash-link'>Profile</div></Link>
+                    <Link to='/profile'><div  id='dash-link'>Profile</div></Link>
                 </div>
                 <div>
-                    <Link to='/'><div  id='dash-link'>Message</div></Link>
+                    <Link to='/message'><div  id='dash-link'>Message</div></Link>
                 </div>
                 <div>
                     <Link to='/login'><div  id='dash-link'>Log in</div></Link>
