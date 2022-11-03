@@ -10,16 +10,28 @@ function Dashboard(){
             </div>
             <div className='links-cont'>
                 <div>
-                    <Link to='./'><div  id='dash-link'>Home</div></Link>
+                    <Link to='./' id='link-cont'>
+                        <div  id='dash-link'>Home</div>
+                        <span class="material-symbols-outlined">cottage</span>
+                        </Link>
                 </div>
                 <div>
-                    <Link to='/profile'><div  id='dash-link'>Profile</div></Link>
+                    <Link to='/profile' id='link-cont'>
+                        <div  id='dash-link'>Profile</div>
+                        <span class="material-symbols-outlined">account_circle</span>
+                        </Link>
                 </div>
                 <div>
-                    <Link to='/message'><div  id='dash-link'>Message</div></Link>
+                    <Link to='/message' id='link-cont'>
+                        <div  id='dash-link'>Message</div>
+                        <span class="material-symbols-outlined">forum</span>
+                        </Link>
                 </div>
                 <div>
-                    <Link to='/login'><div  id='dash-link'>Log in</div></Link>
+                    <Link to='/login' id='link-cont'>
+                        <div id='dash-link'>Log in</div>
+                        <span class="material-symbols-outlined">login</span>
+                    </Link>
                 </div>
             </div>
             <div className='dashboard-bottom'></div>

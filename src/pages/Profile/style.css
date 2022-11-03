@@ -1,0 +1,18 @@
+#profile-main{
+    display: grid;
+    grid-template-rows: 4fr 8fr;
+}
+    .profile-head{
+        border: 1px solid grey;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    .profile-detail{
+        
+    }
+        .profile-pic-cont{
+            border: 1px solid grey;
+        }
+    .profile-body{
+        border: 1px solid grey;
+    }

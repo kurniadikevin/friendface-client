@@ -5,14 +5,24 @@
     padding-left: 25px;
 }
 
+
+
 .links-cont{
     border: 1px solid red;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    
-
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 50px;
 }
+    #link-cont{
+        display: flex;
+        flex-direction: row-reverse;
+       justify-content: space-between;
+      text-decoration: none;
+      color: white;
+    }
 #dash-link{
     text-decoration: none;
     color: white;

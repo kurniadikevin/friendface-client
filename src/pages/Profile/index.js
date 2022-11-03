@@ -7,8 +7,12 @@ export function ProfilePage() {
   return (
     <div className="App">
       <Dashboard/>
-      <div className='main'>
-        <p>page profile</p>
+      <div className='main' id='profile-main'>
+        <div className='profile-head'>
+          <div className='profile-pic-cont'></div>
+          <div className='profile-detail'></div>
+        </div>
+        <div className='profile-body'></div>
       </div>
       
       <Sidebar/>

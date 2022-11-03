@@ -1,3 +1,29 @@
 .HomeComp{
     border: 1px solid grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
 }
+
+.home-head{
+    /* border: 1px solid red; */
+    display: flex;
+    gap: 50px;
+}
+    #make-post{
+        border-radius: 12px;
+        padding: 8px 12px;
+        background-color: cornflowerblue;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+.search-bar{
+    display: flex;
+    gap: 10px;
+}
+    #search-input{
+        border-radius: 10px;
+    }
