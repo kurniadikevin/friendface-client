@@ -1,5 +1,5 @@
 #home-page{
     display: grid;
-    grid-template-rows: 1.5fr 10fr;
+    grid-template-rows: auto 10fr;
 }
 

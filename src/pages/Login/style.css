@@ -5,28 +5,38 @@
 }
 
 .login-box{
-    border: 1px solid red;
+    border: 1px solid white;
     grid-column: 2/3;
     margin-top: 100px;
-    padding: 20px 50px;   
+    padding: 20px 50px;
+    display: grid;   
+    grid-template-rows: 2fr 1.5fr 5fr;
 }
 .login-box>div{
-    border: 1px solid grey;
+   /*  border: 1px solid grey; */
 }
     .login-head{
     display: flex;
     justify-content: center;
     }
-    .login-form{
+    .sign-form{
       
     }
-    #form-login{
+
+    .submit-btn{
+        border: none;
+        padding: 5px 10px;
+        border-radius: 10px;
+        background-color: cornflowerblue;
+        color: white;
+    }
+    .form-sign{
         height: 200px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 40px;
+        gap: 30px;
     }
     .email-cont, .pass-cont{
     /* border:1px solid red; */
@@ -36,8 +46,30 @@
     gap: 10px;
     }
 
-    .login-bottom{
+    .sign-select{
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 20px;
+    }
+        .signup-toggle, .login-toggle{
+            cursor: pointer;
+            transition: 0.1s;
+            font-weight: 600;
+        }
+        .signup-toggle:hover ,.login-toggle:hover{
+            padding-bottom: 2px;
+            font-weight: 500;
+        }
+        .signup-toggle{
+            border-bottom: 1px solid white;
+        }
+
+
+    #signup-wrap{
+
+    }
+
+    #login-wrap{
+        display: none;
     }

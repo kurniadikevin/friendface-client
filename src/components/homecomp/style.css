@@ -1,10 +1,17 @@
 .HomeComp{
-    border: 1px solid grey;
+   
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.HomeCompHead{
+  
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 30px;
     padding-right: 30px;
+    height: 75px;
 }
 
 .home-head{
@@ -26,4 +33,51 @@
 }
     #search-input{
         border-radius: 10px;
+    }
+
+.form-newPost{
+    border: 1px solid grey;
+}
+
+.homeComp-postForm{
+    
+    height: 170px;
+    display: none; 
+}
+    .newpost-form{
+       display: grid;
+       grid-template-rows: 3fr 1fr;
+       padding-left: 30px;
+       padding-right: 30px;
+       padding-top: 25px;
+       gap: 10px;
+       background-color: cornflowerblue;
+       border-radius: 10px;
+       margin:0px 20px;
+    }
+    .newpost-main{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+       
+    }
+    .newpost-button{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+    }
+        #newpost-submit{
+        color: cornflowerblue;
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 5px 10px;
+        }
+
+    #newpost-text{
+        resize: none;
+        height: 100px;
+        width: 100%;
+        border-radius: 5px;
     }
