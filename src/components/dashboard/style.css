@@ -1,30 +1,88 @@
 .Dashboard{
     border: 1px solid grey;
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 2.5fr 1.5fr;
     padding-left: 25px;
+    
 }
 
-
+.app-title{
+    font-weight: 800;
+    font-size: 22pt;
+    padding-top: 25px;
+    transition: 0.5s;
+}
+    .app-title:hover{
+        color: cornflowerblue;
+    }
+.title-dashboard{
+    padding-left: 25px;
+}
+#title-link{
+    text-decoration: none;
+    color: white;
+}
 
 .links-cont{
-    border: 1px solid red;
+   /*  border: 1px solid red; */
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding-top: 30px;
-    padding-right: 30px;
-    padding-left: 50px;
+    padding-right: 50px;
+    padding-left: 30px;
 }
+    .sign-links{
+        padding-top: 10px;
+    }
+
     #link-cont{
         display: flex;
         flex-direction: row-reverse;
        justify-content: space-between;
       text-decoration: none;
-      color: white;
+      color: rgb(142, 179, 248);
     }
+   
+    #link-icon:hover{
+        font-weight: 700;
+        color: white;
+    }
+
 #dash-link{
     text-decoration: none;
     color: white;
     cursor: pointer;
+    font-size: 14pt;
+    font-weight: 600;
+    transition: 0.5s;
+}
+#dash-link:hover{
+    transform: translateX(5px);
+    font-weight: 700;
+    color: cornflowerblue;
+}
+
+.dashboard-bottom{
+    margin-right: 25px;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+}
+
+.dashboard-bottom>div{
+   /*  border: 1px solid grey; */
+}
+
+.profPic-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    #profileImgDash{
+        border-radius: 50%;
+    }
+.profInfo-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

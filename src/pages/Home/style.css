@@ -1,5 +1,54 @@
+
+.main{
+    font-family: 'Nunito', sans-serif;
+}
+
 #home-page{
     display: grid;
     grid-template-rows: auto 10fr;
 }
 
+.displayPostCont{
+    /* border: 1px solid red; */
+    padding:45px 20px 20px 20px;
+}
+
+.post-container{
+  /*   border: 1px solid red;  */
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    padding-bottom: 25px;
+    gap: 20px; 
+}
+
+#profileImg{
+    border-radius: 30px;
+}
+
+    .post-text{
+        padding-bottom: 10px;
+    }
+    .post-author{
+        font-size: 10pt;
+        padding-bottom: 10px;
+    }
+
+    .action-cont{
+       /*  border: 1px solid red; */
+        display: grid;
+        grid-template-columns: 25px 25px;
+        gap: 10px;
+    }
+    #like-icon, #comment-icon{
+        font-size: 15pt;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+
+    #like-icon:hover{
+        color: red;
+          }
+
+    #comment-icon:hover{
+        color:cornflowerblue;
+    }

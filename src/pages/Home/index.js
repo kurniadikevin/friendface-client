@@ -34,9 +34,29 @@ export function HomePage() {
         <div className='displayPostCont'>
           {postData.map(function(item,index){
             return(
-              <div>
-                <div className='post-text'>{item.text}</div>
-                <div className='post-author'>{item.author}</div>
+              <div className='post-container'>
+                <div className='post-sidebar'>
+                 {(()=>{
+                  if(item.profilePicture){
+                    return(
+                      <img  id='profileImg' src={require(item.profilePicture)}/>
+                    )
+                  } else{
+                    return (
+                      <img id='profileImg' src={require('../../assets/profilepicturesSmall.png')} alt='profilePicture'
+                      width={50} height={50}/>
+                    )
+                  }
+                 })()}
+                </div>
+                <div className='post-main'>
+                  <div className='post-text'>{item.text}</div>
+                  <div className='post-author'>{item.author}</div>
+                  <div className='action-cont'>
+                    <span id='like-icon' class="material-symbols-outlined">favorite</span>
+                    <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>
+                  </div>
+                </div>
               </div>
             )
           })}
