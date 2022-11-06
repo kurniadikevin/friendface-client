@@ -32,24 +32,27 @@ export function LoginPage() {
     loginToggle.style.borderBottom='none';
   }
 
+
+  // post form login using axios
   const loginUser = async(e)=>{
     e.preventDefault()
     const article = { 
        email : email,
     password : password};
-    await axios.post(`http://localhost:5000/users/login`, article).then(
+    await axios.post('http://localhost:5000/users/login', article).then(
         (res)=> {
           setCurrentUser('login as admin')
         console.log(res.config.data)
       }
-      )
-    }
+      ).catch((error) => console.log(error));
+}
 
   return (
     <div className="Login">
         <div className='login-box'>
           <div className='login-head'>
             <h2>Friendface</h2>
+            <p>{currentUser}</p>
           </div>
 
             <div className='sign-select'>
@@ -73,18 +76,18 @@ export function LoginPage() {
             </form>
 
           {/* login form */}
-          <div className='form-sign' id='login-wrap'>
+          <div className='form-sign' id='login-wrap' >
               <div className='email-cont'>
                 <label for='email'>Email</label>
-                <input type='text'  placeholder='email'
+                <input type='email'  placeholder='email' name='email' 
                  value={email} onChange={(e)=> setEmail((e.target.value))}></input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
-                <input type='password' placeholder='password'
+                <input type='password' placeholder='password' name='password'  
                   value={password} onChange={(e) => setPassword(e.target.value)}></input>
               </div>
-              <button type='submit' className='submit-btn' onClick={loginUser}>Log in</button>
+              <button type='submit'  className='submit-btn'  onClick={loginUser} >Log in</button>
           </div>              
           </div>
           

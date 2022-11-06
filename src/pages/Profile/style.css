@@ -1,18 +1,33 @@
 #profile-main{
     display: grid;
-    grid-template-rows: 4fr 8fr;
+    grid-template-rows: 3fr 8fr;
 }
     .profile-head{
         border: 1px solid grey;
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr 2.5fr;
     }
     .profile-detail{
-        
+        display: grid;
+        grid-template-rows: 3fr 2fr 2fr;
     }
+    .profile-detail>div{
+        border: 1px solid grey;
+
+    }
+
         .profile-pic-cont{
             border: 1px solid grey;
+            display: flex;
+            justify-content: center;
+            align-items:flex-start;
+            padding-top: 30px;
         }
+
+        #profileImgProfile{
+            border-radius: 50%;
+        }
+
     .profile-body{
         border: 1px solid grey;
     }
