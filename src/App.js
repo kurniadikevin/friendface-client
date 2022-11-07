@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { HomePage } from './pages/Home';
@@ -6,15 +6,33 @@ import {  LoginPage } from './pages/Login';
 import { ProfilePage } from './pages/Profile';
 import { MessagePage} from './pages/Message';
 
-const App = () => (
+
+const App = () =>{ 
+
+  const[userData,setUserData] = useState('')
+
+  const pull_data = (data) => { // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+    setUserData(data);
+    console.log(data);
+  }
+
+  return(
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={HomePage} />
-      <Route path="/login" exact component={LoginPage} />
-      <Route path="/profile" exact component={ProfilePage} />
-      <Route path="/message" exact component={MessagePage} />
+      <Route exact path="/">
+          <HomePage test={userData}/>
+      </Route> 
+      <Route path="/login" >
+          <LoginPage  func={pull_data}/>
+      </Route>
+      <Route  path="/profile" >
+          <ProfilePage/>
+      </Route>
+      <Route path="/message">
+          <MessagePage />  
+      </Route> 
     </Switch>
   </BrowserRouter>
-);
+)};
 
 export default App;

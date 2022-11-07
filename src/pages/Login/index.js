@@ -1,12 +1,22 @@
 import './style.css';
 import axios from 'axios';
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
-export function LoginPage() {
 
-  const [email,setEmail]= useState('')
-  const [password,setPassword]= useState('')
-  const [currentUser, setCurrentUser]= useState('not log in');
+
+export function LoginPage(props) {
+
+  let history = useHistory();
+
+
+
+  const [email,setEmail]= useState('');
+  const [password,setPassword]= useState('');
+  const [userData,setUserData]= useState({});
+
+  // pull data to app
+  props.func(userData);
  
   const toggleFormLogin = ()=>{
     const signupForm = document.querySelector('#signup-wrap');
@@ -34,17 +44,27 @@ export function LoginPage() {
 
 
   // post form login using axios
-  const loginUser = async(e)=>{
-    e.preventDefault()
-    const article = { 
-       email : email,
-    password : password};
-    await axios.post('http://localhost:5000/users/login', article).then(
-        (res)=> {
-          setCurrentUser('login as admin')
-        console.log(res.config.data)
+  const loginUser = async()=>{
+    
+    console.log( email +' '+ password)
+    axios({
+      method: "POST",
+      data: {
+        email: email,
+        password: password,
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/users/login",
+    }).then((res) => {
+      console.log(res.data)
+      if(res.data === 'No User Exists'){
+        alert('No User Exist')
+      } else{
+        setUserData(res.data)
+        history.push("/")
       }
-      ).catch((error) => console.log(error));
+     
+    });
 }
 
   return (
@@ -52,7 +72,7 @@ export function LoginPage() {
         <div className='login-box'>
           <div className='login-head'>
             <h2>Friendface</h2>
-            <p>{currentUser}</p>
+            <p>{userData.email}</p>
           </div>
 
             <div className='sign-select'>

@@ -1,7 +1,25 @@
 import { Link } from 'react-router-dom';
 import './style.css';
+import {useState,useEffect} from 'react';
+import axios from 'axios';
 
 function Dashboard(){
+
+//make selection tab have different attribut (example: turning color blue)
+    const [currentUser,setCurrentUser]= useState({})
+
+
+
+    const fetchCurrentUser = ()=>{
+        fetch('http://localhost:5000/currentUser')
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+    //fetchCurrentUser()
+
+    useEffect(()=>{
+       
+    },[])
 
     return(
         <div className="Dashboard">

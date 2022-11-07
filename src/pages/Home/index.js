@@ -6,7 +6,7 @@ import HomeComp from '../../components/homecomp';
 import { useState, useEffect } from 'react';
 
 
-export function HomePage() {
+export function HomePage(props) {
 
   const [postData,setPostData]=useState([])
 
@@ -19,7 +19,7 @@ export function HomePage() {
     setPostData(data);
     }
 
-
+    console.log(props.test)
     
     useEffect(()=>{
       fetchPostData();
