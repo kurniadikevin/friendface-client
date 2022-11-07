@@ -9,14 +9,6 @@ function Dashboard(props){
    // const [currentUser,setCurrentUser]= useState()
 
     const userData = props.currentUser;
-    console.log(userData)
-
-    const fetchCurrentUser = ()=>{
-        fetch('http://localhost:5000/currentUser')
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    }
-    //fetchCurrentUser()
 
     useEffect(()=>{
        

@@ -19,9 +19,7 @@ export function HomePage(props) {
     console.log(data);
     setPostData(data);
     }
-
-    console.log(props.currentUser)
-   
+    
     useEffect(()=>{
       fetchPostData();
 

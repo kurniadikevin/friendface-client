@@ -1,9 +1,13 @@
 .Dashboard{
     border: 1px solid grey;
     display: grid;
-    grid-template-rows: 1fr 2.5fr 1.5fr;
+    grid-template-rows: 150px 300px 200px;
     padding-left: 25px;
-    
+   
+}
+
+.Dashboard>div{
+   
 }
 
 .app-title{
@@ -11,6 +15,7 @@
     font-size: 22pt;
     padding-top: 25px;
     transition: 0.5s;
+   
 }
     .app-title:hover{
         color: cornflowerblue;

@@ -1,11 +1,17 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import './style.css';
 
 
+
+
 function HomeComp(props){
     const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'})
-    
+    const [postText,setPostText]= useState('')
 
+ 
+    
+   // console.log(currentUser);
     const togglePostForm = ()=>{
         const postForm = document.querySelector('.homeComp-postForm');
         if(postForm.style.display === 'inline'){
@@ -13,8 +19,32 @@ function HomeComp(props){
         } else{  postForm.style.display='inline'}
     }
 
+    const createPost = async()=> {  
+        console.log(postText);
+       // console.log(currentUser.email)
+        axios({
+          method: "POST",
+          data: {
+            text : postText,
+            email : currentUser.email
+          },
+          withCredentials: true,
+          url: "http://localhost:5000/posts/newpost",
+        }).then(function (response) {
+            console.log(response);
+           
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+         
+    }
+    
+
+
+
     useEffect(()=>{
-        setCurrentUser(props.currentUser)
+       setCurrentUser(props.currentUser)
     },[])
 
     return (
@@ -31,16 +61,17 @@ function HomeComp(props){
                 </div>
             </div>
             <div className='homeComp-postForm'>
-                <form className='newpost-form' method='POST' action="http://localhost:5000/posts/newpost">
+                <div className='newpost-form' /* method='POST' action="http://localhost:5000/posts/newpost" */>
                     <div className='newpost-main'>
-                        <textarea id='newpost-text' name='text'></textarea>
+                        <textarea id='newpost-text' name='text'
+                        value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
                     </div>
                     <div className='newpost-button'>
-                        <div name='email' >{currentUser ? currentUser.email : 'not signed in'}</div>
-                        <button id='newpost-submit' type='submit'>Post</button>
+                       
+                        <button id='newpost-submit'onClick={createPost}>Post</button>
                     </div>
                     
-                </form>
+                </div>
             </div>
         </div>
     )

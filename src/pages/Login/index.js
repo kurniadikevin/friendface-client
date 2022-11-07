@@ -42,9 +42,8 @@ export function LoginPage(props) {
 
 
   // post form login using axios
-  const loginUser = async()=>{
-    
-    console.log( email +' '+ password)
+  const loginUser = async()=>{  
+  
     axios({
       method: "POST",
       data: {
@@ -60,8 +59,7 @@ export function LoginPage(props) {
       } else{
         setUserData(res.data)
         history.push("/")
-      }
-     
+      }    
     });
 }
 
