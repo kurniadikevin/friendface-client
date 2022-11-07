@@ -8,7 +8,8 @@ import { useState, useEffect } from 'react';
 
 export function HomePage(props) {
 
-  const [postData,setPostData]=useState([])
+  const [postData,setPostData]=useState([]);
+  const [currentUser,setCurrentUser]= useState(props.currentUser)
 
   const url='http://localhost:5000/posts';
 
@@ -19,18 +20,19 @@ export function HomePage(props) {
     setPostData(data);
     }
 
-    console.log(props.test)
-    
+    console.log(props.currentUser)
+   
     useEffect(()=>{
       fetchPostData();
+
     },[])
 
   return (
     <div className="App">
-      <Dashboard/>
+      <Dashboard currentUser={props.currentUser}/>
       
       <div className='main'  id='home-page'>
-        <HomeComp/>
+        <HomeComp currentUser={props.currentUser}/>
         <div className='displayPostCont'>
           {postData.map(function(item,index){
             return(

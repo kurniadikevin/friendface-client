@@ -3,12 +3,13 @@ import './style.css';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
 
-function Dashboard(){
+function Dashboard(props){
 
 //make selection tab have different attribut (example: turning color blue)
-    const [currentUser,setCurrentUser]= useState({})
+   // const [currentUser,setCurrentUser]= useState()
 
-
+    const userData = props.currentUser;
+    console.log(userData)
 
     const fetchCurrentUser = ()=>{
         fetch('http://localhost:5000/currentUser')
@@ -60,7 +61,7 @@ function Dashboard(){
                         width={75} height={75}/>
                 </div>
                 <div className='profInfo-cont'>
-                    <div className='profileInfoDash'>Random guy</div>
+                    <div className='profileInfoDash'>{userData ? userData.email : 'Not Sign in'}</div>
                 </div>
             </div>
         </div>

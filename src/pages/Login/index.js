@@ -9,8 +9,6 @@ export function LoginPage(props) {
 
   let history = useHistory();
 
-
-
   const [email,setEmail]= useState('');
   const [password,setPassword]= useState('');
   const [userData,setUserData]= useState({});

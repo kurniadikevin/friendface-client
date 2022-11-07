@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 
-export function MessagePage() {
+export function MessagePage(props) {
+
+  let currentUser= props.currentUser
+
   return (
     <div className="App">
-      <Dashboard/>
+      <Dashboard currentUser={props.currentUser} />
       <div className='main'>
         <p>page message</p>
       </div>

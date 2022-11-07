@@ -1,6 +1,10 @@
+import { useState, useEffect } from 'react';
 import './style.css';
 
-function HomeComp(){
+
+function HomeComp(props){
+    const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'})
+    
 
     const togglePostForm = ()=>{
         const postForm = document.querySelector('.homeComp-postForm');
@@ -8,6 +12,10 @@ function HomeComp(){
             postForm.style.display ='none';
         } else{  postForm.style.display='inline'}
     }
+
+    useEffect(()=>{
+        setCurrentUser(props.currentUser)
+    },[])
 
     return (
         <div className='HomeComp'>
@@ -28,6 +36,7 @@ function HomeComp(){
                         <textarea id='newpost-text' name='text'></textarea>
                     </div>
                     <div className='newpost-button'>
+                        <div name='email' >{currentUser ? currentUser.email : 'not signed in'}</div>
                         <button id='newpost-submit' type='submit'>Post</button>
                     </div>
                     
