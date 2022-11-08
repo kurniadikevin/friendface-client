@@ -1,0 +1,13 @@
+.profile-username-form{
+    border: 1px solid cornflowerblue;
+    color: black;
+    position: absolute;
+    left: 480px;
+    top: 200px;
+    background-color: white;
+    height: 100px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}

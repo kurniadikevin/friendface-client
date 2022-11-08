@@ -1,5 +1,4 @@
 import './style.css';
-import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import HomeComp from '../../components/homecomp';
@@ -16,7 +15,6 @@ export function HomePage(props) {
   const fetchPostData = async ()=>{
     const response = await fetch(url);
     var data = await response.json();
-    console.log(data);
     setPostData(data);
     }
     
@@ -39,7 +37,7 @@ export function HomePage(props) {
                  {(()=>{
                   if(item.profilePicture){
                     return(
-                      <img  id='profileImg' src={require(item.profilePicture)}/>
+                      <img  id='profileImg' src={require(item.profilePicture)} alt='profileImage'/>
                     )
                   } else{
                     return (

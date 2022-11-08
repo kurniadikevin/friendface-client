@@ -1,6 +1,6 @@
 #profile-main{
     display: grid;
-    grid-template-rows: 3fr 8fr;
+    grid-template-rows: 200px 8fr;
 }
     .profile-head{
         border: 1px solid grey;
@@ -19,9 +19,11 @@
         .profile-pic-cont{
             border: 1px solid grey;
             display: flex;
-            justify-content: center;
-            align-items:flex-start;
+            justify-content: flex-start;
+            align-items:center;
             padding-top: 30px;
+            flex-direction: column;
+            gap: 20px;
         }
 
         #profileImgProfile{
@@ -30,4 +32,8 @@
 
     .profile-body{
         border: 1px solid grey;
+    }
+
+    #profileForm, #imageForm{
+        display: none;
     }

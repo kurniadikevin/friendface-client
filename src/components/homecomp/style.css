@@ -39,8 +39,7 @@
     border: 1px solid grey;
 }
 
-.homeComp-postForm{
-    
+.homeComp-postForm{ 
     height: 170px;
     display: none; 
 }
