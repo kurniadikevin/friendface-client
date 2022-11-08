@@ -1,16 +1,43 @@
-import './style.css'
+import axios from 'axios';
+import { useState } from 'react';
+import './style.css';
 
-const ImageForm = ()=>{
+const ImageForm = (props)=>{
 
-    const updateProfileImage = ()=>{
-        
+    let currentUser = props.currentUser;
+   //console.log(currentUser)
+    const [image,setImage]= useState()
+
+   /*  const updateProfileImage = ()=>{
+        axios({
+            method : "POST",
+            data : {
+                byUser: currentUser.email,
+                image : image
+            },
+            withCredentials : true,
+            url : 'http://localhost:5000/images/'
+        }).then((res)=>{
+            console.log(res)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
     }
+ */
 
     return (
         <div className="profile-image-form">
-            <label>Image</label>
-            <input placeholder="set username"></input>
-            <button>Confirm change</button>
+            <form method='POST' action='http://localhost:5000/images/'>
+            <label>name</label>
+            <input type='text' name='name'></input>
+            <label>Desc</label>
+            <input type='text' name='desc'></input>
+            <label>Update Profile Image</label>         
+            <input type='file' name='image' /* value={image}  */
+           /*  onChange={(e)=> setImage(e.target.value)} */ ></input>
+            <button type='submit'>Confirm change</button>
+            </form>
         </div>
     )
 }

@@ -32,7 +32,7 @@ const ProfileForm = (props)=>{
     return (
         <div className="profile-username-form">
             <label>Username</label>
-            <input placeholder={currentUser.username} onChange={(e)=> setData(e.target.value)}
+            <input placeholder={currentUser? currentUser.username : ''} onChange={(e)=> setData(e.target.value)}
             ></input>
             <button onClick={updateUsername}>Confirm change</button>
         </div>

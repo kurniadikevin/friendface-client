@@ -56,7 +56,7 @@ export function ProfilePage(props) {
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
               Edit</button>
             <div id ='imageForm'>
-            <ImageForm/>
+            <ImageForm currentUser={props.currentUser}/>
             </div>
           </div>
 
