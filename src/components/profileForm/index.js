@@ -4,9 +4,9 @@ import axios from 'axios';
 
 const ProfileForm = (props)=>{
 
-  const [data,setData]= useState('')
+    const [data,setData]= useState('')
 
-  let currentUser ;
+    let currentUser ;
   
   if(!props.currentUser){
     currentUser = { 

@@ -57,7 +57,7 @@ export function ProfilePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser}/>
+      <Dashboard currentUser={props.currentUser} />
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
@@ -73,8 +73,8 @@ export function ProfilePage(props) {
 
           <div className='profile-detail'>
             <div className='profile-row1'>
-              <div>{currentUser ? currentUser.username : 'Not Signed in'} </div>
-              <div>{currentUser? currentUser.email : 'Not available'}</div>
+              <div>Username : {currentUser ? currentUser.username : 'Not Signed in'} </div>
+              <div>Email : {currentUser? currentUser.email : 'Not available'}</div>
               <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>Edit</button>
               <div id='profileForm'>
               <ProfileForm currentUser={props.currentUser}/>

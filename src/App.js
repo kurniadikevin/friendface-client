@@ -12,7 +12,7 @@ const App = () =>{
   
   const pull_data = (data) => { 
     setUserData(data);
-    console.log(data)
+
   }
 
   return(
