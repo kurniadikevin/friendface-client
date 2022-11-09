@@ -9,9 +9,12 @@ import ImageForm from '../../components/imageForm';
 
 
 export function ProfilePage(props) {
-  let currentUser ;
-  console.log(props.currentUser);
   
+  const [postData,setPostData]= useState([])
+  const [ppUrl,setPpUrl]= useState(require('../../assets/profilepicturesSmall.png'));
+
+
+  let currentUser ;
   if(!props.currentUser){
     currentUser = { 
       _id : 'not set',
@@ -21,17 +24,20 @@ export function ProfilePage(props) {
       currentUser = props.currentUser;
     }
   
-
-  const [postData,setPostData]= useState([])
-
-  const url=`http://localhost:5000/posts/${currentUser.email}`;
-
+  
   const fetchPostData = async ()=>{
+    const url=`http://localhost:5000/posts/${currentUser.email}`;
     const response = await fetch(url);
     var data = await response.json();
-    console.log(data);
     setPostData(data);
     }
+  
+    const fetchPpUrl = async ()=>{
+      const url=`http://localhost:5000/images/${currentUser.email}`;
+      const response = await fetch(url);
+      var data = await response.json();
+      setPpUrl(`data:image/png;base64,${data}`);
+      }
 
     const toggleForm = (form)=>{
       const Form = document.querySelector(`#${form}`);
@@ -41,7 +47,11 @@ export function ProfilePage(props) {
   }
 
     useEffect(()=>{
-      fetchPostData()
+      fetchPostData();
+      if(currentUser.email !== 'not available'){
+        fetchPpUrl()
+      }
+     
     },[])
 
 
@@ -51,7 +61,8 @@ export function ProfilePage(props) {
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src={require('../../assets/profilepicturesSmall.png')} alt='profilePicture'
+            <img id='profileImgProfile' src={ppUrl} 
+            alt='profilePicture'
                           width={100} height={100}/>
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
               Edit</button>
@@ -86,19 +97,8 @@ export function ProfilePage(props) {
           {postData.map(function(item,index){
             return(
               <div className='post-container'>
-                <div className='post-sidebar'>
-                 {(()=>{
-                  if(item.profilePicture){
-                    return(
-                      <img  id='profileImg' src={require(item.profilePicture)} alt='profileImage'/>
-                    )
-                  } else{
-                    return (
-                      <img id='profileImg' src={require('../../assets/profilepicturesSmall.png')} alt='profilePicture'
-                      width={50} height={50}/>
-                    )
-                  }
-                 })()}
+                <div className='post-sidebar'>    
+                  <img  id='profileImg' src={ppUrl} alt='profileImage'  width={50} height={50}/>
                 </div>
                 <div className='post-main'>
                   <div className='post-text'>{item.text}</div>

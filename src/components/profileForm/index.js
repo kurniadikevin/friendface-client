@@ -4,10 +4,19 @@ import axios from 'axios';
 
 const ProfileForm = (props)=>{
 
-    const [data,setData]= useState('')
+  const [data,setData]= useState('')
 
-    let currentUser = props.currentUser;
-    console.log(currentUser)
+  let currentUser ;
+  
+  if(!props.currentUser){
+    currentUser = { 
+      _id : 'not set',
+      username : 'not signed in',
+      email : 'not available',
+    }} else {
+      currentUser = props.currentUser;
+    }
+  
 
     const updateUsername = ()=>{
         // console.log(currentUser.email)
@@ -28,6 +37,8 @@ const ProfileForm = (props)=>{
              console.log(error);
            });
     }
+
+    
 
     return (
         <div className="profile-username-form">

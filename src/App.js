@@ -10,7 +10,7 @@ const App = () =>{
 
   const[userData,setUserData] = useState()
   
-  const pull_data = (data) => { // LOGS DATA FROM CHILD (My name is Dean Winchester... &)
+  const pull_data = (data) => { 
     setUserData(data);
     console.log(data)
   }
