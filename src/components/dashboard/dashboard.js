@@ -60,10 +60,9 @@ function Dashboard(props){
             </div>
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
-                    <div>{props.currentUser ? userPP : ''}</div>
                     <img id='profileImgDash'
-                     src= {props.currentUser ? userPP : 
-                        (require('../../assets/profilepicturesSmall.png'))}  alt='profilePicture'
+                     src= {props.currentUser ? `http://localhost:5000/${userPP} `
+                     : (require('../../assets/profilepicturesSmall.png'))}  alt='profilePicture'
                         width={75} height={75}/>
                 </div>
                 <div className='profInfo-cont'>
