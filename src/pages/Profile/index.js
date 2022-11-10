@@ -37,6 +37,7 @@ export function ProfilePage(props) {
       const response = await fetch(url);
       var data = await response.json();
       setPpUrl(`data:image/png;base64,${data}`);
+    
       }
 
     const toggleForm = (form)=>{
@@ -51,7 +52,7 @@ export function ProfilePage(props) {
       if(currentUser.email !== 'not available'){
         fetchPpUrl()
       }
-     
+      
     },[])
 
 

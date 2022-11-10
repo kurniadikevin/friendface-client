@@ -12,7 +12,6 @@ const App = () =>{
   
   const pull_data = (data) => { 
     setUserData(data);
-
   }
 
   return(

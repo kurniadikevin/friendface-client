@@ -107,7 +107,8 @@ export function LoginPage(props) {
           </div>              
           </div>
           
-        
+          <img alt='test' src={'http://localhost:5000/image-1668065899005.jpg'} 
+          height={50} width={50}/>
 
         </div>
     </div>

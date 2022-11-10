@@ -5,46 +5,26 @@ import axios from 'axios';
 
 function Dashboard(props){
 
-    const userData = props.currentUser;
-    console.log(userData)
-    const [ppUrl,setPpUrl]= useState(require('../../assets/profilepicturesSmall.png'));
+  //  const [ppUrl,setPpUrl]= useState(require('../../assets/profilepicturesSmall.png'));
+  const [userData,setUserData]= useState(
+            {id : 'not set',
+        username : 'not signed in',
+        email : 'not available',
+        profilePicture : (require('../../assets/profilepicturesSmall.png'))}
+        )
 
-    const fetchPpUrl = async ()=>{
-        const url=`http://localhost:5000/images/${userData.email}`;
-        const response = await fetch(url);
-        var data = await response.json();
-        let urlImage = `data:image/png;base64,${data}`
-        setPpUrl(urlImage);
-        updatePPUrlOnUser(urlImage);
-        }
+    const [userPP,setUserPP]= useState('')
 
-    //update user model with image url
-    const updatePPUrlOnUser = (url)=>{
-        console.log(ppUrl)
-        axios({
-            method: "POST",
-            data: {
-              profilePicture : url,
-              _id : userData._id
-            },
-            withCredentials: true,
-            url: `http://localhost:5000/users/update/${userData._id}`,
-          }).then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-    }
-
-
-    useEffect(()=>{
-       if(userData ){
-        //fetchPpUrl();
-       
-       }
+   useEffect(()=>{
+        if(props.currentUser ){
+        setUserData(props.currentUser);
+        console.log(userData);
+        setUserPP(props.currentUser.profilePicture)
+       } 
+      
     },[])
 
+ 
     return(
         <div className="Dashboard">
             <div className='title-dashboard'>
@@ -80,8 +60,10 @@ function Dashboard(props){
             </div>
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
+                    <div>{props.currentUser ? userPP : ''}</div>
                     <img id='profileImgDash'
-                     src={ppUrl}  alt='profilePicture'
+                     src= {props.currentUser ? userPP : 
+                        (require('../../assets/profilepicturesSmall.png'))}  alt='profilePicture'
                         width={75} height={75}/>
                 </div>
                 <div className='profInfo-cont'>
