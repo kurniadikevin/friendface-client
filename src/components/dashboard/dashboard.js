@@ -7,19 +7,19 @@ function Dashboard(props){
 
   //  const [ppUrl,setPpUrl]= useState(require('../../assets/profilepicturesSmall.png'));
   const [userData,setUserData]= useState(
-            {id : 'not set',
+            {
         username : 'not signed in',
         email : 'not available',
         profilePicture : (require('../../assets/profilepicturesSmall.png'))}
         )
 
-    const [userPP,setUserPP]= useState('')
+   
 
    useEffect(()=>{
         if(props.currentUser ){
         setUserData(props.currentUser);
         console.log(userData);
-        setUserPP(props.currentUser.profilePicture)
+        
        } 
       
     },[])
@@ -61,12 +61,14 @@ function Dashboard(props){
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
-                     src= {props.currentUser ? `http://localhost:5000/${userPP} `
-                     : (require('../../assets/profilepicturesSmall.png'))}  alt='profilePicture'
+                     src= {props.currentUser ? `http://localhost:5000/${props.currentUser.profilePicture} `
+                     : (require('../../assets/profilepicturesSmall.png'))} 
+                      alt='profilePicture'
                         width={75} height={75}/>
                 </div>
                 <div className='profInfo-cont'>
                     <div className='profileInfoDash'>{userData ? userData.email : 'Not Sign in'}</div>
+                   
                 </div>
             </div>
         </div>

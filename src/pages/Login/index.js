@@ -49,6 +49,7 @@ export function LoginPage(props) {
       data: {
         email: email,
         password: password,
+       
       },
       withCredentials: true,
       url: "http://localhost:5000/users/login",
@@ -106,10 +107,6 @@ export function LoginPage(props) {
               <button type='submit'  className='submit-btn'  onClick={loginUser} >Log in</button>
           </div>              
           </div>
-          
-          <img alt='test' src={'http://localhost:5000/image-1668065899005.jpg'} 
-          height={50} width={50}/>
-
         </div>
     </div>
   );

@@ -11,8 +11,6 @@ import ImageForm from '../../components/imageForm';
 export function ProfilePage(props) {
   
   const [postData,setPostData]= useState([])
-  const [ppUrl,setPpUrl]= useState(require('../../assets/profilepicturesSmall.png'));
-
 
   let currentUser ;
   if(!props.currentUser){
@@ -26,19 +24,19 @@ export function ProfilePage(props) {
   
   
   const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/${currentUser.email}`;
+    const url=`http://localhost:5000/posts/${currentUser._id}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
     }
   
-    const fetchPpUrl = async ()=>{
+    /* const fetchPpUrl = async ()=>{
       const url=`http://localhost:5000/images/${currentUser.email}`;
       const response = await fetch(url);
       var data = await response.json();
       setPpUrl(`data:image/png;base64,${data}`);
     
-      }
+      } */
 
     const toggleForm = (form)=>{
       const Form = document.querySelector(`#${form}`);
@@ -49,9 +47,7 @@ export function ProfilePage(props) {
 
     useEffect(()=>{
       fetchPostData();
-      if(currentUser.email !== 'not available'){
-        fetchPpUrl()
-      }
+     
       
     },[])
 
@@ -62,9 +58,9 @@ export function ProfilePage(props) {
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src={ppUrl} 
-            alt='profilePicture'
-                          width={100} height={100}/>
+            <img id='profileImgProfile' src= {props.currentUser ? `http://localhost:5000/${props.currentUser.profilePicture} `
+                     : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
+                      width={100} height={100}/>
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
               Edit</button>
             <div id ='imageForm'>
@@ -99,11 +95,13 @@ export function ProfilePage(props) {
             return(
               <div className='post-container'>
                 <div className='post-sidebar'>    
-                  <img  id='profileImg' src={ppUrl} alt='profileImage'  width={50} height={50}/>
+                  <img  id='profileImg' src={item.author ?  `http://localhost:5000/${item.author.profilePicture} `
+                     : (require('../../assets/profilepicturesSmall.png'))}
+                   alt='profileImage'  width={50} height={50}/>
                 </div>
                 <div className='post-main'>
                   <div className='post-text'>{item.text}</div>
-                  <div className='post-author'>{item.author}</div>
+                  <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
                   <div className='action-cont'>
                     <span id='like-icon' class="material-symbols-outlined">favorite</span>
                     <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>

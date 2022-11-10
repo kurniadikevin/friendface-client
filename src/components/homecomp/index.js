@@ -26,13 +26,13 @@ function HomeComp(props){
           method: "POST",
           data: {
             text : postText,
-            email : currentUser.email
+            authorId : currentUser._id
           },
           withCredentials: true,
           url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
-           
+          
           })
           .catch(function (error) {
             console.log(error);
@@ -40,9 +40,6 @@ function HomeComp(props){
          
     }
     
-
-
-
     useEffect(()=>{
        setCurrentUser(props.currentUser)
     },[])
@@ -68,7 +65,7 @@ function HomeComp(props){
                     </div>
                     <div className='newpost-button'>
                        
-                        <button id='newpost-submit'onClick={createPost}>Post</button>
+                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm()}}>Post</button>
                     </div>
                     
                 </div>

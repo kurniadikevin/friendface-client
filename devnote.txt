@@ -1,0 +1,5 @@
+BUG AND ERROR
+- make default image readded
+
+- facebook login
+- friends and like function
