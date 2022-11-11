@@ -37,6 +37,11 @@
     .post-author{
         font-size: 10pt;
         font-weight: 600;
+        padding-bottom: 5px;
+    }
+
+    .post-date{
+        font-size: 9pt;
         padding-bottom: 10px;
     }
 

@@ -30,13 +30,6 @@ export function ProfilePage(props) {
     setPostData(data);
     }
   
-    /* const fetchPpUrl = async ()=>{
-      const url=`http://localhost:5000/images/${currentUser.email}`;
-      const response = await fetch(url);
-      var data = await response.json();
-      setPpUrl(`data:image/png;base64,${data}`);
-    
-      } */
 
     const toggleForm = (form)=>{
       const Form = document.querySelector(`#${form}`);
@@ -102,6 +95,7 @@ export function ProfilePage(props) {
                 <div className='post-main'>
                   <div className='post-text'>{item.text}</div>
                   <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
+                  <div className='post-date'>{item.date}</div>
                   <div className='action-cont'>
                     <span id='like-icon' class="material-symbols-outlined">favorite</span>
                     <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>

@@ -1,5 +1,12 @@
 BUG AND ERROR
-- make default image readded
 
 - facebook login
+- messaging tab
+- upload media(video or photo)
 - friends and like function
+
+-like function applied but need condition (
+    -old account with non array likes cannot be like
+    - bug, still can be like more than once
+    - bug, user should not like their own post
+)

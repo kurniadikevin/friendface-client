@@ -5,21 +5,19 @@ import axios from 'axios';
 
 function Dashboard(props){
 
-  //  const [ppUrl,setPpUrl]= useState(require('../../assets/profilepicturesSmall.png'));
   const [userData,setUserData]= useState(
             {
         username : 'not signed in',
         email : 'not available',
         profilePicture : (require('../../assets/profilepicturesSmall.png'))}
         );
-
     
   const toggleColorSelect = (i)=>{
     const dashLink = document.querySelectorAll('#dash-link');    
     dashLink[i].style.color='cornflowerblue';
+    dashLink[i].style.transform = 'translateX(5px)';
   }
         
-
    useEffect(()=>{
         if(props.currentUser ){
         setUserData(props.currentUser);
@@ -28,7 +26,6 @@ function Dashboard(props){
        toggleColorSelect(props.dashIndex)
     },[])
 
- 
     return(
         <div className="Dashboard">
             <div className='title-dashboard'>

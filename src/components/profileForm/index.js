@@ -19,7 +19,6 @@ const ProfileForm = (props)=>{
   
 
     const updateUsername = ()=>{
-        // console.log(currentUser.email)
          axios({
            method: "POST",
            data: {
@@ -39,7 +38,6 @@ const ProfileForm = (props)=>{
     }
 
     
-
     return (
         <div className="profile-username-form">
             <label>Username</label>
