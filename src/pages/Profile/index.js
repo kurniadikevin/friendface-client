@@ -54,11 +54,11 @@ export function ProfilePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} />
+      <Dashboard currentUser={props.currentUser} dashIndex={1} />
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {props.currentUser ? `http://localhost:5000/${props.currentUser.profilePicture} `
+            <img id='profileImgProfile' src= {props.currentUser?.profilePicture ? `http://localhost:5000/${props.currentUser.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
@@ -70,7 +70,7 @@ export function ProfilePage(props) {
 
           <div className='profile-detail'>
             <div className='profile-row1'>
-              <div>Username : {currentUser ? currentUser.username : 'Not Signed in'} </div>
+              <div>Username : {currentUser?.username ? currentUser.username : 'Not Set'} </div>
               <div>Email : {currentUser? currentUser.email : 'Not available'}</div>
               <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>Edit</button>
               <div id='profileForm'>

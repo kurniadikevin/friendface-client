@@ -26,7 +26,7 @@ export function HomePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser}/>
+      <Dashboard currentUser={props.currentUser} dashIndex={0}/>
       
       <div className='main'  id='home-page'>
         <HomeComp currentUser={props.currentUser}/>
@@ -34,15 +34,14 @@ export function HomePage(props) {
           {postData.map(function(item,index){
             return(
               <div className='post-container'>
-                <div className='post-sidebar'> 
-               {/*  {item.author ? item.author.profilePicture : 'none'}    */} 
-                  <img  id='profileImg' src={item.author ?  `http://localhost:5000/${item.author.profilePicture} `
+                <div className='post-sidebar'>  
+                  <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))}
                      alt='profileImage' width={50} height={50}/> 
                 </div>
                 <div className='post-main'>
                   <div className='post-text'>{item.text}</div>
-                  <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
+                  <div className='post-author'>{item.author?.username ? item.author.username : 'anon'}</div>
                   <div className='action-cont'>
                     <span id='like-icon' class="material-symbols-outlined">favorite</span>
                     <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>

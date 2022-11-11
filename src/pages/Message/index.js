@@ -9,7 +9,7 @@ export function MessagePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} />
+      <Dashboard currentUser={props.currentUser} dashIndex={2} />
       <div className='main'>
         <p>page message</p>
       </div>

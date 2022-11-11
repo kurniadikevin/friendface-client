@@ -11,17 +11,21 @@ function Dashboard(props){
         username : 'not signed in',
         email : 'not available',
         profilePicture : (require('../../assets/profilepicturesSmall.png'))}
-        )
+        );
 
-   
+    
+  const toggleColorSelect = (i)=>{
+    const dashLink = document.querySelectorAll('#dash-link');    
+    dashLink[i].style.color='cornflowerblue';
+  }
+        
 
    useEffect(()=>{
         if(props.currentUser ){
         setUserData(props.currentUser);
         console.log(userData);
-        
        } 
-      
+       toggleColorSelect(props.dashIndex)
     },[])
 
  
@@ -34,19 +38,19 @@ function Dashboard(props){
             </div>
             <div className='links-cont'>
                 <div>
-                    <Link to='./' id='link-cont'>
+                    <Link to='./' id='link-cont' >
                         <div  id='dash-link'>Home</div>
                         <span id='link-icon' class="material-symbols-outlined">cottage</span>
                         </Link>
                 </div>
                 <div>
-                    <Link to='/profile' id='link-cont'>
+                    <Link to='/profile' id='link-cont' >
                         <div  id='dash-link'>Profile</div>
                         <span id='link-icon' class="material-symbols-outlined">account_circle</span>
                         </Link>
                 </div>
                 <div>
-                    <Link to='/message' id='link-cont'>
+                    <Link to='/message' id='link-cont' >
                         <div  id='dash-link'>Message</div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
                         </Link>
@@ -61,7 +65,7 @@ function Dashboard(props){
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
-                     src= {props.currentUser ? `http://localhost:5000/${props.currentUser.profilePicture} `
+                     src= {props.currentUser?.profilePicture ? `http://localhost:5000/${props.currentUser.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} 
                       alt='profilePicture'
                         width={75} height={75}/>
