@@ -5,7 +5,7 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
-
+import CommentForm from '../../components/commentForm';
 
 
 export function UserProfilePage(props) {
@@ -43,6 +43,13 @@ export function UserProfilePage(props) {
       } else{  Form.style.display='inline'}
   } 
 
+  const toggleCommentForm = (i)=>{
+    const commentForm = document.querySelectorAll('.comment-section');
+    if(commentForm[i].style.display === 'inline'){
+        commentForm[i].style.display ='none';
+    } else{  commentForm[i].style.display='inline'}
+  }
+
     useEffect(()=>{
       fetchPostData();
       fetchUserData();
@@ -56,31 +63,23 @@ export function UserProfilePage(props) {
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-          <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
+            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
            
-            <div id ='imageForm'>
-            <ImageForm />
-            </div>
           </div>
 
           <div className='profile-detail'>
             <div className='profile-row1'>
               <div>Username :  {userData.username } </div>
-              <div>Email : {userData.email} </div>
-             
-              <div id='profileForm'>
-                Add as friend
-              </div>
-             
+              <div>Email : {userData.email} </div>         
             </div>
             <div className='profile-row2'>
               <div>Friend</div>
               <div></div>
             </div>
             <div className='profile-row3'>
-              botton panel
+              <button>Add as Friend</button>
             </div>
           </div>
         </div>
@@ -92,7 +91,7 @@ export function UserProfilePage(props) {
             return(
               <div className='post-container'>
                 <div className='post-sidebar'>    
-                  <img  id='profileImg' src={item.author ?  `http://localhost:5000/${item.author.profilePicture} `
+                  <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))}
                    alt='profileImage'  width={50} height={50}/>
                 </div>
@@ -101,14 +100,31 @@ export function UserProfilePage(props) {
                   <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
                   <div className='post-date'>{item.date}</div>
                   <div className='action-cont'>
-                    <div>
-                        <span id='like-icon' class="material-symbols-outlined">favorite</span>
-                        <div>{item.likes.length}</div>
+                    <div className='like-cont'>
+                      <span id='like-icon' class="material-symbols-outlined">favorite</span>
+                      <div>{item.likes.length}</div>
                     </div>
-                    <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>
-                  </div>
+                    <div className='comment-cont'>
+                    <span id='comment-icon' class="material-symbols-outlined"
+                    onClick={()=> toggleCommentForm(index)}>mode_comment</span>
+                    <div>{item.comment.length}</div>
+                  </div>  
+                 </div>
+                 <div className='comment-section'>
+                <CommentForm currentUser={props.currentUser} post= {item} index={index}/>
+                <div className='comment-map'>{((item.comment).reverse()).map(function(comment,index){
+                    return(
+                      <div className='comment-content'>
+                        <div className='comment-text'>{comment.text}</div>
+                        <div className='comment-username'>{comment.author?.username}</div>
+                        <div className='comment-date'>{comment.date}</div>
+                      </div>
+                    )
+                })
+                }</div>
                 </div>
               </div>
+            </div>
             )
           })}
         </div>

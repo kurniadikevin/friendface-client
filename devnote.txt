@@ -6,12 +6,9 @@ BUG AND ERROR
 - upload media(video or photo)?
 - friends function
 - rerender update data state
-- user profile visit
 
 -like function applied but need condition (
     -old account with non array likes cannot be like
     - bug, still can be like more than once  
 )
 
--comment implemented
--like implemented
