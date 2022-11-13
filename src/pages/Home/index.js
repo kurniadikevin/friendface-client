@@ -5,7 +5,7 @@ import HomeComp from '../../components/homecomp';
 import CommentForm from '../../components/commentForm';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 export function HomePage(props) {
 
@@ -75,9 +75,10 @@ const toggleCommentForm = (i)=>{
                     alt='profileImage' width={50} height={50}/> 
               </div>
             <div className='post-main'>
-                <div>{item._id}</div>
                 <div className='post-text'>{item.text}</div>
-                <div className='post-author'>{item.author?.username ? item.author.username : 'anon'}</div>
+                <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
+                  <div className='post-author'>{item.author?.username ? item.author.username : 'anon'}</div>
+                </Link>
                 <div className='post-date'>{item.date}</div>
               <div className='action-cont'>
                   <div className='like-cont'>

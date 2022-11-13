@@ -1,10 +1,12 @@
 BUG AND ERROR
 
+
 - facebook login
-- messaging tab
+- messaging tab ?
 - upload media(video or photo)?
 - friends function
 - rerender update data state
+- user profile visit
 
 -like function applied but need condition (
     -old account with non array likes cannot be like

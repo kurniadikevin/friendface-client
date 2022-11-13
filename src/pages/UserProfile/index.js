@@ -1,46 +1,51 @@
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
-import { useState,useContext,createContext, useEffect } from 'react';
-import UserContext from '../../App.js';
+import { useState, useEffect } from 'react';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 
 
-export function ProfilePage(props) {
-  
-  const [postData,setPostData]= useState([])
 
-  let currentUser ;
-  if(!props.currentUser){
-    currentUser = { 
-      _id : 'not set',
-      username : 'not signed in',
-      email : 'not available',
-    }} else {
-      currentUser = props.currentUser;
-    }
+export function UserProfilePage(props) {
   
+  const [postData,setPostData]= useState([]);
+  const [userData,setUserData]= useState(
+    { username : 'loading',
+      email : 'loading' , profilePicture : ''});
+
+   let {userId} = useParams(); 
+    console.log(userId)
+
   
-  const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/${currentUser._id}`;
+   const fetchPostData = async ()=>{
+    const url=`http://localhost:5000/posts/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
     }
-  
 
+    const fetchUserData = async ()=>{
+        const url=`http://localhost:5000/users/${userId}`;
+        const response = await fetch(url);
+        var data = await response.json();
+        console.log(data)
+        setUserData(data[0]);
+        }
+    
+   
+    
     const toggleForm = (form)=>{
       const Form = document.querySelector(`#${form}`);
       if(Form.style.display === 'inline'){
           Form.style.display ='none';
       } else{  Form.style.display='inline'}
-  }
+  } 
 
     useEffect(()=>{
       fetchPostData();
-     
+      fetchUserData();
       
     },[])
 
@@ -51,23 +56,22 @@ export function ProfilePage(props) {
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {props.currentUser?.profilePicture ? `http://localhost:5000/${props.currentUser.profilePicture} `
+          <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
-            <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
-              Edit</button>
+           
             <div id ='imageForm'>
-            <ImageForm currentUser={props.currentUser}/>
+            <ImageForm />
             </div>
           </div>
 
           <div className='profile-detail'>
             <div className='profile-row1'>
-              <div>Username : {currentUser?.username ? currentUser.username : 'Not Set'} </div>
-              <div>Email : {currentUser? currentUser.email : 'Not available'}</div>
-              <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>Edit</button>
+              <div>Username :  {userData.username } </div>
+              <div>Email : {userData.email} </div>
+             
               <div id='profileForm'>
-              <ProfileForm currentUser={props.currentUser}/>
+                Add as friend
               </div>
              
             </div>
@@ -98,8 +102,8 @@ export function ProfilePage(props) {
                   <div className='post-date'>{item.date}</div>
                   <div className='action-cont'>
                     <div>
-                    <span id='like-icon' class="material-symbols-outlined">favorite</span>
-                    <div>{item.likes.length}</div>
+                        <span id='like-icon' class="material-symbols-outlined">favorite</span>
+                        <div>{item.likes.length}</div>
                     </div>
                     <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>
                   </div>

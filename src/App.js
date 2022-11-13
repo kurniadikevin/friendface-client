@@ -5,6 +5,7 @@ import { HomePage } from './pages/Home';
 import {  LoginPage } from './pages/Login';
 import { ProfilePage } from './pages/Profile';
 import { MessagePage} from './pages/Message';
+import { UserProfilePage } from './pages/UserProfile';
 
 const App = () =>{ 
 
@@ -25,11 +26,14 @@ const App = () =>{
           <LoginPage  func={pull_data}/>
       </Route>
       <Route  path="/profile" >
-              <ProfilePage currentUser={userData}/>
+          <ProfilePage currentUser={userData}/>
       </Route>
       <Route path="/message">
           <MessagePage  currentUser={userData}/>  
       </Route> 
+      <Route path='/userProfile/:userId'>
+          <UserProfilePage currentUser={userData}/>
+      </Route>
     </Switch>
   </BrowserRouter>
  

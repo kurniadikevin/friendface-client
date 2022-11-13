@@ -21,7 +21,7 @@ function Dashboard(props){
    useEffect(()=>{
         if(props.currentUser ){
         setUserData(props.currentUser);
-        console.log(userData);
+       
        } 
        toggleColorSelect(props.dashIndex)
     },[])
@@ -35,7 +35,7 @@ function Dashboard(props){
             </div>
             <div className='links-cont'>
                 <div>
-                    <Link to='./' id='link-cont' >
+                    <Link to='/' id='link-cont' >
                         <div  id='dash-link'>Home</div>
                         <span id='link-icon' class="material-symbols-outlined">cottage</span>
                         </Link>
