@@ -97,7 +97,10 @@ export function ProfilePage(props) {
                   <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
                   <div className='post-date'>{item.date}</div>
                   <div className='action-cont'>
-                    <span id='like-icon' class="material-symbols-outlined">favorite</span>
+                    <div>
+                        <span id='like-icon' class="material-symbols-outlined">favorite</span>
+                        <div>{item.likes.length}</div>
+                    </div>
                     <span id='comment-icon' class="material-symbols-outlined">mode_comment</span>
                   </div>
                 </div>

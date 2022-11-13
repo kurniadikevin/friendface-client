@@ -68,7 +68,10 @@ function Dashboard(props){
                         width={75} height={75}/>
                 </div>
                 <div className='profInfo-cont'>
-                    <div className='profileInfoDash'>{userData ? userData.email : 'Not Sign in'}</div>
+                    <div className='profileInfoDash'>
+                        <div>{userData ? userData.email : 'Not Sign in'}</div>
+                        <div>{userData?.username ? userData.username : 'no username'}</div>
+                    </div>
                    
                 </div>
             </div>
