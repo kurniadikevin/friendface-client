@@ -60,6 +60,7 @@ const toggleCommentForm = (i)=>{
 
   return (
   <div className="App">
+    
     <Dashboard currentUser={props.currentUser} dashIndex={0}/>
     
     <div className='main'  id='home-page'>

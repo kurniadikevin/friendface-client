@@ -27,6 +27,7 @@ function Dashboard(props){
     },[])
 
     return(
+       <div className='dasboard-wrapper'>
         <div className="Dashboard">
             <div className='title-dashboard'>
             <Link to='./' id='title-link'>
@@ -76,6 +77,7 @@ function Dashboard(props){
                 </div>
             </div>
         </div>
+    </div>
     )
 }
 

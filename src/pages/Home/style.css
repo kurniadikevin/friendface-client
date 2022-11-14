@@ -53,6 +53,7 @@
         font-size: 14pt;
         transition: 0.5s;
         cursor: pointer;
+        color: var(--bg2);
     }
 
     .like-cont, .comment-cont{
@@ -99,5 +100,5 @@
         color: var(--bg2);
     }
     .comment-length, .likes-length{
-        color: var(--purple);
+        color: var(--white);
     }

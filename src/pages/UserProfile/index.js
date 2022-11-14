@@ -71,8 +71,14 @@ export function UserProfilePage(props) {
 
           <div className='profile-detail'>
             <div className='profile-row1'>
-              <div>Username :  {userData.username } </div>
-              <div>Email : {userData.email} </div>         
+               <div className='profile-username'>
+                  <div className='tag'>Username :</div>
+                  <div className='text'> {userData?.username ? userData.username : 'Not Set'} </div>
+              </div>
+              <div className='profile-email'>
+                <div className='tag'>Email :</div>
+                <div className='text'> {userData? userData.email : 'Not available'}</div>
+              </div>        
             </div>
             <div className='profile-row2'>
               <div>Friend</div>

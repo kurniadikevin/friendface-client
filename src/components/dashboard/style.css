@@ -1,9 +1,15 @@
+.dashboard-wrapper{
+
+}
+
 .Dashboard{
-   
     display: grid;
     grid-template-rows: 150px 300px 200px;
     padding-left: 25px;
-   
+    position: sticky;
+    top: 0px;
+    height:100vh;
+    
 }
 
 .Dashboard>div{

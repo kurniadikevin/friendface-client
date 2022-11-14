@@ -1,0 +1,41 @@
+.Sidebar{
+   position: sticky;
+   top: 20px;
+   display: grid;
+   grid-template-rows: 100px 400px 1fr;
+}
+
+.sidebar-head{
+   padding-top:10px;
+   display: flex;
+   justify-content: center;
+   font-weight: 600;
+   color: var(--green);
+}
+.sidebar-main{
+   display: flex;
+   flex-direction: column;
+   padding-left: 50px;
+   font-weight: 600;
+}
+   .display-user{
+      padding-bottom: 15px;
+   }
+   .display-username:hover{
+      color:var(--green);
+      transform:translateX(-5px);
+
+   }
+   .display-username{
+      transition: 1s;
+      cursor: pointer;
+   }
+   .display-email{
+      color: var(--purple);
+      transition: 1s;
+      cursor: pointer;
+   }
+#link-user-sidebar{
+   text-decoration: none;
+   color:var(--white);
+}

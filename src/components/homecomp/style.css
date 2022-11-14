@@ -1,7 +1,10 @@
 .HomeComp{
-   border-bottom: 1px solid var(--currentLine);
+    border-bottom: 1px solid var(--currentLine);
     display: grid;
     grid-template-rows: 1fr auto;
+    position: sticky;
+    top: 0px;
+    background-color: var(--background);
 }
 
 .HomeCompHead{
