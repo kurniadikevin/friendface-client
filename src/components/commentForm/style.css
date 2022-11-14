@@ -1,5 +1,21 @@
-
+.comment-form{
+    padding-top: 10px;
+}
 #newComment-text{
     resize: none;
-    
+    background-color: var(--white);    
+}
+#newComment-submit{
+    background-color: var(--green);
+    border: none;
+    border-radius: 5px;
+    color: var(--background);
+    padding: 5px 10px;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+#newComment-submit:hover{
+   cursor: pointer;
+   transform: translateX(5px);
 }

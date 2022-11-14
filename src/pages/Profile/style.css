@@ -3,21 +3,36 @@
     grid-template-rows: 200px 8fr;
 }
     .profile-head{
-        border: 1px solid grey;
         display: grid;
         grid-template-columns: 1fr 2.5fr;
+        font-weight: 600;
+        
     }
     .profile-detail{
+        padding-top: 30px;
         display: grid;
         grid-template-rows: 3fr 2fr 2fr;
     }
-    .profile-detail>div{
-        border: 1px solid grey;
-
+    .profile-row1{
+        
     }
+    .profile-username{
+        display: grid;
+        grid-template-columns: 100px 100px 50px;
+    }
+        .profile-email{
+            display: grid;
+            grid-template-columns: 100px 1fr;  
+        }
+        .tag{
+            color: var(--purple);
+        }
+        .text{
+            color: var(--white);
+        }
 
         .profile-pic-cont{
-            border: 1px solid grey;
+            
             display: flex;
             justify-content: flex-start;
             align-items:center;
@@ -31,9 +46,19 @@
         }
 
     .profile-body{
-        border: 1px solid grey;
+        border-top: 1px solid var(--currentLine);
     }
 
     #profileForm, #imageForm{
         display: none;
     }
+
+/* -----BOTTON------ */
+#edit-btn-profImg, #edit-btn-username{
+    background-color: var(--background);
+    border: none;
+    color: var(--bg2);
+}
+#edit-btn-profImg:hover , #edit-btn-username:hover{
+    color: var(--purple);
+}

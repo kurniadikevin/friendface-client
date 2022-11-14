@@ -23,9 +23,8 @@ const ImageForm = (props)=>{
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         
-            <input type='file' name='image' /* value={image}  */
-           /*  onChange={(e)=> setImage(e.target.value)} */ ></input>
-            <button type='submit'>Confirm change</button>
+            <input type='file' name='image'  ></input>
+            <button type='submit' id='fileInput'>Confirm change</button>
             </form>
         </div>
     )

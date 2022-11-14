@@ -1,13 +1,33 @@
 .profile-image-form{
-    border: 1px solid cornflowerblue;
-    color: black;
+    color: var(--white);
     position: absolute;
     left: 480px;
     top: 200px;
-    background-color: white;
+    background-color: var(--bg2);
     height: 100px;
     width: 250px;
     display: flex;
     flex-direction: column;
     padding: 30px;
+}
+
+.profile-image-form>form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#fileInput{
+    background-color: var(--purple);
+    width: 150px;
+    color: var(--white);
+    border: none;
+}
+#fileInput:hover{
+    cursor: pointer;
+}
+
+#file-upload-button{
+    background-color: var(--purple);
+    color: var(white);
 }

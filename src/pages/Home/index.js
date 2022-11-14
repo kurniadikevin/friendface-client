@@ -56,7 +56,7 @@ const toggleCommentForm = (i)=>{
 
   useEffect(()=>{
       fetchPostData();
-    },[])
+    })
 
   return (
   <div className="App">
@@ -84,12 +84,12 @@ const toggleCommentForm = (i)=>{
                   <div className='like-cont'>
                     <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item)}>
                       favorite</span>
-                    <div>{item.likes.length}</div>
+                    <div className='likes-length'>{item.likes.length}</div>
                   </div>
                   <div className='comment-cont'>
                     <span id='comment-icon' class="material-symbols-outlined"
                     onClick={()=> toggleCommentForm(index)}>mode_comment</span>
-                    <div>{item.comment.length}</div>
+                    <div className='comment-length'>{item.comment.length}</div>
                   </div>
               </div>
               <div className='comment-section'>

@@ -14,7 +14,7 @@ function Dashboard(props){
     
   const toggleColorSelect = (i)=>{
     const dashLink = document.querySelectorAll('#dash-link');    
-    dashLink[i].style.color='cornflowerblue';
+    dashLink[i].style.color='var(--green)';
     dashLink[i].style.transform = 'translateX(5px)';
   }
         
@@ -69,8 +69,8 @@ function Dashboard(props){
                 </div>
                 <div className='profInfo-cont'>
                     <div className='profileInfoDash'>
-                        <div>{userData ? userData.email : 'Not Sign in'}</div>
-                        <div>{userData?.username ? userData.username : 'no username'}</div>
+                        <div className='currentUser-username'>{userData?.username ? userData.username : 'no username'}</div>
+                        <div className='currentUser-email'>{userData ? userData.email : 'Not Sign in'}</div>    
                     </div>
                    
                 </div>

@@ -1,13 +1,37 @@
 .profile-username-form{
-    border: 1px solid cornflowerblue;
-    color: black;
+    color: var(--white);
     position: absolute;
     left: 480px;
     top: 200px;
-    background-color: white;
+    background-color: var(--bg2);
     height: 100px;
     width: 250px;
     display: flex;
     flex-direction: column;
     padding: 30px;
+    gap: 10px;
+}
+
+.profile-username-form>label{
+    color: var(--white);
+    font-weight: 600;
+}
+
+.profile-username-form>input{
+    height: 30px;
+  
+}
+
+#confirmUser-btn{
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    height: 30px;
+    font-weight: 600;
+    width: 150px;
+    margin: 0 auto;
+}
+
+#confirmUser-btn:hover{
+    cursor: pointer;
 }

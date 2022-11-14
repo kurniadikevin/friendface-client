@@ -43,7 +43,7 @@ const ProfileForm = (props)=>{
             <label>Username</label>
             <input placeholder={currentUser? currentUser.username : ''} onChange={(e)=> setData(e.target.value)}
             ></input>
-            <button onClick={updateUsername}>Confirm change</button>
+            <button id='confirmUser-btn' onClick={updateUsername}>Confirm change</button>
         </div>
     )
 }

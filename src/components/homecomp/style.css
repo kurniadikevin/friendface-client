@@ -1,5 +1,5 @@
 .HomeComp{
-   
+   border-bottom: 1px solid var(--currentLine);
     display: grid;
     grid-template-rows: 1fr auto;
 }
@@ -22,8 +22,9 @@
     #make-post{
         border-radius: 12px;
         padding: 8px 12px;
-        background-color: cornflowerblue;
-        color: white;
+        background-color: var(--purple);
+        color: var(--white);
+        font-weight: 700;
         border: none;
         cursor: pointer;
     }
@@ -33,6 +34,11 @@
 }
     #search-input{
         border-radius: 10px;
+        border: none;
+        background-color: var(--white);
+    }
+    #search-logo{
+        color: var(--purple);
     }
 
 .form-newPost{
@@ -42,17 +48,19 @@
 .homeComp-postForm{ 
     height: 170px;
     display: none; 
+    position: absolute;
+    top: 80px;
+    left: 25%;
+    width: 600px;    
 }
     .newpost-form{
        display: grid;
        grid-template-rows: 3fr 1fr;
-       padding-left: 30px;
-       padding-right: 30px;
-       padding-top: 25px;
+       padding: 10px;
        gap: 10px;
-       background-color: cornflowerblue;
-       border-radius: 10px;
-       margin:0px 20px;
+       background-color: var(--bg2);
+       border-radius: 5px;
+       margin:0px 30px;
     }
     .newpost-main{
         display: flex;
@@ -67,11 +75,15 @@
         
     }
         #newpost-submit{
-        color: cornflowerblue;
-        background-color: white;
+        color: var(--white);
+        background-color: var(--purple);
         border: none;
         border-radius: 10px;
         padding: 5px 10px;
+        font-weight: 600;
+        }
+        #newpost-submit:hover{
+            cursor: pointer;
         }
 
     #newpost-text{

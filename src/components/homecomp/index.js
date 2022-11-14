@@ -6,8 +6,9 @@ import './style.css';
 
 
 function HomeComp(props){
-    const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'})
-    const [postText,setPostText]= useState('')
+    const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'});
+    const [postText,setPostText]= useState('');
+    const [render,setRender]= useState(false);
 
  
     
@@ -32,7 +33,7 @@ function HomeComp(props){
           url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
-          
+            setRender(true);
           })
           .catch(function (error) {
             console.log(error);
@@ -48,11 +49,11 @@ function HomeComp(props){
         <div className='HomeComp'>
             <div className='HomeCompHead'>
                 <div className='home-head'>
-                    <button id='make-post' onClick={togglePostForm}>Make post</button>
+                    <button id='make-post' onClick={togglePostForm}>New post</button>
                 </div>
                 <div className='search-bar'>
                     <input type='text' id='search-input'></input>
-                    <div>
+                    <div id='search-logo'>
                     <span class="material-symbols-outlined">search</span>
                     </div>
                 </div>

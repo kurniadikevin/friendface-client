@@ -63,7 +63,8 @@ export function ProfilePage(props) {
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
-              Edit</button>
+            <span class="material-symbols-outlined">photo_camera</span>
+              </button>
             <div id ='imageForm'>
             <ImageForm currentUser={props.currentUser}/>
             </div>
@@ -71,9 +72,18 @@ export function ProfilePage(props) {
 
           <div className='profile-detail'>
             <div className='profile-row1'>
-              <div>Username : {currentUser?.username ? currentUser.username : 'Not Set'} </div>
-              <div>Email : {currentUser? currentUser.email : 'Not available'}</div>
-              <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>Edit</button>
+              <div className='profile-username'>
+                <div className='tag'>Username :</div>
+                <div className='text'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
+                <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>
+                <span class="material-symbols-outlined">edit</span>
+                </button>
+              </div>
+              <div className='profile-email'>
+                <div className='tag'>Email :</div>
+                <div className='text'> {currentUser? currentUser.email : 'Not available'}</div>
+              </div>
+              
               <div id='profileForm'>
               <ProfileForm currentUser={props.currentUser}/>
               </div>
@@ -107,12 +117,12 @@ export function ProfilePage(props) {
                   <div className='action-cont'>
                     <div className='like-cont'>
                       <span id='like-icon' class="material-symbols-outlined">favorite</span>
-                      <div>{item.likes.length}</div>
+                      <div className='likes-length'>{item.likes.length}</div>
                     </div>
                     <div className='comment-cont'>
                     <span id='comment-icon' class="material-symbols-outlined"
                     onClick={()=> toggleCommentForm(index)}>mode_comment</span>
-                    <div>{item.comment.length}</div>
+                    <div className='comment-length'>{item.comment.length}</div>
                   </div>  
                  </div>
                  <div className='comment-section'>

@@ -1,5 +1,5 @@
 .Dashboard{
-    border: 1px solid grey;
+   
     display: grid;
     grid-template-rows: 150px 300px 200px;
     padding-left: 25px;
@@ -15,17 +15,17 @@
     font-size: 22pt;
     padding-top: 25px;
     transition: 0.5s;
-   
+    color: var(--white);
 }
     .app-title:hover{
-        color: cornflowerblue;
+        color: var(--purple);
     }
 .title-dashboard{
     padding-left: 25px;
 }
 #title-link{
     text-decoration: none;
-    color: white;
+    color: var(--white);
 }
 
 .links-cont{
@@ -46,17 +46,17 @@
         flex-direction: row-reverse;
        justify-content: space-between;
       text-decoration: none;
-      color: rgb(142, 179, 248);
+      color: var(--purple);
     }
    
     #link-icon:hover{
         font-weight: 700;
-        color: white;
+        color: var(--pink)
     }
 
 #dash-link{
     text-decoration: none;
-    color: white;
+    color: var(--white);
     cursor: pointer;
     font-size: 14pt;
     font-weight: 600;
@@ -65,7 +65,7 @@
 #dash-link:hover{
     transform: translateX(5px);
     font-weight: 700;
-    color: cornflowerblue;
+    color: var(--purple);
 }
 
 .dashboard-bottom{
@@ -91,3 +91,10 @@
     justify-content: center;
     align-items: center;
 }
+    .currentUser-email{
+        color: var(--purple);
+    }
+    .currentUser-username{
+        color: var(--white);
+        font-weight: 600;
+    }
