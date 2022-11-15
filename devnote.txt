@@ -4,11 +4,11 @@ BUG AND ERROR
 - facebook login
 - messaging tab ?
 - upload media(video or photo)?
-- friends function
-- rerender update data state
+- rerender update data state users
 
 -like function applied but need condition (
     -old account with non array likes cannot be like
     - bug, still can be like more than once  
 )
 
+-render home by friend

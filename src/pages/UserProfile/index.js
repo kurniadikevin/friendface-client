@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import CommentForm from '../../components/commentForm';
+import axios from 'axios';
 
 
 export function UserProfilePage(props) {
@@ -16,9 +17,7 @@ export function UserProfilePage(props) {
       email : 'loading' , profilePicture : ''});
 
    let {userId} = useParams(); 
-    console.log(userId)
 
-  
    const fetchPostData = async ()=>{
     const url=`http://localhost:5000/posts/${userId}`;
     const response = await fetch(url);
@@ -30,11 +29,8 @@ export function UserProfilePage(props) {
         const url=`http://localhost:5000/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
-        console.log(data)
         setUserData(data[0]);
         }
-    
-   
     
     const toggleForm = (form)=>{
       const Form = document.querySelector(`#${form}`);
@@ -49,6 +45,27 @@ export function UserProfilePage(props) {
         commentForm[i].style.display ='none';
     } else{  commentForm[i].style.display='inline'}
   }
+
+  const sendFriendRequest=()=>{
+    axios({
+      method : "POST",
+      data : {
+        requestData :{
+            sender :  props.currentUser,
+            status : 'pending'
+        }
+      },
+      withCredentials : true,
+      url : `http://localhost:5000/users/friendRequest/${userId}`
+    }).then(function(response){
+      console.log(response);
+      alert('friend request send')
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }
+
 
     useEffect(()=>{
       fetchPostData();
@@ -85,7 +102,7 @@ export function UserProfilePage(props) {
               <div></div>
             </div>
             <div className='profile-row3'>
-              <button>Add as Friend</button>
+              <button onClick={sendFriendRequest}>Add as Friend</button>
             </div>
           </div>
         </div>

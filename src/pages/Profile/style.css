@@ -62,3 +62,20 @@
 #edit-btn-profImg:hover , #edit-btn-username:hover{
     color: var(--purple);
 }
+
+#friends-list{
+    display: none;
+    position: absolute;
+    top: 150px;
+    background-color: var(--bg2);
+    padding: 30px 50px;
+}
+.friends-count{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    cursor: pointer;
+}
+
+.friendList-cont{
+    padding-top: 20px;
+}

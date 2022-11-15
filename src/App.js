@@ -6,6 +6,7 @@ import {  LoginPage } from './pages/Login';
 import { ProfilePage } from './pages/Profile';
 import { MessagePage} from './pages/Message';
 import { UserProfilePage } from './pages/UserProfile';
+import { NotificationPage } from './pages/Notification';
 
 const App = () =>{ 
 
@@ -30,6 +31,9 @@ const App = () =>{
       </Route>
       <Route path="/message">
           <MessagePage  currentUser={userData}/>  
+      </Route> 
+      <Route path="/notification">
+          <NotificationPage  currentUser={userData}/>  
       </Route> 
       <Route path='/userProfile/:userId'>
           <UserProfilePage currentUser={userData}/>

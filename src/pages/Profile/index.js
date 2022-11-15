@@ -19,6 +19,7 @@ export function ProfilePage(props) {
       _id : 'not set',
       username : 'not signed in',
       email : 'not available',
+      friends : []
     }} else {
       currentUser = props.currentUser;
     }
@@ -90,7 +91,23 @@ export function ProfilePage(props) {
              
             </div>
             <div className='profile-row2'>
-              <div>Friend</div>
+              <div>
+                <div className='friends-count' onClick={()=> toggleForm('friends-list')}>
+                  <div className='tag'>Friends: </div>
+                  <div> {currentUser._id !== 'not set'? 
+                  currentUser.friends.length : '0'} </div>
+                </div>
+                <div id='friends-list'>
+                  {(currentUser.friends).map((data)=>{
+                      return(
+                        <div className='friendList-cont'>
+                          <div>{data.username}</div>
+                          <div className='tag'>{data.email}</div>
+                        </div>
+                      )
+                  })}
+                </div>
+              </div>
               <div></div>
             </div>
             <div className='profile-row3'>

@@ -1,0 +1,28 @@
+.notif-page{
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    padding: 30px 60px;
+}
+
+.friendReq-head{
+ font-size: 14pt;
+ font-weight: 700;
+ color: var(--purple);
+}
+
+.friendReq-cont{
+    padding-bottom: 20px;
+
+}
+.friendReq-button-cont{
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2,70px);
+    gap: 10px;
+}
+.friendReq-button-cont>button{
+    color: var(--white);
+    background-color: var(--bg2);
+    border: none;
+    padding: 5px 8px;
+}

@@ -45,13 +45,19 @@ function Dashboard(props){
                     <Link to='/profile' id='link-cont' >
                         <div  id='dash-link'>Profile</div>
                         <span id='link-icon' class="material-symbols-outlined">account_circle</span>
-                        </Link>
+                    </Link>
                 </div>
                 <div>
                     <Link to='/message' id='link-cont' >
                         <div  id='dash-link'>Message</div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
-                        </Link>
+                    </Link>
+                </div>
+                <div>
+                    <Link to='/notification' id='link-cont' >
+                        <div  id='dash-link'>Notif</div>
+                        <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
+                    </Link>
                 </div>
                 <div>
                     <Link to='/login' id='link-cont' className='sign-links'>
