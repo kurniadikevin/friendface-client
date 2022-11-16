@@ -32,7 +32,9 @@ export function HomePage(props) {
 
   const likePostFunction = (post)=>{
     if(post.author._id === currentUser._id){
-      alert('Cannot like your own post')
+      const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Cannot like your own post!'
+        alertBox.style.display='inline';
     }
     else{
     axios({

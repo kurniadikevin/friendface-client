@@ -20,6 +20,9 @@ export function NotificationPage(props) {
   
 
   const acceptFriendRequest = (friendReq)=>{
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.style.display='inline';
+    alertBox.textContent='Accept friend request'
     axios({
         method : "POST",
         data : {
@@ -30,7 +33,6 @@ export function NotificationPage(props) {
         url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
         console.log(response);
-        alert('friend accepted')
       })
       .catch(function (error) {
         console.log(error);
@@ -38,6 +40,9 @@ export function NotificationPage(props) {
   }
 
   const declineFriendRequest= (friendReq)=>{
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.style.display='inline';
+    alertBox.textContent='Decline friend request'
     axios({
         method : "POST",
         data : {
@@ -48,7 +53,6 @@ export function NotificationPage(props) {
         url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
         console.log(response);
-        alert('friend decline')
       })
       .catch(function (error) {
         console.log(error);

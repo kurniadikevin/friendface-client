@@ -25,7 +25,9 @@ export function ExplorePage(props) {
 
   const likePostFunction = (post)=>{
     if(post.author._id === currentUser._id){
-      alert('Cannot like your own post')
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.textContent='Cannot like your own post!'
+      alertBox.style.display='inline';
     }
     else{
     axios({
@@ -39,7 +41,10 @@ export function ExplorePage(props) {
       url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {
         console.log(response);
-        alert('post liked')
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Post liked!'
+        alertBox.style.display='inline';        
+
       })
       .catch(function (error) {
         console.log(error);

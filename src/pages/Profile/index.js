@@ -111,7 +111,7 @@ export function ProfilePage(props) {
               <div></div>
             </div>
             <div className='profile-row3'>
-              botton panel
+             
             </div>
           </div>
         </div>
