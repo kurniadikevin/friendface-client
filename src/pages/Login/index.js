@@ -68,9 +68,9 @@ export function LoginPage(props) {
     <div className="Login">
         <div className='login-box'>
           <div className='login-head'>
-            <Link to='./' id='link-home'>
+            {/* <Link to='./' id='link-home'> */}
               <h2>Friendface</h2>
-            </Link>
+            {/* </Link> */}
             <p>{userData.email}</p>
           </div>
 
@@ -106,7 +106,10 @@ export function LoginPage(props) {
                 <input type='password' placeholder='password' name='password'  
                   value={password} onChange={(e) => setPassword(e.target.value)}></input>
               </div>
+              <div>
               <button type='submit'  className='submit-btn'  onClick={loginUser} >Log in</button>
+              {/* <a href="/login/facebook" class="button">Log In With Facebook</a> */}
+              </div>
           </div>              
           </div>
         </div>

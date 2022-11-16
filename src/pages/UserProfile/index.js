@@ -98,11 +98,14 @@ export function UserProfilePage(props) {
               </div>        
             </div>
             <div className='profile-row2'>
-              <div>Friend</div>
-              <div></div>
+              <div className='friends-count'>
+                <div className='tag'>Friend</div>
+                <div>{userData._id !== 'not set'? 
+                  userData.friends?.length : '0'} </div>
+              </div>
             </div>
             <div className='profile-row3'>
-              <button onClick={sendFriendRequest}>Add as Friend</button>
+              <button id='friendReq-btn' onClick={sendFriendRequest}>Add Friend Request</button>
             </div>
           </div>
         </div>

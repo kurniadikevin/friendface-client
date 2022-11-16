@@ -2,3 +2,18 @@
     text-decoration: none;
     color: rgb(142, 179, 248);
 }
+
+#friendReq-btn{
+    cursor: pointer;
+    background-color: var(--purple);
+    border: none;
+    color: var(--white);
+    padding: 5px 8px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+#friendReq-btn:hover {
+    background-color: var(--green);
+    color: black;
+}

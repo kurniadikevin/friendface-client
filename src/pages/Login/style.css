@@ -15,6 +15,9 @@
     background-color: var(--currentLine);
    
 }
+    h2{
+        font-size: 22pt;
+    }
 
     #link-home{
         text-decoration: none;
@@ -39,6 +42,12 @@
         background-color: var(--purple);
         color: white;
         font-weight: 700;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+    .submit-btn:hover{
+        color: var(--background);
+        background-color: var(--green);
     }
     .form-sign{
         height: 200px;

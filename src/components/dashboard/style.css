@@ -21,10 +21,10 @@
     font-size: 22pt;
     padding-top: 25px;
     transition: 0.5s;
-    color: var(--white);
+    color: var(--purple);
 }
     .app-title:hover{
-        color: var(--purple);
+        color: var(--green);
     }
 .title-dashboard{
     padding-left: 25px;
