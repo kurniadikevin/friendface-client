@@ -35,27 +35,33 @@ function Dashboard(props){
             </Link>
             </div>
             <div className='links-cont'>
-                <div>
-                    <Link to='/' id='link-cont' >
+                <div id='home-tabs'>
+                    <Link to='/home' id='link-cont' >
                         <div  id='dash-link'>Home</div>
                         <span id='link-icon' class="material-symbols-outlined">cottage</span>
                         </Link>
                 </div>
-                <div>
+                <div id='explore-tabs'>
+                    <Link to='/' id='link-cont' >
+                        <div  id='dash-link'>Explore</div>
+                        <span id='link-icon' class="material-symbols-outlined">explore</span>
+                        </Link>
+                </div>
+                <div id='profile-tabs'>
                     <Link to='/profile' id='link-cont' >
                         <div  id='dash-link'>Profile</div>
                         <span id='link-icon' class="material-symbols-outlined">account_circle</span>
                     </Link>
                 </div>
-                <div>
+                <div id='message-tabs'>
                     <Link to='/message' id='link-cont' >
                         <div  id='dash-link'>Message</div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
                     </Link>
                 </div>
-                <div>
+                <div id='notification-tabs'>
                     <Link to='/notification' id='link-cont' >
-                        <div  id='dash-link'>Notif</div>
+                        <div  id='dash-link'>Notification</div>
                         <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
                     </Link>
                 </div>

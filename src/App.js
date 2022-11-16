@@ -7,6 +7,7 @@ import { ProfilePage } from './pages/Profile';
 import { MessagePage} from './pages/Message';
 import { UserProfilePage } from './pages/UserProfile';
 import { NotificationPage } from './pages/Notification';
+import { ExplorePage } from './pages/Explore';
 
 const App = () =>{ 
 
@@ -20,9 +21,12 @@ const App = () =>{
  
   <BrowserRouter>
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/home">
           <HomePage currentUser={userData}/>
       </Route> 
+      <Route exact path="/">
+          <ExplorePage currentUser={userData}/>
+      </Route>
       <Route path="/login" >
           <LoginPage  func={pull_data}/>
       </Route>

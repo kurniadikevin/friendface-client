@@ -1,7 +1,7 @@
 import './style.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 
@@ -24,7 +24,7 @@ export function LoginPage(props) {
 
     loginForm.style.display= "flex";
     signupForm.style.display='none';
-    loginToggle.style.borderBottom='1px solid white';
+    loginToggle.style.borderBottom='1px solid var(--purple)';
     signupToggle.style.borderBottom='none';
   }
 
@@ -36,7 +36,7 @@ export function LoginPage(props) {
 
     signupForm.style.display= "flex";
     loginForm.style.display='none';
-    signupToggle.style.borderBottom='1px solid white';
+    signupToggle.style.borderBottom='1px solid var(--purple)';
     loginToggle.style.borderBottom='none';
   }
 
@@ -68,7 +68,9 @@ export function LoginPage(props) {
     <div className="Login">
         <div className='login-box'>
           <div className='login-head'>
-            <h2>Friendface</h2>
+            <Link to='./' id='link-home'>
+              <h2>Friendface</h2>
+            </Link>
             <p>{userData.email}</p>
           </div>
 

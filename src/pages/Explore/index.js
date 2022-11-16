@@ -7,19 +7,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-export function HomePage(props) {
+export function ExplorePage(props) {
 
   let currentUser = props?.currentUser;
  /*  console.log(currentUser) */
   const [postData,setPostData]=useState([]);
 
-  //fetch user following post
-  const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/friends/${currentUser._id}`;
-    const response = await fetch(url);
-    var data = await response.json();
-    setPostData(data);
-    }
 
   //fetch all post 
   const fetchAllPostData = async ()=>{
@@ -61,16 +54,32 @@ const toggleCommentForm = (i)=>{
   } else{  commentForm[i].style.display='inline'}
 }
 
+//hide profile, message, and notification tap for guest user
+const toggleTabsGuestMode = ()=>{
+  const profileTab = document.querySelector('#profile-tabs');
+  const messageTab = document.querySelector('#message-tabs');
+  const notifTab = document.querySelector('#notification-tabs');
+  const homeTab = document.querySelector('#home-tabs');
+  profileTab.style.display='none';
+  messageTab.style.display='none';
+  notifTab.style.display='none';
+  homeTab.style.display='none';
+}
+  
+
   useEffect(()=>{
-      fetchPostData();
-    
-     
+    if(currentUser){
+      fetchAllPostData();
+    } else{
+      fetchAllPostData();
+      toggleTabsGuestMode();
+    }
     })
 
   return (
   <div className="App">
     
-    <Dashboard currentUser={props.currentUser} dashIndex={0}/>
+    <Dashboard currentUser={props.currentUser} dashIndex={1}/>
     
     <div className='main'  id='home-page'>
       <HomeComp currentUser={props.currentUser}/>

@@ -57,7 +57,7 @@ export function NotificationPage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} dashIndex={3} />
+      <Dashboard currentUser={props.currentUser} dashIndex={4} />
       <div className='main'>
         <div className='notif-page'>
         <div className='friendReq-head'>Friend Request</div>
@@ -65,9 +65,9 @@ export function NotificationPage(props) {
         {(currentUser.friendRequest).map((data)=>{
             return (
                 <div className='friendReq-cont'>
-                    <div className='friendReq-username'>{data.sender.username}</div>
-                    <div className='friendReq-email'>{data.sender.email}</div>
-                    <div className='friendReq-status'>Status : {data.status}</div>
+                    <div className='friendReq-username'>{data.sender?.username}</div>
+                    <div className='friendReq-email'>{data.sender?.email}</div>
+                    <div className='friendReq-status'>Status : {data?.status}</div>
                 <div className='friendReq-button-cont'>
                     <button  id='accept-req' onClick={()=>acceptFriendRequest(data)}>Accept</button>
                     <button id='decline-req'onClick={()=>declineFriendRequest(data)}>Decline</button>

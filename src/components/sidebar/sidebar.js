@@ -51,7 +51,19 @@ function Sidebar(){
                     )
                 })}    
             </div>   
-            <div className='sidebar-bottom'></div>
+            <div className='sidebar-bottom'>
+                <div className='desc1'>Theme inspired by Dracula theme</div>
+                <div className='desc2'>'Friendface' name inspired by</div>
+                <div className='desc2'> the IT Crowd series</div>
+                <div className='desc3'>
+                    <div>WebApp by kurniadikevin</div>
+                    <a href='https://github.com/kurniadikevin'>
+                     <i class="fa fa-github" id='github-logo'></i>
+                    </a>
+                </div>
+               
+                
+            </div>
         </div>
         </div>
         

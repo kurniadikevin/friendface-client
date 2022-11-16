@@ -56,7 +56,7 @@ export function ProfilePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} dashIndex={1} />
+      <Dashboard currentUser={props.currentUser} dashIndex={2} />
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>

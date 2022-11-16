@@ -2,13 +2,15 @@ BUG AND ERROR
 
 
 - facebook login
+- rerender update data state users
 - messaging tab ?
 - upload media(video or photo)?
-- rerender update data state users
+
 
 -like function applied but need condition (
     -old account with non array likes cannot be like
     - bug, still can be like more than once  
 )
+-
 
 -render home by friend

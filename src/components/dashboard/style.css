@@ -87,7 +87,7 @@
 .profPic-cont{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
     #profileImgDash{
         border-radius: 50%;
@@ -97,6 +97,12 @@
     justify-content: center;
     align-items: center;
 }
+    .profileInfoDash{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
     .currentUser-email{
         color: var(--purple);
     }
