@@ -17,6 +17,11 @@ function Dashboard(props){
     dashLink[i].style.color='var(--green)';
     dashLink[i].style.transform = 'translateX(5px)';
   }
+
+  const removeAlert=()=>{
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.style.display='none';
+  }
         
    useEffect(()=>{
         if(props.currentUser ){
@@ -86,6 +91,12 @@ function Dashboard(props){
                         <div className='currentUser-email'>{userData ? userData.email : 'Not Sign in'}</div>    
                     </div>
                    
+                </div>
+            </div>
+            <div id='alert-box' onClick={removeAlert}>
+                <div id='alert-content'>
+                <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
+                <div id='alert-msg'>test message</div>
                 </div>
             </div>
         </div>

@@ -64,6 +64,30 @@ export function LoginPage(props) {
     });
 }
 
+
+  // post form login using axios
+  const loginUserSample = async()=>{  
+  
+    axios({
+      method: "POST",
+      data: {
+        email: 'guest@gmail.com',
+        password: 'password',
+       
+      },
+      withCredentials: true,
+      url: "http://localhost:5000/users/login",
+    }).then((res) => {
+      console.log(res.data)
+      if(res.data === 'No User Exists'){
+        alert('No User Exist')
+      } else{
+        setUserData(res.data)
+        history.push("/")
+      }    
+    });
+}
+
   return (
     <div className="Login">
         <div className='login-box'>
@@ -108,6 +132,7 @@ export function LoginPage(props) {
               </div>
               <div>
               <button type='submit'  className='submit-btn'  onClick={loginUser} >Log in</button>
+              <button type='submit'  className='submit-btn'  onClick={loginUserSample} >Log Sample user</button>
               {/* <a href="/login/facebook" class="button">Log In With Facebook</a> */}
               </div>
           </div>              

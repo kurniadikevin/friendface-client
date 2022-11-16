@@ -22,6 +22,10 @@ function HomeComp(props){
 
     const createPost = async()=> {  
         console.log(postText);
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Post created!'
+        alertBox.style.display='inline';
+
        // console.log(currentUser.email)
         axios({
           method: "POST",
@@ -34,6 +38,7 @@ function HomeComp(props){
         }).then(function (response) {
             console.log(response);
             setRender(true);
+            
           })
           .catch(function (error) {
             console.log(error);

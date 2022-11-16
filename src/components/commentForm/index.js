@@ -28,7 +28,9 @@ const CommentForm= (props)=>{
           url: `http://localhost:5000/comments/createComment/${post._id}`,
         }).then(function (response) {
             console.log(response);
-            alert('comment posted');
+            const alertBox = document.querySelector('#alert-box');
+            alertBox.textContent='Comment created!'
+            alertBox.style.display='inline';
             setComment('')
           })
           .catch(function (error) {

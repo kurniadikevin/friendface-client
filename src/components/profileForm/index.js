@@ -19,6 +19,9 @@ const ProfileForm = (props)=>{
   
 
     const updateUsername = ()=>{
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.textContent='Username updated!'
+      alertBox.style.display='inline';
          axios({
            method: "POST",
            data: {

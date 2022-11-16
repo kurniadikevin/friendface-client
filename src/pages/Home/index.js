@@ -46,7 +46,9 @@ export function HomePage(props) {
       url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {
         console.log(response);
-        alert('post liked')
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Liked post!'
+        alertBox.style.display='inline';
       })
       .catch(function (error) {
         console.log(error);
