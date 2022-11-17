@@ -58,8 +58,9 @@ export function UserProfilePage(props) {
       withCredentials : true,
       url : `http://localhost:5000/users/friendRequest/${userId}`
     }).then(function(response){
-      console.log(response);
-      alert('friend request send')
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.textContent='Friend request sent!'
+      alertBox.style.display='inline';
     })
     .catch(function(error){
       console.log(error);

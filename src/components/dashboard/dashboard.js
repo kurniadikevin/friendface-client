@@ -23,6 +23,7 @@ function Dashboard(props){
     alertBox.style.display='none';
   }
         
+  
    useEffect(()=>{
         if(props.currentUser ){
         setUserData(props.currentUser);

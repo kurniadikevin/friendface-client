@@ -14,6 +14,12 @@ const ImageForm = (props)=>{
       }} else {
         currentUser = props.currentUser;
       }
+
+      const imageSubmitAlert= ()=>{
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Profile Image Changed!'
+        alertBox.style.display='inline';
+      }
   
 
 
