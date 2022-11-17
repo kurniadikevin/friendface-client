@@ -34,7 +34,7 @@ function HomeComp(props){
             authorId : currentUser._id
           },
           withCredentials: true,
-          url: "http://localhost:5000/posts/newpost",
+          url: "https://odin-book-api-production.up.railway.app/posts/newpost",
         }).then(function (response) {
             console.log(response);
             setRender(true);

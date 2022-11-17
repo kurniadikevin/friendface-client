@@ -25,7 +25,7 @@ const ImageForm = (props)=>{
 
     return (
         <div className="profile-image-form">
-            <form method='POST' action='http://localhost:5000/images/' enctype="multipart/form-data">
+            <form method='POST' action='https://odin-book-api-production.up.railway.app/images/' enctype="multipart/form-data">
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         
