@@ -35,13 +35,40 @@
     display: flex;
     gap: 10px;
 }
+
+
     #search-input{
         border-radius: 10px;
         border: none;
         background-color: var(--white);
+        padding: 10px;
     }
+
+  
     #search-logo{
         color: var(--purple);
+    }
+
+#query-auto{
+    height: 300px;
+    overflow:scroll;
+    width: 200px;
+    background-color: var(--bg2);
+    top: 70px;
+    right: 60px; 
+    position: absolute;
+    display: none;
+    padding: 5px;
+}
+
+    #query-link{
+        color: var(--white);
+    }
+    .query-result{
+        padding-top: 10px;
+    }
+    .query-result:hover{
+        background-color: var(--currentLine);
     }
 
 .form-newPost{

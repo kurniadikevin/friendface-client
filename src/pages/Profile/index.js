@@ -26,7 +26,7 @@ export function ProfilePage(props) {
   
   
   const fetchPostData = async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}`;
+    const url=`http://localhost:5000/posts/${currentUser._id}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
@@ -60,7 +60,7 @@ export function ProfilePage(props) {
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {props.currentUser?.profilePicture ? `https://odin-book-api-production.up.railway.app/${props.currentUser.profilePicture} `
+            <img id='profileImgProfile' src= {props.currentUser?.profilePicture ? `http://localhost:5000/${props.currentUser.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
@@ -123,7 +123,7 @@ export function ProfilePage(props) {
             return(
               <div className='post-container'>
                 <div className='post-sidebar'>    
-                  <img  id='profileImg' src={item.author?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
+                  <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))}
                    alt='profileImage'  width={50} height={50}/>
                 </div>

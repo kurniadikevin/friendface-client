@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 
@@ -9,6 +10,10 @@ function HomeComp(props){
     const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'});
     const [postText,setPostText]= useState('');
     const [render,setRender]= useState(false);
+    const [searchInput,setSearchInput]= useState('');
+    const [queryData,setQueryData]= useState([]);
+    const [autoComplete,setAutoComplete]=useState([]);
+
 
  
     
@@ -34,7 +39,7 @@ function HomeComp(props){
             authorId : currentUser._id
           },
           withCredentials: true,
-          url: "https://odin-book-api-production.up.railway.app/posts/newpost",
+          url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
             setRender(true);
@@ -42,13 +47,46 @@ function HomeComp(props){
           })
           .catch(function (error) {
             console.log(error);
-          });
-         
+          });    
     }
+
+    const userDataToQuery = async ()=>{
+        const url=`http://localhost:5000/users/search`;
+        const response = await fetch(url);
+        var data = await response.json();
+        setQueryData(data);
+        console.log(data);
+        }
+    
+    const filterDataQuery=()=>{
+       let resultEmail = queryData.filter((item)=>{
+          return  ((item.email).toLowerCase()).includes(searchInput.toLowerCase());
+        })
+        let resultUsername = queryData.filter((item)=>{
+            if(item.username){
+            return  ((item.username).toLowerCase()).includes(searchInput.toLowerCase());
+            }
+          })
+        console.log(resultUsername); 
+        console.log(resultEmail);
+        setAutoComplete([...resultEmail,...resultUsername]);
+    }
+
+    const removeQueryBox = ()=>{
+        const queryBox = document.querySelector('#query-auto');
+        queryBox.style.display='none';
+    }
+   
     
     useEffect(()=>{
-       setCurrentUser(props.currentUser)
-    },[])
+       setCurrentUser(props.currentUser);
+       filterDataQuery();
+       userDataToQuery();//can be called once
+       const queryBox = document.querySelector('#query-auto');
+       if(searchInput !== ''){
+        queryBox.style.display='inline';
+       } 
+    },[searchInput])
 
     return (
         <div className='HomeComp'>
@@ -57,10 +95,24 @@ function HomeComp(props){
                     <button id='make-post' onClick={togglePostForm}>New post</button>
                 </div>
                 <div className='search-bar'>
-                    <input type='text' id='search-input'></input>
+                    <input type='text' id='search-input' value={searchInput} placeholder='search user'
+                    onChange={(e)=>{ setSearchInput(e.target.value)}} onBlur={removeQueryBox}>
+                    </input>
                     <div id='search-logo'>
                     <span class="material-symbols-outlined">search</span>
                     </div>
+                </div>
+                <div id='query-auto'>
+                    {autoComplete.length === 0 ? <div>No result</div> :
+                    autoComplete.map((item)=>{
+                        return(
+                            <div className='query-result'>
+                                <Link id='query-link' to={`/userProfile/${item._id}`}>
+                                <div>{item.username}</div>
+                                <div>{item.email}</div>
+                                </Link>
+                            </div>
+                        )    })}
                 </div>
             </div>
             <div className='homeComp-postForm'>
