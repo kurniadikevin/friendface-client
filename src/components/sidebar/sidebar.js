@@ -9,7 +9,7 @@ function Sidebar(){
     const [data,setData]= useState([]);
 
     const fetchUserList =()=>{
-        let url='http://localhost:5000/users/recent';
+        let url='https://odin-book-api-production.up.railway.app/users/recent';
         fetch(url)
         .then((response) => response.json())
         .then((data) => {

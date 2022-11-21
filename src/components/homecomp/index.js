@@ -64,7 +64,7 @@ function HomeComp(props){
                 </div>
             </div>
             <div className='homeComp-postForm'>
-                <div className='newpost-form' /* method='POST' action="http://localhost:5000/posts/newpost" */>
+                <div className='newpost-form' >
                     <div className='newpost-main'>
                         <textarea id='newpost-text' name='text'
                         value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
