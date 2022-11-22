@@ -85,7 +85,9 @@ function HomeComp(props){
        const queryBox = document.querySelector('#query-auto');
        if(searchInput !== ''){
         queryBox.style.display='inline';
-       } 
+       } else if(searchInput === ''){
+        removeQueryBox();
+       }
     },[searchInput])
 
     return (
@@ -96,7 +98,7 @@ function HomeComp(props){
                 </div>
                 <div className='search-bar'>
                     <input type='text' id='search-input' value={searchInput} placeholder='search user'
-                    onChange={(e)=>{ setSearchInput(e.target.value)}} onBlur={removeQueryBox}>
+                    onChange={(e)=>{ setSearchInput(e.target.value)}} >
                     </input>
                     <div id='search-logo'>
                     <span class="material-symbols-outlined">search</span>
