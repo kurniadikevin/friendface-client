@@ -24,7 +24,7 @@ function Sidebar(){
     },[])
 
     return(
-        <div>
+        <div id='sidebar-wrapper'>
         <div className='Sidebar'>
             <div className='sidebar-head'>Popular user </div>     
             <div className='sidebar-main'>
