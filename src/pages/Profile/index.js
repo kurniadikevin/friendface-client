@@ -7,7 +7,7 @@ import UserContext from '../../App.js';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import CommentForm from '../../components/commentForm';
-
+import { toggleLoader } from '../../components/loader/loader-toggle';
 
 export function ProfilePage(props) {
   
@@ -30,6 +30,7 @@ export function ProfilePage(props) {
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
+    toggleLoader();
     }
   
 

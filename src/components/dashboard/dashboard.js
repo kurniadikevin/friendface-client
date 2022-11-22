@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import LoaderComponent from '../loader/loader'
+
 
 function Dashboard(props){
 
@@ -101,6 +103,7 @@ function Dashboard(props){
                 </div>
             </div>
         </div>
+        <LoaderComponent/>
     </div>
     )
 }

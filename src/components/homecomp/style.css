@@ -47,6 +47,12 @@
   
     #search-logo{
         color: var(--purple);
+        display: flex;
+        align-items: center;
+    }
+    #search-logo>span{
+        font-size: 20pt;
+        cursor: pointer;
     }
 
 #query-auto{

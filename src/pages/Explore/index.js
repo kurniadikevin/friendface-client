@@ -6,6 +6,7 @@ import CommentForm from '../../components/commentForm';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { toggleLoader } from '../../components/loader/loader-toggle';
 
 export function ExplorePage(props) {
 
@@ -20,6 +21,7 @@ export function ExplorePage(props) {
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
+    toggleLoader();
     }
     
 

@@ -11,3 +11,7 @@ BUG AND ERROR
     -old account with non array likes cannot be like
     - bug, still can be like more than once  
 -
+
+
+-add loading
+- searchbar bug focus no focus

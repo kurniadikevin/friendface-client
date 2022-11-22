@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
+import { toggleLoader } from '../../components/loader/loader-toggle';
 
 export function NotificationPage(props) {
 
@@ -67,6 +68,7 @@ export function NotificationPage(props) {
         <div className='friendReq-head'>Friend Request</div>
         <div className='friendReq-main'>
         {(currentUser.friendRequest).map((data)=>{
+            toggleLoader();
             return (
                 <div className='friendReq-cont'>
                     <div className='friendReq-username'>{data.sender?.username}</div>

@@ -26,3 +26,8 @@
     border: none;
     padding: 5px 8px;
 }
+
+button:hover {
+    cursor: pointer;
+    color: var(--purple);
+}
