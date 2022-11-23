@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 
-
-
 function HomeComp(props){
     const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'});
     const [postText,setPostText]= useState('');
@@ -15,9 +13,6 @@ function HomeComp(props){
     const [autoComplete,setAutoComplete]=useState([]);
 
 
- 
-    
-   // console.log(currentUser);
     const togglePostForm = ()=>{
         const postForm = document.querySelector('.homeComp-postForm');
         if(postForm.style.display === 'inline'){
