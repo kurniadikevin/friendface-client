@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
+import { toggleLoader } from '../../components/loader/loader-toggle';
 
 export function NotificationPage(props) {
 
@@ -30,7 +31,7 @@ export function NotificationPage(props) {
             newFriend : friendReq.sender,
             newFriendReceiver : currentUser
         },
-        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
+        url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
         console.log(response);
       })
@@ -50,7 +51,7 @@ export function NotificationPage(props) {
             newFriend : friendReq.sender,
             newFriendReceiver : currentUser
         },
-        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
+        url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
         console.log(response);
       })
@@ -67,6 +68,7 @@ export function NotificationPage(props) {
         <div className='friendReq-head'>Friend Request</div>
         <div className='friendReq-main'>
         {(currentUser.friendRequest).map((data)=>{
+            toggleLoader();
             return (
                 <div className='friendReq-cont'>
                     <div className='friendReq-username'>{data.sender?.username}</div>

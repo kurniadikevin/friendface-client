@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import LoaderComponent from '../loader/loader'
+
 
 function Dashboard(props){
 
@@ -81,7 +83,7 @@ function Dashboard(props){
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
-                     src= {props.currentUser?.profilePicture ? `https://odin-book-api-production.up.railway.app/${props.currentUser.profilePicture} `
+                     src= {props.currentUser?.profilePicture ? `http://localhost:5000/${props.currentUser.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} 
                       alt='profilePicture'
                         width={75} height={75}/>
@@ -101,6 +103,7 @@ function Dashboard(props){
                 </div>
             </div>
         </div>
+        <LoaderComponent/>
     </div>
     )
 }

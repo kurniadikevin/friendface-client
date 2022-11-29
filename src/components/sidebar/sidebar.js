@@ -9,7 +9,7 @@ function Sidebar(){
     const [data,setData]= useState([]);
 
     const fetchUserList =()=>{
-        let url='https://odin-book-api-production.up.railway.app/users/recent';
+        let url='http://localhost:5000/users/recent';
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -24,7 +24,7 @@ function Sidebar(){
     },[])
 
     return(
-        <div>
+        <div id='sidebar-wrapper'>
         <div className='Sidebar'>
             <div className='sidebar-head'>Popular user </div>     
             <div className='sidebar-main'>
@@ -32,7 +32,7 @@ function Sidebar(){
                     return(
                         <div className='display-user'>
                          <div className='display-user-col1'>
-                         <img  id='profileImg' src={data?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${data.profilePicture} `
+                         <img  id='profileImg' src={data?.profilePicture ?  `http://localhost:5000/${data.profilePicture} `
                             : (require('../../assets/profilepicturesSmall.png'))}
                             alt='displayUser-profileImage' width={30} height={30}/> 
                          </div>
@@ -51,7 +51,9 @@ function Sidebar(){
                     )
                 })}    
             </div>   
+            
             <div className='sidebar-bottom'>
+              
                 <div className='desc1'>Theme inspired by Dracula theme</div>
                 <div className='desc2'>'Friendface' name inspired by</div>
                 <div className='desc2'> the IT Crowd series</div>
@@ -60,12 +62,12 @@ function Sidebar(){
                     <a href='https://github.com/kurniadikevin'>
                      <i class="fa fa-github" id='github-logo'></i>
                     </a>
-                </div>
-               
-                
+              
+                </div>  
+            </div>
             </div>
         </div>
-        </div>
+       
         
     )
 }

@@ -50,9 +50,11 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-     
+     position: sticky;
+     bottom: 0px;
    }  
 
+  
    .desc1, .desc2{
       font-size: 10pt;
       color: var(--bg2);

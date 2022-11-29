@@ -2,6 +2,7 @@ import './style.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
+import LoaderComponent from '../../components/loader/loader';
 
 
 
@@ -13,6 +14,15 @@ export function LoginPage(props) {
   const [password,setPassword]= useState('');
   const [userData,setUserData]= useState({});
 
+  //setup loader position and display for login
+  const loader= document.querySelector('#login-loader');
+  if(loader){
+    loader.style.display='none';
+    loader.style.top='77%';
+    loader.style.left='47%';
+
+  }
+   
   // pull data to app
   props.func(userData);
  
@@ -43,7 +53,7 @@ export function LoginPage(props) {
 
   // post form login using axios
   const loginUser = async()=>{  
-  
+    loader.style.display='inline';
     axios({
       method: "POST",
       data: {
@@ -52,7 +62,7 @@ export function LoginPage(props) {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       console.log(res.data)
       if(res.data === 'No User Exists'){
@@ -67,7 +77,7 @@ export function LoginPage(props) {
 
   // post form login using axios
   const loginUserSample = async()=>{  
-  
+    loader.style.display='inline';
     axios({
       method: "POST",
       data: {
@@ -76,7 +86,7 @@ export function LoginPage(props) {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       console.log(res.data)
       if(res.data === 'No User Exists'){
@@ -92,9 +102,9 @@ export function LoginPage(props) {
     <div className="Login">
         <div className='login-box'>
           <div className='login-head'>
-            {/* <Link to='./' id='link-home'> */}
+           
               <h2>Friendface</h2>
-            {/* </Link> */}
+            
             <p>{userData.email}</p>
           </div>
 
@@ -106,7 +116,7 @@ export function LoginPage(props) {
           <div className='sign-form'>
 
           {/*   sign up form */}
-            <form className='form-sign' id='signup-wrap'  method='POST' action='https://odin-book-api-production.up.railway.app/users/signup'>
+            <form className='form-sign' id='signup-wrap'  method='POST' action='http://localhost:5000/users/signup'>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'></input>
@@ -138,6 +148,7 @@ export function LoginPage(props) {
           </div>              
           </div>
         </div>
+      <LoaderComponent/>
     </div>
   );
 }
