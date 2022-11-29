@@ -21,12 +21,11 @@ function HomeComp(props){
     }
 
     const createPost = async()=> {  
-        console.log(postText);
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post created!'
         alertBox.style.display='inline';
 
-       // console.log(currentUser.email)
+      
         axios({
           method: "POST",
           data: {
@@ -36,7 +35,6 @@ function HomeComp(props){
           withCredentials: true,
           url: "https://odin-book-api-production.up.railway.app/posts/newpost",
         }).then(function (response) {
-            console.log(response);
             setRender(true);
             
           })
@@ -50,7 +48,6 @@ function HomeComp(props){
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
-        console.log(data);
         }
     
     const filterDataQuery=()=>{
@@ -62,8 +59,6 @@ function HomeComp(props){
             return  ((item.username).toLowerCase()).includes(searchInput.toLowerCase());
             }
           })
-        console.log(resultUsername); 
-        console.log(resultEmail);
         setAutoComplete([...resultEmail,...resultUsername]);
     }
 

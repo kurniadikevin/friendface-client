@@ -64,7 +64,7 @@ export function LoginPage(props) {
       withCredentials: true,
       url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
-      console.log(res.data)
+     
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{
@@ -88,7 +88,7 @@ export function LoginPage(props) {
       withCredentials: true,
       url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
-      console.log(res.data)
+     
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{

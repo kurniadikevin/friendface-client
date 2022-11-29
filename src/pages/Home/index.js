@@ -11,7 +11,7 @@ import { toggleLoader } from '../../components/loader/loader-toggle';
 export function HomePage(props) {
 
   let currentUser = props?.currentUser;
- /*  console.log(currentUser) */
+ 
   const [postData,setPostData]=useState([]);
 
   //fetch user following post
@@ -42,7 +42,6 @@ export function HomePage(props) {
       withCredentials: true,
       url: `https://odin-book-api-production.up.railway.app/posts/likes/${post._id}`,
     }).then(function (response) {
-        console.log(response);
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Liked post!'
         alertBox.style.display='inline';
