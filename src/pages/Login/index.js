@@ -64,7 +64,6 @@ export function LoginPage(props) {
       withCredentials: true,
       url: "http://localhost:5000/users/login",
     }).then((res) => {
-      console.log(res.data)
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{
@@ -88,7 +87,6 @@ export function LoginPage(props) {
       withCredentials: true,
       url: "http://localhost:5000/users/login",
     }).then((res) => {
-      console.log(res.data)
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{

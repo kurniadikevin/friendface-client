@@ -7,11 +7,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
+import { formatDate,formatTimeStamp } from '../../components/functions';
 
 export function HomePage(props) {
 
   let currentUser = props?.currentUser;
- /*  console.log(currentUser) */
   const [postData,setPostData]=useState([]);
 
   //fetch user following post
@@ -42,7 +42,7 @@ export function HomePage(props) {
       withCredentials: true,
       url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {
-        console.log(response);
+       
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Liked post!'
         alertBox.style.display='inline';
@@ -88,7 +88,7 @@ const toggleCommentForm = (i)=>{
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
                   <div className='post-author'>{item.author?.username ? item.author.username : 'anon'}</div>
                 </Link>
-                <div className='post-date'>{item.date}</div>
+                <div className='post-date'>{formatDate(item.date)}</div>
               <div className='action-cont'>
                   <div className='like-cont'>
                     <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item)}>
@@ -108,7 +108,7 @@ const toggleCommentForm = (i)=>{
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>
                         <div className='comment-username'>{comment.author?.username}</div>
-                        <div className='comment-date'>{comment.date}</div>
+                        <div className='comment-date'>{formatTimeStamp(comment.date)}</div>
                       </div>
                     )
                 })

@@ -33,7 +33,7 @@ export function NotificationPage(props) {
         },
         url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
-        console.log(response);
+       
       })
       .catch(function (error) {
         console.log(error);
@@ -53,7 +53,7 @@ export function NotificationPage(props) {
         },
         url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
-        console.log(response);
+       
       })
       .catch(function (error) {
         console.log(error);
