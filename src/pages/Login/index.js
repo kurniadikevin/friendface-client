@@ -98,6 +98,9 @@ export function LoginPage(props) {
 
   return (
     <div className="Login">
+      <div className='login-col1'></div>
+
+      <div className='login-col2'>
         <div className='login-box'>
           <div className='login-head'>
            
@@ -145,6 +148,7 @@ export function LoginPage(props) {
               </div>
           </div>              
           </div>
+        </div>
         </div>
       <LoaderComponent/>
     </div>

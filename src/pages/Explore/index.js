@@ -5,7 +5,7 @@ import HomeComp from '../../components/homecomp';
 import CommentForm from '../../components/commentForm';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { formatDate,formatTimeStamp } from '../../components/functions';
 
@@ -13,7 +13,8 @@ import { formatDate,formatTimeStamp } from '../../components/functions';
 export function ExplorePage(props) {
 
   let currentUser = props?.currentUser;
- /*  console.log(currentUser) */
+   console.log(currentUser); 
+   let history= useHistory();
   const [postData,setPostData]=useState([]);
 
 
@@ -73,6 +74,7 @@ const toggleTabsGuestMode = ()=>{
   messageTab.style.display='none';
   notifTab.style.display='none';
   homeTab.style.display='none';
+  history.push('/login');// make redirect to login page
 }
   
 
