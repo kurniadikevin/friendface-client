@@ -13,7 +13,6 @@ import { formatDate,formatTimeStamp } from '../../components/functions';
 export function ExplorePage(props) {
 
   let currentUser = props?.currentUser;
-   console.log(currentUser); 
    let history= useHistory();
   const [postData,setPostData]=useState([]);
 

@@ -31,7 +31,7 @@ code {
 
 .App{
   display: grid;
-  grid-template-columns: 2fr 6fr 2.5fr;
+  grid-template-columns: 2.5fr 6fr 2.5fr;
   grid-template-rows: 1fr;
   height: 100vh;
 }

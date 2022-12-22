@@ -18,8 +18,7 @@
 
 .app-title{
     font-weight: 800;
-    font-size: 22pt;
-    padding-top: 25px;
+    font-size: 24pt;
     transition: 0.5s;
     color: var(--purple);
 }
@@ -27,7 +26,9 @@
         color: var(--green);
     }
 .title-dashboard{
-    padding-left: 25px;
+   display: flex;
+    justify-content: center;
+    padding-top: 40px;
 }
 #title-link{
     text-decoration: none;

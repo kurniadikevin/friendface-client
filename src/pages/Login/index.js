@@ -150,7 +150,7 @@ export function LoginPage(props) {
           </div>
         </div>
         </div>
-      <LoaderComponent/>
+      <LoaderComponent id='loader-login-page'/>
     </div>
   );
 }
