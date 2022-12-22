@@ -20,13 +20,6 @@ function HomeComp(props){
         } else{  postForm.style.display='inline'}
     }
 
-    const toggleImageForm = ()=>{
-        const postForm = document.querySelector('.homeComp-imageForm');
-        if(postForm.style.display === 'inline'){
-            postForm.style.display ='none';
-        } else{  postForm.style.display='inline'}
-    }
-
     const createPost = async()=> {  
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post created!'
@@ -34,9 +27,12 @@ function HomeComp(props){
 
         axios({
           method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           data: {
             text : postText,
-            authorId : currentUser._id
+            authorId : currentUser._id,
           },
           withCredentials: true,
           url: "http://localhost:5000/posts/newpost",
@@ -93,7 +89,6 @@ function HomeComp(props){
             <div className='HomeCompHead'>
                 <div className='home-head'>
                     <button id='make-post' onClick={togglePostForm}>New post</button>
-                    <button id='make-post' onClick={toggleImageForm}>Post image</button>
                 </div>
                 <div className='search-bar'>
                     <input type='text' id='search-input' value={searchInput} placeholder='search user'
@@ -117,20 +112,6 @@ function HomeComp(props){
                 </div>
             </div>
             <div className='homeComp-postForm'>
-                <div className='newpost-form' >
-                    <div className='newpost-main'>
-                        <textarea id='newpost-text' name='text'
-                        value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
-                    </div>
-                    <div className='newpost-button'>
-                    <input type='file' name='imagePost'  ></input>
-                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm()}}>Post</button>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <div className='homeComp-imageForm'>
                 <div className='newpost-form' >
                     <div className='newpost-main'>
                         <textarea id='newpost-text' name='text'
