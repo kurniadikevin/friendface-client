@@ -1,18 +1,34 @@
+
 .Login{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(4,1fr);
+    grid-template-columns: repeat(2,1fr);
+}
+
+.login-col1{
+ background-image: url(../../assets/login-bg.jpg);
+ background-size:     cover;                    
+ background-repeat:   no-repeat;
+ background-position: center center;  
+}
+.login-col2{
+    
+    background-color: var(--background00);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .login-box{
-    border: 1px solid var(--purple);
-    border-radius: 20px;
-    grid-column: 2/3;
+    border: 1px solid var(--bg2);
+    box-shadow: rgba(204, 198, 198, 0.35) 0px 5px 15px;
+    border-radius: 1px;
+    width: 300px;
+    height: 400px;
     margin-top: 100px;
     padding: 20px 50px;
     display: grid;   
     grid-template-rows: 2fr 1.5fr 5fr;
-    background-color: var(--currentLine);
+    background-color: var(--background);
    
 }
     h2{
@@ -98,3 +114,4 @@
     label{
         color:var(--green);
     }
+

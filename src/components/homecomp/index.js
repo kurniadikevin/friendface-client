@@ -25,16 +25,19 @@ function HomeComp(props){
         alertBox.textContent='Post created!'
         alertBox.style.display='inline';
 
-      
         axios({
           method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
           data: {
             text : postText,
-            authorId : currentUser._id
+            authorId : currentUser._id,
           },
           withCredentials: true,
           url: "https://odin-book-api-production.up.railway.app/posts/newpost",
         }).then(function (response) {
+            console.log(response);
             setRender(true);
             
           })
@@ -59,6 +62,8 @@ function HomeComp(props){
             return  ((item.username).toLowerCase()).includes(searchInput.toLowerCase());
             }
           })
+        console.log(resultUsername); 
+        console.log(resultEmail);
         setAutoComplete([...resultEmail,...resultUsername]);
     }
 
@@ -114,7 +119,7 @@ function HomeComp(props){
                         value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
                     </div>
                     <div className='newpost-button'>
-                       
+                    <input type='file' name='imagePost'  ></input>
                         <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm()}}>Post</button>
                     </div>
                     

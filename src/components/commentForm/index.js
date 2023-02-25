@@ -27,7 +27,7 @@ const CommentForm= (props)=>{
           withCredentials: true,
           url: `https://odin-book-api-production.up.railway.app/comments/createComment/${post._id}`,
         }).then(function (response) {
-            
+            console.log(response);
             const alertBox = document.querySelector('#alert-box');
             alertBox.textContent='Comment created!'
             alertBox.style.display='inline';

@@ -4,7 +4,7 @@
     grid-template-rows: 1fr auto;
     position: sticky;
     top: 0px;
-    background-color: var(--background);
+    background-color: var(--background00);
 }
 
 .HomeCompHead{

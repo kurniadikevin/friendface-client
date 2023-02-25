@@ -31,6 +31,7 @@ const ProfileForm = (props)=>{
            withCredentials: true,
            url: `https://odin-book-api-production.up.railway.app/users/update/${currentUser._id}`,
          }).then(function (response) {
+             console.log(response);
             const form = document.querySelector('#profileForm');
             form.style.display='none';
            })

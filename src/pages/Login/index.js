@@ -64,7 +64,6 @@ export function LoginPage(props) {
       withCredentials: true,
       url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
-     
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{
@@ -88,7 +87,6 @@ export function LoginPage(props) {
       withCredentials: true,
       url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
-     
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{
@@ -100,6 +98,9 @@ export function LoginPage(props) {
 
   return (
     <div className="Login">
+      <div className='login-col1'></div>
+
+      <div className='login-col2'>
         <div className='login-box'>
           <div className='login-head'>
            
@@ -148,7 +149,8 @@ export function LoginPage(props) {
           </div>              
           </div>
         </div>
-      <LoaderComponent/>
+        </div>
+      <LoaderComponent id='loader-login-page'/>
     </div>
   );
 }

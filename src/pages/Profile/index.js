@@ -8,6 +8,7 @@ import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import CommentForm from '../../components/commentForm';
 import { toggleLoader } from '../../components/loader/loader-toggle';
+import { formatDate,formatTimeStamp } from '../../components/functions';
 
 export function ProfilePage(props) {
   
@@ -131,7 +132,7 @@ export function ProfilePage(props) {
                 <div className='post-main'>
                   <div className='post-text'>{item.text}</div>
                   <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
-                  <div className='post-date'>{item.date}</div>
+                  <div className='post-date'>{formatDate(item.date)}</div>
                   <div className='action-cont'>
                     <div className='like-cont'>
                       <span id='like-icon' class="material-symbols-outlined">favorite</span>
@@ -150,7 +151,7 @@ export function ProfilePage(props) {
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>
                         <div className='comment-username'>{comment.author?.username}</div>
-                        <div className='comment-date'>{comment.date}</div>
+                        <div className='comment-date'>{formatTimeStamp(comment.date)}</div>
                       </div>
                     )
                 })

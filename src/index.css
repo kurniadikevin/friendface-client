@@ -12,6 +12,7 @@
   --white: rgb(248 248 242	);
   --green: rgb(80 250 123);
   --currentLine : rgb(68 71 90);
+  --background00:  rgb(18,16,29);
 }
 
 body {
@@ -19,7 +20,7 @@ body {
   font-family: 'Work Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background);
+  background-color: var(--background00);
   color: var(--white);
   
 }
@@ -31,7 +32,7 @@ code {
 
 .App{
   display: grid;
-  grid-template-columns: 2fr 6fr 2.5fr;
+  grid-template-columns: 2.5fr 6fr 2.5fr;
   grid-template-rows: 1fr;
   height: 100vh;
 }

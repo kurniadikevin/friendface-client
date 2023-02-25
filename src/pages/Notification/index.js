@@ -53,7 +53,7 @@ export function NotificationPage(props) {
         },
         url : `https://odin-book-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
-
+       
       })
       .catch(function (error) {
         console.log(error);
