@@ -1,3 +1,4 @@
+
 .Login{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -11,7 +12,7 @@
 }
 .login-col2{
     
-    background-color: rgb(18,16,29);
+    background-color: var(--background00);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -19,6 +20,7 @@
 
 .login-box{
     border: 1px solid var(--bg2);
+    box-shadow: rgba(204, 198, 198, 0.35) 0px 5px 15px;
     border-radius: 1px;
     width: 300px;
     height: 400px;

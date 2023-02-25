@@ -36,7 +36,8 @@ function Sidebar(){
                             alt='displayUser-profileImage' width={30} height={30}/> 
                          </div>
                         <div className='display-user-col2'>
-                            <Link to={`/userProfile/${data?._id}`} id='link-user-sidebar' >
+                            <Link to={`/userProfile/${data?._id}`} 
+                             id='link-user-sidebar' >
                                 <div className='display-username'>
                                     {data.username}
                                 </div>
