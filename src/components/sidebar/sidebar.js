@@ -13,7 +13,7 @@ function Sidebar(){
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            setData(data)
+            setData(data);
         });
 
     }

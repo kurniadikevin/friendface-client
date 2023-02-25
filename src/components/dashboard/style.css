@@ -118,7 +118,7 @@
     opacity: 0.9;
     position: absolute;
     bottom: 20px;
-    left: 400%;
+    right: 10px;
     background-color: var(--bg2);
     border-radius: 15px;
     justify-content: flex-start;
