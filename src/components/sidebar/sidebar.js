@@ -9,7 +9,7 @@ function Sidebar(){
     const [data,setData]= useState([]);
 
     const fetchUserList =()=>{
-        let url='http://localhost:5000/users/recent';
+        let url='https://odin-book-api-production.up.railway.app/users/recent';
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -31,7 +31,7 @@ function Sidebar(){
                     return(
                         <div className='display-user'>
                          <div className='display-user-col1'>
-                         <img  id='profileImg' src={data?.profilePicture ?  `http://localhost:5000/${data.profilePicture} `
+                         <img  id='profileImg' src={data?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${data.profilePicture} `
                             : (require('../../assets/profilepicturesSmall.png'))}
                             alt='displayUser-profileImage' width={30} height={30}/> 
                          </div>

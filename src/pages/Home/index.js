@@ -16,7 +16,7 @@ export function HomePage(props) {
 
   //fetch user following post
   const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/friends/${currentUser._id}`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/friends/${currentUser._id}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
@@ -40,7 +40,7 @@ export function HomePage(props) {
         likeBy :  currentUser   
       },
       withCredentials: true,
-      url: `http://localhost:5000/posts/likes/${post._id}`,
+      url: `https://odin-book-api-production.up.railway.app/posts/likes/${post._id}`,
     }).then(function (response) {
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Liked post!'
@@ -78,7 +78,7 @@ const toggleCommentForm = (i)=>{
           return(
             <div className='post-container'>
               <div className='post-sidebar'>  
-                <img  id='profileImg' src={item.author?.profilePicture ? `http://localhost:5000/${item.author.profilePicture} `
+                <img  id='profileImg' src={item.author?.profilePicture ? `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' width={50} height={50}/> 
               </div>
