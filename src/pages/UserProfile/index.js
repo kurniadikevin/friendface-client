@@ -1,21 +1,31 @@
 import './style.css';
-import { Link, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
-import ProfileForm from '../../components/profileForm';
-import ImageForm from '../../components/imageForm';
 import CommentForm from '../../components/commentForm';
 import axios from 'axios';
+import { toggleLoader } from '../../components/loader/loader-toggle';
 
 
-export function UserProfilePage(props) {
+export function UserProfilePage() {
   
   const [postData,setPostData]= useState([]);
   const [userData,setUserData]= useState(
     { username : 'loading',
       email : 'loading' , profilePicture : ''});
 
+  // get login user information
+const getUser=()=>{
+  const loggedInUser = localStorage.getItem("user");
+  if (loggedInUser) {
+    const foundUser = JSON.parse(loggedInUser);
+    return foundUser;
+  }
+}
+  let currentUser = getUser();
+
+  // fetch by parameter userId
    let {userId} = useParams(); 
 
    const fetchPostData = async ()=>{
@@ -23,6 +33,7 @@ export function UserProfilePage(props) {
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
+    toggleLoader();
     }
 
     const fetchUserData = async ()=>{
@@ -32,12 +43,6 @@ export function UserProfilePage(props) {
         setUserData(data[0]);
         }
     
-    const toggleForm = (form)=>{
-      const Form = document.querySelector(`#${form}`);
-      if(Form.style.display === 'inline'){
-          Form.style.display ='none';
-      } else{  Form.style.display='inline'}
-  } 
 
   const toggleCommentForm = (i)=>{
     const commentForm = document.querySelectorAll('.comment-section');
@@ -51,7 +56,7 @@ export function UserProfilePage(props) {
       method : "POST",
       data : {
         requestData :{
-            sender :  props.currentUser,
+            sender :  currentUser,
             status : 'pending'
         }
       },
@@ -77,7 +82,7 @@ export function UserProfilePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} dashIndex={1} />
+      <Dashboard  dashIndex={1} />
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
@@ -138,7 +143,7 @@ export function UserProfilePage(props) {
                   </div>  
                  </div>
                  <div className='comment-section'>
-                <CommentForm currentUser={props.currentUser} post= {item} index={index}/>
+                <CommentForm currentUser={currentUser} post= {item} index={index}/>
                 <div className='comment-map'>{((item.comment).reverse()).map(function(comment,index){
                     return(
                       <div className='comment-content'>

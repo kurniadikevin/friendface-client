@@ -15,7 +15,11 @@ const CommentForm= (props)=>{
     }
 
     const createComment= (post)=>{
-  
+        if(!currentUser){
+            const alertBox = document.querySelector('#alert-box');
+            alertBox.textContent='Cannot make comment without login'
+            alertBox.style.display='inline';
+        } else{
         axios({
           method: "POST",
           data: {
@@ -36,6 +40,7 @@ const CommentForm= (props)=>{
           .catch(function (error) {
             console.log(error);
           });
+        }
     }
 
     return(
