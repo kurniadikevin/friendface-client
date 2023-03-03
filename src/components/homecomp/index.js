@@ -24,18 +24,16 @@ function HomeComp(props){
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post created!'
         alertBox.style.display='inline';
-
+        console.log(postText);
+        console.log(currentUser._id)
         axios({
           method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
           data: {
             text : postText,
             authorId : currentUser._id,
           },
           withCredentials: true,
-          url: "https://odin-book-api-production.up.railway.app/posts/newpost",
+          url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
             setRender(true);
@@ -47,7 +45,7 @@ function HomeComp(props){
     }
 
     const userDataToQuery = async ()=>{
-        const url=`https://odin-book-api-production.up.railway.app/users/search`;
+        const url=`http://localhost:5000/users/search`;
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
@@ -119,7 +117,7 @@ function HomeComp(props){
                         value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
                     </div>
                     <div className='newpost-button'>
-                    <input type='file' name='imagePost'  ></input>
+                   {/*  <input type='file' name='imagePost'  ></input> */}
                         <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm()}}>Post</button>
                     </div>
                     
