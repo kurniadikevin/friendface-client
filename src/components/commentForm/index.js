@@ -48,7 +48,7 @@ const CommentForm= (props)=>{
     <div className='comment-form'>
         <div className='newComment-form'>
             <div className='newComment-main'>
-                <textarea id='newComment-text' name='text'
+                <textarea id='newComment-text' name='text' placeholder="add comment here"
                 value={comment} onChange={(e)=> setComment(e.target.value)}
                 cols='50' rows='5'></textarea>
             </div>
