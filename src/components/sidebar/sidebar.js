@@ -9,17 +9,16 @@ function Sidebar(){
     const [data,setData]= useState([]);
 
     const fetchUserList =()=>{
-        let url='https://odin-book-api-production.up.railway.app/users/recent';
-        fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            setData(data);
-        });
+       const recentUser = localStorage.getItem('userRecent');
+       if(recentUser){
+        const foundUser = JSON.parse(recentUser);
+        setData(foundUser);
+       }
 
     }
 
     useEffect(()=>{
-        fetchUserList()
+        fetchUserList();
     },[])
 
     return(
@@ -36,7 +35,7 @@ function Sidebar(){
                             alt='displayUser-profileImage' width={30} height={30}/> 
                          </div>
                         <div className='display-user-col2'>
-                            <Link to={`/userProfile/${data?._id}`} 
+                            <Link to={`/userProfile/${data?._id}`}  
                              id='link-user-sidebar' >
                                 <div className='display-username'>
                                     {data.username}

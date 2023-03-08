@@ -5,25 +5,23 @@ import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 
-export function NotificationPage(props) {
+export function NotificationPage() {
 
-  let currentUser ;
-  if(!props.currentUser){
-    currentUser = { 
-      _id : 'not set',
-      username : 'not signed in',
-      email : 'not available',
-      friends : [],
-      friendRequest : []
-    }} else {
-      currentUser = props.currentUser;
-    }
-  
+
+
+// get login user information
+const getUser=()=>{
+  const loggedInUser = localStorage.getItem("user");
+  if (loggedInUser) {
+    const foundUser = JSON.parse(loggedInUser);
+    return foundUser;
+  }
+}
+
+  let currentUser = getUser();
 
   const acceptFriendRequest = (friendReq)=>{
-    const alertBox = document.querySelector('#alert-box');
-    alertBox.style.display='inline';
-    alertBox.textContent='Accept friend request'
+   
     axios({
         method : "POST",
         data : {
@@ -33,7 +31,9 @@ export function NotificationPage(props) {
         },
         url : `https://odin-book-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
-       
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.style.display='inline';
+      alertBox.textContent='Accept friend request'
       })
       .catch(function (error) {
         console.log(error);
@@ -41,9 +41,7 @@ export function NotificationPage(props) {
   }
 
   const declineFriendRequest= (friendReq)=>{
-    const alertBox = document.querySelector('#alert-box');
-    alertBox.style.display='inline';
-    alertBox.textContent='Decline friend request'
+ 
     axios({
         method : "POST",
         data : {
@@ -53,7 +51,9 @@ export function NotificationPage(props) {
         },
         url : `https://odin-book-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
-       
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.style.display='inline';
+      alertBox.textContent='Decline friend request';
       })
       .catch(function (error) {
         console.log(error);
@@ -62,11 +62,12 @@ export function NotificationPage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} dashIndex={4} />
+      <Dashboard  dashIndex={4} />
       <div className='main'>
         <div className='notif-page'>
         <div className='friendReq-head'>Friend Request</div>
         <div className='friendReq-main'>
+
         {(currentUser.friendRequest).map((data)=>{
             toggleLoader();
             return (

@@ -13,10 +13,18 @@ import { formatDate,formatTimeStamp } from '../../components/functions';
 
 export function ExplorePage(props) {
 
-  let currentUser = props?.currentUser;
    let history= useHistory();
   const [postData,setPostData]=useState([]);
 
+// get login user information
+const getUser=()=>{
+  const loggedInUser = localStorage.getItem("user");
+  if (loggedInUser) {
+    const foundUser = JSON.parse(loggedInUser);
+    return foundUser;
+  }
+}
+  let currentUser = getUser();
 
   //fetch all post 
   const fetchAllPostData = async ()=>{
@@ -29,11 +37,17 @@ export function ExplorePage(props) {
     
 
   const likePostFunction = (post)=>{
+    if( !currentUser){
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.textContent='Please login for like the post!'
+      alertBox.style.display='inline';
+    } else{
     if(post.author._id === currentUser._id){
       const alertBox = document.querySelector('#alert-box');
       alertBox.textContent='Cannot like your own post!'
       alertBox.style.display='inline';
-    }
+    } 
+    
     else{
     axios({
       method: "POST",
@@ -55,6 +69,7 @@ export function ExplorePage(props) {
         console.log(error);
       });
     }
+  }
 }
 
 const toggleCommentForm = (i)=>{
@@ -90,10 +105,10 @@ const toggleTabsGuestMode = ()=>{
   return (
   <div className="App">
     
-    <Dashboard currentUser={props.currentUser} dashIndex={1}/>
+    <Dashboard  dashIndex={1}/>
     
     <div className='main'  id='home-page'>
-      <HomeComp currentUser={props.currentUser}/>
+      <HomeComp currentUser={currentUser}/>
       <div className='displayPostCont'>
 
         {postData.map(function(item,index){
@@ -123,7 +138,7 @@ const toggleTabsGuestMode = ()=>{
                   </div>
               </div>
               <div className='comment-section'>
-                <CommentForm currentUser={props.currentUser} post= {item} index={index}/>
+                <div className='comment-title'>Comments</div>
                 <div className='comment-map'>{((item.comment).reverse()).map(function(comment,index){
                     return(
                       <div className='comment-content'>
@@ -134,6 +149,7 @@ const toggleTabsGuestMode = ()=>{
                     )
                 })
                 }</div>
+                <CommentForm currentUser={currentUser} post= {item} index={index}/>
                </div>
               </div>
             </div>

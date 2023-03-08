@@ -78,11 +78,20 @@
     }
     
 /* ---------COMMENT STYLE ---------*/
+
+.comment-title{
+    color: var(--green);
+    padding-top:20px;
+    padding-bottom: 0px;
+   font-weight: 700;
+   display: flex;
+   
+}
 .comment-map{
   
 }
 .comment-content{
-    padding-top: 20px;
+    padding-top: 10px;
     border-bottom: 1px solid var(--currentLine);
     padding-bottom: 10px;
 }

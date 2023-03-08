@@ -14,6 +14,15 @@ function Dashboard(props){
         profilePicture : (require('../../assets/profilepicturesSmall.png'))}
         );
     
+   // get login user information
+   const getUser=()=>{
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUserData(foundUser);
+    }
+}
+
   const toggleColorSelect = (i)=>{
     const dashLink = document.querySelectorAll('#dash-link');    
     dashLink[i].style.color='var(--green)';
@@ -27,10 +36,8 @@ function Dashboard(props){
         
   
    useEffect(()=>{
-        if(props.currentUser ){
-        setUserData(props.currentUser);
-       
-       } 
+        getUser();
+   
        toggleColorSelect(props.dashIndex)
     },[])
 
@@ -84,6 +91,7 @@ function Dashboard(props){
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
                      src= {props.currentUser?.profilePicture ? `https://odin-book-api-production.up.railway.app/${props.currentUser.profilePicture} `
+                     src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture}`
                      : (require('../../assets/profilepicturesSmall.png'))} 
                       alt='profilePicture'
                         width={75} height={75}/>

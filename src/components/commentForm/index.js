@@ -15,7 +15,11 @@ const CommentForm= (props)=>{
     }
 
     const createComment= (post)=>{
-  
+        if(!currentUser){
+            const alertBox = document.querySelector('#alert-box');
+            alertBox.textContent='Cannot make comment without login'
+            alertBox.style.display='inline';
+        } else{
         axios({
           method: "POST",
           data: {
@@ -36,6 +40,7 @@ const CommentForm= (props)=>{
           .catch(function (error) {
             console.log(error);
           });
+        }
     }
 
     return(
@@ -43,7 +48,7 @@ const CommentForm= (props)=>{
     <div className='comment-form'>
         <div className='newComment-form'>
             <div className='newComment-main'>
-                <textarea id='newComment-text' name='text'
+                <textarea id='newComment-text' name='text' placeholder="add comment here"
                 value={comment} onChange={(e)=> setComment(e.target.value)}
                 cols='50' rows='5'></textarea>
             </div>

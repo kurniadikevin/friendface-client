@@ -60,8 +60,6 @@ function HomeComp(props){
             return  ((item.username).toLowerCase()).includes(searchInput.toLowerCase());
             }
           })
-        console.log(resultUsername); 
-        console.log(resultEmail);
         setAutoComplete([...resultEmail,...resultUsername]);
     }
 

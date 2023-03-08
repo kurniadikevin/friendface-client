@@ -1,18 +1,17 @@
 import './style.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
 
 
 
-export function LoginPage(props) {
+export function LoginPage() {
 
   let history = useHistory();
 
   const [email,setEmail]= useState('');
   const [password,setPassword]= useState('');
-  const [userData,setUserData]= useState({});
 
   //setup loader position and display for login
   const loader= document.querySelector('#login-loader');
@@ -20,12 +19,8 @@ export function LoginPage(props) {
     loader.style.display='none';
     loader.style.top='77%';
     loader.style.left='47%';
-
   }
    
-  // pull data to app
-  props.func(userData);
- 
   const toggleFormLogin = ()=>{
     const signupForm = document.querySelector('#signup-wrap');
     const loginForm = document.querySelector('#login-wrap');
@@ -65,10 +60,10 @@ export function LoginPage(props) {
       url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
-        alert('No User Exist')
+        alert('No User Exist');
       } else{
-        setUserData(res.data)
-        history.push("/")
+        localStorage.setItem("user", JSON.stringify(res.data));
+        history.push("/");
       }    
     });
 }
@@ -90,11 +85,27 @@ export function LoginPage(props) {
       if(res.data === 'No User Exists'){
         alert('No User Exist')
       } else{
-        setUserData(res.data)
+        localStorage.setItem("user", JSON.stringify(res.data));
         history.push("/")
       }    
     });
 }
+
+  //fetch all post 
+  const fetchRecentUser = async ()=>{
+    const url=`http://localhost:5000/users/recent`;
+    const response = await fetch(url);
+    var data = await response.json();
+    localStorage.setItem('userRecent', JSON.stringify(data));
+    }
+
+  useEffect(()=>{
+    
+  //handle logout when login page loaded
+  localStorage.clear();
+  // fetch recent user when login
+  fetchRecentUser();
+  },[])
 
   return (
     <div className="Login">
@@ -106,7 +117,6 @@ export function LoginPage(props) {
            
               <h2>Friendface</h2>
             
-            <p>{userData.email}</p>
           </div>
 
             <div className='sign-select'>

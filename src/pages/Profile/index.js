@@ -10,21 +10,31 @@ import CommentForm from '../../components/commentForm';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { formatDate,formatTimeStamp } from '../../components/functions';
 
-export function ProfilePage(props) {
+export function ProfilePage() {
   
-  const [postData,setPostData]= useState([])
+  const [postData,setPostData]= useState([]);
+  let profilePicture = (require('../../assets/profilepicturesSmall.png'));
 
-  let currentUser ;
-  if(!props.currentUser){
-    currentUser = { 
-      _id : 'not set',
-      username : 'not signed in',
-      email : 'not available',
-      friends : []
-    }} else {
-      currentUser = props.currentUser;
+  // get login user information
+const getUser=()=>{
+  const loggedInUser = localStorage.getItem("user");
+  if (loggedInUser) {
+    const foundUser = JSON.parse(loggedInUser);
+    if(foundUser.profilePicture){
+      profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
+      console.log(profilePicture);
     }
-  
+    return foundUser;
+  }
+}
+
+  let currentUser = getUser({ 
+    _id : 'not set',
+    username : 'not signed in',
+    email : 'not available',
+    friends : []
+  });
+
   
   const fetchPostData = async ()=>{
     const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}`;
@@ -58,18 +68,17 @@ export function ProfilePage(props) {
 
   return (
     <div className="App">
-      <Dashboard currentUser={props.currentUser} dashIndex={2} />
+      <Dashboard  dashIndex={2} />
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {props.currentUser?.profilePicture ? `https://odin-book-api-production.up.railway.app/${props.currentUser.profilePicture} `
-                     : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
+            <img id='profileImgProfile' src= {profilePicture} alt='userPicture'
                       width={100} height={100}/>
             <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
             <span class="material-symbols-outlined">photo_camera</span>
               </button>
             <div id ='imageForm'>
-            <ImageForm currentUser={props.currentUser}/>
+            <ImageForm currentUser={currentUser}/>
             </div>
           </div>
 
@@ -88,7 +97,7 @@ export function ProfilePage(props) {
               </div>
               
               <div id='profileForm'>
-              <ProfileForm currentUser={props.currentUser}/>
+              <ProfileForm currentUser={currentUser}/>
               </div>
              
             </div>
@@ -145,7 +154,7 @@ export function ProfilePage(props) {
                   </div>  
                  </div>
                  <div className='comment-section'>
-                <CommentForm currentUser={props.currentUser} post= {item} index={index}/>
+                <div className='comment-title'>Comments</div>
                 <div className='comment-map'>{((item.comment).reverse()).map(function(comment,index){
                     return(
                       <div className='comment-content'>
@@ -156,6 +165,7 @@ export function ProfilePage(props) {
                     )
                 })
                 }</div>
+                <CommentForm currentUser={currentUser} post= {item} index={index}/>
                 </div>
                </div>
               </div>
