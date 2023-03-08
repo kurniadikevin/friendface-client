@@ -9,17 +9,16 @@ function Sidebar(){
     const [data,setData]= useState([]);
 
     const fetchUserList =()=>{
-        let url='http://localhost:5000/users/recent';
-        fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            setData(data);
-        });
+       const recentUser = localStorage.getItem('userRecent');
+       if(recentUser){
+        const foundUser = JSON.parse(recentUser);
+        setData(foundUser);
+       }
 
     }
 
     useEffect(()=>{
-        fetchUserList()
+        fetchUserList();
     },[])
 
     return(

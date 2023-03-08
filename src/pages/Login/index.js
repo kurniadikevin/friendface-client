@@ -91,10 +91,20 @@ export function LoginPage() {
     });
 }
 
+  //fetch all post 
+  const fetchRecentUser = async ()=>{
+    const url=`http://localhost:5000/users/recent`;
+    const response = await fetch(url);
+    var data = await response.json();
+    localStorage.setItem('userRecent', JSON.stringify(data));
+    }
+
   useEffect(()=>{
     
   //handle logout when login page loaded
   localStorage.clear();
+  // fetch recent user when login
+  fetchRecentUser();
   },[])
 
   return (

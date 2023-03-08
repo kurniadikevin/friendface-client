@@ -11,36 +11,31 @@ import { ExplorePage } from './pages/Explore';
 
 const App = () =>{ 
 
-  const[userData,setUserData] = useState()
-  
-  const pull_data = (data) => { 
-    setUserData(data);
-  }
-
+ 
   return(
  
   <BrowserRouter>
     <Switch>
       <Route exact path="/home">
-          <HomePage currentUser={userData}/>
+          <HomePage />
       </Route> 
       <Route exact path="/">
-          <ExplorePage currentUser={userData}/>
+          <ExplorePage />
       </Route>
       <Route path="/login" >
-          <LoginPage  func={pull_data}/>
+          <LoginPage  />
       </Route>
       <Route  path="/profile" >
-          <ProfilePage currentUser={userData}/>
+          <ProfilePage />
       </Route>
       <Route path="/message">
-          <MessagePage  currentUser={userData}/>  
+          <MessagePage  />  
       </Route> 
       <Route path="/notification">
-          <NotificationPage  currentUser={userData}/>  
+          <NotificationPage  />  
       </Route> 
       <Route path='/userProfile/:userId'>
-          <UserProfilePage currentUser={userData}/>
+          <UserProfilePage />
       </Route>
     </Switch>
   </BrowserRouter>
