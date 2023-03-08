@@ -57,7 +57,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('No User Exist');
@@ -80,7 +80,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('No User Exist')
@@ -127,7 +127,7 @@ export function LoginPage() {
           <div className='sign-form'>
 
           {/*   sign up form */}
-            <form className='form-sign' id='signup-wrap'  method='POST' action='https://odin-book-api-production.up.railway.app/users/signup'>
+            <form className='form-sign' id='signup-wrap'  method='POST' action='http://localhost:5000/users/signup'>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'></input>

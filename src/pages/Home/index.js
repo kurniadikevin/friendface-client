@@ -26,7 +26,7 @@ const getUser=()=>{
 
   //fetch user following post
   const fetchPostData = async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/posts/friends/${currentUser._id}`;
+    const url=`http://localhost:5000/posts/friends/${currentUser._id}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
@@ -53,10 +53,10 @@ const getUser=()=>{
       data: {
           _id :    post._id,
         likes:   post.likes,
-        likeBy :  currentUser   
+        likeBy :  currentUser  
       },
       withCredentials: true,
-      url: `https://odin-book-api-production.up.railway.app/posts/likes/${post._id}`,
+      url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Liked post!'
@@ -82,7 +82,7 @@ const toggleCommentForm = (i)=>{
     }
       
      
-    },[])
+    })
 
   return (
   <div className="App">
@@ -97,7 +97,7 @@ const toggleCommentForm = (i)=>{
           return(
             <div className='post-container'>
               <div className='post-sidebar'>  
-                <img  id='profileImg' src={item.author?.profilePicture ? `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
+                <img  id='profileImg' src={item.author?.profilePicture ? `http://localhost:5000/${item.author.profilePicture} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' width={50} height={50}/> 
               </div>

@@ -33,7 +33,7 @@ function HomeComp(props){
             authorId : currentUser._id,
           },
           withCredentials: true,
-          url: "https://odin-book-api-production.up.railway.app/posts/newpost",
+          url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
             setRender(true);
@@ -45,7 +45,7 @@ function HomeComp(props){
     }
 
     const userDataToQuery = async ()=>{
-        const url=`https://odin-book-api-production.up.railway.app/users/search`;
+        const url=`http://localhost:5000/users/search`;
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
