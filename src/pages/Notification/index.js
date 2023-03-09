@@ -30,7 +30,7 @@ const getUser=()=>{
             newFriend : friendReq.sender,
             newFriendReceiver : currentUser
         },
-        url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
+        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
@@ -50,7 +50,7 @@ const getUser=()=>{
             newFriend : friendReq.sender,
             newFriendReceiver : currentUser
         },
-        url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
+        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';

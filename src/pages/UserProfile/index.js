@@ -29,7 +29,7 @@ const getUser=()=>{
    let {userId} = useParams(); 
 
    const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/${userId}`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
@@ -37,7 +37,7 @@ const getUser=()=>{
     }
 
     const fetchUserData = async ()=>{
-        const url=`http://localhost:5000/users/${userId}`;
+        const url=`https://odin-book-api-production.up.railway.app/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
@@ -61,7 +61,7 @@ const getUser=()=>{
         }
       },
       withCredentials : true,
-      url : `http://localhost:5000/users/friendRequest/${userId}`
+      url : `https://odin-book-api-production.up.railway.app/users/friendRequest/${userId}`
     }).then(function(response){
       const alertBox = document.querySelector('#alert-box');
       alertBox.textContent='Friend request sent!'
@@ -86,7 +86,7 @@ const getUser=()=>{
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
+            <img id='profileImgProfile' src= {userData?.profilePicture ? `https://odin-book-api-production.up.railway.app/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
            
@@ -123,7 +123,7 @@ const getUser=()=>{
             return(
               <div className='post-container'>
                 <div className='post-sidebar'>    
-                  <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
+                  <img  id='profileImg' src={item.author?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))}
                    alt='profileImage'  width={50} height={50}/>
                 </div>

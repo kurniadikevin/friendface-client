@@ -21,7 +21,7 @@ const getUser=()=>{
   if (loggedInUser) {
     const foundUser = JSON.parse(loggedInUser);
     if(foundUser.profilePicture){
-      profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
+      profilePicture= `https://odin-book-api-production.up.railway.app/${foundUser.profilePicture}`
       console.log(profilePicture);
     }
     return foundUser;
@@ -37,7 +37,7 @@ const getUser=()=>{
 
   
   const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/${currentUser._id}`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
@@ -134,7 +134,7 @@ const getUser=()=>{
             return(
               <div className='post-container'>
                 <div className='post-sidebar'>    
-                  <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
+                  <img  id='profileImg' src={item.author?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))}
                    alt='profileImage'  width={50} height={50}/>
                 </div>
