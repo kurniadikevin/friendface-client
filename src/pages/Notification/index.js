@@ -4,6 +4,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
 import { toggleLoader } from '../../components/loader/loader-toggle';
+import { useEffect } from 'react';
 
 export function NotificationPage() {
 
@@ -60,6 +61,10 @@ const getUser=()=>{
       });
   }
 
+  useEffect(()=>{
+    toggleLoader();
+  })
+
   return (
     <div className="App">
       <Dashboard  dashIndex={4} />
@@ -68,8 +73,8 @@ const getUser=()=>{
         <div className='friendReq-head'>Friend Request</div>
         <div className='friendReq-main'>
 
-        {(currentUser.friendRequest).map((data)=>{
-            toggleLoader();
+        {currentUser.friendRequest.length > 0 ? (currentUser.friendRequest).map((data)=>{
+            
             return (
                 <div className='friendReq-cont'>
                     <div className='friendReq-username'>{data.sender?.username}</div>
@@ -81,7 +86,7 @@ const getUser=()=>{
                 </div>
                 </div>
             )
-        })}
+        }): <div  className='friendReq-cont'> You have no friend request</div>}
         </div>
         </div>
       </div>

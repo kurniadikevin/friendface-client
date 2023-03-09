@@ -53,7 +53,7 @@ const getUser=()=>{
       data: {
           _id :    post._id,
         likes:   post.likes,
-        likeBy :  currentUser  
+        likeBy :  currentUser._id   
       },
       withCredentials: true,
       url: `http://localhost:5000/posts/likes/${post._id}`,
@@ -121,7 +121,7 @@ const toggleCommentForm = (i)=>{
               </div>
               <div className='comment-section'>
               <div className='comment-title'>Comments</div>
-                <div className='comment-map'>{((item.comment).reverse()).map(function(comment,index){
+                <div className='comment-map'>{((item.comment)).map(function(comment,index){
                     return(
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>

@@ -77,7 +77,7 @@ const getUser=()=>{
       fetchPostData();
       fetchUserData();
       
-    },[])
+    },[userId])
 
 
   return (
@@ -144,7 +144,7 @@ const getUser=()=>{
                  </div>
                  <div className='comment-section'>
                 <CommentForm currentUser={currentUser} post= {item} index={index}/>
-                <div className='comment-map'>{((item.comment).reverse()).map(function(comment,index){
+                <div className='comment-map'>{((item.comment)).map(function(comment,index){
                     return(
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>
