@@ -24,7 +24,7 @@ function Sidebar(){
     return(
         <div id='sidebar-wrapper'>
         <div className='Sidebar'>
-            <div className='sidebar-head'>Popular user </div>     
+            <div className='sidebar-head'>New user </div>     
             <div className='sidebar-main'>
                 {data.map((data)=>{
                     return(
