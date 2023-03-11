@@ -15,6 +15,8 @@ export function ExplorePage(props) {
 
    let history= useHistory();
   const [postData,setPostData]=useState([]);
+  const [previousPage,setPreviousPage]= useState([]);
+  const [postPage,setPostPage]= useState(1);
 
 // get login user information
 const getUser=()=>{
@@ -34,6 +36,28 @@ const getUser=()=>{
     setPostData(data);
     toggleLoader();
     }
+
+  //fetch post data pages
+  const fetchPostDataPage = async (page)=>{
+    const url=`http://localhost:5000/posts/page/${page}`;
+    const response = await fetch(url);
+    var data = await response.json();
+    if(postData.length === 0){
+      setPostData(data);
+      toggleLoader();
+    } else{
+      setPostData([...postData, ...data] )
+      toggleLoader();
+    }
+    }
+
+  //toggle next page
+  const togglePageOnScroll=(e)=>{
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if(bottom){
+      setPostPage(postPage + 1);
+    }
+  }
     
 
   const likePostFunction = (post)=>{
@@ -95,19 +119,21 @@ const toggleTabsGuestMode = ()=>{
 
   useEffect(()=>{
     if(currentUser){
-      fetchAllPostData();
+      //fetchAllPostData();
+      fetchPostDataPage(postPage);
+      console.log(postData);
     } else{
-      fetchAllPostData();
+      //fetchAllPostData();
       toggleTabsGuestMode();
     }
-    })
+    },[postPage])
 
   return (
   <div className="App">
     
     <Dashboard  dashIndex={1}/>
     
-    <div className='main'  id='home-page'>
+    <div className='main'  id='home-page' onScroll={togglePageOnScroll}>
       <HomeComp currentUser={currentUser}/>
       <div className='displayPostCont'>
 
@@ -124,21 +150,22 @@ const toggleTabsGuestMode = ()=>{
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
                   <div className='post-author'>{item.author?.username ? item.author.username : 'anon'}</div>
                 </Link>
-                <div className='post-date'>{formatDate(item.date)}</div>
+                <div className='post-date'>{/* formatDate */(item.date)}</div>
               <div className='action-cont'>
                   <div className='like-cont'>
                     <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item)}>
                       favorite</span>
-                    <div className='likes-length'>{item.likes.length}</div>
+                    <div className='likes-length'>{item.likes?.length}</div>
                   </div>
                   <div className='comment-cont'>
                     <span id='comment-icon' class="material-symbols-outlined"
                     onClick={()=> toggleCommentForm(index)}>mode_comment</span>
-                    <div className='comment-length'>{item.comment.length}</div>
+                    <div className='comment-length'>{item.comment?.length}</div>
                   </div>
               </div>
               <div className='comment-section'>
                 <div className='comment-title'>Comments</div>
+                {item.comment ? 
                 <div className='comment-map'>{((item.comment)).map(function(comment,index){
                     return(
                       <div className='comment-content'>
@@ -149,6 +176,7 @@ const toggleTabsGuestMode = ()=>{
                     )
                 })
                 }</div>
+              : <div className='comment-map' ></div>}
                 <CommentForm currentUser={currentUser} post= {item} index={index}/>
                </div>
               </div>
@@ -156,7 +184,8 @@ const toggleTabsGuestMode = ()=>{
           )
         })}
       </div>
-
+        <div>{postPage}</div>
+       {/*  <button onClick={togglePageOnScroll}>See more</button> */}
     </div>
     
     <Sidebar/>
