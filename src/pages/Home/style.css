@@ -111,3 +111,16 @@
     .comment-length, .likes-length{
         color: var(--white);
     }
+
+/* see more button */
+.seeMore{
+    cursor: pointer;
+    color: var(--purple);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding-left: 90px;
+    font-size: 12pt;
+    padding-bottom: 20px;
+    display: none;
+}

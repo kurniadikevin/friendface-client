@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { formatDate,formatTimeStamp } from '../../components/functions';
 
-
+//need refactor and clean up!!!!
 
 export function ExplorePage(props) {
 
@@ -45,18 +45,17 @@ const getUser=()=>{
     if(postData.length === 0){
       setPostData(data);
       toggleLoader();
+      toggleSeeMore();
     } else{
       setPostData([...postData, ...data] )
       toggleLoader();
+      toggleSeeMore();
     }
     }
 
   //toggle next page
-  const togglePageOnScroll=(e)=>{
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if(bottom){
+  const togglePageOnScroll=()=>{
       setPostPage(postPage + 1);
-    }
   }
     
 
@@ -115,12 +114,32 @@ const toggleTabsGuestMode = ()=>{
   homeTab.style.display='none';
   history.push('/login');// make redirect to login page
 }
+
+//onscroll page
+window.onscroll= function(){
+  console.log(document.documentElement.clientHeight + ' clientHeight')
+  console.log(document.documentElement.scrollTop + ' scrollTop')
+  console.log(document.documentElement.scrollHeight + ' scrollHeigh')
+  const spareSpace= 0;
+  const bottom = document.documentElement.scrollHeight - document.documentElement.clientHeight <= document.documentElement.scrollTop + spareSpace;
+  if(bottom){
+    console.log('scroll');
+    setPostPage(postPage + 1);
+  }
+}
+
+// toggle see more
+const toggleSeeMore =()=>{
+  const seeMore =document.querySelector('.seeMore');
+ seeMore.style.display=('inline')
+}
   
 
   useEffect(()=>{
     if(currentUser){
       //fetchAllPostData();
       fetchPostDataPage(postPage);
+     
       console.log(postData);
     } else{
       //fetchAllPostData();
@@ -133,9 +152,9 @@ const toggleTabsGuestMode = ()=>{
     
     <Dashboard  dashIndex={1}/>
     
-    <div className='main'  id='home-page' onScroll={togglePageOnScroll}>
+    <div className='main'  id='home-page'>
       <HomeComp currentUser={currentUser}/>
-      <div className='displayPostCont'>
+      <div className='displayPostCont' >
 
         {postData.map(function(item,index){
           return(
@@ -185,7 +204,7 @@ const toggleTabsGuestMode = ()=>{
         })}
       </div>
         <div>{postPage}</div>
-       {/*  <button onClick={togglePageOnScroll}>See more</button> */}
+        <div className='seeMore' onClick={togglePageOnScroll}>See more...</div>
     </div>
     
     <Sidebar/>
