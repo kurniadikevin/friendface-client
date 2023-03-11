@@ -9,14 +9,13 @@ import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { formatDate,formatTimeStamp } from '../../components/functions';
 
-//need refactor and clean up!!!!
 
 export function ExplorePage(props) {
 
    let history= useHistory();
   const [postData,setPostData]=useState([]);
-  const [previousPage,setPreviousPage]= useState([]);
   const [postPage,setPostPage]= useState(1);
+  const [nullData,setNullData]= useState(false);
 
 // get login user information
 const getUser=()=>{
@@ -28,34 +27,32 @@ const getUser=()=>{
 }
   let currentUser = getUser();
 
-  //fetch all post 
-  const fetchAllPostData = async ()=>{
-    const url=`http://localhost:5000/posts/`;
-    const response = await fetch(url);
-    var data = await response.json();
-    setPostData(data);
-    toggleLoader();
-    }
-
   //fetch post data pages
   const fetchPostDataPage = async (page)=>{
     const url=`http://localhost:5000/posts/page/${page}`;
     const response = await fetch(url);
     var data = await response.json();
+    if(data.length === 0){
+      setNullData(true);
+    }
     if(postData.length === 0){
       setPostData(data);
       toggleLoader();
-      toggleSeeMore();
+      toggleSeeMore('inline');
     } else{
       setPostData([...postData, ...data] )
       toggleLoader();
-      toggleSeeMore();
+      toggleSeeMore('inline');
     }
     }
 
   //toggle next page
-  const togglePageOnScroll=()=>{
-      setPostPage(postPage + 1);
+  const toggleNewPage=()=>{
+    if(!nullData){
+       setPostPage(postPage + 1);
+    } else{
+      toggleSeeMore('none');
+    }  
   }
     
 
@@ -117,32 +114,25 @@ const toggleTabsGuestMode = ()=>{
 
 //onscroll page
 window.onscroll= function(){
-  console.log(document.documentElement.clientHeight + ' clientHeight')
-  console.log(document.documentElement.scrollTop + ' scrollTop')
-  console.log(document.documentElement.scrollHeight + ' scrollHeigh')
-  const spareSpace= 0;
+  const spareSpace= 10;
   const bottom = document.documentElement.scrollHeight - document.documentElement.clientHeight <= document.documentElement.scrollTop + spareSpace;
   if(bottom){
-    console.log('scroll');
-    setPostPage(postPage + 1);
+    toggleNewPage();
   }
 }
 
 // toggle see more
-const toggleSeeMore =()=>{
+const toggleSeeMore =(propDisplay)=>{
   const seeMore =document.querySelector('.seeMore');
- seeMore.style.display=('inline')
+ seeMore.style.display=(propDisplay);
 }
   
 
   useEffect(()=>{
     if(currentUser){
-      //fetchAllPostData();
       fetchPostDataPage(postPage);
-     
-      console.log(postData);
     } else{
-      //fetchAllPostData();
+     fetchPostDataPage(postPage);
       toggleTabsGuestMode();
     }
     },[postPage])
@@ -167,9 +157,9 @@ const toggleSeeMore =()=>{
             <div className='post-main'>
                 <div className='post-text'>{item.text}</div>
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
-                  <div className='post-author'>{item.author?.username ? item.author.username : 'anon'}</div>
+                  <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
                 </Link>
-                <div className='post-date'>{/* formatDate */(item.date)}</div>
+                <div className='post-date'>{formatDate(item.date)}</div>
               <div className='action-cont'>
                   <div className='like-cont'>
                     <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item)}>
@@ -203,8 +193,8 @@ const toggleSeeMore =()=>{
           )
         })}
       </div>
-        <div>{postPage}</div>
-        <div className='seeMore' onClick={togglePageOnScroll}>See more...</div>
+        
+        <div className='seeMore' onClick={toggleNewPage}>See more...</div>
     </div>
     
     <Sidebar/>
