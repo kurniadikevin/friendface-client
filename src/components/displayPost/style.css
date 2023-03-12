@@ -1,17 +1,4 @@
 
-.main{
-    font-family: 'Nunito', sans-serif;
-}
-
-#home-page{
-    display: grid;
-    grid-template-rows: auto 10fr;
-}
-
-
-/* ----- display post ---------------- 
-  ready to moved to displayPost style.css*/
-  
 .displayPostCont{
     padding:45px 20px 20px 20px;
 }

@@ -37,7 +37,7 @@ const getUser=()=>{
 
   
   const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/${currentUser._id}`;
+    const url=`http://localhost:5000/posts/${currentUser._id}/page/1`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);

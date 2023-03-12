@@ -26,7 +26,7 @@ const getUser=()=>{
 
   //fetch user following post
   const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/friends/${currentUser._id}`;
+    const url=`http://localhost:5000/posts/friends/${currentUser._id}/page/1`;
     const response = await fetch(url);
     var data = await response.json();
     setPostData(data);
@@ -82,7 +82,7 @@ const toggleCommentForm = (i)=>{
     }
       
      
-    })
+    },[])
 
   return (
   <div className="App">

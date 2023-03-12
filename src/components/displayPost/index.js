@@ -9,27 +9,30 @@ import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { formatDate,formatTimeStamp } from '../../components/functions';
 
+export function DisplayPost(props){
 
-export function ExplorePage(props) {
+    let history= useHistory();
+    const [postData,setPostData]=useState([]);
+    const [postPage,setPostPage]= useState(1);
+    const [nullData,setNullData]= useState(false);
 
-   let history= useHistory();
-  const [postData,setPostData]=useState([]);
-  const [postPage,setPostPage]= useState(1);
-  const [nullData,setNullData]= useState(false);
-
-// get login user information
+    // get login user information
 const getUser=()=>{
-  const loggedInUser = localStorage.getItem("user");
-  if (loggedInUser) {
-    const foundUser = JSON.parse(loggedInUser);
-    return foundUser;
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      return foundUser;
+    }
   }
-}
-  let currentUser = getUser();
+    let currentUser = getUser();
+    console.log(currentUser);
 
-  //fetch post data pages
+    // testing url for passing through props
+    const urlExtension=`friends/${currentUser._id}/`;
+
+    //fetch post data pages
   const fetchPostDataPage = async (page)=>{
-    const url=`http://localhost:5000/posts/page/${page}`;
+    const url=`http://localhost:5000/posts/${urlExtension}page/${page}`;
     const response = await fetch(url);
     var data = await response.json();
     if(data.length === 0){
@@ -37,16 +40,16 @@ const getUser=()=>{
     }
     if(postData.length === 0){
       setPostData(data);
-      toggleLoader();
+      //toggleLoader();
       toggleSeeMore('inline');
     } else{
       setPostData([...postData, ...data] )
-      toggleLoader();
+     // toggleLoader();
       toggleSeeMore('inline');
     }
     }
 
-  //toggle next page
+     //toggle next page
   const toggleNewPage=()=>{
     if(!nullData){
        setPostPage(postPage + 1);
@@ -54,18 +57,17 @@ const getUser=()=>{
       toggleSeeMore('none');
     }  
   }
-    
 
   const likePostFunction = (post)=>{
     if( !currentUser){
       const alertBox = document.querySelector('#alert-box');
-      alertBox.textContent='Please login for like the post!'
-      alertBox.style.display='inline';
+    //  alertBox.textContent='Please login for like the post!'
+     // alertBox.style.display='inline';
     } else{
     if(post.author._id === currentUser._id){
       const alertBox = document.querySelector('#alert-box');
-      alertBox.textContent='Cannot like your own post!'
-      alertBox.style.display='inline';
+      //alertBox.textContent='Cannot like your own post!'
+      //alertBox.style.display='inline';
     } 
     
     else{
@@ -80,9 +82,9 @@ const getUser=()=>{
       url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {
        
-        const alertBox = document.querySelector('#alert-box');
-        alertBox.textContent='Post liked!'
-        alertBox.style.display='inline';        
+     //   const alertBox = document.querySelector('#alert-box');
+     //   alertBox.textContent='Post liked!'
+     //   alertBox.style.display='inline';        
 
       })
       .catch(function (error) {
@@ -92,60 +94,38 @@ const getUser=()=>{
   }
 }
 
-const toggleCommentForm = (i)=>{
+ const toggleCommentForm = (i)=>{
   const commentForm = document.querySelectorAll('.comment-section');
   if(commentForm[i].style.display === 'inline'){
       commentForm[i].style.display ='none';
   } else{  commentForm[i].style.display='inline'}
 }
 
-//hide profile, message, and notification tap for guest user
-const toggleTabsGuestMode = ()=>{
-  const profileTab = document.querySelector('#profile-tabs');
-  const messageTab = document.querySelector('#message-tabs');
-  const notifTab = document.querySelector('#notification-tabs');
-  const homeTab = document.querySelector('#home-tabs');
-  profileTab.style.display='none';
-  messageTab.style.display='none';
-  notifTab.style.display='none';
-  homeTab.style.display='none';
-  history.push('/login');// make redirect to login page
-}
-
 //onscroll page
-window.onscroll= function(){
-  const spareSpace= 10;
-  const bottom = document.documentElement.scrollHeight - document.documentElement.clientHeight <= document.documentElement.scrollTop + spareSpace;
-  if(bottom){
-    toggleNewPage();
+ window.onscroll= function(){
+    const spareSpace= 10;
+    const bottom = document.documentElement.scrollHeight - document.documentElement.clientHeight <= document.documentElement.scrollTop + spareSpace;
+    if(bottom){
+      toggleNewPage();
+    }
   }
-}
-
-// toggle see more
-const toggleSeeMore =(propDisplay)=>{
-  const seeMore =document.querySelector('.seeMore');
- seeMore.style.display=(propDisplay);
-}
   
+  // toggle see more
+  const toggleSeeMore =(propDisplay)=>{
+    const seeMore =document.querySelector('.seeMore');
+   seeMore.style.display=(propDisplay);
+  }
 
   useEffect(()=>{
-    if(currentUser){
-      fetchPostDataPage(postPage);
-    } else{
+  
      fetchPostDataPage(postPage);
-      toggleTabsGuestMode();
-    }
     },[postPage])
-
-  return (
-  <div className="App">
     
-    <Dashboard  dashIndex={1}/>
-    
-    <div className='main'  id='home-page'>
-      <HomeComp currentUser={currentUser}/>
 
-      <div className='displayPostCont' >
+    return (
+        <div>
+
+        <div className='displayPostCont' >
         {postData.map(function(item,index){
           return(
             <div className='post-container'>
@@ -193,11 +173,7 @@ const toggleSeeMore =(propDisplay)=>{
           )
         })}
       </div>
-        
-        <div className='seeMore' onClick={toggleNewPage}>See more...</div>
-    </div>
-    
-    <Sidebar/>
-  </div>
-  );
+            <div className='seeMore' onClick={toggleNewPage}>See more...</div>
+      </div>
+    )
 }
