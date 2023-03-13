@@ -45,7 +45,8 @@ export function DisplayPost(props){
   const toggleNewPage=()=>{
     if(!nullData){
        setPostPage(postPage + 1);
-    } else{
+    } 
+     else{
       toggleSeeMore('none');
     }  
   }
@@ -109,7 +110,7 @@ export function DisplayPost(props){
   useEffect(()=>{
     if(userId){
       setPostPage(1);
-      fetchPostDataPage(postPage,`${userId}/`,true)
+      fetchPostDataPage(postPage,`${userId}/`,true);
     } else{
      fetchPostDataPage(postPage,props.urlExtension);
     }
@@ -120,6 +121,7 @@ export function DisplayPost(props){
     return (
        
         <div className='displayPostCont' >
+          
         {postData.map(function(item,index){
           return(
             <div className='post-container'>
@@ -129,7 +131,7 @@ export function DisplayPost(props){
                     alt='profileImage' width={50} height={50}/> 
               </div>
             <div className='post-main'>
-                <div className='post-text'>{item.text}</div>
+                <div className='post-text'>{item.text ? item.text : 'No post found'}</div>
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
                   <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
                 </Link>
