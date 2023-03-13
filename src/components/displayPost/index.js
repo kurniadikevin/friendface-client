@@ -1,9 +1,7 @@
 import './style.css';
-import Dashboard from '../../components/dashboard/dashboard';
-import Sidebar from '../../components/sidebar/sidebar';
-import HomeComp from '../../components/homecomp';
 import CommentForm from '../../components/commentForm';
 import { useState, useEffect } from 'react';
+import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
@@ -16,35 +14,29 @@ export function DisplayPost(props){
     const [postPage,setPostPage]= useState(1);
     const [nullData,setNullData]= useState(false);
 
-    // get login user information
-const getUser=()=>{
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      return foundUser;
-    }
-  }
-    let currentUser = getUser();
-    console.log(currentUser);
-
-    // testing url for passing through props
-    const urlExtension=`friends/${currentUser._id}/`;
+    let currentUser = props.currentUser;
+    let {userId} = useParams(); 
 
     //fetch post data pages
-  const fetchPostDataPage = async (page)=>{
+  const fetchPostDataPage = async (page,urlExtension,newProfile)=>{
     const url=`http://localhost:5000/posts/${urlExtension}page/${page}`;
     const response = await fetch(url);
     var data = await response.json();
+
+    // confirm data null 
     if(data.length === 0){
       setNullData(true);
     }
-    if(postData.length === 0){
+    // if data length zero or parameter for profilevisit change post
+    if(postData.length === 0 || newProfile){
       setPostData(data);
-      //toggleLoader();
+      toggleLoader();
       toggleSeeMore('inline');
-    } else{
+    } 
+    // else concat data
+    else{
       setPostData([...postData, ...data] )
-     // toggleLoader();
+      toggleLoader();
       toggleSeeMore('inline');
     }
     }
@@ -61,13 +53,13 @@ const getUser=()=>{
   const likePostFunction = (post)=>{
     if( !currentUser){
       const alertBox = document.querySelector('#alert-box');
-    //  alertBox.textContent='Please login for like the post!'
-     // alertBox.style.display='inline';
+      alertBox.textContent='Please login for like the post!'
+      alertBox.style.display='inline';
     } else{
     if(post.author._id === currentUser._id){
       const alertBox = document.querySelector('#alert-box');
-      //alertBox.textContent='Cannot like your own post!'
-      //alertBox.style.display='inline';
+      alertBox.textContent='Cannot like your own post!'
+      alertBox.style.display='inline';
     } 
     
     else{
@@ -80,12 +72,10 @@ const getUser=()=>{
       },
       withCredentials: true,
       url: `http://localhost:5000/posts/likes/${post._id}`,
-    }).then(function (response) {
-       
-     //   const alertBox = document.querySelector('#alert-box');
-     //   alertBox.textContent='Post liked!'
-     //   alertBox.style.display='inline';        
-
+    }).then(function (response) {  
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Post liked!'
+        alertBox.style.display='inline';        
       })
       .catch(function (error) {
         console.log(error);
@@ -117,14 +107,18 @@ const getUser=()=>{
   }
 
   useEffect(()=>{
-  
-     fetchPostDataPage(postPage);
-    },[postPage])
+    if(userId){
+      setPostPage(1);
+      fetchPostDataPage(postPage,`${userId}/`,true)
+    } else{
+     fetchPostDataPage(postPage,props.urlExtension);
+    }
+
+    },[postPage,userId])
     
 
     return (
-        <div>
-
+       
         <div className='displayPostCont' >
         {postData.map(function(item,index){
           return(
@@ -172,8 +166,9 @@ const getUser=()=>{
             </div>
           )
         })}
+         <div className='seeMore' onClick={toggleNewPage}>See more...</div>
       </div>
-            <div className='seeMore' onClick={toggleNewPage}>See more...</div>
-      </div>
+           
+     
     )
 }

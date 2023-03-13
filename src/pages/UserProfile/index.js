@@ -5,12 +5,14 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
 import CommentForm from '../../components/commentForm';
 import axios from 'axios';
+import { DisplayPost } from '../../components/displayPost';
 import { toggleLoader } from '../../components/loader/loader-toggle';
+import { formatDate } from '../../components/functions';
+
 
 
 export function UserProfilePage() {
   
-  const [postData,setPostData]= useState([]);
   const [userData,setUserData]= useState(
     { username : 'loading',
       email : 'loading' , profilePicture : ''});
@@ -23,34 +25,19 @@ const getUser=()=>{
     return foundUser;
   }
 }
+  // current user
   let currentUser = getUser();
 
-  // fetch by parameter userId
+  // visited profile user fetch by parameter userId
    let {userId} = useParams(); 
 
-   const fetchPostData = async ()=>{
-    const url=`http://localhost:5000/posts/${userId}`;
-    const response = await fetch(url);
-    var data = await response.json();
-    setPostData(data);
-    toggleLoader();
-    }
-
-    const fetchUserData = async ()=>{
+  const fetchUserData = async ()=>{
         const url=`http://localhost:5000/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
         }
     
-
-  const toggleCommentForm = (i)=>{
-    const commentForm = document.querySelectorAll('.comment-section');
-    if(commentForm[i].style.display === 'inline'){
-        commentForm[i].style.display ='none';
-    } else{  commentForm[i].style.display='inline'}
-  }
-
   const sendFriendRequest=()=>{
     axios({
       method : "POST",
@@ -72,24 +59,20 @@ const getUser=()=>{
     })
   }
 
-
     useEffect(()=>{
-      fetchPostData();
       fetchUserData();
-      
     },[userId])
 
 
   return (
     <div className="App">
-      <Dashboard  dashIndex={1} />
+      <Dashboard  dashIndex={2} />
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
             <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
-           
           </div>
 
           <div className='profile-detail'>
@@ -117,50 +100,7 @@ const getUser=()=>{
         </div>
 
         <div className='profile-body'>
-
-        <div className='displayPostCont'>
-          {postData.map(function(item,index){
-            return(
-              <div className='post-container'>
-                <div className='post-sidebar'>    
-                  <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
-                     : (require('../../assets/profilepicturesSmall.png'))}
-                   alt='profileImage'  width={50} height={50}/>
-                </div>
-                <div className='post-main'>
-                  <div className='post-text'>{item.text}</div>
-                  <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
-                  <div className='post-date'>{item.date}</div>
-                  <div className='action-cont'>
-                    <div className='like-cont'>
-                      <span id='like-icon' class="material-symbols-outlined">favorite</span>
-                      <div>{item.likes.length}</div>
-                    </div>
-                    <div className='comment-cont'>
-                    <span id='comment-icon' class="material-symbols-outlined"
-                    onClick={()=> toggleCommentForm(index)}>mode_comment</span>
-                    <div>{item.comment.length}</div>
-                  </div>  
-                 </div>
-                 <div className='comment-section'>
-                <CommentForm currentUser={currentUser} post= {item} index={index}/>
-                <div className='comment-map'>{((item.comment)).map(function(comment,index){
-                    return(
-                      <div className='comment-content'>
-                        <div className='comment-text'>{comment.text}</div>
-                        <div className='comment-username'>{comment.author?.username}</div>
-                        <div className='comment-date'>{comment.date}</div>
-                      </div>
-                    )
-                })
-                }</div>
-                </div>
-              </div>
-            </div>
-            )
-          })}
-        </div>
-
+          <DisplayPost currentUser={currentUser} urlExtension={`${userId}/`}/>
         </div>
       </div>
       
