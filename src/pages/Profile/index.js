@@ -4,10 +4,13 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { DisplayPost } from '../../components/displayPost';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
+import { useState, useEffect } from 'react';
+
 
 export function ProfilePage() {
   
   let profilePicture = (require('../../assets/profilepicturesSmall.png'));
+  const [postCount,setPostCount]= useState();
 
   // get login user information
   const getUser=()=>{
@@ -35,6 +38,19 @@ export function ProfilePage() {
           Form.style.display ='none';
       } else{  Form.style.display='inline'}
   }
+
+  const fetchPostCount= async ()=>{
+    const url=`http://localhost:5000/posts/${currentUser._id}/count`;
+    const response = await fetch(url);
+    var data = await response.json();
+    console.log(data);
+    setPostCount(data.postCount);
+    }
+
+    useEffect(()=>{
+     fetchPostCount()
+    },[])
+
 
 
   return (
@@ -90,7 +106,10 @@ export function ProfilePage() {
                   })}
                 </div>
               </div>
-              <div></div>
+              <div className='post-count-cont'>
+                <div>Posts: </div>
+                <div>{postCount} </div>
+              </div>
             </div>
             <div className='profile-row3'>
              

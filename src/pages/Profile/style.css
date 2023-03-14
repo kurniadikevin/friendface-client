@@ -11,10 +11,15 @@
     .profile-detail{
         padding-top: 30px;
         display: grid;
-        grid-template-rows: 3fr 2fr 2fr;
+        grid-template-rows: 2fr 2fr 2fr;
     }
-    .profile-row1{
-        
+
+    
+    .profile-row1, .profile-row2{
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .profile-username{
         display: grid;
@@ -63,6 +68,7 @@
     color: var(--purple);
 }
 
+
 #friends-list{
     display: none;
     position: absolute;
@@ -70,10 +76,11 @@
     background-color: var(--bg2);
     padding: 30px 50px;
 }
-.friends-count{
+.friends-count, .post-count-cont{
     display: grid;
     grid-template-columns: 100px 1fr;
     cursor: pointer;
+    color: var(--purple);
 }
 
 .friendList-cont{
