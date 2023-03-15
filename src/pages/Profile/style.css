@@ -14,6 +14,9 @@
         grid-template-rows: 2fr 2fr 2fr;
     }
 
+    #post-count, #friend-count{
+        color: var(--white)
+    }
     
     .profile-row1, .profile-row2{
        
@@ -23,7 +26,7 @@
     }
     .profile-username{
         display: grid;
-        grid-template-columns: 100px 100px 50px;
+        grid-template-columns: 100px 150px 50px;
     }
         .profile-email{
             display: grid;
@@ -60,9 +63,10 @@
 
 /* -----BOTTON------ */
 #edit-btn-profImg, #edit-btn-username{
-    background-color: var(--background);
+    background-color: var(--background00);
     border: none;
     color: var(--bg2);
+    
 }
 #edit-btn-profImg:hover , #edit-btn-username:hover{
     color: var(--purple);

@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { useState } from 'react';
+
 import './style.css';
+import { refreshLoginSession } from '../functions';
 
 const ImageForm = (props)=>{
 
@@ -23,6 +23,7 @@ const ImageForm = (props)=>{
   
 
 
+
     return (
         <div className="profile-image-form">
             <form method='POST' action='http://localhost:5000/images/' enctype="multipart/form-data">
@@ -30,7 +31,8 @@ const ImageForm = (props)=>{
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         
             <input type='file' name='image'  ></input>
-            <button type='submit' id='fileInput'>Confirm change</button>
+            <button type='submit' id='fileInput'>
+              Confirm change</button>
             </form>
         </div>
     )

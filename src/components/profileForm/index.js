@@ -36,6 +36,8 @@ const ProfileForm = (props)=>{
             const form = document.querySelector('#profileForm');
             form.style.display='none';
             refreshLoginSession(currentUser);
+            const usernameDisplay=document.querySelector('#user-username');
+            usernameDisplay.textContent=data;
            })
            .catch(function (error) {
              console.log(error);

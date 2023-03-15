@@ -95,7 +95,7 @@ const getUser=()=>{
             <div className='profile-row1'>
                <div className='profile-username'>
                   <div className='tag'>Username :</div>
-                  <div className='text'> {userData?.username ? userData.username : 'Not Set'} </div>
+                  <div className='text' id='user-username'> {userData?.username ? userData.username : 'Not Set'} </div>
               </div>
               <div className='profile-email'>
                 <div className='tag'>Email :</div>
@@ -104,13 +104,13 @@ const getUser=()=>{
             </div>
             <div className='profile-row2'>
               <div className='friends-count'>
-                <div className='tag'>Friends:</div>
-                <div>{userData._id !== 'not set'? 
+                <div className='tag'>Friends :</div>
+                <div id='friend-count'>{userData._id !== 'not set'? 
                   userData.friends?.length : '0'} </div>
               </div>
               <div className='post-count-cont'>
-                <div>Posts: </div>
-                <div>{postCount} </div>
+                <div>Posts : </div>
+                <div  id='post-count'>{postCount} </div>
               </div>
             </div>
             <div className='profile-row3'>

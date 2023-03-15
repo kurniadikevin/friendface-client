@@ -5,6 +5,7 @@ import { DisplayPost } from '../../components/displayPost';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import { useState, useEffect } from 'react';
+import { refreshLoginSession } from '../../components/functions';
 
 
 export function ProfilePage() {
@@ -47,7 +48,8 @@ export function ProfilePage() {
     }
 
     useEffect(()=>{
-     fetchPostCount()
+     fetchPostCount();
+     refreshLoginSession(currentUser);
     },[])
 
 
@@ -72,7 +74,7 @@ export function ProfilePage() {
             <div className='profile-row1'>
               <div className='profile-username'>
                 <div className='tag'>Username :</div>
-                <div className='text'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
+                <div className='text' id='user-username'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
                 <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>
                 <span class="material-symbols-outlined">edit</span>
                 </button>
@@ -90,8 +92,8 @@ export function ProfilePage() {
             <div className='profile-row2'>
               <div>
                 <div className='friends-count' onClick={()=> toggleForm('friends-list')}>
-                  <div className='tag'>Friends: </div>
-                  <div> {currentUser._id !== 'not set'? 
+                  <div className='tag'>Friends : </div>
+                  <div id='friend-count'> {currentUser._id !== 'not set'? 
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
@@ -106,8 +108,8 @@ export function ProfilePage() {
                 </div>
               </div>
               <div className='post-count-cont'>
-                <div>Posts: </div>
-                <div>{postCount} </div>
+                <div>Posts : </div>
+                <div id='post-count'>{postCount} </div>
               </div>
             </div>
             <div className='profile-row3'>
