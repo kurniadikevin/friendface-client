@@ -13,6 +13,12 @@ import { DisplayPost } from './components/displayPost';
 
 const App = () =>{ 
 
+    const alertBox= document.querySelector('#alert-box');
+    if(alertBox.style.display === 'inline'){
+        setInterval(() => {
+            alertBox.style.display='none';
+        }, 7000);
+    }
  
   return(
  

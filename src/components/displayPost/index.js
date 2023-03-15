@@ -50,14 +50,14 @@ export function DisplayPost(props){
     }  
   }
 
-  const likePostFunction = (post)=>{
+  const likePostFunction = (post,index)=>{
+    const alertBox = document.querySelector('#alert-box');
+
     if( !currentUser){
-      const alertBox = document.querySelector('#alert-box');
       alertBox.textContent='Please login for like the post!'
       alertBox.style.display='inline';
     } else{
-    if(post.author._id === currentUser._id){
-      const alertBox = document.querySelector('#alert-box');
+    if(post.author?._id === currentUser._id){
       alertBox.textContent='Cannot like your own post!'
       alertBox.style.display='inline';
     } 
@@ -73,12 +73,16 @@ export function DisplayPost(props){
       withCredentials: true,
       url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {  
-        const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post liked!'
-        alertBox.style.display='inline';        
+        alertBox.style.display='inline';
+       
+        const likesCount = document.querySelectorAll('.likes-length');
+        likesCount[index].textContent= post.likes.length + 1;
       })
       .catch(function (error) {
         console.log(error);
+        alertBox.textContent='Server overload / Error'
+        alertBox.style.display='inline';
       });
     }
   }
@@ -137,7 +141,7 @@ export function DisplayPost(props){
                 <div className='post-date'>{formatDate(item.date)}</div>
               <div className='action-cont'>
                   <div className='like-cont'>
-                    <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item)}>
+                    <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item,index)}>
                       favorite</span>
                     <div className='likes-length'>{item.likes?.length}</div>
                   </div>

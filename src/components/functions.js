@@ -20,8 +20,6 @@ export const formatTimeStamp = (value)=>{
 
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
-  console.log(user.email);
-  console.log(lastPassword);
   axios({
     method: "POST",
     data: {

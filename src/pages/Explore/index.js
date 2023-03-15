@@ -14,15 +14,19 @@ const getUser=()=>{
     return foundUser;
   }}
 
- let currentUser= getUser();
- useEffect(()=>{
-  if(!currentUser){
-   const profileTabs= document.querySelector('#profile-tabs');
+ const removeTabsForGuest=()=>{
+  const profileTabs= document.querySelector('#profile-tabs');
    const homeTabs= document.querySelector('#home-tabs');
    const notifTabs= document.querySelector('#notification-tabs');
    profileTabs.style.display='none';
    homeTabs.style.display='none';
-   notifTabs.style.display='none'
+   notifTabs.style.display='none';
+ }
+
+ let currentUser= getUser();
+ useEffect(()=>{
+  if(!currentUser){
+    removeTabsForGuest();
   }
  })
 
