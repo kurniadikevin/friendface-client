@@ -9,7 +9,6 @@ import { formatDate,formatTimeStamp } from '../../components/functions';
 
 export function DisplayPost(props){
 
-    let history= useHistory();
     const [postData,setPostData]=useState([]);
     const [postPage,setPostPage]= useState(1);
     const [nullData,setNullData]= useState(false);

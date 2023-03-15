@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const formatDate= (value)=>{
     let arrMonths=[null,'Jan','Feb', 'Mar','Apr', 'May', 'Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
     //console.log(value);
@@ -15,4 +17,24 @@ export const formatTimeStamp = (value)=>{
      let stringDate =JSON.stringify( date);
    return formatDate(stringDate);
   }
-  
+
+export const refreshLoginSession=(user)=>{
+  const lastPassword= localStorage.getItem('lastPassword');
+  console.log(user.email);
+  console.log(lastPassword);
+  axios({
+    method: "POST",
+    data: {
+      email: user.email,
+      password: lastPassword,
+    },
+    withCredentials: true,
+    url: "http://localhost:5000/users/login",
+  }).then((res) => {
+    if(res.data === 'No User Exists'){
+      alert('No User Exist');
+    } else{
+      localStorage.setItem("user", JSON.stringify(res.data));
+    }    
+  });
+}

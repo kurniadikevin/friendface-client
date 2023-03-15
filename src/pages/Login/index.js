@@ -63,6 +63,7 @@ export function LoginPage() {
         alert('No User Exist');
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("lastPassword",(password));
         history.push("/");
       }    
     });
@@ -86,6 +87,7 @@ export function LoginPage() {
         alert('No User Exist')
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("lastPassword",('password'))
         history.push("/")
       }    
     });

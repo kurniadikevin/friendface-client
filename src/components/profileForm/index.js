@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import './style.css';
 import axios from 'axios';
+import { refreshLoginSession } from '../functions';
 
 const ProfileForm = (props)=>{
 
-    const [data,setData]= useState('')
+    const [data,setData]= useState('');
 
     let currentUser ;
   
@@ -34,6 +35,7 @@ const ProfileForm = (props)=>{
              console.log(response);
             const form = document.querySelector('#profileForm');
             form.style.display='none';
+            refreshLoginSession(currentUser);
            })
            .catch(function (error) {
              console.log(error);

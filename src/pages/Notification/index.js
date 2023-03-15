@@ -5,24 +5,22 @@ import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { useEffect } from 'react';
+import { refreshLoginSession } from '../../components/functions';
 
 export function NotificationPage() {
 
-
-
-// get login user information
-const getUser=()=>{
-  const loggedInUser = localStorage.getItem("user");
-  if (loggedInUser) {
-    const foundUser = JSON.parse(loggedInUser);
-    return foundUser;
+  // get login user information
+  const getUser=()=>{
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      return foundUser;
+    }
   }
-}
 
   let currentUser = getUser();
-
-  const acceptFriendRequest = (friendReq,friendData)=>{
-   
+  
+  const acceptFriendRequest = (friendReq,friendData,index)=>{
     axios({
         method : "POST",
         data : {
@@ -34,15 +32,24 @@ const getUser=()=>{
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
-      alertBox.textContent='Accept friend request'
+      alertBox.textContent='Accept friend request';
+      const requestContainer = document.querySelectorAll('.friendReq-cont');
+      requestContainer[index].style.display='none';
+      refreshLoginSession(currentUser);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  const declineFriendRequest= (friendReq,friendData)=>{
- 
+  const declineFriendRequest= (friendReq,friendData,index)=>{
+    console.log('declineee pres');
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.style.display='inline';
+    alertBox.textContent='Decline friend request';
+    const requestContainer = document.querySelectorAll('.friendReq-cont');
+    requestContainer[index].style.display='none';
+    refreshLoginSession(currentUser);
     axios({
         method : "POST",
         data : {
@@ -52,9 +59,12 @@ const getUser=()=>{
         },
         url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
-      const alertBox = document.querySelector('#alert-box');
+    /*   const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
       alertBox.textContent='Decline friend request';
+      const requestContainer = document.querySelectorAll('.friendReq-cont');
+      requestContainer[index].style.display='none';
+      refreshLoginSession(currentUser); */
       })
       .catch(function (error) {
         console.log(error);
@@ -63,7 +73,8 @@ const getUser=()=>{
 
   useEffect(()=>{
     toggleLoader();
-  })
+    
+  },[])
 
   return (
     <div className="App">
@@ -73,7 +84,7 @@ const getUser=()=>{
         <div className='friendReq-head'>Friend Request</div>
         <div className='friendReq-main'>
 
-        {currentUser.friendRequest.length > 0 ? (currentUser.friendRequest).map((data)=>{
+        {currentUser.friendRequest.length > 0 ? (currentUser.friendRequest).map((data,index)=>{
             const senderInfo={
               _id : data.sender._id,
               username : data.sender.username,
@@ -89,8 +100,8 @@ const getUser=()=>{
                     <div className='friendReq-email'>{data.sender?.email}</div>
                     <div className='friendReq-status'>Status : {data?.status}</div>
                 <div className='friendReq-button-cont'>
-                    <button  id='accept-req' onClick={()=>acceptFriendRequest(requestData,senderInfo)}>Accept</button>
-                    <button id='decline-req'onClick={()=>declineFriendRequest(requestData,senderInfo)}>Decline</button>
+                    <button  id='accept-req' onClick={()=>acceptFriendRequest(requestData,senderInfo,index)}>Accept</button>
+                    <button id='decline-req'onClick={()=>declineFriendRequest(requestData,senderInfo,index)}>Decline</button>
                 </div>
                 </div>
             )
