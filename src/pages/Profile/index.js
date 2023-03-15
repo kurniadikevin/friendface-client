@@ -43,7 +43,6 @@ export function ProfilePage() {
     const url=`http://localhost:5000/posts/${currentUser._id}/count`;
     const response = await fetch(url);
     var data = await response.json();
-    console.log(data);
     setPostCount(data.postCount);
     }
 

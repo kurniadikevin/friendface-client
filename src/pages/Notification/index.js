@@ -21,13 +21,13 @@ const getUser=()=>{
 
   let currentUser = getUser();
 
-  const acceptFriendRequest = (friendReq)=>{
+  const acceptFriendRequest = (friendReq,friendData)=>{
    
     axios({
         method : "POST",
         data : {
             requestData : friendReq,
-            newFriend : friendReq.sender,
+            newFriend : friendData,
             newFriendReceiver : currentUser
         },
         url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
@@ -41,13 +41,13 @@ const getUser=()=>{
       });
   }
 
-  const declineFriendRequest= (friendReq)=>{
+  const declineFriendRequest= (friendReq,friendData)=>{
  
     axios({
         method : "POST",
         data : {
             requestData : friendReq,
-            newFriend : friendReq.sender,
+            newFriend : friendData,
             newFriendReceiver : currentUser
         },
         url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
@@ -74,15 +74,23 @@ const getUser=()=>{
         <div className='friendReq-main'>
 
         {currentUser.friendRequest.length > 0 ? (currentUser.friendRequest).map((data)=>{
-            
+            const senderInfo={
+              _id : data.sender._id,
+              username : data.sender.username,
+              email : data.sender.email
+            }
+           const requestData ={
+              sender :  senderInfo,
+              status : 'pending'
+          }
             return (
                 <div className='friendReq-cont'>
                     <div className='friendReq-username'>{data.sender?.username}</div>
                     <div className='friendReq-email'>{data.sender?.email}</div>
                     <div className='friendReq-status'>Status : {data?.status}</div>
                 <div className='friendReq-button-cont'>
-                    <button  id='accept-req' onClick={()=>acceptFriendRequest(data)}>Accept</button>
-                    <button id='decline-req'onClick={()=>declineFriendRequest(data)}>Decline</button>
+                    <button  id='accept-req' onClick={()=>acceptFriendRequest(requestData,senderInfo)}>Accept</button>
+                    <button id='decline-req'onClick={()=>declineFriendRequest(requestData,senderInfo)}>Decline</button>
                 </div>
                 </div>
             )

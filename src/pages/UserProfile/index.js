@@ -13,7 +13,7 @@ import { formatDate } from '../../components/functions';
 
 export function UserProfilePage() {
 
-  const [postCount,setPostCount]= useState();
+  const [postCount,setPostCount]= useState(0);
   const [userData,setUserData]= useState(
     { username : 'loading',
       email : 'loading' , profilePicture : ''});
@@ -40,19 +40,25 @@ const getUser=()=>{
         }
 
   const fetchPostCount= async ()=>{
-    const url=`http://localhost:5000/posts/${currentUser._id}/count`;
+    const url=`http://localhost:5000/posts/${userId}/count`;
     const response = await fetch(url);
     var data = await response.json();
-    console.log(data);
     setPostCount(data.postCount);
+    console.log(data.postCount);
     }
 
   const sendFriendRequest=()=>{
+    const senderInfo={
+      _id : currentUser._id,
+      username : currentUser.username,
+      email : currentUser.email
+    }
+
     axios({
       method : "POST",
       data : {
         requestData :{
-            sender :  currentUser,
+            sender :  senderInfo,
             status : 'pending'
         }
       },
