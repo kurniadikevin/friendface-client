@@ -1,11 +1,13 @@
 import { useState } from "react";
 import './style.css';
 import axios from "axios";
-import {removeAlert} from '../functions';
+import {removeAlert, formatTimeStamp} from '../functions';
+
 
 const CommentForm= (props)=>{
 
     const [comment,setComment]= useState('');
+
     let currentUser = props?.currentUser;
 
     const toggleCommentForm = (i)=>{
@@ -22,29 +24,57 @@ const CommentForm= (props)=>{
             alertBox.style.display='inline';
             removeAlert();
         } else{
+        const commentAuthor={
+            _id : currentUser._id,
+            email : currentUser.email,
+            username : currentUser.username
+        }
         axios({
           method: "POST",
           data: {
               _id :    post._id,
-            commentBy : currentUser,
+            commentBy : commentAuthor,
             text : comment,
             
           },
           withCredentials: true,
           url: `http://localhost:5000/comments/createComment/${post._id}`,
         }).then(function (response) {
-            console.log(response);
+            const lastComment= (JSON.parse(response.config.data));
             const alertBox = document.querySelector('#alert-box');
             alertBox.textContent='Comment created!'
             alertBox.style.display='inline';
             removeAlert();
-            setComment('')
+            setComment('');
+            displayLastComment(lastComment);
+            displayIncrementCommentCount();
           })
           .catch(function (error) {
             console.log(error);
           });
         }
     }
+
+    // display only last comment to create on client before replace with real data
+    const displayLastComment=(comment)=>{
+      const currentDate= new Date().getTime();
+      const commentContainerMap= document.querySelectorAll('.comment-map');
+      commentContainerMap[props.index].innerHTML +=`
+      <div class='comment-content'>
+      <div class='comment-text'>${comment.text}</div>
+      <div class='comment-username'>${comment.commentBy.username}</div>
+      <div class='comment-date'>${formatTimeStamp(currentDate)}</div>
+    </div>`  
+    }
+
+    const displayIncrementCommentCount=()=>{
+        const commentCount = document.querySelectorAll('.comment-length');
+        (commentCount[props.index]).textContent= props.post.comment.length + 1;
+    }
+
+    useState(()=>{
+       
+    },[])
 
     return(
 
@@ -58,7 +88,8 @@ const CommentForm= (props)=>{
             <div className='newComment-button'>
                 
                 <button id='newComment-submit'onClick={()=> {createComment(props.post) ;
-                     toggleCommentForm(props.index)}}>Add</button>
+                    /*  toggleCommentForm(props.index) */
+                     }}>Add</button>
             </div>
             
         </div>
