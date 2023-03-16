@@ -33,11 +33,10 @@ function Dashboard(props){
     const alertBox = document.querySelector('#alert-box');
     alertBox.style.display='none';
   }
-        
+
   
    useEffect(()=>{
         getUser();
-   
        toggleColorSelect(props.dashIndex)
     },[])
 

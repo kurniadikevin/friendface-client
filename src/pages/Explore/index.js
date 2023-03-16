@@ -28,7 +28,7 @@ const getUser=()=>{
   if(!currentUser){
     removeTabsForGuest();
   }
- })
+ },[])
 
   return (
   <div className="App">

@@ -5,7 +5,7 @@ import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate,formatTimeStamp } from '../../components/functions';
+import { formatDate,formatTimeStamp,removeAlert } from '../../components/functions';
 
 export function DisplayPost(props){
 
@@ -56,10 +56,12 @@ export function DisplayPost(props){
     if( !currentUser){
       alertBox.textContent='Please login for like the post!'
       alertBox.style.display='inline';
+      removeAlert();
     } else{
     if(post.author?._id === currentUser._id){
       alertBox.textContent='Cannot like your own post!'
       alertBox.style.display='inline';
+      removeAlert();
     } 
     
     else{
@@ -75,7 +77,7 @@ export function DisplayPost(props){
     }).then(function (response) {  
         alertBox.textContent='Post liked!'
         alertBox.style.display='inline';
-       
+        removeAlert();
         const likesCount = document.querySelectorAll('.likes-length');
         likesCount[index].textContent= post.likes.length + 1;
       })
@@ -83,6 +85,7 @@ export function DisplayPost(props){
         console.log(error);
         alertBox.textContent='Server overload / Error'
         alertBox.style.display='inline';
+        removeAlert();
       });
     }
   }

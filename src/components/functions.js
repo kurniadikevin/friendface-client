@@ -36,3 +36,10 @@ export const refreshLoginSession=(user)=>{
     }    
   });
 }
+
+export const removeAlert=()=>{
+  setTimeout(()=>{
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.style.display='none';
+  },5000)
+}

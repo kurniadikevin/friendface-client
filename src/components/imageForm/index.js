@@ -1,6 +1,7 @@
 
 import './style.css';
 import { refreshLoginSession } from '../functions';
+import { removeAlert } from '../functions';
 
 const ImageForm = (props)=>{
 
@@ -19,6 +20,7 @@ const ImageForm = (props)=>{
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Profile Image Changed!'
         alertBox.style.display='inline';
+        removeAlert();
       }
   
 
@@ -31,7 +33,7 @@ const ImageForm = (props)=>{
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         
             <input type='file' name='image'  ></input>
-            <button type='submit' id='fileInput'>
+            <button type='submit' id='fileInput'onClick={imageSubmitAlert}>
               Confirm change</button>
             </form>
         </div>

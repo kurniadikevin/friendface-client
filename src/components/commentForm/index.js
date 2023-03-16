@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './style.css';
 import axios from "axios";
+import {removeAlert} from '../functions';
 
 const CommentForm= (props)=>{
 
@@ -17,8 +18,9 @@ const CommentForm= (props)=>{
     const createComment= (post)=>{
         if(!currentUser){
             const alertBox = document.querySelector('#alert-box');
-            alertBox.textContent='Cannot make comment without login'
+            alertBox.textContent='Cannot make comment without login !'
             alertBox.style.display='inline';
+            removeAlert();
         } else{
         axios({
           method: "POST",
@@ -35,6 +37,7 @@ const CommentForm= (props)=>{
             const alertBox = document.querySelector('#alert-box');
             alertBox.textContent='Comment created!'
             alertBox.style.display='inline';
+            removeAlert();
             setComment('')
           })
           .catch(function (error) {
