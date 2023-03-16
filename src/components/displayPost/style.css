@@ -47,6 +47,13 @@
         color: var(--bg2);
     }
 
+    #toggle-comment-icon{
+        padding-top: 10px;
+        font-size: 16pt;
+        cursor: pointer;
+        color: var(--green);
+    }
+
     .like-cont, .comment-cont{
         display: grid;
         grid-template-columns: 25px 25px;
@@ -67,6 +74,7 @@
         display: none;
         
     }
+
     
 /* ---------COMMENT STYLE ---------*/
 

@@ -43,3 +43,22 @@ export const removeAlert=()=>{
     alertBox.style.display='none';
   },5000)
 }
+
+export const toggleCommentSection = (i,commentFormDisplay)=>{
+  const commentSection = document.querySelectorAll('.comment-section');
+  const commentForm=document.querySelectorAll('.comment-form');
+
+  // hide other comment section if one comment section is displayed
+  for( let j= 0; j< commentSection.length; j++){
+    if(j !== i){
+      commentSection[j].style.display='none';
+    }
+  }
+  // toggle comment section on off
+  if(commentSection[i].style.display === 'inline'){
+      commentSection[i].style.display ='none';
+  } else{  commentSection[i].style.display='inline'}
+
+  // only show comment form if comment length is zero
+  commentForm[i].style.display= commentFormDisplay;
+}

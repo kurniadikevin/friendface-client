@@ -10,13 +10,6 @@ const CommentForm= (props)=>{
 
     let currentUser = props?.currentUser;
 
-    const toggleCommentForm = (i)=>{
-        const commentForm = document.querySelectorAll('.comment-section');
-        if(commentForm[i].style.display === 'inline'){
-            commentForm[i].style.display ='none';
-        } else{  commentForm[i].style.display='inline'}
-    }
-
     const createComment= (post)=>{
         if(!currentUser){
             const alertBox = document.querySelector('#alert-box');
@@ -88,7 +81,6 @@ const CommentForm= (props)=>{
             <div className='newComment-button'>
                 
                 <button id='newComment-submit'onClick={()=> {createComment(props.post) ;
-                    /*  toggleCommentForm(props.index) */
                      }}>Add</button>
             </div>
             

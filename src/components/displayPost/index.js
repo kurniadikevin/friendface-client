@@ -5,7 +5,7 @@ import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate,formatTimeStamp,removeAlert } from '../../components/functions';
+import { formatDate,formatTimeStamp,removeAlert,toggleCommentSection } from '../../components/functions';
 
 export function DisplayPost(props){
 
@@ -91,12 +91,22 @@ export function DisplayPost(props){
   }
 }
 
- const toggleCommentForm = (i)=>{
-  const commentForm = document.querySelectorAll('.comment-section');
-  if(commentForm[i].style.display === 'inline'){
-      commentForm[i].style.display ='none';
-  } else{  commentForm[i].style.display='inline'}
-}
+  const toggleCommentForm=(i)=>{
+    const commentForm=document.querySelectorAll('.comment-form');
+    if(commentForm[i].style.display === 'none'){
+      commentForm[i].style.display ='block';
+   } else{  commentForm[i].style.display='none'}
+  }
+
+  //show comment form by default if post has no comment
+  const displayDefaultCommentForm=(item,index)=>{
+    if(item.comment.length === 0){
+      toggleCommentSection(index,'block')
+    } else{
+      toggleCommentSection(index,'none')
+    }
+    }
+
 
 //onscroll page
  window.onscroll= function(){
@@ -150,7 +160,8 @@ export function DisplayPost(props){
                   </div>
                   <div className='comment-cont'>
                     <span id='comment-icon' class="material-symbols-outlined"
-                    onClick={()=> toggleCommentForm(index)}>mode_comment</span>
+                    onClick={()=> displayDefaultCommentForm(item,index)}
+                    >mode_comment</span>
                     <div className='comment-length'>{item.comment?.length}</div>
                   </div>
               </div>
@@ -168,6 +179,12 @@ export function DisplayPost(props){
                 })
                 }</div>
               : <div className='comment-map' ></div>}
+                <div onClick={()=>{toggleCommentForm(index)}}>
+                   <span class="material-symbols-outlined" id='toggle-comment-icon'>
+                   reply
+                  </span>
+                </div>
+                
                 <CommentForm currentUser={currentUser} post= {item} index={index}/>
                </div>
               </div>
