@@ -114,7 +114,8 @@ function HomeComp(props){
                         value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
                     </div>
                     <div className='newpost-button'>
-                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm()}}>Post</button>
+                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm();
+                             window.location.reload(false)}}>Post</button>
                     </div>
                     
                 </div>
