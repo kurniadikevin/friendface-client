@@ -69,7 +69,6 @@ export function LoginPage() {
     });
 }
 
-
   // post form login using axios
   const loginUserSample = async()=>{  
     loader.style.display='inline';
@@ -132,11 +131,13 @@ export function LoginPage() {
             <form className='form-sign' id='signup-wrap'  method='POST' action='http://localhost:5000/users/signup'>
               <div className='email-cont'>
                 <label for='email'>Email</label>
-                <input type='text' name='email' placeholder='email'></input>
+                <input type='text' name='email' placeholder='email'
+                id='signup-email'></input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
-                <input type='password' name='password' placeholder='password'></input>
+                <input type='password' name='password' placeholder='password'
+                id='signup-password'></input>
               </div>
               <button type='submit' className='submit-btn'>Sign Up</button>
             </form>

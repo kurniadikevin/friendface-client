@@ -41,7 +41,7 @@ export const removeAlert=()=>{
   setTimeout(()=>{
     const alertBox = document.querySelector('#alert-box');
     alertBox.style.display='none';
-  },5000)
+  },3000)
 }
 
 export const toggleCommentSection = (i,commentFormDisplay)=>{

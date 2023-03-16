@@ -124,14 +124,18 @@
     padding: 20px;
     display: none;
     animation-name:popAlert;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-fill-mode: forwards;
 }
 
 @keyframes popAlert{
-    0%{ opacity: 0.25;}
-    50%{opacity: 0.75;}
-    100%{opacity: 1;}
+    0%{ opacity: 0;
+        transform: translateY(100px);}
+    25%{opacity: 0.25;}
+    50%{opacity: 0.5;}
+    75%{opacity: 0.75;}
+    100%{opacity: 1;
+    transform: translateY(0px);}
 }
 
 #alert-msg{
