@@ -112,25 +112,6 @@
         font-weight: 600;
     }
 
-#alert-box{
-    width: 250px;
-    height: 80px;
-    opacity: 0.9;
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
-    background-color: var(--bg2);
-    border-radius: 15px;
-    justify-content: flex-start;
-    padding: 20px;
-    transition: 0.5s;
-    display: none;
-    
-}
-
-#alert-msg{
-    font-size: 13pt;
-}
 
 /* <--------deactivate   message tab------> */
 #message-tabs{

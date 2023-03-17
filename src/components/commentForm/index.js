@@ -1,47 +1,73 @@
 import { useState } from "react";
 import './style.css';
 import axios from "axios";
+import {removeAlert, formatTimeStamp} from '../functions';
+
 
 const CommentForm= (props)=>{
 
     const [comment,setComment]= useState('');
-    let currentUser = props?.currentUser;
 
-    const toggleCommentForm = (i)=>{
-        const commentForm = document.querySelectorAll('.comment-section');
-        if(commentForm[i].style.display === 'inline'){
-            commentForm[i].style.display ='none';
-        } else{  commentForm[i].style.display='inline'}
-    }
+    let currentUser = props?.currentUser;
 
     const createComment= (post)=>{
         if(!currentUser){
             const alertBox = document.querySelector('#alert-box');
-            alertBox.textContent='Cannot make comment without login'
+            alertBox.textContent='Cannot make comment without login !'
             alertBox.style.display='inline';
+            removeAlert();
         } else{
+        const commentAuthor={
+            _id : currentUser._id,
+            email : currentUser.email,
+            username : currentUser.username
+        }
         axios({
           method: "POST",
           data: {
               _id :    post._id,
-            commentBy : currentUser,
+            commentBy : commentAuthor,
             text : comment,
             
           },
           withCredentials: true,
           url: `https://odin-book-api-production.up.railway.app/comments/createComment/${post._id}`,
         }).then(function (response) {
-            console.log(response);
+            const lastComment= (JSON.parse(response.config.data));
             const alertBox = document.querySelector('#alert-box');
             alertBox.textContent='Comment created!'
             alertBox.style.display='inline';
-            setComment('')
+            removeAlert();
+            setComment('');
+            displayLastComment(lastComment);
+            displayIncrementCommentCount();
           })
           .catch(function (error) {
             console.log(error);
           });
         }
     }
+
+    // display only last comment to create on client before replace with real data
+    const displayLastComment=(comment)=>{
+      const currentDate= new Date().getTime();
+      const commentContainerMap= document.querySelectorAll('.comment-map');
+      commentContainerMap[props.index].innerHTML +=`
+      <div class='comment-content'>
+      <div class='comment-text'>${comment.text}</div>
+      <div class='comment-username'>${comment.commentBy.username}</div>
+      <div class='comment-date'>${formatTimeStamp(currentDate)}</div>
+    </div>`  
+    }
+
+    const displayIncrementCommentCount=()=>{
+        const commentCount = document.querySelectorAll('.comment-length');
+        (commentCount[props.index]).textContent= props.post.comment.length + 1;
+    }
+
+    useState(()=>{
+       
+    },[])
 
     return(
 
@@ -55,7 +81,7 @@ const CommentForm= (props)=>{
             <div className='newComment-button'>
                 
                 <button id='newComment-submit'onClick={()=> {createComment(props.post) ;
-                     toggleCommentForm(props.index)}}>Add</button>
+                     }}>Add</button>
             </div>
             
         </div>

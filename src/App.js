@@ -8,10 +8,12 @@ import { MessagePage} from './pages/Message';
 import { UserProfilePage } from './pages/UserProfile';
 import { NotificationPage } from './pages/Notification';
 import { ExplorePage } from './pages/Explore';
+import { DisplayPost } from './components/displayPost';
+
 
 const App = () =>{ 
 
- 
+
   return(
  
   <BrowserRouter>
@@ -36,6 +38,9 @@ const App = () =>{
       </Route> 
       <Route path='/userProfile/:userId'>
           <UserProfilePage />
+      </Route>
+      <Route  path="/testPost">
+          <DisplayPost />
       </Route>
     </Switch>
   </BrowserRouter>

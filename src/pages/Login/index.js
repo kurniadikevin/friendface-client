@@ -1,8 +1,10 @@
 import './style.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
+import AlertBox from '../../components/alertBox/index';
+import {removeAlert} from '../../components/functions';
 
 
 
@@ -60,14 +62,19 @@ export function LoginPage() {
       url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
-        alert('No User Exist');
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Wrong username or password';
+        alertBox.style.display='inline';
+        alertBox.style.position="fixed";
+        loader.style.display='none';
+        removeAlert();
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("lastPassword",(password));
         history.push("/");
       }    
     });
 }
-
 
   // post form login using axios
   const loginUserSample = async()=>{  
@@ -86,9 +93,40 @@ export function LoginPage() {
         alert('No User Exist')
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("lastPassword",('password'))
         history.push("/")
       }    
     });
+}
+
+// sign up user using axios then redirect
+const signUpUser = async()=>{  
+  loader.style.display='inline';
+  const alertBox = document.querySelector('#alert-box');
+  axios({
+    method: "POST",
+    data: {
+      email: email,
+      password: password,
+     
+    },
+    withCredentials: true,
+    url: "http://localhost:5000/users/signup",
+  }).then((res) => {
+    if(res.data === 'No User Exists'){
+      alertBox.textContent='Sign up unsuccessful';
+      alertBox.style.display='inline';
+      alertBox.style.position="fixed";
+      loader.style.display='none';
+      removeAlert();
+    } else{
+      alertBox.textContent='Account created!';
+      alertBox.style.display='inline';
+      alertBox.style.position="fixed";
+      loader.style.display='none';
+    loginUser();
+    }    
+  });
 }
 
   //fetch all post 
@@ -127,17 +165,22 @@ export function LoginPage() {
           <div className='sign-form'>
 
           {/*   sign up form */}
-            <form className='form-sign' id='signup-wrap'  method='POST' action='https://odin-book-api-production.up.railway.app/users/signup'>
+            <div className='form-sign' id='signup-wrap' 
+            /*  method='POST'  action='http://localhost:5000/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
-                <input type='text' name='email' placeholder='email'></input>
+                <input type='text' name='email' placeholder='email'
+                 value={email} onChange={(e)=> setEmail((e.target.value))}
+                id='signup-email'></input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
-                <input type='password' name='password' placeholder='password'></input>
+                <input type='password' name='password' placeholder='password'
+                 value={password} onChange={(e) => setPassword(e.target.value)}
+                id='signup-password'></input>
               </div>
-              <button type='submit' className='submit-btn'>Sign Up</button>
-            </form>
+              <button type='submit' className='submit-btn' onClick={signUpUser}>Sign Up</button>
+            </div>
 
           {/* login form */}
           <div className='form-sign' id='login-wrap' >
@@ -158,9 +201,11 @@ export function LoginPage() {
               </div>
           </div>              
           </div>
-        </div>
+         </div>
+         <AlertBox/> 
         </div>
       <LoaderComponent id='loader-login-page'/>
+    
     </div>
   );
 }

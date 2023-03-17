@@ -1,32 +1,30 @@
 import './style.css';
-import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
-import { useState, useEffect } from 'react';
-import UserContext from '../../App.js';
+import { DisplayPost } from '../../components/displayPost';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
-import CommentForm from '../../components/commentForm';
-import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate,formatTimeStamp } from '../../components/functions';
+import { useState, useEffect } from 'react';
+import { refreshLoginSession } from '../../components/functions';
+
 
 export function ProfilePage() {
   
-  const [postData,setPostData]= useState([]);
   let profilePicture = (require('../../assets/profilepicturesSmall.png'));
+  const [postCount,setPostCount]= useState();
 
   // get login user information
-const getUser=()=>{
-  const loggedInUser = localStorage.getItem("user");
-  if (loggedInUser) {
-    const foundUser = JSON.parse(loggedInUser);
-    if(foundUser.profilePicture){
-      profilePicture= `https://odin-book-api-production.up.railway.app/${foundUser.profilePicture}`
-      console.log(profilePicture);
+  const getUser=()=>{
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      if(foundUser.profilePicture){
+        profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
+        console.log(profilePicture);
+      }
+      return foundUser;
     }
-    return foundUser;
   }
-}
 
   let currentUser = getUser({ 
     _id : 'not set',
@@ -34,36 +32,26 @@ const getUser=()=>{
     email : 'not available',
     friends : []
   });
-
   
-  const fetchPostData = async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}`;
-    const response = await fetch(url);
-    var data = await response.json();
-    setPostData(data);
-    toggleLoader();
-    }
-  
-
-    const toggleForm = (form)=>{
+  const toggleForm = (form)=>{
       const Form = document.querySelector(`#${form}`);
       if(Form.style.display === 'inline'){
           Form.style.display ='none';
       } else{  Form.style.display='inline'}
   }
 
-  const toggleCommentForm = (i)=>{
-    const commentForm = document.querySelectorAll('.comment-section');
-    if(commentForm[i].style.display === 'inline'){
-        commentForm[i].style.display ='none';
-    } else{  commentForm[i].style.display='inline'}
-  }
+  const fetchPostCount= async ()=>{
+    const url=`http://localhost:5000/posts/${currentUser._id}/count`;
+    const response = await fetch(url);
+    var data = await response.json();
+    setPostCount(data.postCount);
+    }
 
     useEffect(()=>{
-      fetchPostData();
-     
-      
+     fetchPostCount();
+     refreshLoginSession(currentUser);
     },[])
+
 
 
   return (
@@ -86,7 +74,7 @@ const getUser=()=>{
             <div className='profile-row1'>
               <div className='profile-username'>
                 <div className='tag'>Username :</div>
-                <div className='text'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
+                <div className='text' id='user-username'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
                 <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>
                 <span class="material-symbols-outlined">edit</span>
                 </button>
@@ -104,8 +92,8 @@ const getUser=()=>{
             <div className='profile-row2'>
               <div>
                 <div className='friends-count' onClick={()=> toggleForm('friends-list')}>
-                  <div className='tag'>Friends: </div>
-                  <div> {currentUser._id !== 'not set'? 
+                  <div className='tag'>Friends : </div>
+                  <div id='friend-count'> {currentUser._id !== 'not set'? 
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
@@ -119,7 +107,10 @@ const getUser=()=>{
                   })}
                 </div>
               </div>
-              <div></div>
+              <div className='post-count-cont'>
+                <div>Posts : </div>
+                <div id='post-count'>{postCount} </div>
+              </div>
             </div>
             <div className='profile-row3'>
              
@@ -128,51 +119,7 @@ const getUser=()=>{
         </div>
 
         <div className='profile-body'>
-
-        <div className='displayPostCont'>
-          {postData.map(function(item,index){
-            return(
-              <div className='post-container'>
-                <div className='post-sidebar'>    
-                  <img  id='profileImg' src={item.author?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
-                     : (require('../../assets/profilepicturesSmall.png'))}
-                   alt='profileImage'  width={50} height={50}/>
-                </div>
-                <div className='post-main'>
-                  <div className='post-text'>{item.text}</div>
-                  <div className='post-author'>{item.author ? item.author.username : 'anon'}</div>
-                  <div className='post-date'>{formatDate(item.date)}</div>
-                  <div className='action-cont'>
-                    <div className='like-cont'>
-                      <span id='like-icon' class="material-symbols-outlined">favorite</span>
-                      <div className='likes-length'>{item.likes.length}</div>
-                    </div>
-                    <div className='comment-cont'>
-                    <span id='comment-icon' class="material-symbols-outlined"
-                    onClick={()=> toggleCommentForm(index)}>mode_comment</span>
-                    <div className='comment-length'>{item.comment.length}</div>
-                  </div>  
-                 </div>
-                 <div className='comment-section'>
-                <div className='comment-title'>Comments</div>
-                <div className='comment-map'>{((item.comment)).map(function(comment,index){
-                    return(
-                      <div className='comment-content'>
-                        <div className='comment-text'>{comment.text}</div>
-                        <div className='comment-username'>{comment.author?.username}</div>
-                        <div className='comment-date'>{formatTimeStamp(comment.date)}</div>
-                      </div>
-                    )
-                })
-                }</div>
-                <CommentForm currentUser={currentUser} post= {item} index={index}/>
-                </div>
-               </div>
-              </div>
-            )
-          })}
-        </div>
-
+          <DisplayPost currentUser={currentUser} urlExtension={`${currentUser._id}/`}/>
         </div>
       </div>
       

@@ -8,13 +8,12 @@
 .sidebar-head{
    position: sticky;
    top: 0px;
-   padding-top:20px;
    display: flex;
    justify-content: center;
+   align-items: center;
    font-weight: 600;
    color: var(--green);
    background-color: var(--background00);
-   
 }
 .sidebar-main{
    display: flex;

@@ -2,12 +2,12 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
+import { removeAlert } from '../functions';
 
 
 function HomeComp(props){
     const [currentUser,setCurrentUser] = useState({username : 'not sign in', email: 'not email'});
     const [postText,setPostText]= useState('');
-    const [render,setRender]= useState(false);
     const [searchInput,setSearchInput]= useState('');
     const [queryData,setQueryData]= useState([]);
     const [autoComplete,setAutoComplete]=useState([]);
@@ -22,10 +22,9 @@ function HomeComp(props){
 
     const createPost = async()=> {  
         const alertBox = document.querySelector('#alert-box');
-        alertBox.textContent='Post created!'
+        alertBox.textContent='Post created!';
         alertBox.style.display='inline';
-        console.log(postText);
-        console.log(currentUser._id)
+        removeAlert();
         axios({
           method: "POST",
           data: {
@@ -36,8 +35,6 @@ function HomeComp(props){
           url: "https://odin-book-api-production.up.railway.app/posts/newpost",
         }).then(function (response) {
             console.log(response);
-            setRender(true);
-            
           })
           .catch(function (error) {
             console.log(error);
@@ -115,8 +112,8 @@ function HomeComp(props){
                         value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
                     </div>
                     <div className='newpost-button'>
-                   {/*  <input type='file' name='imagePost'  ></input> */}
-                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm()}}>Post</button>
+                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm();
+                             window.location.reload(false)}}>Post</button>
                     </div>
                     
                 </div>

@@ -1,0 +1,125 @@
+
+.displayPostCont{
+    padding:45px 20px 20px 20px;
+}
+
+.post-container{
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    gap: 20px; 
+}
+    .post-sidebar{
+        display: flex;
+    }
+
+#profileImg{
+    border-radius: 30px;
+}
+
+    .post-text{
+        padding-bottom: 20px;
+        padding-right: 20px;
+    }
+    .post-author{
+        font-size: 10pt;
+        font-weight: 600;
+        padding-bottom: 5px;
+        color: var(--purple);
+    }
+
+    .post-date{
+        font-size: 9pt;
+        padding-bottom: 10px;
+        color: var(--bg2);
+    }
+
+    .action-cont{
+        display: grid;
+        grid-template-columns: 50px 50px;
+        gap: 10px;
+    }
+    #like-icon, #comment-icon{
+        font-size: 14pt;
+        transition: 0.5s;
+        cursor: pointer;
+        color: var(--bg2);
+    }
+
+    #toggle-comment-icon{
+        padding-top: 10px;
+        font-size: 16pt;
+        cursor: pointer;
+        color: var(--green);
+    }
+
+    .like-cont, .comment-cont{
+        display: grid;
+        grid-template-columns: 25px 25px;
+        font-size: 10pt;
+        font-weight: 600;
+    }
+
+
+    #like-icon:hover{
+        color: var(--red);
+          }
+
+    #comment-icon:hover{
+        color:var(--pink);
+    }
+
+.comment-section{
+        display: none;
+        
+    }
+
+    
+/* ---------COMMENT STYLE ---------*/
+
+.comment-title{
+    color: var(--green);
+    padding-top:20px;
+    padding-bottom: 0px;
+   font-weight: 700;
+   display: flex;
+   
+}
+.comment-map{
+  
+}
+.comment-content{
+    padding-top: 10px;
+    border-bottom: 1px solid var(--currentLine);
+    padding-bottom: 10px;
+}
+    .comment-text{
+        font-size: 11pt;
+    }
+    .comment-username{
+        font-weight: 600;
+        font-size: 10pt;
+        padding-top: 10px;
+        color: var(--purple);
+    }
+    .comment-date{
+        font-size: 9pt;
+        color: var(--bg2);
+    }
+    .comment-length, .likes-length{
+        color: var(--white);
+    }
+
+/* see more button */
+.seeMore{
+    cursor: pointer;
+    color: var(--purple);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding-left: 70px;
+    font-size: 12pt;
+    padding-bottom: 20px;
+    display: none;
+}

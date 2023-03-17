@@ -2,6 +2,8 @@
 .Login{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    overflow: hidden;
+    
 }
 
 .login-col1{
@@ -115,3 +117,4 @@
         color:var(--green);
     }
 
+   

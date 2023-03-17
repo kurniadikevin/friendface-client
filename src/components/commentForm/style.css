@@ -6,10 +6,10 @@
     background-color: var(--white);    
 }
 #newComment-submit{
-    background-color: var(--green);
+    background-color: var(--purple);
     border: none;
     border-radius: 5px;
-    color: var(--background);
+    color: var(--background00);
     padding: 5px 10px;
     font-weight: 600;
     transition: 0.5s;
@@ -17,5 +17,6 @@
 
 #newComment-submit:hover{
    cursor: pointer;
+   background-color: var(--green);
    transform: translateX(5px);
 }
