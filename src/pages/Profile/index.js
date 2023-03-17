@@ -19,7 +19,7 @@ export function ProfilePage() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
-        profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
+        profilePicture= `https://odin-book-api-production.up.railway.app/${foundUser.profilePicture}`
         console.log(profilePicture);
       }
       return foundUser;
@@ -41,7 +41,7 @@ export function ProfilePage() {
   }
 
   const fetchPostCount= async ()=>{
-    const url=`http://localhost:5000/posts/${currentUser._id}/count`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);

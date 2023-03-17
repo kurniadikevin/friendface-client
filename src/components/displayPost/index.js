@@ -18,7 +18,7 @@ export function DisplayPost(props){
 
     //fetch post data pages
   const fetchPostDataPage = async (page,urlExtension,newProfile)=>{
-    const url=`http://localhost:5000/posts/${urlExtension}page/${page}`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/${urlExtension}page/${page}`;
     const response = await fetch(url);
     var data = await response.json();
 
@@ -73,7 +73,7 @@ export function DisplayPost(props){
         likeBy :  currentUser._id   
       },
       withCredentials: true,
-      url: `http://localhost:5000/posts/likes/${post._id}`,
+      url: `https://odin-book-api-production.up.railway.app/posts/likes/${post._id}`,
     }).then(function (response) {  
         alertBox.textContent='Post liked!'
         alertBox.style.display='inline';
@@ -142,7 +142,7 @@ export function DisplayPost(props){
           return(
             <div className='post-container'>
               <div className='post-sidebar'>  
-                <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
+                <img  id='profileImg' src={item.author?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${item.author.profilePicture} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' width={50} height={50}/> 
               </div>

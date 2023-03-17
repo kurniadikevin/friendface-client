@@ -33,14 +33,14 @@ const getUser=()=>{
    let {userId} = useParams(); 
 
   const fetchUserData = async ()=>{
-        const url=`http://localhost:5000/users/${userId}`;
+        const url=`https://odin-book-api-production.up.railway.app/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
         }
 
   const fetchPostCount= async ()=>{
-    const url=`http://localhost:5000/posts/${userId}/count`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/${userId}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);

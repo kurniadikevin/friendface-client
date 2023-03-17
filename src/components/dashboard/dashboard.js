@@ -85,15 +85,10 @@ function Dashboard(props){
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
-<<<<<<< HEAD
-                     src= {userData?.profilePicture ? `https://odin-book-api-production.up.railway.app/${userData.profilePicture}`
-                     : (require('../../assets/profilepicturesSmall.png'))} 
-=======
                      src= {userData.email === 'not available' ?
                      userData.profilePicture :
-                      `http://localhost:5000/${userData.profilePicture}`
+                      `https://odin-book-api-production.up.railway.app/${userData.profilePicture}`
                      } 
->>>>>>> localdev-paganation
                       alt='profilePicture'
                         width={75} height={75}/>
                 </div>

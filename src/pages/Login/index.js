@@ -111,7 +111,7 @@ const signUpUser = async()=>{
      
     },
     withCredentials: true,
-    url: "http://localhost:5000/users/signup",
+    url: "https://odin-book-api-production.up.railway.app/users/signup",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       alertBox.textContent='Sign up unsuccessful';
@@ -166,7 +166,7 @@ const signUpUser = async()=>{
 
           {/*   sign up form */}
             <div className='form-sign' id='signup-wrap' 
-            /*  method='POST'  action='http://localhost:5000/users/signup' */>
+            /*  method='POST'  action='https://odin-book-api-production.up.railway.app/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'
