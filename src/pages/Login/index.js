@@ -99,6 +99,36 @@ export function LoginPage() {
     });
 }
 
+// sign up user using axios then redirect
+const signUpUser = async()=>{  
+  loader.style.display='inline';
+  const alertBox = document.querySelector('#alert-box');
+  axios({
+    method: "POST",
+    data: {
+      email: email,
+      password: password,
+     
+    },
+    withCredentials: true,
+    url: "http://localhost:5000/users/signup",
+  }).then((res) => {
+    if(res.data === 'No User Exists'){
+      alertBox.textContent='Sign up unsuccessful';
+      alertBox.style.display='inline';
+      alertBox.style.position="fixed";
+      loader.style.display='none';
+      removeAlert();
+    } else{
+      alertBox.textContent='Account created!';
+      alertBox.style.display='inline';
+      alertBox.style.position="fixed";
+      loader.style.display='none';
+    loginUser();
+    }    
+  });
+}
+
   //fetch all post 
   const fetchRecentUser = async ()=>{
     const url=`http://localhost:5000/users/recent`;
@@ -135,19 +165,22 @@ export function LoginPage() {
           <div className='sign-form'>
 
           {/*   sign up form */}
-            <form className='form-sign' id='signup-wrap'  method='POST' action='http://localhost:5000/users/signup'>
+            <div className='form-sign' id='signup-wrap' 
+            /*  method='POST'  action='http://localhost:5000/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'
+                 value={email} onChange={(e)=> setEmail((e.target.value))}
                 id='signup-email'></input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
                 <input type='password' name='password' placeholder='password'
+                 value={password} onChange={(e) => setPassword(e.target.value)}
                 id='signup-password'></input>
               </div>
-              <button type='submit' className='submit-btn'>Sign Up</button>
-            </form>
+              <button type='submit' className='submit-btn' onClick={signUpUser}>Sign Up</button>
+            </div>
 
           {/* login form */}
           <div className='form-sign' id='login-wrap' >

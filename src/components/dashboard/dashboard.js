@@ -94,7 +94,7 @@ function Dashboard(props){
                 </div>
                 <div className='profInfo-cont'>
                     <div className='profileInfoDash'>
-                        <div className='currentUser-username'>{userData?.username ? userData.username : 'no username'}</div>
+                        <div className='currentUser-username'>{userData?.username ? userData.username : 'Not Set'}</div>
                         <div className='currentUser-email'>{userData ? userData.email : 'Not Sign in'}</div>    
                     </div>
                    
