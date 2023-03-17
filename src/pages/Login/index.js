@@ -1,7 +1,7 @@
 import './style.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
 import AlertBox from '../../components/alertBox/index';
 import {removeAlert} from '../../components/functions';

@@ -3,9 +3,14 @@ import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import HomeComp from '../../components/homecomp';
 import { DisplayPost } from '../../components/displayPost';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
+import {  useHistory } from "react-router-dom";
 
 export function ExplorePage(props) {
+
+
+  let history = useHistory();
+
 // get login user information
 const getUser=()=>{
   const loggedInUser = localStorage.getItem("user");
@@ -27,6 +32,7 @@ const getUser=()=>{
  useEffect(()=>{
   if(!currentUser){
     removeTabsForGuest();
+    history.push("/login");
   }
  },[])
 
