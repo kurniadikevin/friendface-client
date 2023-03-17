@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import {useState,useEffect} from 'react';
 import axios from 'axios';
-import LoaderComponent from '../loader/loader'
+import LoaderComponent from '../loader/loader';
+import AlertBox from '../alertBox/index';
 
 
 function Dashboard(props){
@@ -27,11 +28,6 @@ function Dashboard(props){
     const dashLink = document.querySelectorAll('#dash-link');    
     dashLink[i].style.color='var(--green)';
     dashLink[i].style.transform = 'translateX(5px)';
-  }
-
-  const removeAlert=()=>{
-    const alertBox = document.querySelector('#alert-box');
-    alertBox.style.display='none';
   }
 
   
@@ -104,12 +100,7 @@ function Dashboard(props){
                    
                 </div>
             </div>
-            <div id='alert-box' onClick={removeAlert}>
-                <div id='alert-content'>
-                <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
-                <div id='alert-msg'>test message</div>
-                </div>
-            </div>
+           <AlertBox/>
         </div>
         <LoaderComponent/>
     </div>

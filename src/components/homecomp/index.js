@@ -25,8 +25,6 @@ function HomeComp(props){
         alertBox.textContent='Post created!';
         alertBox.style.display='inline';
         removeAlert();
-        console.log(postText);
-        console.log(currentUser._id);
         axios({
           method: "POST",
           data: {

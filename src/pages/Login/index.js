@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
+import AlertBox from '../../components/alertBox/index';
+import {removeAlert} from '../../components/functions';
 
 
 
@@ -60,7 +62,12 @@ export function LoginPage() {
       url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
-        alert('No User Exist');
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Wrong username or password';
+        alertBox.style.display='inline';
+        alertBox.style.position="fixed";
+        loader.style.display='none';
+        removeAlert();
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("lastPassword",(password));
@@ -161,9 +168,11 @@ export function LoginPage() {
               </div>
           </div>              
           </div>
-        </div>
+         </div>
+         <AlertBox/> 
         </div>
       <LoaderComponent id='loader-login-page'/>
+    
     </div>
   );
 }
