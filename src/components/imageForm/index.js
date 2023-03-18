@@ -28,7 +28,7 @@ const ImageForm = (props)=>{
 
     return (
         <div className="profile-image-form">
-            <form method='POST' action='https://odin-book-api-production.up.railway.app/images/' enctype="multipart/form-data">
+            <form method='POST' action='https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/images/' enctype="multipart/form-data">
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         

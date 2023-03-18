@@ -28,7 +28,7 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
-        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
+        url : `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
@@ -57,7 +57,7 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
-        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
+        url : `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
     /*   const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';

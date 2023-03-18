@@ -30,7 +30,7 @@ function Sidebar(){
                     return(
                         <div className='display-user'>
                          <div className='display-user-col1'>
-                         <img  id='profileImg' src={data?.profilePicture ?  `https://odin-book-api-production.up.railway.app/${data.profilePicture} `
+                         <img  id='profileImg' src={data?.profilePicture ?  `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/${data.profilePicture} `
                             : (require('../../assets/profilepicturesSmall.png'))}
                             alt='displayUser-profileImage' width={30} height={30}/> 
                          </div>

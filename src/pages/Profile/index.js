@@ -19,7 +19,7 @@ export function ProfilePage() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
-        profilePicture= `https://odin-book-api-production.up.railway.app/${foundUser.profilePicture}`
+        profilePicture= `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/${foundUser.profilePicture}`
         console.log(profilePicture);
       }
       return foundUser;
@@ -41,7 +41,7 @@ export function ProfilePage() {
   }
 
   const fetchPostCount= async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}/count`;
+    const url=`https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/posts/${currentUser._id}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);

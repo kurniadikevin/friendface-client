@@ -87,7 +87,7 @@ function Dashboard(props){
                     <img id='profileImgDash'
                      src= {userData.email === 'not available' ?
                      userData.profilePicture :
-                      `https://odin-book-api-production.up.railway.app/${userData.profilePicture}`
+                      `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/${userData.profilePicture}`
                      } 
                       alt='profilePicture'
                         width={75} height={75}/>
