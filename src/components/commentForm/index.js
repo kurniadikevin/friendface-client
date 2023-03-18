@@ -31,7 +31,7 @@ const CommentForm= (props)=>{
             
           },
           withCredentials: true,
-          url: `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/comments/createComment/${post._id}`,
+          url: `https://odin-book-api-production.up.railway.app/comments/createComment/${post._id}`,
         }).then(function (response) {
             const lastComment= (JSON.parse(response.config.data));
             const alertBox = document.querySelector('#alert-box');

@@ -30,7 +30,7 @@ const ProfileForm = (props)=>{
              _id : currentUser._id
            },
            withCredentials: true,
-           url: `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/users/update/${currentUser._id}`,
+           url: `https://odin-book-api-production.up.railway.app/users/update/${currentUser._id}`,
          }).then(function (response) {
              console.log(response);
             const form = document.querySelector('#profileForm');

@@ -33,14 +33,14 @@ const getUser=()=>{
    let {userId} = useParams(); 
 
   const fetchUserData = async ()=>{
-        const url=`https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/users/${userId}`;
+        const url=`https://odin-book-api-production.up.railway.app/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
         }
 
   const fetchPostCount= async ()=>{
-    const url=`https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/posts/${userId}/count`;
+    const url=`https://odin-book-api-production.up.railway.app/posts/${userId}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);
@@ -63,7 +63,7 @@ const getUser=()=>{
         }
       },
       withCredentials : true,
-      url : `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/users/friendRequest/${userId}`
+      url : `https://odin-book-api-production.up.railway.app/users/friendRequest/${userId}`
     }).then(function(response){
       const alertBox = document.querySelector('#alert-box');
       alertBox.textContent='Friend request sent!'
@@ -86,7 +86,7 @@ const getUser=()=>{
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {userData?.profilePicture ? `https://3088-2001-448a-3032-ed80-5d90-4b56-1649-edab.ap.ngrok.io/${userData.profilePicture} `
+            <img id='profileImgProfile' src= {userData?.profilePicture ? `https://odin-book-api-production.up.railway.app/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
           </div>
