@@ -7,7 +7,6 @@ import AlertBox from '../../components/alertBox/index';
 import {removeAlert} from '../../components/functions';
 
 
-
 export function LoginPage() {
 
   let history = useHistory();
@@ -126,7 +125,17 @@ const signUpUser = async()=>{
       loader.style.display='none';
     loginUser();
     }    
-  });
+  })
+  .catch(
+    function(error){
+      console.log(error.response.data);
+      alertBox.textContent='Email already used!';
+      alertBox.style.display='inline';
+      alertBox.style.position="fixed";
+      loader.style.display='none';
+      removeAlert();
+    }
+  )
 }
 
   //fetch all post 

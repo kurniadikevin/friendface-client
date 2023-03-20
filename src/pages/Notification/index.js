@@ -43,7 +43,6 @@ export function NotificationPage() {
   }
 
   const declineFriendRequest= (friendReq,friendData,index)=>{
-    console.log('declineee pres');
     const alertBox = document.querySelector('#alert-box');
     alertBox.style.display='inline';
     alertBox.textContent='Decline friend request';
