@@ -41,9 +41,12 @@ function Sidebar(){
                                     {data.username}
                                 </div>
                             </Link>
+                            <Link to={`/userProfile/${data?._id}`}  
+                             id='link-user-sidebar' >
                             <div className='display-email'>
                                 {data.email}
                             </div>
+                            </Link>
                         </div>
                         </div>
                         

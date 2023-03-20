@@ -62,3 +62,11 @@ export const toggleCommentSection = (i,commentFormDisplay)=>{
   // only show comment form if comment length is zero
   commentForm[i].style.display= commentFormDisplay;
 }
+
+// universal toggle for form using id name of the form as parameter
+export const toggleForm = (form)=>{
+  const Form = document.querySelector(`#${form}`);
+  if(Form.style.display === 'inline'){
+      Form.style.display ='none';
+  } else{  Form.style.display='inline'}
+}

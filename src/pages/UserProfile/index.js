@@ -7,7 +7,7 @@ import CommentForm from '../../components/commentForm';
 import axios from 'axios';
 import { DisplayPost } from '../../components/displayPost';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate } from '../../components/functions';
+import { formatDate,toggleForm } from '../../components/functions';
 
 
 
@@ -37,6 +37,12 @@ const getUser=()=>{
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
+        console.log(data[0]);
+
+        //check for friend status on user visit
+        checkFriendStatusAndRequest(data[0].friends,'Friend');
+         //check for friend request  user visit
+         checkFriendStatusAndRequest(data[0].friendRequest,'Friend request sent');
         }
 
   const fetchPostCount= async ()=>{
@@ -44,7 +50,6 @@ const getUser=()=>{
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);
-    console.log(data.postCount);
     }
 
   const sendFriendRequest=()=>{
@@ -72,6 +77,24 @@ const getUser=()=>{
     .catch(function(error){
       console.log(error);
     })
+  }
+
+  const checkFriendStatusAndRequest = (type,textButton)=>{
+    const userFriendsList = type;
+    const checkIncludeFriend = userFriendsList.filter((item)=>{
+     if(item.sender){
+      return item.sender._id === currentUser._id;
+     } else{
+      return item._id === currentUser._id;
+     }
+      
+    })
+    if(checkIncludeFriend.length > 0){
+      const requestButton = document.querySelector('#friendReq-btn');
+      requestButton.textContent=textButton;
+      requestButton.style.backgroundColor='var(--green)';
+      requestButton.style.color='var(--background00)';
+    }
   }
 
     useEffect(()=>{
@@ -105,16 +128,42 @@ const getUser=()=>{
             <div className='profile-row2'>
               <div className='friends-count'>
                 <div className='tag'>Friends :</div>
-                <div id='friend-count'>{userData._id !== 'not set'? 
+                <div id='friend-count' onClick={()=>
+                   toggleForm('friends-list')}>
+                  {userData._id !== 'not set'? 
                   userData.friends?.length : '0'} </div>
               </div>
+              <div id='friends-list'>
+                Friend list
+                  {userData.friends ?
+                  (userData.friends).map((data)=>{
+                      return(
+                        <div className='friendList-cont'>
+                          <div>{data.username }</div>
+                          <div className='tag'>{data.email }</div>
+                        </div>
+                      )
+                  }) : <div className='friendList-cont'>
+                        <div>No friends yet</div>
+                       </div>
+                }
+                </div>
+
               <div className='post-count-cont'>
                 <div>Posts : </div>
                 <div  id='post-count'>{postCount} </div>
               </div>
             </div>
             <div className='profile-row3'>
-              <button id='friendReq-btn' onClick={sendFriendRequest}>Add Friend Request</button>
+              <button id='friendReq-btn' /* onClick={sendFriendRequest} */
+              onClick={(e)=>{
+                if(e.target.textContent==='Friend'|| e.target.textContent==='Friend request sent'){
+                  return;
+                } else{
+                  sendFriendRequest();
+                }
+              }}>
+                Add Friend Request</button>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { DisplayPost } from '../../components/displayPost';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import { useState, useEffect } from 'react';
-import { refreshLoginSession } from '../../components/functions';
+import { refreshLoginSession,toggleForm } from '../../components/functions';
 
 
 export function ProfilePage() {
@@ -33,12 +33,6 @@ export function ProfilePage() {
     friends : []
   });
   
-  const toggleForm = (form)=>{
-      const Form = document.querySelector(`#${form}`);
-      if(Form.style.display === 'inline'){
-          Form.style.display ='none';
-      } else{  Form.style.display='inline'}
-  }
 
   const fetchPostCount= async ()=>{
     const url=`http://localhost:5000/posts/${currentUser._id}/count`;
@@ -97,6 +91,7 @@ export function ProfilePage() {
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
+                Friend list
                   {(currentUser.friends).map((data)=>{
                       return(
                         <div className='friendList-cont'>
