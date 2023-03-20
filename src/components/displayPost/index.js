@@ -18,16 +18,34 @@ export function DisplayPost(props){
 
     //fetch post data pages
   const fetchPostDataPage = async (page,urlExtension,newProfile)=>{
-    const url=`http://localhost:5000/posts/${urlExtension}page/${page}`;
+    try {
+      const url=`http://localhost:5000/posts/${urlExtension}page/${page}`;
     const response = await fetch(url);
     var data = await response.json();
-
+    } catch (error) {
+      console.log(error)  
+      if(page === 1){
+        const alertBox = document.querySelector('#alert-box');
+      alertBox.textContent='No post available! Please be friend with other user or post something to see profile'
+      alertBox.style.display='inline';
+      toggleLoader();
+      removeAlert();
+      }
+    }
+    
     // confirm data null 
     if(data.length === 0){
       setNullData(true);
     }
+    // if new profile/profile visit and data more than one page
+    else if(newProfile && postData.length > 0){
+      setPostData([...postData, ...data] )
+      toggleLoader();
+      toggleSeeMore('inline');
+      displayLikedPost([...postData, ...data]);
+    }
     // if data length zero or parameter for profilevisit change post
-    if(postData.length === 0 || newProfile){
+    else if(postData.length === 0 || newProfile){
       setPostData(data);
       toggleLoader();
       toggleSeeMore('inline');
@@ -39,7 +57,7 @@ export function DisplayPost(props){
       toggleLoader();
       toggleSeeMore('inline');
       displayLikedPost([...postData, ...data]);
-    }
+     }
     }
 
      //toggle next page
@@ -141,7 +159,6 @@ export function DisplayPost(props){
 
   // make different display for post current user already liked
   const displayLikedPost =(postData)=>{ 
-    console.log('like display')
     for (let i=0; i<postData.length; i++){
       const likesList = postData[i].likes;
       const sameLike = likesList.filter((item)=>{
