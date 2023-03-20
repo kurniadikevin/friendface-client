@@ -31,12 +31,14 @@ export function DisplayPost(props){
       setPostData(data);
       toggleLoader();
       toggleSeeMore('inline');
+      displayLikedPost(data);
     } 
     // else concat data
     else{
       setPostData([...postData, ...data] )
       toggleLoader();
       toggleSeeMore('inline');
+      displayLikedPost([...postData, ...data]);
     }
     }
 
@@ -52,6 +54,10 @@ export function DisplayPost(props){
 
   const likePostFunction = (post,index)=>{
     const alertBox = document.querySelector('#alert-box');
+    const likesList = post.likes;
+    const sameLike = likesList.filter((item)=>{
+     return item === currentUser._id
+    })
 
     if( !currentUser){
       alertBox.textContent='Please login for like the post!'
@@ -60,6 +66,12 @@ export function DisplayPost(props){
     } else{
     if(post.author?._id === currentUser._id){
       alertBox.textContent='Cannot like your own post!'
+      alertBox.style.display='inline';
+      removeAlert();
+    }
+    // prevet user to like more than once
+    else if(sameLike.length > 0){
+      alertBox.textContent='You already like this post'
       alertBox.style.display='inline';
       removeAlert();
     } 
@@ -80,6 +92,8 @@ export function DisplayPost(props){
         removeAlert();
         const likesCount = document.querySelectorAll('.likes-length');
         likesCount[index].textContent= post.likes.length + 1;
+        const likeIcon = document.querySelectorAll('#like-icon');
+        likeIcon[index].style.color='var(--pink)';
       })
       .catch(function (error) {
         console.log(error);
@@ -90,6 +104,8 @@ export function DisplayPost(props){
     }
   }
 }
+
+
 
   const toggleCommentForm=(i)=>{
     const commentForm=document.querySelectorAll('.comment-form');
@@ -123,14 +139,30 @@ export function DisplayPost(props){
    seeMore.style.display=(propDisplay);
   }
 
+  // make different display for post current user already liked
+  const displayLikedPost =(postData)=>{ 
+    console.log('like display')
+    for (let i=0; i<postData.length; i++){
+      const likesList = postData[i].likes;
+      const sameLike = likesList.filter((item)=>{
+      return item === currentUser._id;
+      })
+      if(sameLike.length > 0 ){
+        const likeIcon = document.querySelectorAll('#like-icon');
+        likeIcon[i].style.color='var(--pink)';
+      }
+    }}
+
+
   useEffect(()=>{
     if(userId){
       setPostPage(1);
       fetchPostDataPage(postPage,`${userId}/`,true);
+     
     } else{
-     fetchPostDataPage(postPage,props.urlExtension);
+     fetchPostDataPage(postPage,props.urlExtension)
     }
-
+  
     },[postPage,userId])
     
 
@@ -139,6 +171,7 @@ export function DisplayPost(props){
         <div className='displayPostCont' >
           
         {postData.map(function(item,index){
+         
           return(
             <div className='post-container'>
               <div className='post-sidebar'>  
@@ -154,7 +187,7 @@ export function DisplayPost(props){
                 <div className='post-date'>{formatDate(item.date)}</div>
               <div className='action-cont'>
                   <div className='like-cont'>
-                    <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item,index)}>
+                    <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item,index)} >
                       favorite</span>
                     <div className='likes-length'>{item.likes?.length}</div>
                   </div>
