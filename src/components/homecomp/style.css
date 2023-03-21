@@ -92,11 +92,12 @@
     .newpost-form{
        display: grid;
        grid-template-rows: 3fr 1fr;
-       padding: 10px;
+       padding: 15px;
        gap: 10px;
        background-color: var(--bg2);
        border-radius: 5px;
        margin:0px 30px;
+      
     }
     .newpost-main{
         display: flex;
@@ -106,10 +107,19 @@
     }
     .newpost-button{
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
         
     }
+
+    .post-type{
+        display: flex;
+        gap: 10px;
+    }
+    .post-type>span{
+        cursor: pointer;
+    }
+
         #newpost-submit{
         color: var(--white);
         background-color: var(--purple);
@@ -127,4 +137,22 @@
         height: 100px;
         width: 100%;
         border-radius: 5px;
+    }
+
+
+
+    /* image post form */
+    #postForm-image{
+        display: none;
+    }
+
+    #newpost-main-image{
+        flex-direction: column;
+        justify-content: space-between;
+        padding-bottom: 10px;
+    }
+
+    .image-post-header{
+        color: var(--white);
+        font-size: 14pt;
     }

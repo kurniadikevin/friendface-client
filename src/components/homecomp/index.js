@@ -11,6 +11,7 @@ function HomeComp(props){
     const [searchInput,setSearchInput]= useState('');
     const [queryData,setQueryData]= useState([]);
     const [autoComplete,setAutoComplete]=useState([]);
+    const [postMode,setPostMode]= useState('text');
 
 
     const togglePostForm = ()=>{
@@ -20,7 +21,7 @@ function HomeComp(props){
         } else{  postForm.style.display='inline'}
     }
 
-    const createPost = async()=> {  
+    const createPostText = async()=> {  
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post created!';
         alertBox.style.display='inline';
@@ -64,7 +65,22 @@ function HomeComp(props){
         const queryBox = document.querySelector('#query-auto');
         queryBox.style.display='none';
     }
+
+    const toggleImageAndTextForm=(select)=>{
+        const textForm= document.querySelector('#postForm-text');
+        const imageForm = document.querySelector('#postForm-image');
+        if(select === 'text'){
+        textForm.style.display='grid';
+        imageForm.style.display='none';
+        } else if(select === 'image'){
+        textForm.style.display='none';
+        imageForm.style.display='grid';
+        }
+    }
    
+    const createPostImage= ()=>{
+        
+    }
     
     useEffect(()=>{
        setCurrentUser(props.currentUser);
@@ -76,7 +92,8 @@ function HomeComp(props){
        } else if(searchInput === ''){
         removeQueryBox();
        }
-    },[searchInput])
+       toggleImageAndTextForm(postMode);
+    },[searchInput,postMode])
 
     return (
         <div className='HomeComp'>
@@ -106,17 +123,52 @@ function HomeComp(props){
                 </div>
             </div>
             <div className='homeComp-postForm'>
-                <div className='newpost-form' >
+                <div className='newpost-form' id='postForm-text' >
                     <div className='newpost-main'>
                         <textarea id='newpost-text' name='text'
-                        value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
+                        value={postText} onChange={(e)=> setPostText(e.target.value)}
+                        placeholder='Post something..'>
+                        </textarea>
                     </div>
                     <div className='newpost-button'>
-                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm();
+                        <div className='post-type'>
+                            <span class="material-symbols-outlined" style={{color : 'var(--purple)'}} >
+                            border_color
+                            </span>
+                            <span class="material-symbols-outlined"
+                            onClick={()=> setPostMode('image')}>
+                            imagesmode
+                            </span>
+                        </div>
+                        <button id='newpost-submit'onClick={()=> {createPostText() ; togglePostForm();
                              window.location.reload(false)}}>Post</button>
                     </div>
-                    
                 </div>
+
+                <div className='newpost-form' id='postForm-image' >
+                    <div className='newpost-main' id='newpost-main-image'>
+                       <div className='image-post-header'>Upload image</div>
+                       <input type='file'
+                        accept="image/png, image/jpeg"
+                        name='image-file'>
+                       </input>
+                    </div>
+                    <div className='newpost-button'>
+                        <div className='post-type'>
+                            <span class="material-symbols-outlined"
+                            onClick={()=> setPostMode('text')} >
+                            border_color
+                            </span>
+                            <span class="material-symbols-outlined"  style={{color : 'var(--purple)'}}>
+                            imagesmode
+                            </span>
+                        </div>
+                        <button id='newpost-submit'onClick={()=> {createPostImage() ; togglePostForm();
+                             window.location.reload(false)}}>Post</button>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     )
