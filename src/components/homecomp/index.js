@@ -12,6 +12,7 @@ function HomeComp(props){
     const [queryData,setQueryData]= useState([]);
     const [autoComplete,setAutoComplete]=useState([]);
     const [postMode,setPostMode]= useState('text');
+    const [imageFile,setImageFile]= useState([]);
 
 
     const togglePostForm = ()=>{
@@ -78,8 +79,25 @@ function HomeComp(props){
         }
     }
    
-    const createPostImage= ()=>{
-        
+    const handleFileSelect = (event) => {
+        setImageFile(event.target.files);
+        console.log(event.target.files);
+      }
+
+    const createPostImage= async()=> {  
+        const formData = new FormData();
+        formData.append("image", imageFile[0]);
+        formData.append('authorId',currentUser._id);
+        formData.append('text',postText);
+        axios.post('http://localhost:5000/postImages', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        })
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Image uploading!';
+        alertBox.style.display='inline';
+        removeAlert();
     }
     
     useEffect(()=>{
@@ -148,9 +166,8 @@ function HomeComp(props){
                 <div className='newpost-form' id='postForm-image' >
                     <div className='newpost-main' id='newpost-main-image'>
                        <div className='image-post-header'>Upload image</div>
-                       <input type='file'
-                        accept="image/png, image/jpeg"
-                        name='image-file'>
+                       <input type='file' onChange={handleFileSelect} id='image-file'
+                        name='image'>
                        </input>
                     </div>
                     <div className='newpost-button'>

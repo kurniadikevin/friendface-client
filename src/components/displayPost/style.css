@@ -17,6 +17,9 @@
 #profileImg{
     border-radius: 30px;
 }
+    .post-image{
+        padding-bottom: 20px;
+    }
 
     .post-text{
         padding-bottom: 20px;

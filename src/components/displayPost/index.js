@@ -197,7 +197,12 @@ export function DisplayPost(props){
                     alt='profileImage' width={50} height={50}/> 
               </div>
             <div className='post-main'>
-                <div className='post-text'>{item.text ? item.text : 'No post found'}</div>
+               { item.imageContent ?  <div className='post-image'>
+                  <img id='post-image' src={ `http://localhost:5000/${item.imageContent} `}
+                    height={150} >
+                  </img>
+                </div>: '' }
+                <div className='post-text'>{item.text ? item.text : ''}</div>
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
                   <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
                 </Link>
