@@ -8,6 +8,18 @@
  font-size: 14pt;
  font-weight: 700;
  color: var(--purple);
+ display: flex;
+ gap: 60px;
+}
+.friendReq-head>div{
+    cursor: pointer;
+}
+
+#likeAndComment-select{
+    color: var(--bg2);
+}
+.likeAndComment-main{
+    display: none;
 }
 
 .friendReq-cont{
