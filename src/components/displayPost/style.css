@@ -20,6 +20,9 @@
     .post-image{
         padding-bottom: 20px;
     }
+    #post-image{
+        object-fit: contain;
+    }
 
     .post-text{
         padding-bottom: 20px;
@@ -52,6 +55,7 @@
 
     #toggle-comment-icon{
         padding-top: 10px;
+        padding-left: 10px;
         font-size: 16pt;
         cursor: pointer;
         color: var(--green);
@@ -84,13 +88,16 @@
 .comment-title{
     color: var(--green);
     padding-top:20px;
-    padding-bottom: 0px;
+    padding-bottom:10px;
+    padding-left: 10px;
    font-weight: 700;
    display: flex;
    
 }
 .comment-map{
-  
+  overflow: auto;
+  max-height: 400px;
+  padding-left: 10px;
 }
 .comment-content{
     padding-top: 10px;
@@ -126,3 +133,24 @@
     padding-bottom: 20px;
     display: none;
 }
+
+/* CUSTOM SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: var(--bg2);
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--purple);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--green);
+  }

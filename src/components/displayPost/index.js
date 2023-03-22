@@ -199,7 +199,7 @@ export function DisplayPost(props){
             <div className='post-main'>
                { item.imageContent ?  <div className='post-image'>
                   <img id='post-image' src={ `http://localhost:5000/${item.imageContent} `}
-                    height={150} >
+                    height={200} >
                   </img>
                 </div>: '' }
                 <div className='post-text'>{item.text ? item.text : ''}</div>
