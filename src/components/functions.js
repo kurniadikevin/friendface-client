@@ -18,6 +18,12 @@ export const formatTimeStamp = (value)=>{
    return formatDate(stringDate);
   }
 
+export const displayDateDifferences=(value)=>{
+  let difference=(Date.now() - value)/60000;
+  let result= Math.floor(difference);
+  return `${result} Minutes ago`;
+}
+
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
   axios({

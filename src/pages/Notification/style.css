@@ -15,10 +15,10 @@
     cursor: pointer;
 }
 
-#likeAndComment-select{
+#friendReq-select{
     color: var(--bg2);
 }
-.likeAndComment-main{
+.friendReq-main{
     display: none;
 }
 
@@ -41,5 +41,14 @@
 
 button:hover {
     cursor: pointer;
+    color: var(--purple);
+}
+
+.likeAndComment-cont{
+    border-bottom: 1px solid var(--bg2);
+    padding-top: 30px;
+}
+
+.likeAndComment-username{
     color: var(--purple);
 }

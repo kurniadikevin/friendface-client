@@ -5,7 +5,7 @@ import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { useEffect, useState } from 'react';
-import { refreshLoginSession } from '../../components/functions';
+import { refreshLoginSession, displayDateDifferences } from '../../components/functions';
 
 export function NotificationPage() {
 
@@ -84,14 +84,6 @@ export function NotificationPage() {
     }
   }
 
-  const getUserInfoNotification=(authorId)=>{
-    fetch(`http://localhost:5000/users/${authorId}`)
-    .then((response) => response.json())
-    .then((data) =>{ 
-      console.log(data.email);
-      return data.email;
-    });
-  }
 
   useEffect(()=>{
     toggleLoader();
@@ -104,10 +96,10 @@ export function NotificationPage() {
       <div className='main'>
         <div className='notif-page'>
         <div className='friendReq-head'>
+          <div id='likeAndComment-select' onClick={()=> switchNotif('likeAndComment')}>
+            Notification</div>
           <div id='friendReq-select' onClick={()=>switchNotif('friend')}>
             Friend Request</div>
-          <div id='likeAndComment-select' onClick={()=> switchNotif('likeAndComment')}>
-            Like and Comment</div>
         </div>
         <div className='friendReq-main'>
 
@@ -135,12 +127,13 @@ export function NotificationPage() {
         }): <div  className='friendReq-cont'> You have no friend request</div>}
         </div>
         <div className='likeAndComment-main'>
-           {(currentUser.postNotification).length > 0 ? (currentUser.postNotification).map((item,index)=>{
+           {(currentUser.postNotification).length > 0 ? ((currentUser.postNotification).reverse()).map((item,index)=>{
               return (
-              <div>
-                <div>{getUserInfoNotification(item.byUser)}</div>
-                <div>{item.action} your post
-                {item.byUser}</div>
+              <div className='likeAndComment-cont'>
+                <div className='likeAndComment-username'>{item.byUser.username? item.byUser.username : item.byUser}</div>
+                <div>{item.byUser.email}</div>  
+                <div>{item.action} your post</div>
+                {item.date ? <div>{displayDateDifferences(item.date)}</div> : ''}
               </div>
               )
            }):

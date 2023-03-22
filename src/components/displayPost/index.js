@@ -95,12 +95,17 @@ export function DisplayPost(props){
     } 
     
     else{
+      const likeByAuthor={
+        _id : currentUser._id,
+        email : currentUser.email,
+        username : currentUser.username
+    }
     axios({
       method: "POST",
       data: {
           _id :    post._id,
         likes:   post.likes,
-        likeBy :  currentUser._id   
+        likeBy :  likeByAuthor   
       },
       withCredentials: true,
       url: `http://localhost:5000/posts/likes/${post._id}`,

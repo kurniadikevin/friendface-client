@@ -27,8 +27,7 @@ const CommentForm= (props)=>{
           data: {
               _id :    post._id,
             commentBy : commentAuthor,
-            text : comment,
-            
+            text : comment
           },
           withCredentials: true,
           url: `http://localhost:5000/comments/createComment/${post._id}`,
