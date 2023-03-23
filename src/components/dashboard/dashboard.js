@@ -12,7 +12,8 @@ function Dashboard(props){
             {
         username : 'not signed in',
         email : 'not available',
-        profilePicture : (require('../../assets/profilepicturesSmall.png'))}
+        profilePicture : (require('../../assets/profilepicturesSmall.png'))
+        }
         );
     
    // get login user information
@@ -85,9 +86,9 @@ function Dashboard(props){
             <div className='dashboard-bottom'>
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
-                     src= {userData.email === 'not available' ?
-                     userData.profilePicture :
-                      `http://localhost:5000/${userData.profilePicture}`
+                     src= {userData.profilePicture ?
+                      `http://localhost:5000/${userData.profilePicture}` :
+                      (require('../../assets/profilepicturesSmall.png'))
                      } 
                       alt='profilePicture'
                         width={75} height={75}/>

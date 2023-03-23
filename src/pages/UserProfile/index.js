@@ -109,7 +109,7 @@ const getUser=()=>{
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
+            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData._id} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
           </div>

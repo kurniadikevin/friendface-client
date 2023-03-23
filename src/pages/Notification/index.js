@@ -139,7 +139,7 @@ export function NotificationPage() {
             )
         }): <div  className='friendReq-cont'> You have no friend request</div>}
         </div>
-        <div className='likeAndComment-main'>
+        {<div className='likeAndComment-main'>
            {(currentUser.postNotification).length > 0 ? ((currentUser.postNotification).reverse()).map((item,index)=>{
               return (
               <div className='likeAndComment-cont'>
@@ -147,7 +147,7 @@ export function NotificationPage() {
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage'
                      id='notif-image'/>
-                <div className='likeAndComment-username'>{item.byUser.username? item.byUser.username : item.byUser}</div>
+                <div className='likeAndComment-username'>{item.byUser?.username ? item.byUser.username : item.byUser._id}</div>
                 <div id='notif-email'>{item.byUser.email}</div>  
                 <div id='notif-action'>{item.action} your post</div>
                 {item.date ? <div id='notif-date'>{displayDateDifferences(item.date)}</div> : ''}
@@ -156,7 +156,7 @@ export function NotificationPage() {
            }):
            <div  className='friendReq-cont'> Notification clear</div>
            }
-           </div>
+           </div>}
         </div>
       </div>
       
