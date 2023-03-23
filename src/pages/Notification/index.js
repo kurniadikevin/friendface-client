@@ -84,6 +84,13 @@ export function NotificationPage() {
     }
   }
 
+  const getProfileImage= async(userId)=>{
+    const url=`http://localhost:5000/users/profilePicture/${userId}`;
+    const response = await fetch(url);
+    var data = await response.json();
+    console.log(data);
+  }
+
 
   useEffect(()=>{
     toggleLoader();
@@ -115,9 +122,15 @@ export function NotificationPage() {
           }
             return (
                 <div className='friendReq-cont'>
+                    <img  src={data.sender._id ?  `http://localhost:5000/users/profilePicture/${data.sender._id} `
+                    : (require('../../assets/profilepicturesSmall.png'))}
+                    alt='profileImage' 
+                     id='notif-image'/>
+                   <div>
                     <div className='friendReq-username'>{data.sender?.username}</div>
                     <div className='friendReq-email'>{data.sender?.email}</div>
                     <div className='friendReq-status'>Status : {data?.status}</div>
+                   </div>
                 <div className='friendReq-button-cont'>
                     <button  id='accept-req' onClick={()=>acceptFriendRequest(requestData,senderInfo,index)}>Accept</button>
                     <button id='decline-req'onClick={()=>declineFriendRequest(requestData,senderInfo,index)}>Decline</button>
@@ -130,10 +143,14 @@ export function NotificationPage() {
            {(currentUser.postNotification).length > 0 ? ((currentUser.postNotification).reverse()).map((item,index)=>{
               return (
               <div className='likeAndComment-cont'>
+                <img  src={item.byUser._id ?  `http://localhost:5000/users/profilePicture/${item.byUser._id} `
+                    : (require('../../assets/profilepicturesSmall.png'))}
+                    alt='profileImage'
+                     id='notif-image'/>
                 <div className='likeAndComment-username'>{item.byUser.username? item.byUser.username : item.byUser}</div>
-                <div>{item.byUser.email}</div>  
-                <div>{item.action} your post</div>
-                {item.date ? <div>{displayDateDifferences(item.date)}</div> : ''}
+                <div id='notif-email'>{item.byUser.email}</div>  
+                <div id='notif-action'>{item.action} your post</div>
+                {item.date ? <div id='notif-date'>{displayDateDifferences(item.date)}</div> : ''}
               </div>
               )
            }):

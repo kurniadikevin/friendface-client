@@ -21,7 +21,16 @@ export const formatTimeStamp = (value)=>{
 export const displayDateDifferences=(value)=>{
   let difference=(Date.now() - value)/60000;
   let result= Math.floor(difference);
-  return `${result} Minutes ago`;
+  if(result< 60){
+    return `${result} Minutes ago`;
+  } else if( result >= 60 && result < 1440){
+    const resultHour = Math.floor(result/60);
+    return `${resultHour} Hours ago`;
+  } else if( result >= 1440 ){
+    const resultDay = Math.floor(result/1440);
+    return `${resultDay} Days ago`;
+  }
+  
 }
 
 export const refreshLoginSession=(user)=>{

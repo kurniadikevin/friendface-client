@@ -24,8 +24,20 @@
 
 .friendReq-cont{
     padding-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
 
 }
+.friendReq-username{
+    color: var(--purple);
+}
+.friendReq-email{
+    color: var(--green);
+}
+.friendReq-status{
+    color: var(--bg2);
+}
+
 .friendReq-button-cont{
     padding-top: 10px;
     display: grid;
@@ -45,10 +57,40 @@ button:hover {
 }
 
 .likeAndComment-cont{
-    border-bottom: 1px solid var(--bg2);
-    padding-top: 30px;
+  
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 20px 30px 30px 30px;
+}
+
+.likeAndComment-cont>div{
+    padding-bottom: 3px;
+}
+
+#notif-image{
+    grid-column: 1/2;
+    grid-row: 1/5;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 10px;
 }
 
 .likeAndComment-username{
     color: var(--purple);
+}
+
+#notif-email{
+color: var(--green);
+}
+
+#notif-action{
+   
+}
+
+#notif-date{
+    color: var(--bg2);
+    font-size: 10pt;
 }
