@@ -5,10 +5,10 @@
     position: sticky;
     top: 0px;
     background-color: var(--background00);
+    
 }
 
 .HomeCompHead{
-  
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -88,16 +88,19 @@
     top: 80px;
     left: 11%;
     width: 600px;    
+    backdrop-filter: blur(2px);
+   
 }
     .newpost-form{
        display: grid;
        grid-template-rows: 3fr 1fr;
        padding: 15px;
+       padding-top: 18px;
        gap: 10px;
        background-color: var(--bg2);
        border-radius: 5px;
        margin:0px 30px;
-      
+        
     }
     .newpost-main{
         display: flex;

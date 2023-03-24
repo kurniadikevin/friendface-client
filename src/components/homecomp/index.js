@@ -19,7 +19,9 @@ function HomeComp(props){
         const postForm = document.querySelector('.homeComp-postForm');
         if(postForm.style.display === 'inline'){
             postForm.style.display ='none';
-        } else{  postForm.style.display='inline'}
+        } else{ 
+             postForm.style.display='inline';
+            }
     }
 
     const createPostText = async()=> {  

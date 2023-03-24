@@ -22,8 +22,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background00);
   color: var(--white);
-  
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
