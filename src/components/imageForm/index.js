@@ -1,7 +1,6 @@
-
 import './style.css';
 import { refreshLoginSession } from '../functions';
-import { removeAlert } from '../functions';
+import { removeAlert,toggleForm, toggleBluredBg } from '../functions';
 
 const ImageForm = (props)=>{
 
@@ -36,6 +35,10 @@ const ImageForm = (props)=>{
             <button type='submit' id='fileInput'onClick={imageSubmitAlert}>
               Confirm change</button>
             </form>
+            <span id='close-box' class="material-symbols-outlined"
+             onClick={()=>{toggleForm('imageForm'); toggleBluredBg()}}>
+              close
+            </span>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './style.css';
 import axios from 'axios';
-import { refreshLoginSession } from '../functions';
+import { refreshLoginSession,toggleBluredBg,toggleForm } from '../functions';
 
 const ProfileForm = (props)=>{
 
@@ -51,6 +51,10 @@ const ProfileForm = (props)=>{
             <input placeholder={currentUser? currentUser.username : ''} onChange={(e)=> setData(e.target.value)}
             ></input>
             <button id='confirmUser-btn' onClick={updateUsername}>Confirm change</button>
+            <span id='close-box' class="material-symbols-outlined"
+             onClick={()=>{toggleForm('profileForm'); toggleBluredBg()}}>
+              close
+            </span>
         </div>
     )
 }

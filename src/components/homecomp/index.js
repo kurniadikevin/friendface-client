@@ -189,7 +189,7 @@ function HomeComp(props){
 
 
             </div>
-            <div className='blurred-bg'></div>
+          
         </div>
     )
 }

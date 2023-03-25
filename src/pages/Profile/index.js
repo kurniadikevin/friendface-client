@@ -69,7 +69,7 @@ export function ProfilePage() {
               <div className='profile-username'>
                 <div className='tag'>Username :</div>
                 <div className='text' id='user-username'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
-                <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>
+                <button id='edit-btn-username' onClick={()=> {toggleForm('profileForm'); toggleBluredBg()}}>
                 <span class="material-symbols-outlined">edit</span>
                 </button>
               </div>

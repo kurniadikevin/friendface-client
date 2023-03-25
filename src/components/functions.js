@@ -88,10 +88,14 @@ export const toggleForm = (form)=>{
 
 //toggle blurred background
 export const toggleBluredBg=()=>{
-  const blurredBg= document.querySelector('.blurred-bg');
+  console.log('toogleblur');
+  const blurredBg= document.querySelector('.blurred-bg-dash');
+  const homeComp= document.querySelector('.HomeComp');
   if(blurredBg.style.display === 'inline'){
       blurredBg.style.display ='none';
+      homeComp.style.backgroundColor='var(--background00)';
   } else{ 
        blurredBg.style.display='inline';
+       homeComp.style.backgroundColor='transparent';
       }
 }

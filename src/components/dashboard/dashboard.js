@@ -102,9 +102,10 @@ function Dashboard(props){
                 </div>
             </div>
            <AlertBox/>
+           <div className='blurred-bg-dash'></div>
         </div>
         <LoaderComponent/>
-        
+     
     </div>
     )
 }
