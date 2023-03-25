@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { removeAlert } from '../functions';
+import { removeAlert,toggleBluredBg } from '../functions';
 
 
 function HomeComp(props){
@@ -119,7 +119,7 @@ function HomeComp(props){
         <div className='HomeComp'>
             <div className='HomeCompHead'>
                 <div className='home-head'>
-                    <button id='make-post' onClick={togglePostForm}>New post</button>
+                    <button id='make-post' onClick={()=>{togglePostForm(); toggleBluredBg();}}>New post</button>
                 </div>
                 <div className='search-bar'>
                     <input type='text' id='search-input' value={searchInput} placeholder='search user'
@@ -189,6 +189,7 @@ function HomeComp(props){
 
 
             </div>
+            <div className='blurred-bg'></div>
         </div>
     )
 }

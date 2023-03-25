@@ -1,7 +1,7 @@
 .profile-image-form{
     color: var(--white);
     position: absolute;
-    left: 480px;
+    left: 35%;
     top: 200px;
     background-color: var(--bg2);
     height: 100px;

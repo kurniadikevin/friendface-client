@@ -104,6 +104,7 @@ function Dashboard(props){
            <AlertBox/>
         </div>
         <LoaderComponent/>
+        
     </div>
     )
 }

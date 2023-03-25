@@ -5,7 +5,7 @@ import { DisplayPost } from '../../components/displayPost';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import { useState, useEffect } from 'react';
-import { refreshLoginSession,toggleForm } from '../../components/functions';
+import { refreshLoginSession,toggleForm,toggleBluredBg } from '../../components/functions';
 
 
 export function ProfilePage() {
@@ -56,7 +56,7 @@ export function ProfilePage() {
           <div className='profile-pic-cont'>
             <img id='profileImgProfile' src= {profilePicture} alt='userPicture'
                       width={100} height={100}/>
-            <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
+            <button id='edit-btn-profImg' onClick={()=> {toggleForm('imageForm'); toggleBluredBg()}}>
             <span class="material-symbols-outlined">photo_camera</span>
               </button>
             <div id ='imageForm'>
@@ -91,7 +91,7 @@ export function ProfilePage() {
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
-                Friend list
+                Friends list
                   {(currentUser.friends).map((data)=>{
                       return(
                         <div className='friendList-cont'>

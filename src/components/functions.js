@@ -85,3 +85,13 @@ export const toggleForm = (form)=>{
       Form.style.display ='none';
   } else{  Form.style.display='inline'}
 }
+
+//toggle blurred background
+export const toggleBluredBg=()=>{
+  const blurredBg= document.querySelector('.blurred-bg');
+  if(blurredBg.style.display === 'inline'){
+      blurredBg.style.display ='none';
+  } else{ 
+       blurredBg.style.display='inline';
+      }
+}
