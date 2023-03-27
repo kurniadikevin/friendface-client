@@ -177,9 +177,12 @@ export function DisplayPost(props){
     for (let i=0; i<postData.length; i++){
       const likesList = postData[i].likes;
       const sameLike = likesList.filter((item)=>{
-      return item === currentUser._id;
+      return item._id === currentUser._id;
       })
-      if(sameLike.length > 0 ){
+      const sameLikeOldFormat = likesList.filter((item)=>{
+        return item === currentUser._id;
+        })
+      if(sameLike.length > 0 || sameLikeOldFormat.length > 0){
         const likeIcon = document.querySelectorAll('#like-icon');
         likeIcon[i].style.color='var(--pink)';
       }
