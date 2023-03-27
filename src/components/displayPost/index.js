@@ -35,22 +35,30 @@ export function DisplayPost(props){
     
     // confirm data null 
     if(data.length === 0){
+      if(page === 1){
+        setPostData([]);
+      }
       setNullData(true);
     }
+    
+      // if data length zero or parameter for profilevisit change post
+    else if(page === 1 && newProfile ){
+      setPostData(data);
+      toggleLoader();
+      toggleSeeMore('inline');
+      displayLikedPost(data);
+      console.log('all new profile')
+    } 
+
     // if new profile/profile visit and data more than one page
     else if(newProfile && postData.length > 0){
       setPostData([...postData, ...data] )
       toggleLoader();
       toggleSeeMore('inline');
       displayLikedPost([...postData, ...data]);
+      console.log('fetch more')
     }
-    // if data length zero or parameter for profilevisit change post
-    else if(postData.length === 0 || newProfile){
-      setPostData(data);
-      toggleLoader();
-      toggleSeeMore('inline');
-      displayLikedPost(data);
-    } 
+  
     // else concat data
     else{
       setPostData([...postData, ...data] )
@@ -128,8 +136,6 @@ export function DisplayPost(props){
   }
 }
 
-
-
   const toggleCommentForm=(i)=>{
     const commentForm=document.querySelectorAll('.comment-form');
     if(commentForm[i].style.display === 'none'){
@@ -176,16 +182,20 @@ export function DisplayPost(props){
     }}
 
 
+  // fetch for post page change
+  useEffect(()=>{ 
+      fetchPostDataPage(postPage,props.urlExtension)
+      console.log('standard fetch')
+    },[postPage])
+
+  // fetch for userId parameter change
   useEffect(()=>{
-    if(userId){
+      if(userId){
       setPostPage(1);
       fetchPostDataPage(postPage,`${userId}/`,true);
-     
-    } else{
-     fetchPostDataPage(postPage,props.urlExtension)
-    }
-  
-    },[postPage,userId])
+      console.log('new user fetch')
+      }
+    },[userId])
     
 
     return (

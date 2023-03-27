@@ -1,10 +1,9 @@
 import './style.css';
-import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { refreshLoginSession, displayDateDifferences } from '../../components/functions';
 
 export function NotificationPage() {

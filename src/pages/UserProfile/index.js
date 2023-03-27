@@ -3,11 +3,9 @@ import {  useParams } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
-import CommentForm from '../../components/commentForm';
 import axios from 'axios';
 import { DisplayPost } from '../../components/displayPost';
-import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate,toggleForm } from '../../components/functions';
+import { toggleForm } from '../../components/functions';
 
 
 
@@ -73,6 +71,13 @@ const getUser=()=>{
       const alertBox = document.querySelector('#alert-box');
       alertBox.textContent='Friend request sent!'
       alertBox.style.display='inline';
+
+      //change button display when friend request send
+      const requestButton = document.querySelector('#friendReq-btn');
+      requestButton.textContent='Friend request sent';
+      requestButton.style.backgroundColor='var(--green)';
+      requestButton.style.color='var(--background00)';
+
     })
     .catch(function(error){
       console.log(error);
@@ -109,7 +114,7 @@ const getUser=()=>{
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData._id} `
+            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
           </div>
