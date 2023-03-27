@@ -85,6 +85,9 @@ export function DisplayPost(props){
      return item === currentUser._id
     })
 
+    const likeIcon= document.querySelectorAll('#like-icon');
+
+
     if( !currentUser){
       alertBox.textContent='Please login for like the post!'
       alertBox.style.display='inline';
@@ -96,7 +99,7 @@ export function DisplayPost(props){
       removeAlert();
     }
     // prevet user to like more than once
-    else if(sameLike.length > 0){
+    else if(sameLike.length > 0 || likeIcon[index].style.color==='var(--pink)' ){
       alertBox.textContent='You already like this post'
       alertBox.style.display='inline';
       removeAlert();
@@ -125,6 +128,7 @@ export function DisplayPost(props){
         likesCount[index].textContent= post.likes.length + 1;
         const likeIcon = document.querySelectorAll('#like-icon');
         likeIcon[index].style.color='var(--pink)';
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -185,7 +189,6 @@ export function DisplayPost(props){
   // fetch for post page change
   useEffect(()=>{ 
       fetchPostDataPage(postPage,props.urlExtension)
-      console.log('standard fetch')
     },[postPage])
 
   // fetch for userId parameter change
@@ -193,7 +196,6 @@ export function DisplayPost(props){
       if(userId){
       setPostPage(1);
       fetchPostDataPage(postPage,`${userId}/`,true);
-      console.log('new user fetch')
       }
     },[userId])
     
