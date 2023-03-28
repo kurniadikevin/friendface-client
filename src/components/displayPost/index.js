@@ -47,7 +47,6 @@ export function DisplayPost(props){
       toggleLoader();
       toggleSeeMore('inline');
       displayLikedPost(data);
-      console.log('all new profile')
     } 
 
     // if new profile/profile visit and data more than one page
@@ -56,7 +55,6 @@ export function DisplayPost(props){
       toggleLoader();
       toggleSeeMore('inline');
       displayLikedPost([...postData, ...data]);
-      console.log('fetch more')
     }
   
     // else concat data
@@ -169,7 +167,9 @@ export function DisplayPost(props){
   // toggle see more
   const toggleSeeMore =(propDisplay)=>{
     const seeMore =document.querySelector('.seeMore');
-   seeMore.style.display=(propDisplay);
+    if(seeMore){
+      seeMore.style.display=(propDisplay);
+    }
   }
 
   // make different display for post current user already liked
@@ -188,6 +188,41 @@ export function DisplayPost(props){
       }
     }}
 
+    const showDeleteIcon=(item,index)=>{
+      if( item.author._id === currentUser._id){
+        return(
+          <div className='delete-cont'>
+          <span id='delete-icon' class="material-symbols-outlined"
+          onClick={()=> deleteUserPost(item._id,index)}>
+            delete
+          </span>
+       </div>
+        )
+      } 
+    }
+
+    //delete user post
+    const deleteUserPost=(postId,index)=>{
+      const alertBox = document.querySelector('#alert-box');
+      axios({
+        method: "POST",
+        withCredentials: true,
+        url: `http://localhost:5000/posts/delete/${postId}`,
+      }).then(function (response) {  
+          alertBox.textContent='Post deleted!'
+          alertBox.style.display='inline';
+          const postContainer= document.querySelectorAll('.post-container');
+          postContainer[index].style.display='none';
+          removeAlert();
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+          alertBox.textContent='Server overload / Error'
+          alertBox.style.display='inline';
+          removeAlert();
+        });
+    }
 
   // fetch for post page change
   useEffect(()=>{ 
@@ -244,6 +279,8 @@ export function DisplayPost(props){
                     >mode_comment</span>
                     <div className='comment-length'>{item.comment?.length}</div>
                   </div>
+                  {/* conditional currentUser is author */}
+                  <div>{item.author?._id ? showDeleteIcon(item,index): ''}</div>
               </div>
               <div className='comment-section'>
                 <div className='comment-title'>Comments</div>

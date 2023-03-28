@@ -44,11 +44,17 @@
 
     .action-cont{
         display: grid;
-        grid-template-columns: 50px 50px;
+        grid-template-columns: 50px 50px 50px;
         gap: 10px;
     }
     #like-icon, #comment-icon{
         font-size: 14pt;
+        transition: 0.5s;
+        cursor: pointer;
+        color: var(--bg2);
+    }
+    #delete-icon{
+        font-size: 16pt;
         transition: 0.5s;
         cursor: pointer;
         color: var(--bg2);
