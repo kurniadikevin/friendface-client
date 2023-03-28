@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { removeAlert,toggleBluredBg } from '../functions';
+import { removeAlert, toggleBluredBg, alertNullPostText } from '../functions';
 
 
 function HomeComp(props){
@@ -25,6 +25,7 @@ function HomeComp(props){
     }
 
     const createPostText = async()=> {  
+        if(postText){
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post created!';
         alertBox.style.display='inline';
@@ -42,7 +43,8 @@ function HomeComp(props){
           })
           .catch(function (error) {
             console.log(error);
-          });    
+          });  
+        }  
     }
 
     const userDataToQuery = async ()=>{
@@ -160,8 +162,16 @@ function HomeComp(props){
                             imagesmode
                             </span>
                         </div>
-                        <button id='newpost-submit'onClick={()=> {createPostText() ; togglePostForm();
-                             window.location.reload(false)}}>Post</button>
+                        <button id='newpost-submit'onClick={()=> {
+                            if (postText.length>0){
+                                createPostText();
+                                togglePostForm();
+                                window.location.reload(false);
+                            } else{
+                                alertNullPostText();
+                            }
+                            }}>
+                            Post</button>
                     </div>
                 </div>
 
@@ -182,8 +192,15 @@ function HomeComp(props){
                             imagesmode
                             </span>
                         </div>
-                        <button id='newpost-submit'onClick={()=> {createPostImage() ; togglePostForm();
-                             window.location.reload(false)}}>Post</button>
+                        <button id='newpost-submit'onClick={()=> {
+                            if(imageFile.length === 0){
+                            alertNullPostText();
+                            } else{
+                            createPostImage();
+                            togglePostForm();
+                            window.location.reload(false);
+                            }
+                            }}>Post</button>
                     </div>
                 </div>
 

@@ -91,11 +91,22 @@ export const toggleBluredBg=()=>{
   console.log('toogleblur');
   const blurredBg= document.querySelector('.blurred-bg-dash');
   const homeComp= document.querySelector('.HomeComp');
+  const sidebar= document.querySelector('.Sidebar');
   if(blurredBg.style.display === 'inline'){
       blurredBg.style.display ='none';
       homeComp.style.backgroundColor='var(--background00)';
+      sidebar.style.zIndex=0;
   } else{ 
        blurredBg.style.display='inline';
        homeComp.style.backgroundColor='transparent';
+       sidebar.style.zIndex=-1;
       }
+}
+
+// alert display for null post 
+export const alertNullPostText=()=>{
+  const alertBox = document.querySelector('#alert-box');
+  alertBox.textContent='Please insert text or image before posting!';
+  alertBox.style.display='inline';
+  removeAlert();
 }

@@ -32,7 +32,7 @@ export function DisplayPost(props){
       removeAlert();
       }
     }
-    
+
     // confirm data null 
     if(data.length === 0){
       if(page === 1){
@@ -224,9 +224,10 @@ export function DisplayPost(props){
         });
     }
 
+
   // fetch for post page change
   useEffect(()=>{ 
-      fetchPostDataPage(postPage,props.urlExtension)
+      fetchPostDataPage(postPage,props.urlExtension);
     },[postPage])
 
   // fetch for userId parameter change
@@ -240,7 +241,7 @@ export function DisplayPost(props){
 
     return (
        
-        <div className='displayPostCont' >
+        <div className='displayPostCont' id={props.singlePost ? 'post-detail-display' : ''}>
           
         {postData.map(function(item,index){
          
