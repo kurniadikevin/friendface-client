@@ -114,7 +114,7 @@ export function ProfilePage() {
         </div>
 
         <div className='profile-body'>
-          <DisplayPost currentUser={currentUser} urlExtension={`${currentUser._id}/`}/>
+          <DisplayPost currentUser={currentUser} urlExtension={`byUser/${currentUser._id}/`}/>
         </div>
       </div>
       

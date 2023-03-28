@@ -198,7 +198,7 @@ export function DisplayPost(props){
   useEffect(()=>{
       if(userId){
       setPostPage(1);
-      fetchPostDataPage(postPage,`${userId}/`,true);
+      fetchPostDataPage(postPage,`byUser/${userId}/`,true);
       }
     },[userId])
     
@@ -217,12 +217,17 @@ export function DisplayPost(props){
                     alt='profileImage' width={50} height={50}/> 
               </div>
             <div className='post-main'>
-               { item.imageContent ?  <div className='post-image'>
+               { item.imageContent ?  
+                <Link to={`/postDetail/${item._id}`} >
+                 <div className='post-image'>
                   <img id='post-image' src={ `http://localhost:5000/${item.imageContent} `}
                     height={200} >
                   </img>
-                </div>: '' }
-                <div className='post-text'>{item.text ? item.text : ''}</div>
+                </div>
+                </Link> : '' }
+                <Link to={`/postDetail/${item._id}`} >
+                 <div className='post-text'>{item.text ? item.text : ''}</div>
+                </Link>
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
                   <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
                 </Link>
@@ -266,7 +271,10 @@ export function DisplayPost(props){
             </div>
           )
         })}
-         <div className='seeMore' onClick={toggleNewPage}>See more...</div>
+        { props.singlePost === true ? '':
+           <div className='seeMore' onClick={toggleNewPage}>See more...</div>
+         }
+        
       </div>
            
      

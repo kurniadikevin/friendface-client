@@ -174,7 +174,7 @@ const getUser=()=>{
         </div>
 
         <div className='profile-body'>
-          <DisplayPost currentUser={currentUser} urlExtension={`${userId}/`}/>
+          <DisplayPost currentUser={currentUser} urlExtension={`byUser/${userId}/`}/>
         </div>
       </div>
       
