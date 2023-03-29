@@ -30,7 +30,7 @@ const CommentForm= (props)=>{
             text : comment
           },
           withCredentials: true,
-          url: `http://localhost:5000/comments/createComment/${post._id}`,
+          url: `https://odin-book-api-production.up.railway.app/comments/createComment/${post._id}`,
         }).then(function (response) {
             const lastComment= (JSON.parse(response.config.data));
             const alertBox = document.querySelector('#alert-box');

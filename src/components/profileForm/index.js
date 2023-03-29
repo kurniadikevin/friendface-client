@@ -30,7 +30,7 @@ const ProfileForm = (props)=>{
              _id : currentUser._id
            },
            withCredentials: true,
-           url: `http://localhost:5000/users/update/${currentUser._id}`,
+           url: `https://odin-book-api-production.up.railway.app/users/update/${currentUser._id}`,
          }).then(function (response) {
              console.log(response);
             const form = document.querySelector('#profileForm');
@@ -38,6 +38,7 @@ const ProfileForm = (props)=>{
             refreshLoginSession(currentUser);
             const usernameDisplay=document.querySelector('#user-username');
             usernameDisplay.textContent=data;
+            window.location.reload(false);
            })
            .catch(function (error) {
              console.log(error);

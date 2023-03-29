@@ -58,7 +58,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "http://localhost:5000/users/login",
+      url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         const alertBox = document.querySelector('#alert-box');
@@ -86,7 +86,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "http://localhost:5000/users/login",
+      url: "https://odin-book-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('No User Exist')
@@ -110,7 +110,7 @@ const signUpUser = async()=>{
      
     },
     withCredentials: true,
-    url: "http://localhost:5000/users/signup",
+    url: "https://odin-book-api-production.up.railway.app/users/signup",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       alertBox.textContent='Sign up unsuccessful';
@@ -140,7 +140,7 @@ const signUpUser = async()=>{
 
   //fetch all post 
   const fetchRecentUser = async ()=>{
-    const url=`http://localhost:5000/users/recent`;
+    const url=`https://odin-book-api-production.up.railway.app/users/recent`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userRecent', JSON.stringify(data));
@@ -175,7 +175,7 @@ const signUpUser = async()=>{
 
           {/*   sign up form */}
             <div className='form-sign' id='signup-wrap' 
-            /*  method='POST'  action='http://localhost:5000/users/signup' */>
+            /*  method='POST'  action='https://odin-book-api-production.up.railway.app/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'

@@ -87,7 +87,7 @@ function Dashboard(props){
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
                      src= {userData.profilePicture ?
-                      `http://localhost:5000/${userData.profilePicture}` :
+                      `https://odin-book-api-production.up.railway.app/${userData.profilePicture}` :
                       (require('../../assets/profilepicturesSmall.png'))
                      } 
                       alt='profilePicture'
