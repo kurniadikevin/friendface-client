@@ -5,7 +5,7 @@ import { DisplayPost } from '../../components/displayPost';
 import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import { useState, useEffect } from 'react';
-import { refreshLoginSession } from '../../components/functions';
+import { refreshLoginSession,toggleForm,toggleBluredBg } from '../../components/functions';
 
 
 export function ProfilePage() {
@@ -19,7 +19,7 @@ export function ProfilePage() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
-        profilePicture= `https://odin-book-api-production.up.railway.app/${foundUser.profilePicture}`
+        profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
         console.log(profilePicture);
       }
       return foundUser;
@@ -33,15 +33,9 @@ export function ProfilePage() {
     friends : []
   });
   
-  const toggleForm = (form)=>{
-      const Form = document.querySelector(`#${form}`);
-      if(Form.style.display === 'inline'){
-          Form.style.display ='none';
-      } else{  Form.style.display='inline'}
-  }
 
   const fetchPostCount= async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/posts/${currentUser._id}/count`;
+    const url=`http://localhost:5000/posts/${currentUser._id}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);
@@ -62,7 +56,7 @@ export function ProfilePage() {
           <div className='profile-pic-cont'>
             <img id='profileImgProfile' src= {profilePicture} alt='userPicture'
                       width={100} height={100}/>
-            <button id='edit-btn-profImg' onClick={()=> toggleForm('imageForm')}>
+            <button id='edit-btn-profImg' onClick={()=> {toggleForm('imageForm'); toggleBluredBg()}}>
             <span class="material-symbols-outlined">photo_camera</span>
               </button>
             <div id ='imageForm'>
@@ -75,7 +69,7 @@ export function ProfilePage() {
               <div className='profile-username'>
                 <div className='tag'>Username :</div>
                 <div className='text' id='user-username'> {currentUser?.username ? currentUser.username : 'Not Set'} </div>
-                <button id='edit-btn-username' onClick={()=> toggleForm('profileForm')}>
+                <button id='edit-btn-username' onClick={()=> {toggleForm('profileForm'); toggleBluredBg()}}>
                 <span class="material-symbols-outlined">edit</span>
                 </button>
               </div>
@@ -97,6 +91,7 @@ export function ProfilePage() {
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
+                Friends list
                   {(currentUser.friends).map((data)=>{
                       return(
                         <div className='friendList-cont'>
@@ -119,7 +114,7 @@ export function ProfilePage() {
         </div>
 
         <div className='profile-body'>
-          <DisplayPost currentUser={currentUser} urlExtension={`${currentUser._id}/`}/>
+          <DisplayPost currentUser={currentUser} urlExtension={`byUser/${currentUser._id}/`}/>
         </div>
       </div>
       

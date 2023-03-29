@@ -18,6 +18,21 @@ export const formatTimeStamp = (value)=>{
    return formatDate(stringDate);
   }
 
+export const displayDateDifferences=(value)=>{
+  let difference=(Date.now() - value)/60000;
+  let result= Math.floor(difference);
+  if(result< 60){
+    return `${result} Minutes ago`;
+  } else if( result >= 60 && result < 1440){
+    const resultHour = Math.floor(result/60);
+    return `${resultHour} Hours ago`;
+  } else if( result >= 1440 ){
+    const resultDay = Math.floor(result/1440);
+    return `${resultDay} Days ago`;
+  }
+  
+}
+
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
   axios({
@@ -27,7 +42,7 @@ export const refreshLoginSession=(user)=>{
       password: lastPassword,
     },
     withCredentials: true,
-    url: "https://odin-book-api-production.up.railway.app/users/login",
+    url: "http://localhost:5000/users/login",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       alert('No User Exist');
@@ -61,4 +76,37 @@ export const toggleCommentSection = (i,commentFormDisplay)=>{
 
   // only show comment form if comment length is zero
   commentForm[i].style.display= commentFormDisplay;
+}
+
+// universal toggle for form using id name of the form as parameter
+export const toggleForm = (form)=>{
+  const Form = document.querySelector(`#${form}`);
+  if(Form.style.display === 'inline'){
+      Form.style.display ='none';
+  } else{  Form.style.display='inline'}
+}
+
+//toggle blurred background
+export const toggleBluredBg=()=>{
+  console.log('toogleblur');
+  const blurredBg= document.querySelector('.blurred-bg-dash');
+  const homeComp= document.querySelector('.HomeComp');
+  const sidebar= document.querySelector('.Sidebar');
+  if(blurredBg.style.display === 'inline'){
+      blurredBg.style.display ='none';
+      homeComp.style.backgroundColor='var(--background00)';
+      sidebar.style.zIndex=0;
+  } else{ 
+       blurredBg.style.display='inline';
+       homeComp.style.backgroundColor='transparent';
+       sidebar.style.zIndex=-1;
+      }
+}
+
+// alert display for null post 
+export const alertNullPostText=()=>{
+  const alertBox = document.querySelector('#alert-box');
+  alertBox.textContent='Please insert text or image before posting!';
+  alertBox.style.display='inline';
+  removeAlert();
 }

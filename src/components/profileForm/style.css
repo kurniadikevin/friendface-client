@@ -1,7 +1,7 @@
 .profile-username-form{
     color: var(--white);
     position: absolute;
-    left: 480px;
+    left: 35%;
     top: 200px;
     background-color: var(--bg2);
     height: 100px;
@@ -10,6 +10,7 @@
     flex-direction: column;
     padding: 30px;
     gap: 10px;
+    border: 2px solid black;
 }
 
 .profile-username-form>label{

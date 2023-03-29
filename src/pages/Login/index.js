@@ -7,7 +7,6 @@ import AlertBox from '../../components/alertBox/index';
 import {removeAlert} from '../../components/functions';
 
 
-
 export function LoginPage() {
 
   let history = useHistory();
@@ -59,7 +58,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         const alertBox = document.querySelector('#alert-box');
@@ -87,7 +86,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('No User Exist')
@@ -111,7 +110,7 @@ const signUpUser = async()=>{
      
     },
     withCredentials: true,
-    url: "https://odin-book-api-production.up.railway.app/users/signup",
+    url: "http://localhost:5000/users/signup",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       alertBox.textContent='Sign up unsuccessful';
@@ -126,12 +125,22 @@ const signUpUser = async()=>{
       loader.style.display='none';
     loginUser();
     }    
-  });
+  })
+  .catch(
+    function(error){
+      console.log(error.response.data);
+      alertBox.textContent='Email already used!';
+      alertBox.style.display='inline';
+      alertBox.style.position="fixed";
+      loader.style.display='none';
+      removeAlert();
+    }
+  )
 }
 
   //fetch all post 
   const fetchRecentUser = async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/users/recent`;
+    const url=`http://localhost:5000/users/recent`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userRecent', JSON.stringify(data));
@@ -166,7 +175,7 @@ const signUpUser = async()=>{
 
           {/*   sign up form */}
             <div className='form-sign' id='signup-wrap' 
-            /*  method='POST'  action='https://odin-book-api-production.up.railway.app/users/signup' */>
+            /*  method='POST'  action='http://localhost:5000/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'

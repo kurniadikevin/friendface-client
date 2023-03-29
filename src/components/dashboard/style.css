@@ -9,7 +9,6 @@
     position: sticky;
     top: 0px;
     height:100vh;
-    
 }
 
 .Dashboard>div{
@@ -92,6 +91,7 @@
 }
     #profileImgDash{
         border-radius: 50%;
+        z-index: -1;
     }
 .profInfo-cont{
     display: flex;
@@ -116,4 +116,14 @@
 /* <--------deactivate   message tab------> */
 #message-tabs{
     display: none;
+}
+
+.blurred-bg-dash{
+    display: none;
+    width: 200vw;
+    height: 100vh;
+    left: -100px;
+    position:fixed;
+    background-color: rgb(50,50,50,0.7);
+    z-index: 1;
 }

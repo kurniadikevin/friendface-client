@@ -1,0 +1,14 @@
+#post-detail-display{
+    zoom: 1.06;
+    margin-left: 20px;
+}
+
+
+
+#post-detail-display>div>div>img{
+    width: 60px;
+    height: 60px;
+    position: relative;
+    right: 10px;
+    top: 5px;
+}

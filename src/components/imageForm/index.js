@@ -1,7 +1,6 @@
-
 import './style.css';
 import { refreshLoginSession } from '../functions';
-import { removeAlert } from '../functions';
+import { removeAlert,toggleForm, toggleBluredBg } from '../functions';
 
 const ImageForm = (props)=>{
 
@@ -28,7 +27,7 @@ const ImageForm = (props)=>{
 
     return (
         <div className="profile-image-form">
-            <form method='POST' action='https://odin-book-api-production.up.railway.app/images/' enctype="multipart/form-data">
+            <form method='POST' action='http://localhost:5000/images/' enctype="multipart/form-data">
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         
@@ -36,6 +35,10 @@ const ImageForm = (props)=>{
             <button type='submit' id='fileInput'onClick={imageSubmitAlert}>
               Confirm change</button>
             </form>
+            <span id='close-box' class="material-symbols-outlined"
+             onClick={()=>{toggleForm('imageForm'); toggleBluredBg()}}>
+              close
+            </span>
         </div>
     )
 }

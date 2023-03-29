@@ -1,6 +1,6 @@
 {
-  "name": "friendface-fe",
-  "version": "1.1.0",
+  "name": "friendface",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

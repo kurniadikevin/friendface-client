@@ -27,11 +27,10 @@ const CommentForm= (props)=>{
           data: {
               _id :    post._id,
             commentBy : commentAuthor,
-            text : comment,
-            
+            text : comment
           },
           withCredentials: true,
-          url: `https://odin-book-api-production.up.railway.app/comments/createComment/${post._id}`,
+          url: `http://localhost:5000/comments/createComment/${post._id}`,
         }).then(function (response) {
             const lastComment= (JSON.parse(response.config.data));
             const alertBox = document.querySelector('#alert-box');

@@ -22,8 +22,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background00);
   color: var(--white);
-  
+
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -36,6 +37,9 @@ code {
   grid-template-rows: 1fr;
   height: 100vh;
 }
+
+
+
   .main{
       border-left: 1px solid var(--currentLine);
       border-right: 1px solid var(--currentLine);

@@ -25,8 +25,8 @@ const getUser=()=>{
       <HomeComp currentUser={currentUser}/>
       <DisplayPost currentUser={currentUser} urlExtension={`friends/${currentUser._id}/`}/>
     </div>
-    
     <Sidebar/>
+    
   </div>
   );
 }

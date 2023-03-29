@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './style.css';
 import axios from 'axios';
-import { refreshLoginSession } from '../functions';
+import { refreshLoginSession,toggleBluredBg,toggleForm } from '../functions';
 
 const ProfileForm = (props)=>{
 
@@ -30,7 +30,7 @@ const ProfileForm = (props)=>{
              _id : currentUser._id
            },
            withCredentials: true,
-           url: `https://odin-book-api-production.up.railway.app/users/update/${currentUser._id}`,
+           url: `http://localhost:5000/users/update/${currentUser._id}`,
          }).then(function (response) {
              console.log(response);
             const form = document.querySelector('#profileForm');
@@ -51,6 +51,10 @@ const ProfileForm = (props)=>{
             <input placeholder={currentUser? currentUser.username : ''} onChange={(e)=> setData(e.target.value)}
             ></input>
             <button id='confirmUser-btn' onClick={updateUsername}>Confirm change</button>
+            <span id='close-box' class="material-symbols-outlined"
+             onClick={()=>{toggleForm('profileForm'); toggleBluredBg()}}>
+              close
+            </span>
         </div>
     )
 }

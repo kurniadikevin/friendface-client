@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { removeAlert } from '../functions';
+import { removeAlert, toggleBluredBg, alertNullPostText } from '../functions';
 
 
 function HomeComp(props){
@@ -11,16 +11,21 @@ function HomeComp(props){
     const [searchInput,setSearchInput]= useState('');
     const [queryData,setQueryData]= useState([]);
     const [autoComplete,setAutoComplete]=useState([]);
+    const [postMode,setPostMode]= useState('text');
+    const [imageFile,setImageFile]= useState([]);
 
 
     const togglePostForm = ()=>{
         const postForm = document.querySelector('.homeComp-postForm');
         if(postForm.style.display === 'inline'){
             postForm.style.display ='none';
-        } else{  postForm.style.display='inline'}
+        } else{ 
+             postForm.style.display='inline';
+            }
     }
 
-    const createPost = async()=> {  
+    const createPostText = async()=> {  
+        if(postText){
         const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Post created!';
         alertBox.style.display='inline';
@@ -32,17 +37,18 @@ function HomeComp(props){
             authorId : currentUser._id,
           },
           withCredentials: true,
-          url: "https://odin-book-api-production.up.railway.app/posts/newpost",
+          url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
             console.log(error);
-          });    
+          });  
+        }  
     }
 
     const userDataToQuery = async ()=>{
-        const url=`https://odin-book-api-production.up.railway.app/users/search`;
+        const url=`http://localhost:5000/users/search`;
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
@@ -64,7 +70,39 @@ function HomeComp(props){
         const queryBox = document.querySelector('#query-auto');
         queryBox.style.display='none';
     }
+
+    const toggleImageAndTextForm=(select)=>{
+        const textForm= document.querySelector('#postForm-text');
+        const imageForm = document.querySelector('#postForm-image');
+        if(select === 'text'){
+        textForm.style.display='grid';
+        imageForm.style.display='none';
+        } else if(select === 'image'){
+        textForm.style.display='none';
+        imageForm.style.display='grid';
+        }
+    }
    
+    const handleFileSelect = (event) => {
+        setImageFile(event.target.files);
+        console.log(event.target.files);
+      }
+
+    const createPostImage= async()=> {  
+        const formData = new FormData();
+        formData.append("image", imageFile[0]);
+        formData.append('authorId',currentUser._id);
+        formData.append('text',postText);
+        axios.post('http://localhost:5000/postImages', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        })
+        const alertBox = document.querySelector('#alert-box');
+        alertBox.textContent='Image uploading!';
+        alertBox.style.display='inline';
+        removeAlert();
+    }
     
     useEffect(()=>{
        setCurrentUser(props.currentUser);
@@ -76,13 +114,14 @@ function HomeComp(props){
        } else if(searchInput === ''){
         removeQueryBox();
        }
-    },[searchInput])
+       toggleImageAndTextForm(postMode);
+    },[searchInput,postMode])
 
     return (
         <div className='HomeComp'>
             <div className='HomeCompHead'>
                 <div className='home-head'>
-                    <button id='make-post' onClick={togglePostForm}>New post</button>
+                    <button id='make-post' onClick={()=>{togglePostForm(); toggleBluredBg();}}>New post</button>
                 </div>
                 <div className='search-bar'>
                     <input type='text' id='search-input' value={searchInput} placeholder='search user'
@@ -106,18 +145,68 @@ function HomeComp(props){
                 </div>
             </div>
             <div className='homeComp-postForm'>
-                <div className='newpost-form' >
+                <div className='newpost-form' id='postForm-text' >
                     <div className='newpost-main'>
                         <textarea id='newpost-text' name='text'
-                        value={postText} onChange={(e)=> setPostText(e.target.value)}></textarea>
+                        value={postText} onChange={(e)=> setPostText(e.target.value)}
+                        placeholder='Post something..'>
+                        </textarea>
                     </div>
                     <div className='newpost-button'>
-                        <button id='newpost-submit'onClick={()=> {createPost() ; togglePostForm();
-                             window.location.reload(false)}}>Post</button>
+                        <div className='post-type'>
+                            <span class="material-symbols-outlined" style={{color : 'var(--purple)'}} >
+                            border_color
+                            </span>
+                            <span class="material-symbols-outlined"
+                            onClick={()=> setPostMode('image')}>
+                            imagesmode
+                            </span>
+                        </div>
+                        <button id='newpost-submit'onClick={()=> {
+                            if (postText.length>0){
+                                createPostText();
+                                togglePostForm();
+                                window.location.reload(false);
+                            } else{
+                                alertNullPostText();
+                            }
+                            }}>
+                            Post</button>
                     </div>
-                    
                 </div>
+
+                <div className='newpost-form' id='postForm-image' >
+                    <div className='newpost-main' id='newpost-main-image'>
+                       <div className='image-post-header'>Upload image</div>
+                       <input type='file' onChange={handleFileSelect} id='image-file'
+                        name='image'>
+                       </input>
+                    </div>
+                    <div className='newpost-button'>
+                        <div className='post-type'>
+                            <span class="material-symbols-outlined"
+                            onClick={()=> setPostMode('text')} >
+                            border_color
+                            </span>
+                            <span class="material-symbols-outlined"  style={{color : 'var(--purple)'}}>
+                            imagesmode
+                            </span>
+                        </div>
+                        <button id='newpost-submit'onClick={()=> {
+                            if(imageFile.length === 0){
+                            alertNullPostText();
+                            } else{
+                            createPostImage();
+                            togglePostForm();
+                            window.location.reload(false);
+                            }
+                            }}>Post</button>
+                    </div>
+                </div>
+
+
             </div>
+          
         </div>
     )
 }

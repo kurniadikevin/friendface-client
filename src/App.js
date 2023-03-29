@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React from 'react';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { HomePage } from './pages/Home';
@@ -9,6 +9,7 @@ import { UserProfilePage } from './pages/UserProfile';
 import { NotificationPage } from './pages/Notification';
 import { ExplorePage } from './pages/Explore';
 import { DisplayPost } from './components/displayPost';
+import { PostDetail } from './pages/PostDetail';
 
 
 const App = () =>{ 
@@ -41,6 +42,9 @@ const App = () =>{
       </Route>
       <Route  path="/testPost">
           <DisplayPost />
+      </Route>
+      <Route  path="/postDetail/:postId">
+          <PostDetail />
       </Route>
     </Switch>
   </BrowserRouter>

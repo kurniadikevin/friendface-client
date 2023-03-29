@@ -12,6 +12,7 @@
     animation-name:popAlert;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    z-index: 3;
 }
 
 @keyframes popAlert{
