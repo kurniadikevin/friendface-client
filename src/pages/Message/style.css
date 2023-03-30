@@ -7,3 +7,8 @@
 #message-main>div{
     border: 1px solid white;
 }
+
+.chatRoom-container{
+    border: 1px solid white;
+    padding: 10px 5px;
+}
