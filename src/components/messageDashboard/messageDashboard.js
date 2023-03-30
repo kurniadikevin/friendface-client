@@ -15,9 +15,7 @@ const MessageDashboard=()=>{
         const response = await fetch(url);
         var data = await response.json();
         const listChat = data[0].chatRoomList;
-        console.log(data[0].chatRoomList);
         setChatRoomList(data[0].chatRoomList);
-  
         const filterListChat = listChat.map((i)=>{
           if((i.membersId).length > 2){
           return i.membersId;
@@ -26,7 +24,6 @@ const MessageDashboard=()=>{
           }
           
         });
-        console.log(filterListChat);
         getUserInfoOnChatRoom(filterListChat);
       }
       catch(err){
