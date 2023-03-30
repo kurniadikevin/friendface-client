@@ -3,17 +3,9 @@ import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import HomeComp from '../../components/homecomp';
 import { DisplayPost } from '../../components/displayPost';
-
+import { getUser } from '../../components/functions';
 
 export function HomePage() {
-
-// get login user information
-const getUser=()=>{
-  const loggedInUser = localStorage.getItem("user");
-  if (loggedInUser) {
-    const foundUser = JSON.parse(loggedInUser);
-    return foundUser;
-  }}
 
  let currentUser= getUser();
 

@@ -40,8 +40,8 @@ const App = () =>{
       <Route path='/userProfile/:userId'>
           <UserProfilePage />
       </Route>
-      <Route  path="/testPost">
-          <DisplayPost />
+      <Route  path="/messages">
+          < MessagePage />
       </Route>
       <Route  path="/postDetail/:postId">
           <PostDetail />

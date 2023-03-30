@@ -5,7 +5,7 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DisplayPost } from '../../components/displayPost';
-import { toggleForm } from '../../components/functions';
+import { toggleForm,getUser } from '../../components/functions';
 
 
 
@@ -16,14 +16,6 @@ export function UserProfilePage() {
     { username : 'loading',
       email : 'loading' , profilePicture : ''});
 
-  // get login user information
-const getUser=()=>{
-  const loggedInUser = localStorage.getItem("user");
-  if (loggedInUser) {
-    const foundUser = JSON.parse(loggedInUser);
-    return foundUser;
-  }
-}
   // current user
   let currentUser = getUser();
 

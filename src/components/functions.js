@@ -30,8 +30,16 @@ export const displayDateDifferences=(value)=>{
     const resultDay = Math.floor(result/1440);
     return `${resultDay} Days ago`;
   }
-  
 }
+
+//get currentUser Data from localStorage
+ export const getUser=()=>{
+  const loggedInUser = localStorage.getItem("user");
+  if (loggedInUser) {
+    const foundUser = JSON.parse(loggedInUser);
+    return foundUser;
+  }}
+
 
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');

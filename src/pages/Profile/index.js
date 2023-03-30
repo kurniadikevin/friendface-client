@@ -20,7 +20,6 @@ export function ProfilePage() {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
         profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
-        console.log(profilePicture);
       }
       return foundUser;
     }

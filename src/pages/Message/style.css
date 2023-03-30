@@ -1,0 +1,9 @@
+#message-main{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+   
+}
+
+#message-main>div{
+    border: 1px solid white;
+}

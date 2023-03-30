@@ -4,16 +4,9 @@ import { DisplayPost } from '../../components/displayPost';
 import HomeComp from '../../components/homecomp';
 import {  useParams } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/sidebar';
+import { getUser } from '../../components/functions';
 
-export const PostDetail=()=>{
-    // get login user information
-const getUser=()=>{
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      return foundUser;
-    }}
-  
+export const PostDetail=()=>{  
    let currentUser= getUser();
 
    let {postId} = useParams(); 
