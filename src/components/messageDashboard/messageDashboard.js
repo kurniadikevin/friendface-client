@@ -1,6 +1,7 @@
 import { getUser } from '../functions';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './style.css';
 
 const MessageDashboard=()=>{
     
@@ -81,9 +82,10 @@ const MessageDashboard=()=>{
               
               <div className='chatRoom-member'>
                 { item.length > 1 ?
-                 <div>
+                 <div >
+                  <div id='groupChat-text'>Group Chat</div>
                   {item.map((i)=>{
-                    return(<div>Group {i.username}  {i.email}</div>)
+                    return(<div><b>{i.username}</b>  {i.email}</div>)
                   })}
                 </div> 
                 : <div>{item.username}  {item.email}</div>}

@@ -1,0 +1,16 @@
+.chatRoom-container{
+    border-bottom: 1px solid white;
+    padding: 10px 5px;
+}
+
+.chatRoom-member{
+    border: 1px solid red;
+    color: var(--white);
+}
+.chatRoom-lastContent{
+    color: var(--bg2);
+}
+
+#groupChat-text{
+    color: var(--purple);
+}
