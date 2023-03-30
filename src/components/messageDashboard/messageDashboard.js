@@ -1,5 +1,6 @@
-import { getUser } from '../../components/functions';
+import { getUser } from '../functions';
 import {useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const MessageDashboard=()=>{
     
@@ -70,7 +71,7 @@ const MessageDashboard=()=>{
   
     useEffect(()=>{
       fetchUserChatRoomList(currentUser._id);
-      console.log(chatRoomList);
+    
     },[])
 
     return(
@@ -79,6 +80,8 @@ const MessageDashboard=()=>{
 
           return(
             <div className='chatRoom-container'>
+              <Link  to={`/messagechat/${chatRoomList[index]._id}`}>
+              
               <div className='chatRoom-member'>
                 { item.length > 1 ?
                  <div>
@@ -89,6 +92,7 @@ const MessageDashboard=()=>{
                 : <div>{item.username}  {item.email}</div>}
                 </div>
               <div className='chatRoom-lastContent'>chat last content</div>
+              </Link>
           </div>
           )
           })}

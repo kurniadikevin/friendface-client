@@ -65,7 +65,7 @@ function Dashboard(props){
                     </Link>
                 </div>
                 <div id='message-tabs'>
-                    <Link to='/message' id='link-cont' >
+                    <Link to='/messages' id='link-cont' >
                         <div  id='dash-link'>Messages</div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
                     </Link>
