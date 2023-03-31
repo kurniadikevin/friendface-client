@@ -13,7 +13,7 @@ const MessageDashboard=()=>{
   
     const fetchUserChatRoomList= async (userId)=>{
       try{
-        const url=`http://localhost:5000/userChat/byUserId/${userId}`
+        const url=`http://localhost:5000/userChat/byUserId/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         const listChat = data[0].chatRoomList;
