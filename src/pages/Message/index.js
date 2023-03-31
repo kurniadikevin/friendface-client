@@ -13,11 +13,10 @@ export function MessagePage() {
 
   let currentUser= getUser();
 
-  // visited use chatRoomId parameter
-   let {chatRoomId} = useParams(); 
+ 
+
 
   useEffect(()=>{
-    console.log(chatRoomId);
     toggleLoader();
   },[])
   
@@ -27,9 +26,9 @@ export function MessagePage() {
       <div className='main' id='message-main'>
         <MessageDashboard/>
         <div className='message-content-container'>
-          { chatRoomId ? <div>{chatRoomId}</div>:
+         
             <button>new chat</button>
-         }
+         
         </div>
       </div>
       

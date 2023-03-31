@@ -19,10 +19,12 @@ const MessageDashboard=()=>{
         const listChat = data[0].chatRoomList;
         setChatRoomList(data[0].chatRoomList);
         const filterListChat = listChat.map((i)=>{
+          //group chat list show all id
           if((i.membersId).length > 2){
           return i.membersId;
-          } else{
-           // return i.membersId[1];
+          }
+          //private chat list show only foreign id in string format
+          else if((i.membersId).length === 2){
            const foreignMemberId= (i.membersId).filter((id)=> {
             return id !== currentUser._id;
            })
@@ -31,7 +33,7 @@ const MessageDashboard=()=>{
           
         });
         getUserInfoOnChatRoom(filterListChat);
-        //console.log(filterListChat);
+        console.log(filterListChat);
       }
       catch(err){
         console.log(err)
@@ -61,7 +63,7 @@ const MessageDashboard=()=>{
           }}
           )
       ).then((value)=>{
-        console.log(value);
+      //  console.log(value);
         const memberValue= value.map((i)=>{
           if(i.length === 1){
             return i[0];
@@ -70,7 +72,7 @@ const MessageDashboard=()=>{
           }
         })
         setChatRoomUserInfoList(memberValue);
-        console.log(memberValue);
+      //  console.log(memberValue);
     })
     }
     
