@@ -2,6 +2,7 @@ import { getUser } from '../functions';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
+import { toggleLoader } from '../loader/loader-toggle';
 
 const MessageDashboard=()=>{
     
@@ -21,11 +22,16 @@ const MessageDashboard=()=>{
           if((i.membersId).length > 2){
           return i.membersId;
           } else{
-            return i.membersId[1];
+           // return i.membersId[1];
+           const foreignMemberId= (i.membersId).filter((id)=> {
+            return id !== currentUser._id;
+           })
+           return foreignMemberId[0];
           }
           
         });
         getUserInfoOnChatRoom(filterListChat);
+        //console.log(filterListChat);
       }
       catch(err){
         console.log(err)
@@ -55,6 +61,7 @@ const MessageDashboard=()=>{
           }}
           )
       ).then((value)=>{
+        console.log(value);
         const memberValue= value.map((i)=>{
           if(i.length === 1){
             return i[0];
@@ -63,13 +70,14 @@ const MessageDashboard=()=>{
           }
         })
         setChatRoomUserInfoList(memberValue);
+        console.log(memberValue);
     })
     }
     
   
     useEffect(()=>{
       fetchUserChatRoomList(currentUser._id);
-    
+      
     },[])
 
     return(
@@ -85,7 +93,7 @@ const MessageDashboard=()=>{
                  <div >
                   <div id='groupChat-text'>Group Chat</div>
                   {item.map((i)=>{
-                    return(<div><b>{i.username}</b>  {i.email}</div>)
+                    return(<div>{/* <b>{i.username}</b>  */} {i.email}</div>)
                   })}
                 </div> 
                 : <div>{item.username}  {item.email}</div>}

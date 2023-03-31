@@ -48,10 +48,10 @@ export function MessageDetailPage() {
         <div className='message-content-container'>
          <div className='chat-user-head'>
           <div className='chat-user-imgCont'>
-            <img id='chat-user-img'
+            {/* <img id='chat-user-img'
             src={chatRoomData.membersId[1].profilePicture ?  `http://localhost:5000/${chatRoomData.membersId[1].profilePicture} `
             : (require('../../assets/profilepicturesSmall.png'))} width={60} height={60}
-            />
+            /> */}
           </div>
           <div className='chat-user-info'>
             <div className='chat-user-username'>{chatRoomData.membersId ? chatRoomData.membersId[1]?.username : ''}</div>
