@@ -7,6 +7,8 @@
 .chat-user-head{
     display: grid;
     grid-template-columns: 100px auto;
+    background-color: var(--background00);
+   
 }
 
 .chat-user-head>div{
@@ -35,6 +37,8 @@
 
 .chat-container{
     padding: 20px;
+    overflow: auto;
+    max-height: 500px;
 }
 
 .message-wrap{
@@ -92,11 +96,13 @@
 }
 
 .message-input-container{
-    background-color: var(--black);
+    background-color: var(--background00OP);
     padding: 20px;
     display: flex;
     gap: 20px;
     justify-content: center;
+    /* position: sticky;
+    bottom: 0px; */
 }
 
 
@@ -113,7 +119,7 @@
 
 #message-send-btn{
     border-radius: 10px;
-    background-color: var(--background00);
+    background-color: transparent;
     border: none;
     color: var(--bg2);
 }
@@ -122,8 +128,5 @@
 }
 
 #message-send-btn:hover{
-    background-color: var(--purple);
-    color: var(--white);
-   
-   
+    color: var(--purple);
 }

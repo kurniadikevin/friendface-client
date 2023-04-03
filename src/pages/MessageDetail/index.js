@@ -69,6 +69,7 @@ export function MessageDetailPage() {
  }
 
 /* 
+// Livechat with set Interval
   useEffect(() => {
     const interval = setInterval(() => {
       console.log(`This will run every second! ${chatRoomId}`);

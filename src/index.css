@@ -13,6 +13,7 @@
   --green: rgb(80 250 123);
   --currentLine : rgb(68 71 90);
   --background00:  rgb(18,16,29);
+  --background00OP:  rgb(18,16,29,0.7);
 }
 
 body {

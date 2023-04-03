@@ -1,11 +1,14 @@
+.message-dashboard{
+    border-right: 1px solid var(--bg2);
+}
 .chatRoom-container{
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--bg2);
     padding: 10px 5px;
 }
 
 .chatRoom-member{
     color: var(--white);
-    border: 1px solid yellow;
+   
 }
 .chatRoom-lastContent{
     color: var(--bg2);
