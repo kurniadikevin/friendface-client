@@ -6,6 +6,7 @@ import { toggleLoader } from '../../components/loader/loader-toggle';
 import { getUser,formatDate } from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 export function MessageDetailPage() {
@@ -16,21 +17,16 @@ export function MessageDetailPage() {
 
  const [chatRoomData,setChatRoomData]= useState({})
  const [chatData,setChatData]= useState([]);
+ const [inputText,setInputText]= useState('');
 
  const fetchChatData= async (chatRoomId)=>{
   try{
     const url=`http://localhost:5000/chatRoom/byId/${chatRoomId}`
     const response = await fetch(url);
     var data = await response.json();
-    //console.log(data[0]);
-    
     setChatRoomData(data[0]);
-    //console.log(data[0].membersId[1].email);
-   
     setChatData(data[0].messagesId);
-    console.log(data[0].messagesId)
-  }
-  catch(err){
+  } catch(err){
     console.log(err);
   }
  }
@@ -39,40 +35,57 @@ export function MessageDetailPage() {
     const foreignInfo = (chatRoomData.membersId).filter((item)=>{
       return item._id !== currentUser._id;
     })
-    console.log(foreignInfo);
     if(foreignInfo.length === 1){
       return foreignInfo[0][property];
     } else if (foreignInfo.length > 1){
       const mappedProperty = foreignInfo.map((item)=> {
         return item[property];
       })
-    console.log(mappedProperty);
     return mappedProperty;
     }
  }
 
- const checkForForeignUser=(data)=>{
-    if(data._id === currentUser._id){
-      return false;
-    } else {
-      return true
+ const createChatMessage=()=>{
+  console.log(inputText.length);
+    if(inputText.length > 0 && inputText.length <= 140){
+      axios({
+        method: "POST",
+        data: {
+          text : inputText,
+          currentUser : currentUser._id,
+        },
+        withCredentials: true,
+        url: `http://localhost:5000/message/new/${chatRoomId}`,
+      }).then(function (response) {
+          console.log(response);
+          setInputText('');
+        })
+        .catch(function (error) {
+          console.log(error);
+        }); 
+    } else{
+    alert('cannot be null or more than 140')
     }
  }
 
-/*  const seperateChatLayout =()=>{
-  const chatBox= document.querySelectorAll('.message-container');
-   for( let i =0;i< chatData.length; i++){
-     if(chatData[i].author === currentUser._id){
-      chatBox[i].setAttribute("id","message-container-currentUser");
-     }
-   }
- }
-  */
+/* 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log(`This will run every second! ${chatRoomId}`);
+      fetchChatData(chatRoomId);
+      toggleLoader();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [chatRoomId]);
+ */
 
-  useEffect(()=>{
+  //without interval for developing to prevent infinite loop
+  useEffect(() => {
     fetchChatData(chatRoomId);
-    toggleLoader();
-  },[chatRoomId])
+      toggleLoader();
+   
+  }, [chatRoomId]);
+
   
   return (
     <div className="App">
@@ -117,8 +130,12 @@ export function MessageDetailPage() {
          </div>
 
          <div className='message-input-container'> 
-            <textarea className='message-input-text'></textarea>
-            <button id='message-send-btn'>Send</button>
+            <textarea className='message-input-text'
+              value={inputText} onChange={(e)=>setInputText(e.target.value)}>
+            </textarea>
+            <button id='message-send-btn' onClick={createChatMessage}>
+              <span class="material-symbols-outlined">send</span>
+            </button>
          </div>
 
         </div>

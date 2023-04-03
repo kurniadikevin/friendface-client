@@ -19,7 +19,6 @@ export function MessagePage() {
     const url=`http://localhost:5000/userChat/byUserId/${userId}`
     const response = await fetch(url);
     var data = await response.json();
-    console.log(data);
     if(data.length===0){
      console.log('no data');
      createOrUpdateUserChatData(userId,'create');
@@ -41,8 +40,6 @@ export function MessagePage() {
         console.log(error);
       });  
   }
-
-
 
   useEffect(()=>{
     toggleLoader();
