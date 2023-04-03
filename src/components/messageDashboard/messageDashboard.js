@@ -33,7 +33,6 @@ const MessageDashboard=()=>{
           
         });
         getUserInfoOnChatRoom(filterListChat);
-        console.log(filterListChat);
       }
       catch(err){
         console.log(err)
@@ -89,7 +88,7 @@ const MessageDashboard=()=>{
           return(
             <div className='chatRoom-container'>
               <Link  to={`/messagechat/${chatRoomList[index]._id}`}>
-              
+               
               <div className='chatRoom-member'>
                 { item.length > 1 ?
                  <div >
@@ -98,7 +97,7 @@ const MessageDashboard=()=>{
                     return(<div>{/* <b>{i.username}</b>  */} {i.email}</div>)
                   })}
                 </div> 
-                : <div>{item.username}  {item.email}</div>}
+                : <div>{item.username} // {item.email}</div>}
                 </div>
               <div className='chatRoom-lastContent'>chat last content</div>
               </Link>

@@ -22,18 +22,52 @@ export function MessageDetailPage() {
     const url=`http://localhost:5000/chatRoom/byId/${chatRoomId}`
     const response = await fetch(url);
     var data = await response.json();
+    //console.log(data[0]);
+    
     setChatRoomData(data[0]);
-    console.log(data[0]);
-    console.log(data[0].membersId[1].email);
+    //console.log(data[0].membersId[1].email);
    
     setChatData(data[0].messagesId);
+    console.log(data[0].messagesId)
   }
   catch(err){
     console.log(err);
   }
  }
 
- 
+ const showOnlyForeignUserInfo =(chatRoomData,property)=>{
+    const foreignInfo = (chatRoomData.membersId).filter((item)=>{
+      return item._id !== currentUser._id;
+    })
+    console.log(foreignInfo);
+    if(foreignInfo.length === 1){
+      return foreignInfo[0][property];
+    } else if (foreignInfo.length > 1){
+      const mappedProperty = foreignInfo.map((item)=> {
+        return item[property];
+      })
+    console.log(mappedProperty);
+    return mappedProperty;
+    }
+ }
+
+ const checkForForeignUser=(data)=>{
+    if(data._id === currentUser._id){
+      return false;
+    } else {
+      return true
+    }
+ }
+
+/*  const seperateChatLayout =()=>{
+  const chatBox= document.querySelectorAll('.message-container');
+   for( let i =0;i< chatData.length; i++){
+     if(chatData[i].author === currentUser._id){
+      chatBox[i].setAttribute("id","message-container-currentUser");
+     }
+   }
+ }
+  */
 
   useEffect(()=>{
     fetchChatData(chatRoomId);
@@ -48,26 +82,45 @@ export function MessageDetailPage() {
         <div className='message-content-container'>
          <div className='chat-user-head'>
           <div className='chat-user-imgCont'>
-            {/* <img id='chat-user-img'
-            src={chatRoomData.membersId[1].profilePicture ?  `http://localhost:5000/${chatRoomData.membersId[1].profilePicture} `
+            {chatRoomData.membersId ? 
+            <img id='chat-user-img'
+            src={showOnlyForeignUserInfo(chatRoomData,'profilePicture') 
+            ?  `http://localhost:5000/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
             : (require('../../assets/profilepicturesSmall.png'))} width={60} height={60}
-            /> */}
+            /> : ''
+            }
           </div>
           <div className='chat-user-info'>
-            <div className='chat-user-username'>{chatRoomData.membersId ? chatRoomData.membersId[1]?.username : ''}</div>
-            <div className='chat-user-email'>{chatRoomData.membersId ? chatRoomData.membersId[1].email : ''}</div>
+            <div className='chat-user-username'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'username') : ''}</div>
+            <div className='chat-user-email'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'email') : ''}</div>
          </div>
          </div>
          <div className='chat-container'>
-          {chatData.map((item)=>{
+          {chatData.map((item,index)=>{
             return(
+              <div className='message-wrap'>
+              {item.author !== currentUser._id ?
               <div className='message-container'>
+                <div className='message-sender'>{ showOnlyForeignUserInfo(chatRoomData,'username')}</div>
                 <div className='message-text'>{item.text}</div>
                 <div className='message-sendAt'>{formatDate( item.sendAt) }</div>
-              </div>
+              </div> :
+              <div className='message-container-currentUser'>
+                <div className='message-sender-currentUser'>You</div>
+                <div className='message-text-currentUser'>{item.text}</div>
+                <div className='message-sendAt'>{formatDate( item.sendAt) }</div>
+            </div>
+            }
+            </div>
             )
           })}
          </div>
+
+         <div className='message-input-container'> 
+            <textarea className='message-input-text'></textarea>
+            <button id='message-send-btn'>Send</button>
+         </div>
+
         </div>
       </div>
       
