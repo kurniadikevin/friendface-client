@@ -80,7 +80,7 @@ export function MessageDetailPage() {
   }, [chatRoomId]);
  */
 
-  //without interval for developing to prevent infinite loop
+  //without interval for developing to prevent infinite loop 
   useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
@@ -131,9 +131,10 @@ export function MessageDetailPage() {
          </div>
 
          <div className='message-input-container'> 
-            <textarea className='message-input-text'
-              value={inputText} onChange={(e)=>setInputText(e.target.value)}>
-            </textarea>
+              <textarea className='message-input-text'
+                value={inputText} onChange={(e)=>setInputText(e.target.value)}>
+              </textarea> 
+              <div id='text-area-count'>{inputText.length}/140</div>
             <button id='message-send-btn' onClick={createChatMessage}>
               <span class="material-symbols-outlined">send</span>
             </button>

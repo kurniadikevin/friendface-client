@@ -87,6 +87,7 @@
     width: 300px;
     border-radius: 10px;
     padding: 10px;
+    
     font-weight: 600;
 }
 
@@ -99,10 +100,16 @@
     background-color: var(--background00OP);
     padding: 20px;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     /* position: sticky;
     bottom: 0px; */
+}
+#text-area-count{
+    display: grid;
+    place-items: center;
+    color: var(--purple);
+    font-size: 10pt;
 }
 
 

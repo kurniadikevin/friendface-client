@@ -67,17 +67,19 @@ export function MessagePage() {
         setAutoComplete([...resultEmail,...resultUsername]);
         }
 
-  const createPrivateChatRoom=(userId)=>{
+  const createPrivateChatRoom=(item)=>{
+    const alertBox = document.querySelector('#alert-box');
     axios({
       method: "POST",
       data: {
         currentUser : currentUser._id,
       },
       withCredentials: true,
-      url: `http://localhost:5000/chatRoom/createPrivate/${userId}`,
+      url: `http://localhost:5000/chatRoom/createPrivate/${item._id}`,
     }).then(function (response) {
         console.log(response);
-        alert('chat room created')
+        alertBox.textContent=`New chat room with ${item.username ? item.username : item.email} created !`
+      alertBox.style.display='inline';
        window.location.reload(false);
       })
       .catch(function (error) {
@@ -117,7 +119,7 @@ export function MessagePage() {
               autoComplete.map((item)=>{
                 return(
                   <div className='new-chat-query-result'>
-                      <div id='query-message' onClick={()=>createPrivateChatRoom(item._id)} >
+                      <div id='query-message' >
                         <img id='new-chat-img'
                           src={item.profilePicture
                           ?  `http://localhost:5000/${item.profilePicture} `
@@ -126,6 +128,8 @@ export function MessagePage() {
                         <div className='new-chat-user-info'>
                           <div className='new-chat-username'>{item.username ? item.username : 'Not set'}</div>
                           <div className='new-chat-email'>{item.email}</div>
+                          <button id='new-chat-btn' onClick={()=>createPrivateChatRoom(item)}>
+                            New chat</button>
                         </div>
                       </div>
                   </div>

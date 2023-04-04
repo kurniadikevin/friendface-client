@@ -39,3 +39,18 @@
     color: var(--purple);
 }
 
+#new-chat-btn{
+    margin-top: 5px;
+    border: none;
+    background-color: var(--purple);
+    color: var(--white);
+    transition: 0.5s;
+}
+
+#new-chat-btn:hover{
+    margin-left: 5px;
+    border: none;
+    background-color: var(--green);
+   color: black;
+}
+
