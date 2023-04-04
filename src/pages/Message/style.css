@@ -8,3 +8,34 @@
    
 }
 
+#search-bar-chat{
+    display: grid;
+    grid-template-columns: auto 50px;
+    padding: 20px;
+}
+
+.map-search-new-chat{
+    overflow: auto;
+    max-height: 700px;
+}
+
+#new-chat-img{
+    border-radius: 50%;
+}
+
+#query-message{
+    display: grid;
+    grid-template-columns: 100px auto;
+    padding: 20px;
+    cursor: pointer;
+}
+
+
+.new-chat-username{
+    color: var(--white);
+    font-weight: 800;
+}
+.new-chat-email{
+    color: var(--purple);
+}
+

@@ -41,7 +41,7 @@ function Dashboard(props){
        <div className='dasboard-wrapper'>
         <div className="Dashboard">
             <div className='title-dashboard'>
-            <Link to='./' id='title-link'>
+            <Link to='/' id='title-link'>
                 <div className='app-title'>Friendface</div>
             </Link>
             </div>

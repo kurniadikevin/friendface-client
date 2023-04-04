@@ -13,6 +13,10 @@ import axios from 'axios';
 export function MessagePage() {
 
   let currentUser= getUser();
+  
+  const [userData,setUserData]=useState([]);
+  const [autoComplete,setAutoComplete]= useState([]);
+  const [searchInput,setSearchInput]= useState();
 
   const checkUserChatAvailability= async(userId)=>{
 
@@ -41,20 +45,92 @@ export function MessagePage() {
       });  
   }
 
+  const userDataToQuery = async ()=>{
+    const url=`http://localhost:5000/users/search`;
+    const response = await fetch(url);
+    var data = await response.json();
+    setUserData(data);
+    setAutoComplete(data);
+    }
+
+ const filterDataQuery=()=>{
+       let resultEmail = userData.filter((item)=>{
+          if(item.email){
+            return  ((item.email).toLowerCase()).includes(searchInput.toLowerCase());
+          }
+        })
+        let resultUsername = userData.filter((item)=>{
+            if(item.username){
+            return  ((item.username).toLowerCase()).includes(searchInput.toLowerCase());
+            }
+          })
+        setAutoComplete([...resultEmail,...resultUsername]);
+        }
+
+  const createPrivateChatRoom=(userId)=>{
+    axios({
+      method: "POST",
+      data: {
+        currentUser : currentUser._id,
+      },
+      withCredentials: true,
+      url: `http://localhost:5000/chatRoom/createPrivate/${userId}`,
+    }).then(function (response) {
+        console.log(response);
+        alert('chat room created')
+       window.location.reload(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+  }
+  
   useEffect(()=>{
-    toggleLoader();
-    checkUserChatAvailability(currentUser._id);
+       userDataToQuery();
+       toggleLoader();
+       checkUserChatAvailability(currentUser._id);
   },[])
+
+  useEffect(()=>{
+    if(searchInput){
+      filterDataQuery();
+    }
+    
+  },[searchInput]);
   
   return (
     <div className="App">
       <Dashboard  dashIndex={3} />
       <div className='main' id='message-main'>
         <MessageDashboard/>
-        <div className='message-content-container'>
-         
-            <button>new chat</button>
-         
+        <div className='message-content-newChat'>
+           <div className='search-bar' id='search-bar-chat'>
+               <input type='text' id='search-input' value={searchInput} placeholder='Search user to start new chat with'
+                    onChange={(e)=>{ setSearchInput(e.target.value); }} >
+                </input>
+                <div id='search-logo'>
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+            </div>
+            <div className='map-search-new-chat' >
+              {autoComplete.length === 0 ? <div>No result</div> :
+              autoComplete.map((item)=>{
+                return(
+                  <div className='new-chat-query-result'>
+                      <div id='query-message' onClick={()=>createPrivateChatRoom(item._id)} >
+                        <img id='new-chat-img'
+                          src={item.profilePicture
+                          ?  `http://localhost:5000/${item.profilePicture} `
+                          : (require('../../assets/profilepicturesSmall.png'))} width={60} height={60}
+                          />
+                        <div className='new-chat-user-info'>
+                          <div className='new-chat-username'>{item.username ? item.username : 'Not set'}</div>
+                          <div className='new-chat-email'>{item.email}</div>
+                        </div>
+                      </div>
+                  </div>
+                  )    })}
+                </div>    
         </div>
       </div>
       

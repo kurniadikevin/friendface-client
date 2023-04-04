@@ -83,6 +83,13 @@ const MessageDashboard=()=>{
 
     return(
         <div className='message-dashboard'>
+          <Link  to={`/messages/`}>
+          <div className='new-chat-container'>
+              <span class="material-symbols-outlined">
+               add
+              </span>
+          </div>
+          </Link>
           {chatRoomUserInfoList.map((item,index)=>{
 
           return(
@@ -104,6 +111,7 @@ const MessageDashboard=()=>{
           </div>
           )
           })}
+            
         </div>
     )
 

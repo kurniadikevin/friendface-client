@@ -1,6 +1,31 @@
 .message-dashboard{
     border-right: 1px solid var(--bg2);
 }
+
+.new-chat-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top:10px ;
+    padding-bottom: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--bg2);
+    border-right: 1px solid var(--bg2);
+    border-radius: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--purple);
+    transition:0.5s;
+}
+
+.new-chat-container:hover{
+    background-color: var(--purple);
+    color: var(--white);
+}
+
 .chatRoom-container{
     border-bottom: 1px solid var(--bg2);
     padding: 10px 5px;
