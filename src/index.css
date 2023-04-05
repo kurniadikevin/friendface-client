@@ -9,6 +9,7 @@
   --cyan : rgb(139 233 253);
   --yellow : rgb(241 250 140);
   --bg2 : rgb(98 114 164);
+  --bg2OP : rgb(98, 114, 164,0.5 );
   --white: rgb(248 248 242	);
   --green: rgb(80 250 123);
   --currentLine : rgb(68 71 90);

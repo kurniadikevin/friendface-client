@@ -16,26 +16,52 @@
     margin-right: 100px;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: var(--purple);
+    color: var(--green);
     transition:0.5s;
 }
 
 .new-chat-container:hover{
-    background-color: var(--purple);
-    color: var(--white);
+    background-color: var(--green);
+    color: black;
 }
 
 .chatRoom-container{
-    border-bottom: 1px solid var(--bg2);
-    padding: 10px 5px;
+    padding: 10px;
+    padding-bottom: 15px;
+    transition: 0.5s;
+}
+.chatRoom-container:hover {
+    background-color: var(--bg2OP);
+}
+
+.chatroom-username{
+    transition: 0.5s;
+    font-weight: 600;
+   padding-top: 5px;
+  
+}
+
+.chatRoom-container:hover .chatroom-username{
+    font-weight: 700;
 }
 
 .chatRoom-member{
     color: var(--white);
-   
+    padding: 5px;
 }
+
+.member-info-cont{
+    display: grid;
+    grid-template-columns: 60px auto;
+}
+
+#chat-dashboard-user-img{
+    border-radius: 50%;
+}
+
 .chatRoom-lastContent{
     color: var(--bg2);
+    
 }
 
 #groupChat-text{

@@ -68,9 +68,18 @@ export function MessageDetailPage() {
     }
  }
 
+ // event handler to create chat message when enter key down
+ const handleKeyEnter=(event)=>{
+  if(event.key=== 'Enter'){
+    createChatMessage();
+  }
+ }
+
 
 // Livechat with set Interval 1 second
   useEffect(() => {
+    fetchChatData(chatRoomId);
+    toggleLoader();
     const interval = setInterval(() => {
       fetchChatData(chatRoomId);
       toggleLoader();
@@ -131,7 +140,9 @@ export function MessageDetailPage() {
 
          <div className='message-input-container'> 
               <textarea className='message-input-text'
-                value={inputText} onChange={(e)=>setInputText(e.target.value)}>
+                value={inputText} onChange={(e)=>setInputText(e.target.value)}
+                onKeyDown={(event)=>{handleKeyEnter(event)}}
+                >
               </textarea> 
               <div id='text-area-count'>{inputText.length}/140</div>
             <button id='message-send-btn' onClick={createChatMessage}>

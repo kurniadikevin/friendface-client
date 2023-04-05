@@ -72,7 +72,7 @@ const MessageDashboard=()=>{
         }
       })
       setChatRoomUserInfoList(memberValue);
-    //  console.log(memberValue);
+     console.log(memberValue);
   })
   }
 
@@ -91,12 +91,14 @@ const MessageDashboard=()=>{
     
   
     useEffect(()=>{
+      updateUserChatData(currentUser._id);
+      fetchUserChatRoomList(currentUser._id);
       // update chat room list every 5 seconds
-      const interval = setInterval(() => {
+     /*  const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
       }, 5000);
-      return () => clearInterval(interval);
+      return () => clearInterval(interval); */
     },[])
 
     return(
@@ -104,7 +106,7 @@ const MessageDashboard=()=>{
           <Link  to={`/messages/`}>
           <div className='new-chat-container'>
               <span class="material-symbols-outlined">
-               add
+               loupe
               </span>
           </div>
           </Link>
@@ -116,15 +118,25 @@ const MessageDashboard=()=>{
                
               <div className='chatRoom-member'>
                 { item.length > 1 ?
-                 <div >
+                 <div className='member-info' >
                   <div id='groupChat-text'>Group Chat</div>
                   {item.map((i)=>{
                     return(<div>{/* <b>{i.username}</b>  */} {i.email}</div>)
                   })}
                 </div> 
-                : <div>{item.username} // {item.email}</div>}
+                : 
+                <div className='member-info-cont'>
+                  <img id='chat-dashboard-user-img'
+                    src={`http://localhost:5000/users/profilePicture/${item._id}`} width={50} height={50}
+                    />
+                  <div>
+                    <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
+                    <div className='chatRoom-lastContent'>chat last content</div>
+                  </div>
                 </div>
-              <div className='chatRoom-lastContent'>chat last content</div>
+                }
+                </div>
+             
               </Link>
           </div>
           )

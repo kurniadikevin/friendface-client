@@ -27,7 +27,6 @@
     display: grid;
     grid-template-columns: 100px auto;
     padding: 20px;
-    cursor: pointer;
 }
 
 
@@ -42,15 +41,15 @@
 #new-chat-btn{
     margin-top: 5px;
     border: none;
-    background-color: var(--purple);
-    color: var(--white);
+    background-color: var(--green);
+    color: black;
     transition: 0.5s;
+    border-radius: 12px;
+    padding: 4px 7px;
+    font-weight: 700;
 }
 
 #new-chat-btn:hover{
     margin-left: 5px;
-    border: none;
-    background-color: var(--green);
-   color: black;
 }
 

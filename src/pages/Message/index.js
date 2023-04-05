@@ -133,7 +133,10 @@ export function MessagePage() {
                           <div className='new-chat-username'>{item.username ? item.username : 'Not set'}</div>
                           <div className='new-chat-email'>{item.email}</div>
                           <button id='new-chat-btn' onClick={()=>createPrivateChatRoom(item)}>
-                            New chat</button>
+                            <span class="material-symbols-outlined">
+                                loupe
+                            </span>
+                            </button>
                         </div>
                       </div>
                   </div>

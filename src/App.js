@@ -39,13 +39,13 @@ const App = () =>{
       <Route path='/userProfile/:userId'>
           <UserProfilePage />
       </Route>
-      <Route  path="/messages/">
+      <Route  path="/messages">
           < MessagePage />
       </Route>
   {/*     <Route  path="/messages/(:chatRoomId)">
           < MessagePage />
       </Route> */}
-      <Route  path="/messagechat/:chatRoomId">
+      <Route  path="/messagechat/:chatRoomId?">
           < MessageDetailPage />
       </Route>
       <Route  path="/postDetail/:postId">
