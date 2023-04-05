@@ -6,13 +6,15 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { getUser } from '../../components/functions';
 import {useState, useEffect } from 'react';
-import {  useParams } from 'react-router-dom';
+
+import {  useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
 export function MessagePage() {
 
   let currentUser= getUser();
+  let history = useHistory();
   
   const [userData,setUserData]=useState([]);
   const [autoComplete,setAutoComplete]= useState([]);
@@ -77,10 +79,11 @@ export function MessagePage() {
       withCredentials: true,
       url: `http://localhost:5000/chatRoom/createPrivate/${item._id}`,
     }).then(function (response) {
-        console.log(response);
+        console.log('new chat room _id ' +response.data._id); // new chat room id for redirect
         alertBox.textContent=`New chat room with ${item.username ? item.username : item.email} created !`
-      alertBox.style.display='inline';
-       window.location.reload(false);
+        alertBox.style.display='inline';
+        history.push(`/messagechat/${response.data._id}`);
+     
       })
       .catch(function (error) {
         console.log(error);
@@ -97,8 +100,9 @@ export function MessagePage() {
     if(searchInput){
       filterDataQuery();
     }
-    
   },[searchInput]);
+
+  
   
   return (
     <div className="App">

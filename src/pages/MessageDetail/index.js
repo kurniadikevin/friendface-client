@@ -68,24 +68,23 @@ export function MessageDetailPage() {
     }
  }
 
-/* 
-// Livechat with set Interval
+
+// Livechat with set Interval 1 second
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(`This will run every second! ${chatRoomId}`);
       fetchChatData(chatRoomId);
       toggleLoader();
     }, 1000);
     return () => clearInterval(interval);
   }, [chatRoomId]);
- */
+
 
   //without interval for developing to prevent infinite loop 
-  useEffect(() => {
+  /* useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
    
-  }, [chatRoomId]);
+  }, [chatRoomId]); */
 
   
   return (
