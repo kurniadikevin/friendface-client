@@ -25,6 +25,11 @@
     color: black;
 }
 
+.chatRoom-wrapper{
+    overflow: auto;
+    max-height: 650px;
+}
+
 .chatRoom-container{
     padding: 10px;
     padding-bottom: 15px;

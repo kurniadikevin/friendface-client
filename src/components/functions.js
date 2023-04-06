@@ -18,6 +18,17 @@ export const formatTimeStamp = (value)=>{
    return formatDate(stringDate);
   }
 
+export const parseTimeSort = (timeArr)=>{
+  const timeParse=[];
+   timeArr.forEach((i)=>{
+     timeParse.push(Date.parse(i))
+   })
+ return timeParse.sort((a,b)=>{
+   return a-b
+ });
+ }
+ 
+
 export const displayDateDifferences=(value)=>{
   let difference=(Date.now() - value)/60000;
   let result= Math.floor(difference);

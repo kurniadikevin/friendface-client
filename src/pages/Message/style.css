@@ -16,17 +16,20 @@
 
 .map-search-new-chat{
     overflow: auto;
-    max-height: 700px;
+    max-height: 650px;
 }
 
 #new-chat-img{
     border-radius: 50%;
+    position: relative;
+    top: 5px;
 }
 
 #query-message{
     display: grid;
     grid-template-columns: 100px auto;
     padding: 20px;
+    padding-left: 25px;
 }
 
 

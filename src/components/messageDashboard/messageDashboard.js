@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import { toggleLoader } from '../loader/loader-toggle';
 import axios from 'axios';
+import { formatDate } from '../functions';
+
 
 const MessageDashboard=()=>{
     
@@ -17,8 +19,8 @@ const MessageDashboard=()=>{
       const url=`http://localhost:5000/userChat/byUserId/${userId}`;
       const response = await fetch(url);
       var data = await response.json();
-      const listChat = data[0].chatRoomList;
-      setChatRoomList(data[0].chatRoomList);
+      const listChat = sortChatRooms( data[0].chatRoomList);
+      setChatRoomList(listChat);
       const filterListChat = listChat.map((i)=>{
         //group chat list show all id
         if((i.membersId).length > 2){
@@ -63,7 +65,6 @@ const MessageDashboard=()=>{
         }}
         )
     ).then((value)=>{
-    //  console.log(value);
       const memberValue= value.map((i)=>{
         if(i.length === 1){
           return i[0];
@@ -72,7 +73,6 @@ const MessageDashboard=()=>{
         }
       })
       setChatRoomUserInfoList(memberValue);
-     console.log(memberValue);
   })
   }
 
@@ -88,17 +88,27 @@ const MessageDashboard=()=>{
       console.log(error);
     });  
 }
+
+  const sortChatRooms=(data)=>{
+   const sortedData= data.sort((a,b)=>{
+    return (
+      Date.parse(b.modifiedAt ? b.modifiedAt : b.createdAt) -
+      Date.parse(a.modifiedAt ? a.modifiedAt : a.createdAt) 
+    )
+  })
+  return sortedData;
+  }
     
   
-    useEffect(()=>{
+  useEffect(()=>{
       updateUserChatData(currentUser._id);
       fetchUserChatRoomList(currentUser._id);
       // update chat room list every 5 seconds
-     /*  const interval = setInterval(() => {
+      const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
       }, 5000);
-      return () => clearInterval(interval); */
+      return () => clearInterval(interval);
     },[])
 
     return(
@@ -110,6 +120,8 @@ const MessageDashboard=()=>{
               </span>
           </div>
           </Link>
+
+          <div className='chatRoom-wrapper'>
           {chatRoomUserInfoList.map((item,index)=>{
 
           return(
@@ -131,7 +143,12 @@ const MessageDashboard=()=>{
                     />
                   <div>
                     <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
-                    <div className='chatRoom-lastContent'>chat last content</div>
+                    <div className='chatRoom-lastContent'>
+                      last update : 
+                      { formatDate(
+                      chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
+                      )}
+                      </div>
                   </div>
                 </div>
                 }
@@ -141,8 +158,8 @@ const MessageDashboard=()=>{
           </div>
           )
           })}
-            
-        </div>
+      </div>
+  </div>
     )
 
 }
