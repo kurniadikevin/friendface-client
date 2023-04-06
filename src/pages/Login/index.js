@@ -139,10 +139,10 @@ const signUpUser = async()=>{
 
   //fetch all post 
   const fetchRecentUser = async ()=>{
-    const url=`http://localhost:5000/users/recent`;
+    const url=`http://localhost:5000/users/popular`;
     const response = await fetch(url);
     var data = await response.json();
-    localStorage.setItem('userRecent', JSON.stringify(data));
+    localStorage.setItem('userPopular', JSON.stringify(data));
     }
 
   useEffect(()=>{
