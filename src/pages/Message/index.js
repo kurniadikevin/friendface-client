@@ -127,7 +127,7 @@ export function MessagePage() {
                         <img id='new-chat-img'
                           src={item.profilePicture
                           ?  `http://localhost:5000/${item.profilePicture} `
-                          : (require('../../assets/profilepicturesSmall.png'))} width={60} height={60}
+                          : (require('../../assets/profilepicturesSmall.png'))} width={55} height={55}
                           />
                         <div className='new-chat-user-info'>
                           <div className='new-chat-username'>{item.username ? item.username : 'Not set'}</div>

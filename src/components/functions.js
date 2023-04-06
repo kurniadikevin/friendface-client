@@ -31,16 +31,24 @@ export const parseTimeSort = (timeArr)=>{
  
 
 export const displayDateDifferences=(value)=>{
+  if(typeof value !== 'number'){
+  value =  Date.parse(value)
+  }
+  // in minute value
   let difference=(Date.now() - value)/60000;
   let result= Math.floor(difference);
   if(result< 60){
-    return `${result} Minutes ago`;
+    return (result < 1 ? `less than a min ago` : `${result} min ago`);
   } else if( result >= 60 && result < 1440){
     const resultHour = Math.floor(result/60);
-    return `${resultHour} Hours ago`;
-  } else if( result >= 1440 ){
+    return (resultHour === 1 ? `1 hour ago` :`${resultHour} hours ago`);
+  } else if( result >= 1440 && result <= 10080){
     const resultDay = Math.floor(result/1440);
-    return `${resultDay} Days ago`;
+    return  (resultDay ===1 ? `1 day ago` : `${resultDay} days ago`);
+  } else{
+    const date= new Date(value);
+    return (
+     formatDate(JSON.stringify(date)));
   }
 }
 

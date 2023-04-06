@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import { toggleLoader } from '../loader/loader-toggle';
 import axios from 'axios';
-import { formatDate } from '../functions';
+import { formatDate, displayDateDifferences } from '../functions';
 
 
 const MessageDashboard=()=>{
@@ -141,11 +141,11 @@ const MessageDashboard=()=>{
                   <img id='chat-dashboard-user-img'
                     src={`http://localhost:5000/users/profilePicture/${item._id}`} width={50} height={50}
                     />
-                  <div>
+                  <div className='chatroom-info-wrap'>
                     <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
                     <div className='chatRoom-lastContent'>
-                      last update : 
-                      { formatDate(
+                      {'last update   '} 
+                      { displayDateDifferences(
                       chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
                       )}
                       </div>

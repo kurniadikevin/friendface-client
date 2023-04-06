@@ -1,5 +1,5 @@
 .message-dashboard{
-    border-right: 1px solid var(--bg2);
+    
 }
 
 .new-chat-container{
@@ -39,9 +39,14 @@
     background-color: var(--bg2OP);
 }
 
+.chatroom-info-wrap{
+    padding-left: 10px;
+}
+
 .chatroom-username{
     transition: 0.5s;
-    font-weight: 600;
+    font-weight: 800;
+    font-size: 12pt;
    padding-top: 5px;
   
 }
@@ -66,7 +71,7 @@
 
 .chatRoom-lastContent{
     color: var(--bg2);
-    
+    font-size: 10pt;
 }
 
 #groupChat-text{

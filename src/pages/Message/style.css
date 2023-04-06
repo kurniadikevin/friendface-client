@@ -30,8 +30,11 @@
     grid-template-columns: 100px auto;
     padding: 20px;
     padding-left: 25px;
+    transition: 0.5s;
 }
-
+#query-message:hover {
+    background-color: var(--bg2OP);
+}
 
 .new-chat-username{
     color: var(--white);
@@ -47,9 +50,11 @@
     background-color: var(--green);
     color: black;
     transition: 0.5s;
-    border-radius: 12px;
-    padding: 4px 7px;
+    border-radius: 15px;
+    padding: 2px 3px;
     font-weight: 700;
+    display: grid;
+    place-items: center;
 }
 
 #new-chat-btn:hover{

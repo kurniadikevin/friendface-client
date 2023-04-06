@@ -3,7 +3,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,formatDate } from '../../components/functions';
+import { getUser,displayDateDifferences } from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -88,7 +88,7 @@ export function MessageDetailPage() {
   }, [chatRoomId]);
 
 
-  //without interval for developing to prevent infinite loop 
+  //without interval for developing to prevent infinite loop when hot reload
   /* useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
@@ -108,7 +108,7 @@ export function MessageDetailPage() {
             <img id='chat-user-img'
             src={showOnlyForeignUserInfo(chatRoomData,'profilePicture') 
             ?  `http://localhost:5000/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
-            : (require('../../assets/profilepicturesSmall.png'))} width={60} height={60}
+            : (require('../../assets/profilepicturesSmall.png'))} width={50} height={50}
             /> : ''
             }
           </div>
@@ -125,12 +125,12 @@ export function MessageDetailPage() {
               <div className='message-container'>
                 <div className='message-sender'>{ showOnlyForeignUserInfo(chatRoomData,'username')}</div>
                 <div className='message-text'>{item.text}</div>
-                <div className='message-sendAt'>{formatDate( item.sendAt) }</div>
+                <div className='message-sendAt'>{displayDateDifferences( item.sendAt) }</div>
               </div> :
               <div className='message-container-currentUser'>
                 <div className='message-sender-currentUser'>You</div>
                 <div className='message-text-currentUser'>{item.text}</div>
-                <div className='message-sendAt'>{formatDate( item.sendAt) }</div>
+                <div className='message-sendAt'>{displayDateDifferences( item.sendAt) }</div>
             </div>
             }
             </div>
