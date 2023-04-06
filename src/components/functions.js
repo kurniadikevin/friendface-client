@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { rot13 } from 'simple-cipher-js';
 
 export const formatDate= (value)=>{
     let arrMonths=[null,'Jan','Feb', 'Mar','Apr', 'May', 'Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
@@ -51,20 +52,30 @@ export const displayDateDifferences=(value)=>{
     return foundUser;
   }}
 
+ //store cipher localpassword in localStorage
+ export const storeCipherPass=(str)=>{
+  return rot13.encrypt(str); 
+ } 
+
+ //load cipher localpassword in localStorage
+  const loadCipherPass=(str)=>{
+  return rot13.decrypt(str); 
+ } 
 
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
+  const passDecipher= loadCipherPass(lastPassword);
   axios({
     method: "POST",
     data: {
       email: user.email,
-      password: lastPassword,
+      password: passDecipher,
     },
     withCredentials: true,
     url: "http://localhost:5000/users/login",
   }).then((res) => {
     if(res.data === 'No User Exists'){
-      alert('No User Exist');
+      console.log('No User Exist');
     } else{
       localStorage.setItem("user", JSON.stringify(res.data));
     }    

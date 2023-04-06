@@ -27,8 +27,6 @@ export function UserProfilePage() {
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
-        console.log(data[0]);
-
         //check for friend status on user visit
         checkFriendStatusAndRequest(data[0].friends,'Friend');
          //check for friend request  user visit

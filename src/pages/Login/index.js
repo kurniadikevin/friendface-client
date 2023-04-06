@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import {  useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
 import AlertBox from '../../components/alertBox/index';
-import {removeAlert} from '../../components/functions';
-
+import {removeAlert,storeCipherPass} from '../../components/functions';
 
 export function LoginPage() {
 
@@ -69,7 +68,7 @@ export function LoginPage() {
         removeAlert();
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
-        localStorage.setItem("lastPassword",(password));
+        localStorage.setItem("lastPassword",storeCipherPass(password));
         history.push("/");
       }    
     });
@@ -89,10 +88,10 @@ export function LoginPage() {
       url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
-        alert('No User Exist')
+        alert('Nosa User Exist')
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
-        localStorage.setItem("lastPassword",('password'))
+        localStorage.setItem("lastPassword",storeCipherPass('password'))
         history.push("/")
       }    
     });
