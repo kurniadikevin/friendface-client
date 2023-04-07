@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { rot13 } from 'simple-cipher-js';
 
 export const formatDate= (value)=>{
     let arrMonths=[null,'Jan','Feb', 'Mar','Apr', 'May', 'Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
@@ -18,34 +19,71 @@ export const formatTimeStamp = (value)=>{
    return formatDate(stringDate);
   }
 
+export const parseTimeSort = (timeArr)=>{
+  const timeParse=[];
+   timeArr.forEach((i)=>{
+     timeParse.push(Date.parse(i))
+   })
+ return timeParse.sort((a,b)=>{
+   return a-b
+ });
+ }
+ 
+
 export const displayDateDifferences=(value)=>{
+  if(typeof value !== 'number'){
+  value =  Date.parse(value)
+  }
+  // in minute value
   let difference=(Date.now() - value)/60000;
   let result= Math.floor(difference);
   if(result< 60){
-    return `${result} Minutes ago`;
+    return (result < 1 ? `less than a min ago` : `${result} min ago`);
   } else if( result >= 60 && result < 1440){
     const resultHour = Math.floor(result/60);
-    return `${resultHour} Hours ago`;
-  } else if( result >= 1440 ){
+    return (resultHour === 1 ? `1 hour ago` :`${resultHour} hours ago`);
+  } else if( result >= 1440 && result <= 10080){
     const resultDay = Math.floor(result/1440);
-    return `${resultDay} Days ago`;
+    return  (resultDay ===1 ? `1 day ago` : `${resultDay} days ago`);
+  } else{
+    const date= new Date(value);
+    return (
+     formatDate(JSON.stringify(date)));
   }
-  
 }
+
+//get currentUser Data from localStorage
+ export const getUser=()=>{
+  const loggedInUser = localStorage.getItem("user");
+  if (loggedInUser) {
+    const foundUser = JSON.parse(loggedInUser);
+    return foundUser;
+  }}
+
+ //store cipher localpassword in localStorage
+ export const storeCipherPass=(str)=>{
+  return rot13.encrypt(str); 
+ } 
+
+ //load cipher localpassword in localStorage
+  const loadCipherPass=(str)=>{
+  return rot13.decrypt(str); 
+ } 
 
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
+  const passDecipher= loadCipherPass(lastPassword);
   axios({
     method: "POST",
     data: {
       email: user.email,
-      password: lastPassword,
+      password: passDecipher,
     },
     withCredentials: true,
     url: "https://odin-book-api-production.up.railway.app/users/login",
   }).then((res) => {
     if(res.data === 'No User Exists'){
-      alert('No User Exist');
+      console.log('No User Exist');
     } else{
       localStorage.setItem("user", JSON.stringify(res.data));
     }    
@@ -88,7 +126,6 @@ export const toggleForm = (form)=>{
 
 //toggle blurred background
 export const toggleBluredBg=()=>{
-  console.log('toogleblur');
   const blurredBg= document.querySelector('.blurred-bg-dash');
   const homeComp= document.querySelector('.HomeComp');
   const sidebar= document.querySelector('.Sidebar');

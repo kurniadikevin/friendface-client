@@ -1,0 +1,113 @@
+#message-main{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+   
+}
+
+#message-main>div{
+   
+}
+
+#search-bar-chat{
+    display: grid;
+    grid-template-columns: auto 50px;
+    padding: 20px;
+}
+
+.map-search-new-chat{
+    overflow: auto;
+    max-height: 650px;
+}
+
+#new-chat-img{
+    border-radius: 50%;
+    position: relative;
+    top: 5px;
+}
+
+#query-message{
+    display: grid;
+    grid-template-columns: 100px auto;
+    padding: 20px;
+    padding-left: 25px;
+    transition: 0.5s;
+}
+#query-message:hover {
+    background-color: var(--bg2OP);
+}
+
+.new-chat-username{
+    color: var(--white);
+    font-weight: 800;
+}
+.new-chat-email{
+    color: var(--purple);
+}
+
+.new-chat-btn-container{
+    display: grid;
+    grid-template-columns: 30px 30px;
+    gap: 20px;
+}
+
+#new-chat-btn{
+    margin-top: 5px;
+    border: none;
+    background-color: var(--green);
+    color: black;
+    transition: 0.5s;
+    border-radius: 15px;
+    padding: 3px 4px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+}
+
+#new-chat-btn:hover{
+   background-color: black;
+   color: var(--green);
+}
+/* ----------------- Group name input form------------ */
+
+.new-group-form{
+    display: none;
+    border-top: 1px solid var(--bg2OP);
+   
+    grid-template-columns: auto 60px;
+    padding: 20px;
+    background-color: var(--background00);
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    animation-name:popAlert;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    z-index: 3;
+}
+
+@keyframes popAlert{
+    0%{ opacity: 0;
+        transform: translateY(-100px);
+        }
+    25%{opacity: 0.25;}
+    50%{opacity: 0.5;}
+    75%{opacity: 0.75;}
+    100%{opacity: 1;
+    transform: translateY(0px);}
+}
+
+#group-name-input{
+    border-radius: 10px;
+    border: none;
+    background-color: var(--white);
+    padding: 10px;
+}
+
+#add-group-btn{
+    color: var(--purple);
+    padding-left: 12px;
+    cursor: pointer;
+}
+#add-group-btn:hover{
+    color: var(--green);
+}

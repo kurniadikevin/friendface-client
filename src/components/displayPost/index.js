@@ -5,7 +5,7 @@ import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate,formatTimeStamp,removeAlert,toggleCommentSection } from '../../components/functions';
+import { formatDate,formatTimeStamp,removeAlert,toggleCommentSection, displayDateDifferences} from '../../components/functions';
 
 export function DisplayPost(props){
 
@@ -267,7 +267,7 @@ export function DisplayPost(props){
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
                   <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
                 </Link>
-                <div className='post-date'>{formatDate(item.date)}</div>
+                <div className='post-date'>{displayDateDifferences(item.date)}</div>
               <div className='action-cont'>
                   <div className='like-cont'>
                     <span id='like-icon' class="material-symbols-outlined" onClick={()=> likePostFunction(item,index)} >
@@ -291,7 +291,7 @@ export function DisplayPost(props){
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>
                         <div className='comment-username'>{comment.author?.username}</div>
-                        <div className='comment-date'>{formatTimeStamp(comment.date)}</div>
+                        <div className='comment-date'>{displayDateDifferences(comment.date)}</div>
                       </div>
                     )
                 })

@@ -4,18 +4,9 @@ import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { useEffect } from 'react';
-import { refreshLoginSession, displayDateDifferences } from '../../components/functions';
+import { refreshLoginSession, displayDateDifferences,getUser } from '../../components/functions';
 
 export function NotificationPage() {
-
-  // get login user information
-  const getUser=()=>{
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      return foundUser;
-    }
-  }
 
   let currentUser = getUser();
   
@@ -83,12 +74,12 @@ export function NotificationPage() {
     }
   }
 
-  const getProfileImage= async(userId)=>{
-    const url=`https://odin-book-api-production.up.railway.app/users/profilePicture/${userId}`;
+  /* const getProfileImage= async(userId)=>{
+    const url=`http://localhost:5000/users/profilePicture/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     console.log(data);
-  }
+  } */
 
 
   useEffect(()=>{

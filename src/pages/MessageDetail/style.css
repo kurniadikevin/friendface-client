@@ -1,0 +1,141 @@
+.message-content-container{
+    display: grid;
+    grid-template-rows: 80px auto 100px;
+}
+
+
+.chat-user-head{
+    display: grid;
+    grid-template-columns: 100px auto;
+    background-color: var(--background00);
+   
+}
+
+.chat-user-head>div{
+   
+}
+
+#chat-user-img{
+    border-radius: 50%;
+}
+
+.chat-user-imgCont{
+ display: grid; 
+ place-items: center; 
+}
+
+.chat-user-info{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.chat-user-email{
+    color: var(--bg2);
+}
+
+.chat-container{
+    padding: 20px;
+    overflow: auto;
+    max-height: 500px;
+}
+
+.message-wrap{
+   
+}
+
+.message-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+   
+}
+
+.message-container-currentUser{
+ display: flex;
+ flex-direction: column;
+ align-items: end;
+
+}
+
+.message-sender{
+    color: var(--bg2);
+    font-weight: 600;
+    padding-left: 4px;
+    font-size: 10pt;
+}
+
+.message-sender-currentUser{
+    color: var(--bg2);
+    font-weight: 600;
+    padding-right: 4px;
+    font-size: 10pt;
+}
+
+
+.message-text{
+    background-color: var(--bg2);
+    width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.message-text-currentUser{
+    background-color: var(--purple);
+    width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    
+    font-weight: 600;
+}
+
+.message-sendAt{
+ font-size: 9pt;
+ padding-left: 5px;
+ color: var(--bg2);
+}
+
+.message-input-container{
+    background-color: var(--background00OP);
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    /* position: sticky;
+    bottom: 0px; */
+}
+#text-area-count{
+    display: grid;
+    place-items: center;
+    color: var(--purple);
+    font-size: 10pt;
+    width: 50px;
+}
+
+
+.message-input-text{
+  resize: none;
+ width: 400px;
+ height: 35px;
+ padding: 10px;
+ border-radius: 10px;
+ font-size: 12pt;
+ 
+}
+
+
+#message-send-btn{
+    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    color: var(--bg2);
+}
+#message-send-btn>span{
+    font-size: 28pt;
+}
+
+#message-send-btn:hover{
+    color: var(--purple);
+}

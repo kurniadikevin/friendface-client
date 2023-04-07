@@ -41,7 +41,7 @@ function Dashboard(props){
        <div className='dasboard-wrapper'>
         <div className="Dashboard">
             <div className='title-dashboard'>
-            <Link to='./' id='title-link'>
+            <Link to='/' id='title-link'>
                 <div className='app-title'>Friendface</div>
             </Link>
             </div>
@@ -65,8 +65,8 @@ function Dashboard(props){
                     </Link>
                 </div>
                 <div id='message-tabs'>
-                    <Link to='/message' id='link-cont' >
-                        <div  id='dash-link'>Message</div>
+                    <Link to='/messages' id='link-cont' >
+                        <div  id='dash-link'>Messages</div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
                     </Link>
                 </div>

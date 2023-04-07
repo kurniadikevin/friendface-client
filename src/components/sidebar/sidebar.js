@@ -9,7 +9,7 @@ function Sidebar(){
     const [data,setData]= useState([]);
 
     const fetchUserList =()=>{
-       const recentUser = localStorage.getItem('userRecent');
+       const recentUser = localStorage.getItem('userPopular');
        if(recentUser){
         const foundUser = JSON.parse(recentUser);
         setData(foundUser);
@@ -24,7 +24,7 @@ function Sidebar(){
     return(
         <div id='sidebar-wrapper'>
         <div className='Sidebar'>
-            <div className='sidebar-head'>New user </div>     
+            <div className='sidebar-head'>Popular user </div>     
             <div className='sidebar-main'>
                 {data.map((data)=>{
                     return(

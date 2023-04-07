@@ -114,9 +114,9 @@
 
 
 /* <--------deactivate   message tab------> */
-#message-tabs{
+/* #message-tabs{
     display: none;
-}
+} */
 
 .blurred-bg-dash{
     display: none;

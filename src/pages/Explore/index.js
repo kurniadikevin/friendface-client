@@ -5,19 +5,13 @@ import HomeComp from '../../components/homecomp';
 import { DisplayPost } from '../../components/displayPost';
 import { useEffect} from 'react';
 import {  useHistory } from "react-router-dom";
+import { getUser } from '../../components/functions';
 
 export function ExplorePage(props) {
 
 
   let history = useHistory();
 
-// get login user information
-const getUser=()=>{
-  const loggedInUser = localStorage.getItem("user");
-  if (loggedInUser) {
-    const foundUser = JSON.parse(loggedInUser);
-    return foundUser;
-  }}
 
  const removeTabsForGuest=()=>{
   const profileTabs= document.querySelector('#profile-tabs');

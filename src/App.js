@@ -5,12 +5,11 @@ import { HomePage } from './pages/Home';
 import {  LoginPage } from './pages/Login';
 import { ProfilePage } from './pages/Profile';
 import { MessagePage} from './pages/Message';
+import { MessageDetailPage } from './pages/MessageDetail';
 import { UserProfilePage } from './pages/UserProfile';
 import { NotificationPage } from './pages/Notification';
 import { ExplorePage } from './pages/Explore';
-import { DisplayPost } from './components/displayPost';
 import { PostDetail } from './pages/PostDetail';
-
 
 const App = () =>{ 
 
@@ -40,8 +39,14 @@ const App = () =>{
       <Route path='/userProfile/:userId'>
           <UserProfilePage />
       </Route>
-      <Route  path="/testPost">
-          <DisplayPost />
+      <Route  path="/messages">
+          < MessagePage />
+      </Route>
+  {/*     <Route  path="/messages/(:chatRoomId)">
+          < MessagePage />
+      </Route> */}
+      <Route  path="/messagechat/:chatRoomId?">
+          < MessageDetailPage />
       </Route>
       <Route  path="/postDetail/:postId">
           <PostDetail />

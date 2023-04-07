@@ -144,7 +144,7 @@
 /* CUSTOM SCROLLBAR */
 /* width */
 ::-webkit-scrollbar {
-    width: 8px;
+    width:3px;
   }
   
   /* Track */
@@ -154,7 +154,7 @@
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: var(--purple);
+    background: var(--background00);
   }
   
   /* Handle on hover */

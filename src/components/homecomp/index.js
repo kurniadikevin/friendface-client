@@ -85,7 +85,6 @@ function HomeComp(props){
    
     const handleFileSelect = (event) => {
         setImageFile(event.target.files);
-        console.log(event.target.files);
       }
 
     const createPostImage= async()=> {  
