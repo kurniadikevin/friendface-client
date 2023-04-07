@@ -139,7 +139,7 @@ const signUpUser = async()=>{
 
   //fetch all post 
   const fetchRecentUser = async ()=>{
-    const url=`http://localhost:5000/users/popular`;
+    const url=`https://odin-book-api-production.up.railway.app/users/popular`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userPopular', JSON.stringify(data));

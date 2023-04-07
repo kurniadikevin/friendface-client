@@ -16,7 +16,7 @@ const MessageDashboard=()=>{
 
   const fetchUserChatRoomList= async (userId)=>{
     try{
-      const url=`http://localhost:5000/userChat/byUserId/${userId}`;
+      const url=`https://odin-book-api-production.up.railway.app/userChat/byUserId/${userId}`;
       const response = await fetch(url);
       var data = await response.json();
       const listChat = sortChatRooms( data[0].chatRoomList);
@@ -49,7 +49,7 @@ const MessageDashboard=()=>{
           if(typeof i === 'object'){
               const resultArr=[];
               i.forEach(async(j)=>{
-              const data= (await fetch(`http://localhost:5000/users/simplified/${j}`, {
+              const data= (await fetch(`https://odin-book-api-production.up.railway.app/users/simplified/${j}`, {
               method: "GET",
               })).json();
               data.then((value)=>{
@@ -58,7 +58,7 @@ const MessageDashboard=()=>{
             })
           return resultArr;
           } else{
-            const result= (await fetch(`http://localhost:5000/users/simplified/${i}`, {
+            const result= (await fetch(`https://odin-book-api-production.up.railway.app/users/simplified/${i}`, {
             method: "GET",
           })).json()
           return result;
@@ -80,7 +80,7 @@ const MessageDashboard=()=>{
   axios({
     method: "POST",
     withCredentials: true,
-    url: `http://localhost:5000/userChat/update/${userId}`,
+    url: `https://odin-book-api-production.up.railway.app/userChat/update/${userId}`,
   }).then(function (response) {
       console.log(response);
     })
@@ -146,7 +146,7 @@ const MessageDashboard=()=>{
                 : 
                 <div className='member-info-cont'>
                   <img id='chat-dashboard-user-img'
-                    src={`http://localhost:5000/users/profilePicture/${item._id}`} width={50} height={50}
+                    src={`https://odin-book-api-production.up.railway.app/users/profilePicture/${item._id}`} width={50} height={50}
                     />
                   <div className='chatroom-info-wrap'>
                     <div className='chatroom-username'>{item.username ? item.username : item.email}</div>

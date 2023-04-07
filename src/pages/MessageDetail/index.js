@@ -21,7 +21,7 @@ export function MessageDetailPage() {
 
  const fetchChatData= async (chatRoomId)=>{
   try{
-    const url=`http://localhost:5000/chatRoom/byId/${chatRoomId}`
+    const url=`https://odin-book-api-production.up.railway.app/chatRoom/byId/${chatRoomId}`
     const response = await fetch(url);
     var data = await response.json();
     setChatRoomData(data[0]);
@@ -64,7 +64,7 @@ export function MessageDetailPage() {
           currentUser : currentUser._id,
         },
         withCredentials: true,
-        url: `http://localhost:5000/message/new/${chatRoomId}`,
+        url: `https://odin-book-api-production.up.railway.app/message/new/${chatRoomId}`,
       }).then(function (response) {
           console.log(response);
           setInputText('');
@@ -116,7 +116,7 @@ export function MessageDetailPage() {
             {chatRoomData.membersId ? 
             <img id='chat-user-img'
             src={showOnlyForeignUserInfo(chatRoomData,'profilePicture') 
-            ?  `http://localhost:5000/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
+            ?  `https://odin-book-api-production.up.railway.app/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
             : (require('../../assets/profilepicturesSmall.png'))} width={50} height={50}
             /> : ''
             }

@@ -75,7 +75,7 @@ export function NotificationPage() {
   }
 
   /* const getProfileImage= async(userId)=>{
-    const url=`http://localhost:5000/users/profilePicture/${userId}`;
+    const url=`https://odin-book-api-production.up.railway.app/users/profilePicture/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     console.log(data);

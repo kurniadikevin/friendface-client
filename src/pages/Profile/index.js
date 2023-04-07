@@ -19,7 +19,7 @@ export function ProfilePage() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
-        profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
+        profilePicture= `https://odin-book-api-production.up.railway.app/${foundUser.profilePicture}`
       }
       return foundUser;
     }
