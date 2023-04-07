@@ -81,10 +81,11 @@ export function MessagePage() {
       withCredentials: true,
       url: `http://localhost:5000/chatRoom/createPrivate/${item._id}`,
     }).then(function (response) {
-        console.log('new chat room _id ' +response.data._id); // new chat room id for redirect
+        
         alertBox.textContent=`New chat room with ${item.username ? item.username : item.email} created !`
         alertBox.style.display='inline';
         setTimeout(()=>{
+          // new chat room id for redirect
           history.push(`/messagechat/${response.data._id}`);
         },1000)
       })
@@ -94,16 +95,19 @@ export function MessagePage() {
   }
 
   const addToGroupList=(item,index)=>{ 
-    const icon = document.querySelectorAll('#user-group-add-icon');
+    const iconAddGroup = document.querySelectorAll('#user-group-add-icon');
+    const btnAddGroup = document.querySelectorAll('.user-group-add-btn');
     const newGroupForm = document.querySelector('.new-group-form');
     newGroupForm.style.display='grid';
     setGroupMemberArr((groupMemberArr)=>[...groupMemberArr, item]);
     const alertBox = document.querySelector('#alert-box');
     alertBox.textContent=`Added ${item.email} to group member`
     alertBox.style.display='inline';
-    icon[index].textContent='done_outline';
+    iconAddGroup[index].textContent='done_outline';
+    btnAddGroup[index].style.backgroundColor='black';
+    btnAddGroup[index].style.color='var(--green)';
     removeAlert();
-    console.log(groupMemberArr);
+   
   }
 
   const submitNewGroup=()=>{
@@ -127,11 +131,10 @@ export function MessagePage() {
       withCredentials: true,
       url: `http://localhost:5000/chatRoom/createGroup`,
     }).then(function (response) {
-        console.log('new chat room _id ' +response.data._id); // new chat room id for redirect
-        console.log(response.data)
         alertBox.textContent=`${newGroupName} group created!`
         alertBox.style.display='inline';
         setTimeout(()=>{
+           // new chat room id for redirect
           history.push(`/messagechat/${response.data._id}`);
         },3000)
       })
@@ -198,7 +201,7 @@ export function MessagePage() {
                                   loupe
                               </span>
                             </button>
-                            <button id='new-chat-btn' onClick={()=>addToGroupList(item,index)}>
+                            <button id='new-chat-btn' className='user-group-add-btn' onClick={()=>addToGroupList(item,index)}>
                               <span class="material-symbols-outlined" id='user-group-add-icon'>
                               group_add
                               </span>

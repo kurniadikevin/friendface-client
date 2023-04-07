@@ -31,16 +31,16 @@ export function MessageDetailPage() {
   }
  }
 
- const showOnlyForeignUserInfo =(chatRoomData,property)=>{
+ const showOnlyForeignUserInfo =(chatRoomData,property,type)=>{
     const foreignInfo = (chatRoomData.membersId).filter((item)=>{
       return item._id !== currentUser._id;
     })
     // for private chat
-    if(foreignInfo.length === 1){
+    if(foreignInfo.length === 1 || type ==='chat' ){
       return foreignInfo[0][property];
     }
-    // for group chat 
-    else if (foreignInfo.length > 1){
+    // for group chat title
+    else if (foreignInfo.length > 1 && type ==='info'){
       const mappedProperty = (chatRoomData.membersId).map((item)=> {
         return item[property];
       })
@@ -49,7 +49,6 @@ export function MessageDetailPage() {
       } else if( property === 'profilePicture'){
         return 'group-default.jpg'
       } else if(property === 'email'){
-        console.log(mappedProperty.join(', '));
         return (mappedProperty.join(', '));
       } 
     }
@@ -87,7 +86,7 @@ export function MessageDetailPage() {
 
 
 // Livechat with set Interval 1 second
-/*   useEffect(() => {
+  useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
     const interval = setInterval(() => {
@@ -95,15 +94,15 @@ export function MessageDetailPage() {
       toggleLoader();
     }, 1000);
     return () => clearInterval(interval);
-  }, [chatRoomId]); */
+  }, [chatRoomId]);
 
 
   //without interval for developing to prevent infinite loop when hot reload
-  useEffect(() => {
+  /* useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
    
-  }, [chatRoomId]);
+  }, [chatRoomId]); */
 
   
   return (
@@ -123,8 +122,8 @@ export function MessageDetailPage() {
             }
           </div>
           <div className='chat-user-info'>
-            <div className='chat-user-username'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'username') : ''}</div>
-            <div className='chat-user-email'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'email') : ''}</div>
+            <div className='chat-user-username'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'username','info') : ''}</div>
+            <div className='chat-user-email'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'email','info') : ''}</div>
          </div>
          </div>
          <div className='chat-container'>
@@ -133,7 +132,7 @@ export function MessageDetailPage() {
               <div className='message-wrap'>
               {item.author !== currentUser._id ?
               <div className='message-container'>
-                <div className='message-sender'>{ showOnlyForeignUserInfo(chatRoomData,'username')}</div>
+                <div className='message-sender'>{ showOnlyForeignUserInfo(chatRoomData,'username','chat')}</div>
                 <div className='message-text'>{item.text}</div>
                 <div className='message-sendAt'>{displayDateDifferences( item.sendAt) }</div>
               </div> :

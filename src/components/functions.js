@@ -126,7 +126,6 @@ export const toggleForm = (form)=>{
 
 //toggle blurred background
 export const toggleBluredBg=()=>{
-  console.log('toogleblur');
   const blurredBg= document.querySelector('.blurred-bg-dash');
   const homeComp= document.querySelector('.HomeComp');
   const sidebar= document.querySelector('.Sidebar');

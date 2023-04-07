@@ -104,11 +104,11 @@ const MessageDashboard=()=>{
       updateUserChatData(currentUser._id);
       fetchUserChatRoomList(currentUser._id);
       // update chat room list every 5 seconds
-     /*  const interval = setInterval(() => {
+      const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
-      }, 5000);
-      return () => clearInterval(interval); */
+      }, 3000);
+      return () => clearInterval(interval);
     },[])
 
     return(
