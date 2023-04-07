@@ -104,11 +104,11 @@ const MessageDashboard=()=>{
       updateUserChatData(currentUser._id);
       fetchUserChatRoomList(currentUser._id);
       // update chat room list every 5 seconds
-      const interval = setInterval(() => {
+     /*  const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
       }, 5000);
-      return () => clearInterval(interval);
+      return () => clearInterval(interval); */
     },[])
 
     return(
@@ -130,11 +130,18 @@ const MessageDashboard=()=>{
                
               <div className='chatRoom-member'>
                 { item.length > 1 ?
-                 <div className='member-info' >
-                  <div id='groupChat-text'>Group Chat</div>
-                  {item.map((i)=>{
-                    return(<div>{/* <b>{i.username}</b>  */} {i.email}</div>)
-                  })}
+                 <div className='member-info-cont' >
+                  <img id='chat-dashboard-user-img' src={(require('../../assets/group-default-image-square.jpg'))}
+                   width={50} height={50}/>
+                   <div className='chatroom-info-wrap'>
+                      <div className='chatroom-username' id='chatroom-groupName'>{chatRoomList[index].groupName}</div>
+                      <div className='chatRoom-lastContent'>
+                      {'last update   '} 
+                      { displayDateDifferences(
+                      chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
+                      )}
+                      </div>
+                  </div>
                 </div> 
                 : 
                 <div className='member-info-cont'>

@@ -35,13 +35,23 @@ export function MessageDetailPage() {
     const foreignInfo = (chatRoomData.membersId).filter((item)=>{
       return item._id !== currentUser._id;
     })
+    // for private chat
     if(foreignInfo.length === 1){
       return foreignInfo[0][property];
-    } else if (foreignInfo.length > 1){
-      const mappedProperty = foreignInfo.map((item)=> {
+    }
+    // for group chat 
+    else if (foreignInfo.length > 1){
+      const mappedProperty = (chatRoomData.membersId).map((item)=> {
         return item[property];
       })
-    return mappedProperty;
+      if( property === 'username'){
+        return chatRoomData.groupName
+      } else if( property === 'profilePicture'){
+        return 'group-default.jpg'
+      } else if(property === 'email'){
+        console.log(mappedProperty.join(', '));
+        return (mappedProperty.join(', '));
+      } 
     }
  }
 
@@ -77,7 +87,7 @@ export function MessageDetailPage() {
 
 
 // Livechat with set Interval 1 second
-  useEffect(() => {
+/*   useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
     const interval = setInterval(() => {
@@ -85,15 +95,15 @@ export function MessageDetailPage() {
       toggleLoader();
     }, 1000);
     return () => clearInterval(interval);
-  }, [chatRoomId]);
+  }, [chatRoomId]); */
 
 
   //without interval for developing to prevent infinite loop when hot reload
-  /* useEffect(() => {
+  useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
    
-  }, [chatRoomId]); */
+  }, [chatRoomId]);
 
   
   return (

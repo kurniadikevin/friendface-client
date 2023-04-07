@@ -60,14 +60,14 @@
 }
 
 .message-sender{
-    color: var(--white);
+    color: var(--bg2);
     font-weight: 600;
     padding-left: 4px;
     font-size: 10pt;
 }
 
 .message-sender-currentUser{
-    color: var(--white);
+    color: var(--bg2);
     font-weight: 600;
     padding-right: 4px;
     font-size: 10pt;
@@ -94,6 +94,7 @@
 .message-sendAt{
  font-size: 9pt;
  padding-left: 5px;
+ color: var(--bg2);
 }
 
 .message-input-container{

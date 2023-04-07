@@ -51,6 +51,10 @@
   
 }
 
+#chatroom-groupName{
+   
+}
+
 .chatRoom-container:hover .chatroom-username{
     font-weight: 700;
 }
