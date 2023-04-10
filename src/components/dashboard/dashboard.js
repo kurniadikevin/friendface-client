@@ -12,9 +12,12 @@ function Dashboard(props){
             {
         username : 'not signed in',
         email : 'not available',
-        profilePicture : (require('../../assets/profilepicturesSmall.png'))
+        profilePicture : (require('../../assets/profilepicturesSmall.png')),
+        postNotification : []
         }
         );
+  const [unSeenNotification,setUnSeenNotification]= useState();
+ 
     
    // get login user information
    const getUser=()=>{
@@ -22,6 +25,7 @@ function Dashboard(props){
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
+      getUnSeenNotification(foundUser);
     }
 }
 
@@ -31,10 +35,22 @@ function Dashboard(props){
     dashLink[i].style.transform = 'translateX(5px)';
   }
 
+ const getUnSeenNotification=(data)=>{
+    const notifPost=  (data.postNotification).filter((item)=>{
+        if(!item.seenAt){return item; }})
+    const notifPostCount= notifPost.length;
+    const notifFriendRequest= (data.friendRequest).filter((item)=>{
+        if(!item.seenAt){return item; }})
+    const notifFriendRequestCount = notifFriendRequest.length;
+
+    setUnSeenNotification(notifPostCount + notifFriendRequestCount);
+ }
+
   
    useEffect(()=>{
         getUser();
-       toggleColorSelect(props.dashIndex)
+       toggleColorSelect(props.dashIndex);
+       
     },[])
 
     return(
@@ -72,6 +88,7 @@ function Dashboard(props){
                 </div>
                 <div id='notification-tabs'>
                     <Link to='/notification' id='link-cont' >
+                        <div>{unSeenNotification}</div>
                         <div  id='dash-link'>Notification</div>
                         <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
                     </Link>

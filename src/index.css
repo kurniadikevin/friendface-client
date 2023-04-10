@@ -3,6 +3,7 @@
 
 :root{
   --background : rgb(40 42 54	);
+  --backgroundOP : rgb(40 ,42 ,54,0.6	);
   --purple:rgb(189 147 249);
   --pink : rgb(255 121 198);
   --red : rgb(255 85 85);

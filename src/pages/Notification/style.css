@@ -1,6 +1,7 @@
 .notif-page{
     display: grid;
     grid-template-rows: 80px 1fr;
+    /* padding: 30px 60px; */
     padding: 30px 60px;
 }
 
@@ -26,7 +27,9 @@
     padding-bottom: 20px;
     display: grid;
     grid-template-columns: 1fr 5fr;
-
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
 }
 .friendReq-username{
     color: var(--purple);
@@ -57,7 +60,8 @@ button:hover {
 }
 
 .likeAndComment-cont{
-  
+    padding-left: 30px;
+    padding-right: 30px;
     padding-top: 20px;
     display: grid;
     grid-template-columns: 1fr 5fr;
@@ -93,4 +97,9 @@ color: var(--green);
 #notif-date{
     color: var(--bg2);
     font-size: 10pt;
+}
+
+#unseen-notif{
+    background-color: var(--backgroundOP);
+    border-radius: 10px;
 }
