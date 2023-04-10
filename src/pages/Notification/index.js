@@ -1,4 +1,5 @@
 import './style.css';
+import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import axios from 'axios';
@@ -139,7 +140,9 @@ export function NotificationPage() {
                      id='notif-image'/>
                 <div className='likeAndComment-username'>{item.byUser?.username ? item.byUser.username : item.byUser._id}</div>
                 <div id='notif-email'>{item.byUser.email}</div>  
+                <Link  to={`/postDetail/${item.postId}`}>
                 <div id='notif-action'>{item.action} your post</div>
+                </Link>
                 {item.date ? <div id='notif-date'>{displayDateDifferences(item.date)}</div> : ''}
               </div>
               )

@@ -116,6 +116,22 @@ export const toggleCommentSection = (i,commentFormDisplay)=>{
   commentForm[i].style.display= commentFormDisplay;
 }
 
+//toggle comment form
+export const toggleCommentForm=(i)=>{
+  const commentForm=document.querySelectorAll('.comment-form');
+  if(commentForm[i].style.display === 'none'){
+    commentForm[i].style.display ='block';
+ } else{  commentForm[i].style.display='none'}
+}
+
+// clear all displayed comment section
+export const clearCommentDisplay=(data)=>{
+  const commentSection= document.querySelectorAll('.comment-map');
+  for(let i=0; i< data.length; i++ ){
+    commentSection.style.display='none';
+  }
+}
+
 // universal toggle for form using id name of the form as parameter
 export const toggleForm = (form)=>{
   const Form = document.querySelector(`#${form}`);
@@ -147,3 +163,10 @@ export const alertNullPostText=()=>{
   alertBox.style.display='inline';
   removeAlert();
 }
+
+//make action on 'Enter' key down
+export const handleKeyEnter=(event,action)=>{
+  if(event.key=== 'Enter'){
+   action();
+  }
+ }

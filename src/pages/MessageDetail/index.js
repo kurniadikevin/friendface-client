@@ -3,7 +3,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences } from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter } from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -77,14 +77,6 @@ export function MessageDetailPage() {
     }
  }
 
- // event handler to create chat message when enter key down
- const handleKeyEnter=(event)=>{
-  if(event.key=== 'Enter'){
-    createChatMessage();
-  }
- }
-
-
 // Livechat with set Interval 1 second
   useEffect(() => {
     fetchChatData(chatRoomId);
@@ -150,7 +142,7 @@ export function MessageDetailPage() {
          <div className='message-input-container'> 
               <textarea className='message-input-text'
                 value={inputText} onChange={(e)=>setInputText(e.target.value)}
-                onKeyDown={(event)=>{handleKeyEnter(event)}}
+                onKeyDown={(event)=>{handleKeyEnter(event, createChatMessage)}}
                 >
               </textarea> 
               <div id='text-area-count'>{inputText.length}/140</div>

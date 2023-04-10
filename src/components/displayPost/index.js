@@ -5,7 +5,8 @@ import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { formatDate,formatTimeStamp,removeAlert,toggleCommentSection, displayDateDifferences} from '../../components/functions';
+import { formatDate,removeAlert,toggleCommentSection, 
+  displayDateDifferences, toggleCommentForm} from '../../components/functions';
 
 export function DisplayPost(props){
 
@@ -138,12 +139,6 @@ export function DisplayPost(props){
   }
 }
 
-  const toggleCommentForm=(i)=>{
-    const commentForm=document.querySelectorAll('.comment-form');
-    if(commentForm[i].style.display === 'none'){
-      commentForm[i].style.display ='block';
-   } else{  commentForm[i].style.display='none'}
-  }
 
   //show comment form by default if post has no comment
   const displayDefaultCommentForm=(item,index)=>{
@@ -264,7 +259,7 @@ export function DisplayPost(props){
                 <Link to={`/postDetail/${item._id}`} >
                  <div className='post-text'>{item.text ? item.text : ''}</div>
                 </Link>
-                <Link to={`/userProfile/${item.author?._id}`} id='link-user' >
+                <Link to={`/userProfile/${item.author?._id}`} id='link-user'>
                   <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
                 </Link>
                 <div className='post-date'>{displayDateDifferences(item.date)}</div>
@@ -290,7 +285,9 @@ export function DisplayPost(props){
                     return(
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>
+                        <Link to={`/userProfile/${comment.author?._id}`}>
                         <div className='comment-username'>{comment.author?.username}</div>
+                        </Link>
                         <div className='comment-date'>{displayDateDifferences(comment.date)}</div>
                       </div>
                     )
