@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import LoaderComponent from '../loader/loader';
 import AlertBox from '../alertBox/index';
+import { refreshLoginSession } from '../functions';
 
 
 function Dashboard(props){
@@ -17,8 +18,8 @@ function Dashboard(props){
         }
         );
   const [unSeenNotification,setUnSeenNotification]= useState();
- 
-    
+  const [unSeenMessages,setUnSeenMessages]= useState(0);
+
    // get login user information
    const getUser=()=>{
     const loggedInUser = localStorage.getItem("user");
@@ -26,8 +27,17 @@ function Dashboard(props){
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
       getUnSeenNotification(foundUser);
-    }
-}
+     
+    }}
+
+    const getMessageNotifCount=()=>{
+        const notifCount = localStorage.getItem("userMessageNotification");
+        if (notifCount) {
+          const count = JSON.parse(notifCount);
+          setUnSeenMessages( count);
+          return count;
+        }}
+
 
   const toggleColorSelect = (i)=>{
     const dashLink = document.querySelectorAll('#dash-link');    
@@ -46,11 +56,18 @@ function Dashboard(props){
     setUnSeenNotification(notifPostCount + notifFriendRequestCount);
  }
 
+ const removeNotifZero=(element,data)=>{
+    const notifElement= document.querySelector(element);
+    if(data === 0){
+        notifElement.style.display='none';
+    }
+ }
+
   
    useEffect(()=>{
         getUser();
        toggleColorSelect(props.dashIndex);
-       
+      getMessageNotifCount();
     },[])
 
     return(
@@ -83,14 +100,19 @@ function Dashboard(props){
                 <div id='message-tabs'>
                     <Link to='/messages' id='link-cont' >
                         <div  id='dash-link'>Messages</div>
+                        <div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
+                       {unSeenMessages > 0 ?  <span id='unseen-messages-count'>{unSeenMessages}</span> : ''}
+                        </div>
                     </Link>
                 </div>
                 <div id='notification-tabs'>
-                    <Link to='/notification' id='link-cont' >
-                        <div>{unSeenNotification}</div>
+                    <Link to='/notification' id='link-cont' > 
                         <div  id='dash-link'>Notification</div>
+                        <div>
                         <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
+                        {unSeenNotification > 0 ? <span id='unseen-notification-count'>{unSeenNotification}</span>:''}
+                        </div>
                     </Link>
                 </div>
                 <div>

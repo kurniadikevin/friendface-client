@@ -70,6 +70,7 @@ export const displayDateDifferences=(value)=>{
   return rot13.decrypt(str); 
  } 
 
+
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
   const passDecipher= loadCipherPass(lastPassword);
@@ -86,9 +87,11 @@ export const refreshLoginSession=(user)=>{
       console.log('No User Exist');
     } else{
       localStorage.setItem("user", JSON.stringify(res.data));
+      getAndAssignMessageNotifCount(res.data._id);
     }    
   });
 }
+
 
 export const removeAlert=()=>{
   setTimeout(()=>{
@@ -170,3 +173,24 @@ export const handleKeyEnter=(event,action)=>{
    action();
   }
  }
+
+ //get and assign messageNotification count to localStorage
+ export const getAndAssignMessageNotifCount= async(userId)=>{
+  try{
+    const url=`http://localhost:5000/userChat/byUserId/${userId}`;
+    const response = await fetch(url);
+    var data = await response.json();
+    localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));
+  }
+  catch(err){
+    console.log(err);
+  }
+ }
+
+   //get user message Notification count
+   export const getMessageNotifCount=()=>{
+    const notifCount = localStorage.getItem("userMessageNotification");
+    if (notifCount) {
+      const count = JSON.parse(notifCount);
+      return count;
+    }}

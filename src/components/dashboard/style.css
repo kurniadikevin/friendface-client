@@ -112,6 +112,17 @@
         font-weight: 600;
     }
 
+    #unseen-messages-count, #unseen-notification-count{
+        position: absolute;
+        margin-top: -5px;
+        margin-left: 2.5px;
+        z-index: 2;
+        font-weight: 600;
+        padding: 3px 6px;
+        color: var(--white);
+        background-color: var(--red);
+        border-radius: 50%;
+    }
 
 /* <--------deactivate   message tab------> */
 /* #message-tabs{
