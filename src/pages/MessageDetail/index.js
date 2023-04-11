@@ -3,7 +3,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences,handleKeyEnter } from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter, getAndAssignMessageNotifCount } from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -55,7 +55,7 @@ export function MessageDetailPage() {
  }
 
  const createChatMessage=()=>{
-  console.log(inputText.length);
+ 
     if(inputText.length > 0 && inputText.length <= 140){
       axios({
         method: "POST",
@@ -77,6 +77,26 @@ export function MessageDetailPage() {
     }
  }
 
+ const seenChatRoomToRemoveNotif=()=>{
+  axios({
+    method: "POST",
+    data: {
+      currentUser : currentUser._id,
+    },
+    withCredentials: true,
+    url: `http://localhost:5000/chatRoom/seen/${chatRoomId}`,
+  }).then((response)=>{
+    console.log(response);
+    console.log('chat room seened');
+    //update on message detail
+    //getAndAssignMessageNotifCount( currentUser._id);
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
+ }
+
+
 // Livechat with set Interval 1 second
   /* useEffect(() => {
     fetchChatData(chatRoomId);
@@ -93,7 +113,7 @@ export function MessageDetailPage() {
   useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
-   
+   seenChatRoomToRemoveNotif();
   }, [chatRoomId]);
 
   

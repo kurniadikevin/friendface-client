@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import LoaderComponent from '../loader/loader';
 import AlertBox from '../alertBox/index';
-import { refreshLoginSession } from '../functions';
+import { getAndAssignMessageNotifCount } from '../functions';
 
 
 function Dashboard(props){
@@ -56,18 +56,13 @@ function Dashboard(props){
     setUnSeenNotification(notifPostCount + notifFriendRequestCount);
  }
 
- const removeNotifZero=(element,data)=>{
-    const notifElement= document.querySelector(element);
-    if(data === 0){
-        notifElement.style.display='none';
-    }
- }
-
   
    useEffect(()=>{
-        getUser();
-       toggleColorSelect(props.dashIndex);
-      getMessageNotifCount();
+    getUser();
+    toggleColorSelect(props.dashIndex);
+   // getAndAssignMessageNotifCount(userData._id);
+    getMessageNotifCount();
+    console.log('dashboard render')
     },[])
 
     return(
