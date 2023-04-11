@@ -78,7 +78,7 @@ export function MessageDetailPage() {
  }
 
 // Livechat with set Interval 1 second
-  useEffect(() => {
+  /* useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
     const interval = setInterval(() => {
@@ -86,15 +86,15 @@ export function MessageDetailPage() {
       toggleLoader();
     }, 1000);
     return () => clearInterval(interval);
-  }, [chatRoomId]);
+  }, [chatRoomId]); */
 
 
   //without interval for developing to prevent infinite loop when hot reload
-  /* useEffect(() => {
+  useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
    
-  }, [chatRoomId]); */
+  }, [chatRoomId]);
 
   
   return (

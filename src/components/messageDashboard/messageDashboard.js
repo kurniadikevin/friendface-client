@@ -13,6 +13,7 @@ const MessageDashboard=()=>{
 
   const [chatRoomList,setChatRoomList]= useState([]);
   const [chatRoomUserInfoList,setChatRoomUserInfoList]= useState([]);
+  const [messageNotif,setMessageNotif]= useState(0);
 
   const fetchUserChatRoomList= async (userId)=>{
     try{
@@ -21,6 +22,9 @@ const MessageDashboard=()=>{
       var data = await response.json();
       const listChat = sortChatRooms( data[0].chatRoomList);
       setChatRoomList(listChat);
+      setMessageNotif(data[0].messageNotification);
+      //fetch notification on local
+      localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));
       const filterListChat = listChat.map((i)=>{
         //group chat list show all id
         if((i.membersId).length > 2){
@@ -73,6 +77,7 @@ const MessageDashboard=()=>{
         }
       })
       setChatRoomUserInfoList(memberValue);
+      
   })
   }
 
@@ -99,16 +104,25 @@ const MessageDashboard=()=>{
   return sortedData;
   }
     
+  // assign count on chat room for notification from userChat that have same chatroom Id
+ const assignNotifToChatRoomCount=(data,chatRoomId)=>{
+  let sum=0;
+  for( let i=0; i< data.length; i++){
+    if(data[i].chatRoomId == chatRoomId){
+      sum += 1;
+    }
+  } return sum;
+ }
   
   useEffect(()=>{
       updateUserChatData(currentUser._id);
       fetchUserChatRoomList(currentUser._id);
       // update chat room list every 5 seconds
-      const interval = setInterval(() => {
+   /*    const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
       }, 3000);
-      return () => clearInterval(interval);
+      return () => clearInterval(interval); */
     },[])
 
     return(
@@ -141,6 +155,7 @@ const MessageDashboard=()=>{
                       chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
                       )}
                       </div>
+                      <div>count</div>
                   </div>
                 </div> 
                 : 
@@ -156,6 +171,7 @@ const MessageDashboard=()=>{
                       chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
                       )}
                       </div>
+                      <div>{assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id)}</div>
                   </div>
                 </div>
                 }
