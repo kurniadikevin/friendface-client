@@ -11,6 +11,13 @@
     height:100vh;
 }
 
+/* shadow */
+.Dashboard{
+background: #12111D;
+box-shadow:  7px 7px 14px #0d0c14,
+             -7px -7px 14px #171626;
+}
+
 .Dashboard>div{
    
 }

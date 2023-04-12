@@ -6,8 +6,13 @@
         display: grid;
         grid-template-columns: 1fr 2.5fr;
         font-weight: 600;
-        
     }
+/* box shadow */
+    .profile-head{
+        box-shadow:  7px 7px 14px #0d0c14,
+        -7px -7px 14px #171626;
+    }
+
     .profile-detail{
         padding-top: 30px;
         display: grid;
@@ -54,7 +59,7 @@
         }
 
     .profile-body{
-        border-top: 1px solid var(--currentLine);
+        /* border-top: 1px solid var(--currentLine); */
     }
 
     #profileForm, #imageForm{

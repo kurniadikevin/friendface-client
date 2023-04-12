@@ -1,8 +1,14 @@
+#sidebar-wrapper{
+   box-shadow:  -7px 7px 14px #0f0e17,
+             7px -7px 14px #151423;
+}
+
 .Sidebar{
    display: grid;
    grid-template-rows: 80px 1.5fr 200px;
    position: sticky;
    top: 0px;
+  
 }
 
 .sidebar-head{

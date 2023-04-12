@@ -40,9 +40,15 @@ function Dashboard(props){
 
 
   const toggleColorSelect = (i)=>{
+    //dash link text
     const dashLink = document.querySelectorAll('#dash-link');    
     dashLink[i].style.color='var(--green)';
     dashLink[i].style.transform = 'translateX(5px)';
+
+    //dash link icon
+    const linkIcon = document.querySelectorAll('#link-icon');    
+    linkIcon[i].style.color='var(--pink)';
+    
   }
 
  const getUnSeenNotification=(data)=>{
@@ -62,7 +68,7 @@ function Dashboard(props){
     toggleColorSelect(props.dashIndex);
     getAndAssignMessageNotifCount(userData._id);
     getMessageNotifCount();
-    console.log('dashboard render')
+   
     },[])
 
     return(

@@ -151,10 +151,13 @@ export const toggleBluredBg=()=>{
   if(blurredBg.style.display === 'inline'){
       blurredBg.style.display ='none';
       homeComp.style.backgroundColor='var(--background00)';
+      homeComp.style.boxShadow=`7px 7px 14px #0d0c14,
+      -7px -7px 14px #171626`;
       sidebar.style.zIndex=0;
   } else{ 
        blurredBg.style.display='inline';
        homeComp.style.backgroundColor='transparent';
+       homeComp.style.boxShadow='none';
        sidebar.style.zIndex=-1;
       }
 }
