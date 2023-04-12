@@ -90,8 +90,9 @@
     position: relative;
     left: 10px;
     z-index: 2;
+    font-size: 10pt;
     font-weight: 600;
-    padding: 1px 7px;
+    padding: 1px 9px;
     color: var(--white);
     background-color: var(--red);
     border-radius: 50%;

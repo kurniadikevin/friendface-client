@@ -148,14 +148,20 @@ const MessageDashboard=()=>{
                   <img id='chat-dashboard-user-img' src={(require('../../assets/group-default-image-square.jpg'))}
                    width={50} height={50}/>
                    <div className='chatroom-info-wrap'>
-                      <div className='chatroom-username' id='chatroom-groupName'>{chatRoomList[index].groupName}</div>
+                    <div className='chatRoom-cont-username'>
+                        <div className='chatroom-username' id='chatroom-groupName'>{chatRoomList[index].groupName}</div>
+                        {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id) > 0 ?
+                      <span id='unseen-messages-count-chatroom'>
+                        {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id)}
+                      </span>
+                      : ''}
+                    </div>
                       <div className='chatRoom-lastContent'>
                       {'last update   '} 
                       { displayDateDifferences(
                       chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
                       )}
                       </div>
-                      <div>count</div>
                   </div>
                 </div> 
                 : 
@@ -165,12 +171,12 @@ const MessageDashboard=()=>{
                     />
                   <div className='chatroom-info-wrap'>
                     <div className='chatRoom-cont-username'>
-                    <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
-                    {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id) > 0 ?
-                    <span id='unseen-messages-count-chatroom'>
-                      {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id)}
-                    </span>
-                    : ''}
+                      <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
+                      {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id) > 0 ?
+                      <span id='unseen-messages-count-chatroom'>
+                        {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id)}
+                      </span>
+                      : ''}
                     </div>
                     <div className='chatRoom-lastContent'>
                       {'last update   '} 
