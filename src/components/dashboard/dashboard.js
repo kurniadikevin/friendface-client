@@ -60,7 +60,7 @@ function Dashboard(props){
    useEffect(()=>{
     getUser();
     toggleColorSelect(props.dashIndex);
-   // getAndAssignMessageNotifCount(userData._id);
+    getAndAssignMessageNotifCount(userData._id);
     getMessageNotifCount();
     console.log('dashboard render')
     },[])

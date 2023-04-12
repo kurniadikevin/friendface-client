@@ -7,6 +7,7 @@ import { getUser,displayDateDifferences,handleKeyEnter, getAndAssignMessageNotif
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export function MessageDetailPage() {
@@ -96,25 +97,36 @@ export function MessageDetailPage() {
   })
  }
 
+ const scrollDefaulToBottom=()=>{
+  const chatRoomBody= document.querySelector('.chat-container');
+  chatRoomBody.scrollTop = chatRoomBody.scrollHeight;
+  console.log( chatRoomBody.scrollHeight);
+ }
 
 // Livechat with set Interval 1 second
-  /* useEffect(() => {
+  useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
+    seenChatRoomToRemoveNotif();
+
+    // toggle to bottom scroll chat after load messages
+    setTimeout(scrollDefaulToBottom,1000);
+
     const interval = setInterval(() => {
       fetchChatData(chatRoomId);
       toggleLoader();
+     
     }, 1000);
     return () => clearInterval(interval);
-  }, [chatRoomId]); */
+  }, [chatRoomId]);
 
 
   //without interval for developing to prevent infinite loop when hot reload
-  useEffect(() => {
+ /*  useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
    seenChatRoomToRemoveNotif();
-  }, [chatRoomId]);
+  }, [chatRoomId]); */
 
   
   return (
@@ -134,7 +146,11 @@ export function MessageDetailPage() {
             }
           </div>
           <div className='chat-user-info'>
+            { chatRoomData.membersId ?
+            <Link  to={`/userProfile/${ showOnlyForeignUserInfo(chatRoomData,'_id','info')}`}>
             <div className='chat-user-username'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'username','info') : ''}</div>
+            </Link>
+            : ''}
             <div className='chat-user-email'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'email','info') : ''}</div>
          </div>
          </div>
