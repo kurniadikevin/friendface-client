@@ -38,6 +38,7 @@ const ProfileForm = (props)=>{
             refreshLoginSession(currentUser);
             const usernameDisplay=document.querySelector('#user-username');
             usernameDisplay.textContent=data;
+            setTimeout(()=> window.location.reload(false),1000);
            })
            .catch(function (error) {
              console.log(error);
