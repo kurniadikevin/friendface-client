@@ -1,5 +1,5 @@
 import './style.css';
-import {  useParams } from 'react-router-dom';
+import {  useParams ,useHistory} from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
@@ -16,13 +16,16 @@ export function UserProfilePage() {
     { username : 'loading',
       email : 'loading' , profilePicture : ''});
 
+  let history = useHistory();
   // current user
   let currentUser = getUser();
-
   // visited profile user fetch by parameter userId
    let {userId} = useParams(); 
 
   const fetchUserData = async ()=>{
+        //redirect to profile if user visit their own profile
+        history.push("/profile");
+        
         const url=`http://localhost:5000/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
@@ -31,6 +34,7 @@ export function UserProfilePage() {
         checkFriendStatusAndRequest(data[0].friends,'Friend');
          //check for friend request  user visit
          checkFriendStatusAndRequest(data[0].friendRequest,'Friend request sent');
+
         }
 
   const fetchPostCount= async ()=>{
