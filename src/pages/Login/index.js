@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {  useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
 import AlertBox from '../../components/alertBox/index';
-import {removeAlert,storeCipherPass} from '../../components/functions';
+import {removeAlert,storeCipherPass, getAndAssignMessageNotifCount} from '../../components/functions';
 
 export function LoginPage() {
 
@@ -69,6 +69,7 @@ export function LoginPage() {
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("lastPassword",storeCipherPass(password));
+        getAndAssignMessageNotifCount(res.data._id);
         history.push("/");
       }    
     });
@@ -91,7 +92,8 @@ export function LoginPage() {
         alert('Nosa User Exist')
       } else{
         localStorage.setItem("user", JSON.stringify(res.data));
-        localStorage.setItem("lastPassword",storeCipherPass('password'))
+        localStorage.setItem("lastPassword",storeCipherPass('password'));
+        getAndAssignMessageNotifCount(res.data._id);
         history.push("/")
       }    
     });

@@ -3,6 +3,7 @@
 
 :root{
   --background : rgb(40 42 54	);
+  --backgroundOP : rgb(40 ,42 ,54,0.6	);
   --purple:rgb(189 147 249);
   --pink : rgb(255 121 198);
   --red : rgb(255 85 85);
@@ -14,6 +15,7 @@
   --green: rgb(80 250 123);
   --currentLine : rgb(68 71 90);
   --background00:  rgb(18,16,29);
+  --backgroundHomeComp:  rgb(20,18,30);
   --background00OP:  rgb(18,16,29,0.7);
 }
 
@@ -43,8 +45,8 @@ code {
 
 
   .main{
-      border-left: 1px solid var(--currentLine);
-      border-right: 1px solid var(--currentLine);
+     /*  border-left: 1px solid var(--currentLine); */
+     /*  border-right: 1px solid var(--currentLine); */
   }
 
 @media screen and (max-width: 500px) {

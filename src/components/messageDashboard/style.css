@@ -43,12 +43,16 @@
     padding-left: 10px;
 }
 
+.chatRoom-cont-username{
+   
+    display: flex;
+}
+
 .chatroom-username{
     transition: 0.5s;
     font-weight: 800;
     font-size: 12pt;
    padding-top: 5px;
-  
 }
 
 #chatroom-groupName{
@@ -80,4 +84,18 @@
 
 #groupChat-text{
     color: var(--purple);
+}
+
+#unseen-messages-count-chatroom{
+    position: relative;
+    left: 10px;
+    z-index: 2;
+    font-size: 10pt;
+    font-weight: 600;
+    padding: 1px 9px;
+    color: var(--white);
+    background-color: var(--red);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
 }

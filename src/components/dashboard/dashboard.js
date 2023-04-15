@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import LoaderComponent from '../loader/loader';
 import AlertBox from '../alertBox/index';
+import { getAndAssignMessageNotifCount } from '../functions';
 
 
 function Dashboard(props){
@@ -12,29 +13,62 @@ function Dashboard(props){
             {
         username : 'not signed in',
         email : 'not available',
-        profilePicture : (require('../../assets/profilepicturesSmall.png'))
+        profilePicture : (require('../../assets/profilepicturesSmall.png')),
+        postNotification : []
         }
         );
-    
+  const [unSeenNotification,setUnSeenNotification]= useState();
+  const [unSeenMessages,setUnSeenMessages]= useState(0);
+
    // get login user information
    const getUser=()=>{
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUserData(foundUser);
-    }
-}
+      getUnSeenNotification(foundUser);
+     
+    }}
+
+    const getMessageNotifCount=()=>{
+        const notifCount = localStorage.getItem("userMessageNotification");
+        if (notifCount) {
+          const count = JSON.parse(notifCount);
+          setUnSeenMessages( count);
+          return count;
+        }}
+
 
   const toggleColorSelect = (i)=>{
+    //dash link text
     const dashLink = document.querySelectorAll('#dash-link');    
     dashLink[i].style.color='var(--green)';
     dashLink[i].style.transform = 'translateX(5px)';
+
+    //dash link icon
+    const linkIcon = document.querySelectorAll('#link-icon');    
+    linkIcon[i].style.color='var(--pink)';
+    
   }
+
+ const getUnSeenNotification=(data)=>{
+    const notifPost=  (data.postNotification).filter((item)=>{
+        if(!item.seenAt){return item; }})
+    const notifPostCount= notifPost.length;
+    const notifFriendRequest= (data.friendRequest).filter((item)=>{
+        if(!item.seenAt){return item; }})
+    const notifFriendRequestCount = notifFriendRequest.length;
+
+    setUnSeenNotification(notifPostCount + notifFriendRequestCount);
+ }
 
   
    useEffect(()=>{
-        getUser();
-       toggleColorSelect(props.dashIndex)
+    getUser();
+    toggleColorSelect(props.dashIndex);
+    getAndAssignMessageNotifCount(userData._id);
+    getMessageNotifCount();
+   
     },[])
 
     return(
@@ -67,13 +101,19 @@ function Dashboard(props){
                 <div id='message-tabs'>
                     <Link to='/messages' id='link-cont' >
                         <div  id='dash-link'>Messages</div>
+                        <div>
                         <span id='link-icon' class="material-symbols-outlined">forum</span>
+                       {unSeenMessages > 0 ?  <span id='unseen-messages-count'>{unSeenMessages}</span> : ''}
+                        </div>
                     </Link>
                 </div>
                 <div id='notification-tabs'>
-                    <Link to='/notification' id='link-cont' >
+                    <Link to='/notification' id='link-cont' > 
                         <div  id='dash-link'>Notification</div>
+                        <div>
                         <span id='link-icon' class="material-symbols-outlined">notifications_active</span>
+                        {unSeenNotification > 0 ? <span id='unseen-notification-count'>{unSeenNotification}</span>:''}
+                        </div>
                     </Link>
                 </div>
                 <div>

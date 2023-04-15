@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './style.css';
 import axios from "axios";
-import {removeAlert, formatTimeStamp} from '../functions';
+import {removeAlert, formatTimeStamp, toggleCommentForm, handleKeyEnter} from '../functions';
 
 
 const CommentForm= (props)=>{
@@ -10,7 +10,7 @@ const CommentForm= (props)=>{
 
     let currentUser = props?.currentUser;
 
-    const createComment= (post)=>{
+    const createComment= (post,index)=>{
         if(!currentUser){
             const alertBox = document.querySelector('#alert-box');
             alertBox.textContent='Cannot make comment without login !'
@@ -40,6 +40,7 @@ const CommentForm= (props)=>{
             setComment('');
             displayLastComment(lastComment);
             displayIncrementCommentCount();
+            toggleCommentForm(index);
           })
           .catch(function (error) {
             console.log(error);
@@ -75,12 +76,13 @@ const CommentForm= (props)=>{
             <div className='newComment-main'>
                 <textarea id='newComment-text' name='text' placeholder="add comment here"
                 value={comment} onChange={(e)=> setComment(e.target.value)}
+                onKeyDown={(event)=>{handleKeyEnter(event, ()=> {createComment(props.post,props.index)})}}
                 cols='50' rows='5'></textarea>
             </div>
             <div className='newComment-button'>
                 
-                <button id='newComment-submit'onClick={()=> {createComment(props.post) ;
-                     }}>Add</button>
+                <button id='newComment-submit'onClick={()=> {createComment(props.post,props.index)}}
+                >Add</button>
             </div>
             
         </div>

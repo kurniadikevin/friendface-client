@@ -3,10 +3,11 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences } from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter, getAndAssignMessageNotifCount } from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 export function MessageDetailPage() {
@@ -55,7 +56,7 @@ export function MessageDetailPage() {
  }
 
  const createChatMessage=()=>{
-  console.log(inputText.length);
+ 
     if(inputText.length > 0 && inputText.length <= 140){
       axios({
         method: "POST",
@@ -77,31 +78,54 @@ export function MessageDetailPage() {
     }
  }
 
- // event handler to create chat message when enter key down
- const handleKeyEnter=(event)=>{
-  if(event.key=== 'Enter'){
-    createChatMessage();
-  }
+ const seenChatRoomToRemoveNotif=()=>{
+  axios({
+    method: "POST",
+    data: {
+      currentUser : currentUser._id,
+    },
+    withCredentials: true,
+    url: `http://localhost:5000/chatRoom/seen/${chatRoomId}`,
+  }).then((response)=>{
+    console.log(response);
+    console.log('chat room seened');
+    //update on message detail
+    //getAndAssignMessageNotifCount( currentUser._id);
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
  }
 
+ const scrollDefaulToBottom=()=>{
+  const chatRoomBody= document.querySelector('.chat-container');
+  chatRoomBody.scrollTop = chatRoomBody.scrollHeight;
+  console.log( chatRoomBody.scrollHeight);
+ }
 
 // Livechat with set Interval 1 second
   useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
+    seenChatRoomToRemoveNotif();
+
+    // toggle to bottom scroll chat after load messages
+    setTimeout(scrollDefaulToBottom,1000);
+
     const interval = setInterval(() => {
       fetchChatData(chatRoomId);
       toggleLoader();
+     
     }, 1000);
     return () => clearInterval(interval);
   }, [chatRoomId]);
 
 
   //without interval for developing to prevent infinite loop when hot reload
-  /* useEffect(() => {
+ /*  useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();
-   
+   seenChatRoomToRemoveNotif();
   }, [chatRoomId]); */
 
   
@@ -122,7 +146,11 @@ export function MessageDetailPage() {
             }
           </div>
           <div className='chat-user-info'>
+            { chatRoomData.membersId ?
+            <Link  to={`/userProfile/${ showOnlyForeignUserInfo(chatRoomData,'_id','info')}`}>
             <div className='chat-user-username'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'username','info') : ''}</div>
+            </Link>
+            : ''}
             <div className='chat-user-email'>{chatRoomData.membersId ? showOnlyForeignUserInfo(chatRoomData,'email','info') : ''}</div>
          </div>
          </div>
@@ -150,7 +178,7 @@ export function MessageDetailPage() {
          <div className='message-input-container'> 
               <textarea className='message-input-text'
                 value={inputText} onChange={(e)=>setInputText(e.target.value)}
-                onKeyDown={(event)=>{handleKeyEnter(event)}}
+                onKeyDown={(event)=>{handleKeyEnter(event, createChatMessage)}}
                 >
               </textarea> 
               <div id='text-area-count'>{inputText.length}/140</div>

@@ -70,6 +70,7 @@ export const displayDateDifferences=(value)=>{
   return rot13.decrypt(str); 
  } 
 
+
 export const refreshLoginSession=(user)=>{
   const lastPassword= localStorage.getItem('lastPassword');
   const passDecipher= loadCipherPass(lastPassword);
@@ -86,9 +87,11 @@ export const refreshLoginSession=(user)=>{
       console.log('No User Exist');
     } else{
       localStorage.setItem("user", JSON.stringify(res.data));
+      getAndAssignMessageNotifCount(res.data._id);
     }    
   });
 }
+
 
 export const removeAlert=()=>{
   setTimeout(()=>{
@@ -116,6 +119,22 @@ export const toggleCommentSection = (i,commentFormDisplay)=>{
   commentForm[i].style.display= commentFormDisplay;
 }
 
+//toggle comment form
+export const toggleCommentForm=(i)=>{
+  const commentForm=document.querySelectorAll('.comment-form');
+  if(commentForm[i].style.display === 'none'){
+    commentForm[i].style.display ='block';
+ } else{  commentForm[i].style.display='none'}
+}
+
+// clear all displayed comment section
+export const clearCommentDisplay=(data)=>{
+  const commentSection= document.querySelectorAll('.comment-map');
+  for(let i=0; i< data.length; i++ ){
+    commentSection.style.display='none';
+  }
+}
+
 // universal toggle for form using id name of the form as parameter
 export const toggleForm = (form)=>{
   const Form = document.querySelector(`#${form}`);
@@ -132,10 +151,13 @@ export const toggleBluredBg=()=>{
   if(blurredBg.style.display === 'inline'){
       blurredBg.style.display ='none';
       homeComp.style.backgroundColor='var(--background00)';
+      homeComp.style.boxShadow=`7px 7px 14px #0d0c14,
+      -7px -7px 14px #171626`;
       sidebar.style.zIndex=0;
   } else{ 
        blurredBg.style.display='inline';
        homeComp.style.backgroundColor='transparent';
+       homeComp.style.boxShadow='none';
        sidebar.style.zIndex=-1;
       }
 }
@@ -147,3 +169,31 @@ export const alertNullPostText=()=>{
   alertBox.style.display='inline';
   removeAlert();
 }
+
+//make action on 'Enter' key down
+export const handleKeyEnter=(event,action)=>{
+  if(event.key=== 'Enter'){
+   action();
+  }
+ }
+
+ //get and assign messageNotification count to localStorage
+ export const getAndAssignMessageNotifCount= async(userId)=>{
+  try{
+    const url=`http://localhost:5000/userChat/byUserId/${userId}`;
+    const response = await fetch(url);
+    var data = await response.json();
+    localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));
+  }
+  catch(err){
+    console.log(err);
+  }
+ }
+
+   //get user message Notification count
+   export const getMessageNotifCount=()=>{
+    const notifCount = localStorage.getItem("userMessageNotification");
+    if (notifCount) {
+      const count = JSON.parse(notifCount);
+      return count;
+    }}

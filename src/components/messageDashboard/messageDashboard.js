@@ -2,7 +2,6 @@ import { getUser } from '../functions';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { toggleLoader } from '../loader/loader-toggle';
 import axios from 'axios';
 import { formatDate, displayDateDifferences } from '../functions';
 
@@ -13,6 +12,7 @@ const MessageDashboard=()=>{
 
   const [chatRoomList,setChatRoomList]= useState([]);
   const [chatRoomUserInfoList,setChatRoomUserInfoList]= useState([]);
+  const [messageNotif,setMessageNotif]= useState(0);
 
   const fetchUserChatRoomList= async (userId)=>{
     try{
@@ -21,6 +21,9 @@ const MessageDashboard=()=>{
       var data = await response.json();
       const listChat = sortChatRooms( data[0].chatRoomList);
       setChatRoomList(listChat);
+      setMessageNotif(data[0].messageNotification);
+      //fetch notification on local
+      localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));
       const filterListChat = listChat.map((i)=>{
         //group chat list show all id
         if((i.membersId).length > 2){
@@ -73,6 +76,7 @@ const MessageDashboard=()=>{
         }
       })
       setChatRoomUserInfoList(memberValue);
+      
   })
   }
 
@@ -99,6 +103,15 @@ const MessageDashboard=()=>{
   return sortedData;
   }
     
+  // assign count on chat room for notification from userChat that have same chatroom Id
+ const assignNotifToChatRoomCount=(data,chatRoomId)=>{
+  let sum=0;
+  for( let i=0; i< data.length; i++){
+    if(data[i].chatRoomId == chatRoomId){
+      sum += 1;
+    }
+  } return sum;
+ }
   
   useEffect(()=>{
       updateUserChatData(currentUser._id);
@@ -134,7 +147,14 @@ const MessageDashboard=()=>{
                   <img id='chat-dashboard-user-img' src={(require('../../assets/group-default-image-square.jpg'))}
                    width={50} height={50}/>
                    <div className='chatroom-info-wrap'>
-                      <div className='chatroom-username' id='chatroom-groupName'>{chatRoomList[index].groupName}</div>
+                    <div className='chatRoom-cont-username'>
+                        <div className='chatroom-username' id='chatroom-groupName'>{chatRoomList[index].groupName}</div>
+                        {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id) > 0 ?
+                      <span id='unseen-messages-count-chatroom'>
+                        {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id)}
+                      </span>
+                      : ''}
+                    </div>
                       <div className='chatRoom-lastContent'>
                       {'last update   '} 
                       { displayDateDifferences(
@@ -149,13 +169,21 @@ const MessageDashboard=()=>{
                     src={`https://odin-book-api-production.up.railway.app/users/profilePicture/${item._id}`} width={50} height={50}
                     />
                   <div className='chatroom-info-wrap'>
-                    <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
+                    <div className='chatRoom-cont-username'>
+                      <div className='chatroom-username'>{item.username ? item.username : item.email}</div>
+                      {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id) > 0 ?
+                      <span id='unseen-messages-count-chatroom'>
+                        {assignNotifToChatRoomCount(messageNotif,chatRoomList[index]._id)}
+                      </span>
+                      : ''}
+                    </div>
                     <div className='chatRoom-lastContent'>
                       {'last update   '} 
                       { displayDateDifferences(
                       chatRoomList[index].modifiedAt ? chatRoomList[index].modifiedAt : chatRoomList[index].createdAt
                       )}
                       </div>
+                      
                   </div>
                 </div>
                 }
