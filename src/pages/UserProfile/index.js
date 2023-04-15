@@ -26,7 +26,7 @@ export function UserProfilePage() {
         //redirect to profile if user visit their own profile
         history.push("/profile");
         
-        const url=`http://localhost:5000/users/${userId}`;
+        const url=`https://odin-book-api-production.up.railway.app/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);

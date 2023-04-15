@@ -180,7 +180,7 @@ export const handleKeyEnter=(event,action)=>{
  //get and assign messageNotification count to localStorage
  export const getAndAssignMessageNotifCount= async(userId)=>{
   try{
-    const url=`http://localhost:5000/userChat/byUserId/${userId}`;
+    const url=`https://odin-book-api-production.up.railway.app/userChat/byUserId/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));

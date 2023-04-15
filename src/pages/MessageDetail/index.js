@@ -85,7 +85,7 @@ export function MessageDetailPage() {
       currentUser : currentUser._id,
     },
     withCredentials: true,
-    url: `http://localhost:5000/chatRoom/seen/${chatRoomId}`,
+    url: `https://odin-book-api-production.up.railway.app/chatRoom/seen/${chatRoomId}`,
   }).then((response)=>{
     console.log(response);
     console.log('chat room seened');

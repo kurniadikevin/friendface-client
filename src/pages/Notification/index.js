@@ -81,7 +81,7 @@ export function NotificationPage() {
   const seenNotificationForPostAndFriendRequest=(user,urlExt)=>{
     axios({
       method : "POST",
-      url : `http://localhost:5000/users/${urlExt}/${user._id}`
+      url : `https://odin-book-api-production.up.railway.app/users/${urlExt}/${user._id}`
   }).then(function (response) {
     console.log(urlExt)
    /* refreshLoginSession(currentUser); */
@@ -139,7 +139,7 @@ export function NotificationPage() {
           }
             return (
               <div className='friendReq-cont'>
-                    <img  src={data.sender._id ?  `http://localhost:5000/users/profilePicture/${data.sender._id} `
+                    <img  src={data.sender._id ?  `https://odin-book-api-production.up.railway.app/users/profilePicture/${data.sender._id} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' 
                      id='notif-image'/>
