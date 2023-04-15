@@ -2,7 +2,6 @@ import { getUser } from '../functions';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { toggleLoader } from '../loader/loader-toggle';
 import axios from 'axios';
 import { formatDate, displayDateDifferences } from '../functions';
 
