@@ -1,6 +1,5 @@
 
 .displayPostCont{
-    
     padding:45px 20px 45px 20px;
     padding-left: 45px;
 }
@@ -30,6 +29,7 @@
         padding-bottom: 20px;
         padding-right: 20px;
         cursor: pointer;
+        word-wrap: break-word;
     }
     .post-author{
         font-size: 10pt;
@@ -162,4 +162,15 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: var(--green);
+  }
+
+
+  @media screen and (max-width: 500px) {
+    .displayPostCont{
+        padding: 10px;
+    }
+    .post-text{
+        width: 300px;
+    }
+
   }
