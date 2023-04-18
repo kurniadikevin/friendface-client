@@ -133,7 +133,7 @@ export function MessageDetailPage() {
     <div className="App">
       <Dashboard  dashIndex={3} />
       <div className='main' id='message-main'>
-        <MessageDashboard/>
+        <MessageDashboard idChatDetail='dashboard-chat-detail'/>
         <div className='message-content-container'>
          <div className='chat-user-head'>
           <div className='chat-user-imgCont'>

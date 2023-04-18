@@ -104,7 +104,6 @@ code {
     height: 75px;
     padding: 0;
     background-color: var(--background00OP);
-    border: 1px solid red;
   }
   .links-cont>div{
     display: grid;
@@ -139,7 +138,9 @@ code {
     grid-template-rows: 100px 1fr;
     padding-left: 10px;
     padding-right: 10px; 
+    
   }
+  
 
   
 
@@ -200,4 +201,21 @@ code {
     max-width: 400px;   
     
 }
+/* message dashboard */
+.chatRoom-wrapper{ 
+  max-height: fit-content;
+}
+/* user list */
+.map-search-new-chat{
+  max-height: fit-content;
+}
+/* message page */
+#message-main{
+  display: grid;
+  max-width: 400px;
+}
+
+ #dashboard-chat-detail{  
+  max-height: 650px;
+ }
 }
