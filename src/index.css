@@ -184,9 +184,20 @@ code {
   }
   /* blurred bg dash */
   .blurred-bg-dash{
-    height: 10000%
+    height: 10000%;
   }
   #new-post-mobile{
     display: inline;
+    z-index: 9;
   }
+
+  /* home comp post form */
+  .homeComp-postForm{ 
+    height: 150px;
+    bottom: 100px;
+    position:fixed;
+    top: 80%;
+    max-width: 400px;   
+    
+}
 }
