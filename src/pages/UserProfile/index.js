@@ -24,8 +24,10 @@ export function UserProfilePage() {
 
   const fetchUserData = async ()=>{
         //redirect to profile if user visit their own profile
-        history.push("/profile");
-        
+        if(userId === currentUser._id){
+          history.push("/profile");
+        }
+       
         const url=`https://odin-book-api-production.up.railway.app/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
