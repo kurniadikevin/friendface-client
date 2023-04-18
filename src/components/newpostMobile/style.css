@@ -1,0 +1,15 @@
+#new-post-mobile{
+    position: fixed;
+    color: var(--green);
+    bottom: 80px;
+    right: 30px;
+    z-index: 100;
+    background-color: var(--bg2OP);
+    border-radius: 50%;
+    padding: 15px;
+    display: none;
+}
+
+#np-mobile-icon{
+    font-size: 20pt;
+}

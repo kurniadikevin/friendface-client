@@ -91,6 +91,9 @@ code {
   .HomeComp{
     background-color: transparent;
   }
+  .home-head, .search-bar{
+    display: none;
+  }
   
   .links-cont{
     display: grid;
@@ -98,13 +101,17 @@ code {
     position: fixed;
     bottom: 0px;
     width: 100%;
-    height: 50px;
+    height: 75px;
     padding: 0;
     background-color: var(--background00OP);
+    border: 1px solid red;
   }
   .links-cont>div{
     display: grid;
     place-items: center;
+  }
+  #link-icon{
+    
   }
 
   .sign-links{
@@ -133,17 +140,53 @@ code {
     padding-left: 10px;
     padding-right: 10px; 
   }
+
   
-  .login-box{
-   
-  }
-
-  .message-content-newChat{
-
-  }
 
   /* make post container for new post */
   #make-post{
     display: block;
+  }
+
+  /* login---page */
+
+  .Login{
+    background-image: url(../src/assets/login-bg.jpg);
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center;  
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+
+  }
+  .login-col1{
+    display: hide;
+  }
+  .login-col2{
+    background-color: transparent;
+  }
+
+  .login-box{
+    background-color: var(--background00);
+    box-shadow: none;
+    border: none;
+  }
+  /* notification- page */
+  .notif-page{
+    place-items: center;
+  }
+   .likeAndComment-cont{
+    grid-template-columns: 2fr 5fr;
+  }
+  .friendReq-cont{
+    grid-template-columns: 3fr 5fr;
+  }
+  /* blurred bg dash */
+  .blurred-bg-dash{
+    height: 10000%
+  }
+  #new-post-mobile{
+    display: inline;
   }
 }

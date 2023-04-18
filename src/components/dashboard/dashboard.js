@@ -5,6 +5,7 @@ import axios from 'axios';
 import LoaderComponent from '../loader/loader';
 import AlertBox from '../alertBox/index';
 import { getAndAssignMessageNotifCount } from '../functions';
+import NewPostMobile from '../newpostMobile';
 
 
 function Dashboard(props){
@@ -77,6 +78,7 @@ function Dashboard(props){
             <div className='title-dashboard'>
             <Link to='/' id='title-link'>
                 <div className='app-title'>Friendface</div>
+                <NewPostMobile/>
             </Link>
             </div>
             <div className='links-cont'>
@@ -144,6 +146,7 @@ function Dashboard(props){
            <AlertBox/>
            <div className='blurred-bg-dash'></div>
         </div>
+      
         <LoaderComponent/>
      
     </div>
