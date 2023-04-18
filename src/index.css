@@ -49,7 +49,10 @@ code {
      /*  border-right: 1px solid var(--currentLine); */
   }
 
-@media screen and (max-width: 500px) {
+
+
+
+@media screen and (max-width: 1000px) {
   .App{
     zoom: 75%;
   }
@@ -59,10 +62,8 @@ code {
   .Dashboard{
     padding-left:0px;
     height:50px;
-    max-width: 300px;
     display: grid;
     place-items: center;
-  
   }
 
   .title-dashboard{
@@ -74,19 +75,23 @@ code {
     padding-top: 0px;
     position: fixed;
     width: 100%;
-    top: 0px;
+    top: 10px;
     background-color: var(--background00);
   }
     .app-title{
-      position: absolute;
-      left: 40%;
+      
     }
   .dashboard-bottom{
     display: none;
   }
-  #sidebar-wrapper, #dash-link, .HomeComp{
+  #sidebar-wrapper, #dash-link{
     display: none;
   }
+
+  .HomeComp{
+    background-color: transparent;
+  }
+  
   .links-cont{
     display: grid;
     grid-template-columns: repeat(6,1fr);
@@ -96,7 +101,6 @@ code {
     height: 50px;
     padding: 0;
     background-color: var(--background00OP);
-    border: 1px solid red;
   }
   .links-cont>div{
     display: grid;
@@ -116,7 +120,7 @@ code {
     grid-template-rows: 2fr 2fr 2fr;
   }
   .profile-username, .profile-email{
-    grid-template-columns: 1fr;
+    
   }
   #profileImgProfile{
     height: 60px;
@@ -126,8 +130,8 @@ code {
   .App{
     grid-template-columns: auto;
     grid-template-rows: 100px 1fr;
-    padding-left: 0px;
-    padding-right: 0px; 
+    padding-left: 10px;
+    padding-right: 10px; 
   }
   
   .login-box{
@@ -136,5 +140,10 @@ code {
 
   .message-content-newChat{
 
+  }
+
+  /* make post container for new post */
+  #make-post{
+    display: block;
   }
 }
