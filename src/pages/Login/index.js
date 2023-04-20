@@ -3,8 +3,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {  useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
+import { toggleLoader,displayLoader } from '../../components/loader/loader-toggle';
 import AlertBox from '../../components/alertBox/index';
 import {removeAlert,storeCipherPass, getAndAssignMessageNotifCount} from '../../components/functions';
+import validator from "validator";
+
 
 export function LoginPage() {
 
@@ -45,10 +48,9 @@ export function LoginPage() {
     loginToggle.style.borderBottom='none';
   }
 
-
   // post form login using axios
   const loginUser = async()=>{  
-    loader.style.display='inline';
+   displayLoader();
     axios({
       method: "POST",
       data: {
@@ -77,7 +79,7 @@ export function LoginPage() {
 
   // post form login using axios
   const loginUserSample = async()=>{  
-    loader.style.display='inline';
+   displayLoader();
     axios({
       method: "POST",
       data: {
@@ -101,7 +103,7 @@ export function LoginPage() {
 
 // sign up user using axios then redirect
 const signUpUser = async()=>{  
-  loader.style.display='inline';
+  displayLoader();
   const alertBox = document.querySelector('#alert-box');
   axios({
     method: "POST",
@@ -146,6 +148,41 @@ const signUpUser = async()=>{
     var data = await response.json();
     localStorage.setItem('userPopular', JSON.stringify(data));
     }
+  
+  //validate email
+const validateEmail=()=>{
+  const signUpEmailInput= document.querySelector('#signup-email')
+  const logInEmailInput= document.querySelector('#login-email');
+  if (!validator.isEmail(email)) {
+    //false
+    signUpEmailInput.style.border='3px solid var(--red)';
+    logInEmailInput.style.border='3px solid var(--red)';
+  }else {
+    //true
+    signUpEmailInput.style.border='1px solid black';
+    logInEmailInput.style.border='1px solid black';
+  }
+}
+
+const validateWhenSignUp=()=>{
+  if(validator.isEmail(email) && password.length >= 5){
+    signUpUser()
+  }else if(password.length < 5){
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.textContent='Please enter password with minimun of 5 character';
+    alertBox.style.display='inline';
+    alertBox.style.position="fixed";
+    loader.style.display='none';
+  } 
+  else{
+    const alertBox = document.querySelector('#alert-box');
+    alertBox.textContent='Please input email with email format';
+    alertBox.style.display='inline';
+    alertBox.style.position="fixed";
+    loader.style.display='none';
+  }
+}
+
 
   useEffect(()=>{
     
@@ -153,7 +190,15 @@ const signUpUser = async()=>{
   localStorage.clear();
   // fetch recent user when login
   fetchRecentUser();
+  toggleLoader();
   },[])
+
+  useEffect(()=>{
+    if(email){
+    validateEmail();
+    }
+    console.log('val')
+  },[email])
 
   return (
     <div className="Login">
@@ -189,7 +234,7 @@ const signUpUser = async()=>{
                  value={password} onChange={(e) => setPassword(e.target.value)}
                 id='signup-password'></input>
               </div>
-              <button type='submit' className='submit-btn' onClick={signUpUser}>Sign Up</button>
+              <button type='submit' className='submit-btn' onClick={validateWhenSignUp}>Sign Up</button>
             </div>
 
           {/* login form */}
@@ -197,11 +242,13 @@ const signUpUser = async()=>{
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='email'  placeholder='email' name='email' 
-                 value={email} onChange={(e)=> setEmail((e.target.value))}></input>
+                 value={email} onChange={(e)=> setEmail((e.target.value))}
+                 id='login-email'>
+                 </input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
-                <input type='password' placeholder='password' name='password'  
+                <input type='password' placeholder='password' name='password'  id='login-password'
                   value={password} onChange={(e) => setPassword(e.target.value)}></input>
               </div>
               <div>
