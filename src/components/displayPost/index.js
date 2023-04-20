@@ -260,7 +260,7 @@ export function DisplayPost(props){
                  <div className='post-text'>{item.text ? item.text : ''}</div>
                 </Link>
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user'>
-                  <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
+                  <div className='post-author'>{item.author?.username ? item.author.username : item.author?.email}</div>
                 </Link>
                 <div className='post-date'>{displayDateDifferences(item.date)}</div>
               <div className='action-cont'>
