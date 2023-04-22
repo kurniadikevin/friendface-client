@@ -3,10 +3,10 @@ import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
-import { formatDate, displayDateDifferences } from '../functions';
+import { displayDateDifferences } from '../functions';
 
 
-const MessageDashboard=()=>{
+const MessageDashboard=(props)=>{
     
   let currentUser= getUser();
 
@@ -134,7 +134,7 @@ const MessageDashboard=()=>{
           </div>
           </Link>
 
-          <div className='chatRoom-wrapper'>
+          <div className='chatRoom-wrapper'  id={props.idChatDetail}>
           {chatRoomUserInfoList.map((item,index)=>{
 
           return(

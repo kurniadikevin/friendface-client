@@ -1,13 +1,11 @@
 import './style.css';
-import { Link } from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { getUser, removeAlert } from '../../components/functions';
 import {useState, useEffect } from 'react';
-
-import {  useParams, useHistory } from 'react-router-dom';
+import {   useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 

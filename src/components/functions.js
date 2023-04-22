@@ -197,3 +197,14 @@ export const handleKeyEnter=(event,action)=>{
       const count = JSON.parse(notifCount);
       return count;
     }}
+
+    //toggle post form
+    export const togglePostForm = ()=>{
+      const postForm = document.querySelector('.homeComp-postForm');
+      if(postForm.style.display === 'inline'){
+          postForm.style.display ='none';
+      } else{ 
+           postForm.style.display='inline';
+          }
+  }
+

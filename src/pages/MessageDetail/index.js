@@ -3,7 +3,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences,handleKeyEnter, getAndAssignMessageNotifCount } from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter} from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -133,12 +133,12 @@ export function MessageDetailPage() {
     <div className="App">
       <Dashboard  dashIndex={3} />
       <div className='main' id='message-main'>
-        <MessageDashboard/>
+        <MessageDashboard idChatDetail='dashboard-chat-detail'/>
         <div className='message-content-container'>
          <div className='chat-user-head'>
           <div className='chat-user-imgCont'>
             {chatRoomData.membersId ? 
-            <img id='chat-user-img'
+            <img id='chat-user-img' alt='user-profile-picture'
             src={showOnlyForeignUserInfo(chatRoomData,'profilePicture') 
             ?  `https://odin-book-api-production.up.railway.app/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
             : (require('../../assets/profilepicturesSmall.png'))} width={50} height={50}

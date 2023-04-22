@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import { removeAlert, toggleBluredBg, alertNullPostText } from '../functions';
+import { removeAlert, toggleBluredBg, alertNullPostText,togglePostForm } from '../functions';
 
 
 function HomeComp(props){
@@ -14,15 +14,6 @@ function HomeComp(props){
     const [postMode,setPostMode]= useState('text');
     const [imageFile,setImageFile]= useState([]);
 
-
-    const togglePostForm = ()=>{
-        const postForm = document.querySelector('.homeComp-postForm');
-        if(postForm.style.display === 'inline'){
-            postForm.style.display ='none';
-        } else{ 
-             postForm.style.display='inline';
-            }
-    }
 
     const createPostText = async()=> {  
         if(postText){

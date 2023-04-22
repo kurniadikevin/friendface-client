@@ -1,6 +1,6 @@
 {
   "name": "friendface",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -13,6 +13,7 @@
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
     "simple-cipher-js": "^0.0.7",
+    "validator": "^13.9.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

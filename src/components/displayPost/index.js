@@ -260,7 +260,7 @@ export function DisplayPost(props){
                  <div className='post-text'>{item.text ? item.text : ''}</div>
                 </Link>
                 <Link to={`/userProfile/${item.author?._id}`} id='link-user'>
-                  <div className='post-author'>{item.author?.username ? item.author.username : 'Not Set'}</div>
+                  <div className='post-author'>{item.author?.username ? item.author.username : item.author?.email}</div>
                 </Link>
                 <div className='post-date'>{displayDateDifferences(item.date)}</div>
               <div className='action-cont'>
@@ -286,7 +286,8 @@ export function DisplayPost(props){
                       <div className='comment-content'>
                         <div className='comment-text'>{comment.text}</div>
                         <Link to={`/userProfile/${comment.author?._id}`}>
-                        <div className='comment-username'>{comment.author?.username}</div>
+                        <div className='comment-username'>{comment.author?.username ? comment.author?.username : comment.author?.email  }
+                        </div>
                         </Link>
                         <div className='comment-date'>{displayDateDifferences(comment.date)}</div>
                       </div>

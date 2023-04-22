@@ -49,30 +49,70 @@ code {
      /*  border-right: 1px solid var(--currentLine); */
   }
 
-@media screen and (max-width: 500px) {
+
+
+
+@media screen and (max-width: 1000px) {
+  .App{
+    zoom: 75%;
+  }
+  .dashboard-wrapper{
+    height: 50px;
+  }
   .Dashboard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 120px; 
+    padding-left:0px;
+    height:50px;
+    display: grid;
+    place-items: center;
   }
 
   .title-dashboard{
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 60px;
     padding-left: 0px;
+    padding-top: 0px;
+    position: fixed;
+    width: 100%;
+    top: 10px;
+    background-color: var(--background00);
   }
+    .app-title{
+      
+    }
   .dashboard-bottom{
     display: none;
   }
-  #sidebar-wrapper, #dash-link, .HomeComp{
+  #sidebar-wrapper, #dash-link{
     display: none;
   }
+
+  .HomeComp{
+    background-color: transparent;
+  }
+  .home-head, .search-bar{
+    display: none;
+  }
+  
   .links-cont{
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 75px;
+    padding: 0;
+    background-color: var(--background00OP);
+  }
+  .links-cont>div{
+    display: grid;
+    place-items: center;
+  }
+  #link-icon{
     
   }
+
   .sign-links{
     padding-top: 0px;
   }
@@ -86,7 +126,7 @@ code {
     grid-template-rows: 2fr 2fr 2fr;
   }
   .profile-username, .profile-email{
-    grid-template-columns: 1fr;
+    
   }
   #profileImgProfile{
     height: 60px;
@@ -96,12 +136,86 @@ code {
   .App{
     grid-template-columns: auto;
     grid-template-rows: 100px 1fr;
-    padding-left: 0px;
-    padding-right: 0px; 
-  }
-  
-  .login-box{
-   
+    padding-left: 10px;
+    padding-right: 10px; 
     
   }
+  
+
+  
+
+  /* make post container for new post */
+  #make-post{
+    display: block;
+  }
+
+  /* login---page */
+
+  .Login{
+    background-image: url(../src/assets/login-bg.jpg);
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center;  
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+
+  }
+  .login-col1{
+    display: hide;
+  }
+  .login-col2{
+    background-color: transparent;
+  }
+
+  .login-box{
+    background-color: var(--background00);
+    box-shadow: none;
+    border: none;
+  }
+  /* notification- page */
+  .notif-page{
+    place-items: center;
+  }
+   .likeAndComment-cont{
+    grid-template-columns: 2fr 5fr;
+  }
+  .friendReq-cont{
+    grid-template-columns: 3fr 5fr;
+  }
+  /* blurred bg dash */
+  .blurred-bg-dash{
+    height: 10000%;
+  }
+  #new-post-mobile{
+    display: inline;
+    z-index: 9;
+  }
+
+  /* home comp post form */
+  .homeComp-postForm{ 
+    height: 150px;
+    bottom: 100px;
+    position:fixed;
+    top: 80%;
+    max-width: 400px;   
+    
+}
+/* message dashboard */
+.chatRoom-wrapper{ 
+  max-height: fit-content;
+}
+/* user list */
+.map-search-new-chat{
+  max-height: fit-content;
+}
+/* message page */
+#message-main{
+  display: grid;
+  max-width: 400px;
+}
+
+ #dashboard-chat-detail{  
+  max-height: 650px;
+ }
 }

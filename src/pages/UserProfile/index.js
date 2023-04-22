@@ -28,7 +28,7 @@ export function UserProfilePage() {
           history.push("/profile");
         }
        
-        const url=`https://odin-book-api-production.up.railway.app/users/${userId}`;
+        const url=`http://localhost:5000/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
