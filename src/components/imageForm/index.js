@@ -1,5 +1,4 @@
 import './style.css';
-import { refreshLoginSession } from '../functions';
 import { removeAlert,toggleForm, toggleBluredBg } from '../functions';
 
 const ImageForm = (props)=>{

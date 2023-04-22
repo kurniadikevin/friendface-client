@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import './style.css';
 import {useState,useEffect} from 'react';
-import axios from 'axios';
 import LoaderComponent from '../loader/loader';
 import AlertBox from '../alertBox/index';
 import { getAndAssignMessageNotifCount } from '../functions';

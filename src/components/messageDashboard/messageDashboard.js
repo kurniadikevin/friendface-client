@@ -3,7 +3,7 @@ import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
-import { formatDate, displayDateDifferences } from '../functions';
+import { displayDateDifferences } from '../functions';
 
 
 const MessageDashboard=(props)=>{
