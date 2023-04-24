@@ -3,7 +3,8 @@ import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
-import { displayDateDifferences } from '../functions';
+import { displayDateDifferences, removeMessageLoader } from '../functions';
+import LoaderMessenger from '../loaderMessenger';
 
 
 const MessageDashboard=(props)=>{
@@ -76,7 +77,7 @@ const MessageDashboard=(props)=>{
         }
       })
       setChatRoomUserInfoList(memberValue);
-      
+      removeMessageLoader();
   })
   }
 
@@ -116,12 +117,14 @@ const MessageDashboard=(props)=>{
   useEffect(()=>{
       updateUserChatData(currentUser._id);
       fetchUserChatRoomList(currentUser._id);
+
       // update chat room list every 5 seconds
       const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
       }, 3000);
       return () => clearInterval(interval);
+     
     },[])
 
     return(
@@ -135,6 +138,9 @@ const MessageDashboard=(props)=>{
           </Link>
 
           <div className='chatRoom-wrapper'  id={props.idChatDetail}>
+          <div id='loader-msg-dash'>
+            <LoaderMessenger/>
+          </div>
           {chatRoomUserInfoList.map((item,index)=>{
 
           return(
@@ -194,6 +200,7 @@ const MessageDashboard=(props)=>{
           )
           })}
       </div>
+     
   </div>
     )
 

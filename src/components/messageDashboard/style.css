@@ -99,3 +99,9 @@
     display: grid;
     place-items: center;
 }
+
+#loader-msg-dash{
+    position: absolute;
+    top: 25%;
+    left: 30%;
+}

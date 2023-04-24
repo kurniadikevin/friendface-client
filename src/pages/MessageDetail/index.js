@@ -3,12 +3,12 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences,handleKeyEnter} from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter, removeLoaderChatRoom} from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import LoaderMessenger from '../../components/loaderMessenger';
 
 export function MessageDetailPage() {
 
@@ -27,6 +27,7 @@ export function MessageDetailPage() {
     var data = await response.json();
     setChatRoomData(data[0]);
     setChatData(data[0].messagesId);
+  
   } catch(err){
     console.log(err);
   }
@@ -103,11 +104,13 @@ export function MessageDetailPage() {
   console.log( chatRoomBody.scrollHeight);
  }
 
+
 // Livechat with set Interval 1 second
   useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
     seenChatRoomToRemoveNotif();
+    removeLoaderChatRoom();
 
     // toggle to bottom scroll chat after load messages
     setTimeout(scrollDefaulToBottom,1000);
@@ -173,6 +176,7 @@ export function MessageDetailPage() {
             </div>
             )
           })}
+          <div id='loader-dash-chat'><LoaderMessenger/></div>
          </div>
 
          <div className='message-input-container'> 
