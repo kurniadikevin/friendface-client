@@ -101,7 +101,7 @@ export function MessageDetailPage() {
  const scrollDefaulToBottom=()=>{
   const chatRoomBody= document.querySelector('.chat-container');
   chatRoomBody.scrollTop = chatRoomBody.scrollHeight;
-  console.log( chatRoomBody.scrollHeight);
+ // console.log( chatRoomBody.scrollHeight);
  }
 
 
