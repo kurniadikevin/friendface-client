@@ -28,7 +28,7 @@ function HomeComp(props){
             authorId : currentUser._id,
           },
           withCredentials: true,
-          url: "https://odin-book-api-production.up.railway.app/posts/newpost",
+          url: "https://friendface-api-production.up.railway.app/posts/newpost",
         }).then(function (response) {
             console.log(response);
           })
@@ -39,7 +39,7 @@ function HomeComp(props){
     }
 
     const userDataToQuery = async ()=>{
-        const url=`https://odin-book-api-production.up.railway.app/users/search`;
+        const url=`https://friendface-api-production.up.railway.app/users/search`;
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
@@ -83,7 +83,7 @@ function HomeComp(props){
         formData.append("image", imageFile[0]);
         formData.append('authorId',currentUser._id);
         formData.append('text',postText);
-        axios.post('https://odin-book-api-production.up.railway.app/postImages', formData, {
+        axios.post('https://friendface-api-production.up.railway.app/postImages', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }

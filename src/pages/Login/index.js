@@ -59,7 +59,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "https://friendface-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         const alertBox = document.querySelector('#alert-box');
@@ -88,7 +88,7 @@ export function LoginPage() {
        
       },
       withCredentials: true,
-      url: "https://odin-book-api-production.up.railway.app/users/login",
+      url: "https://friendface-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('Nosa User Exist')
@@ -113,7 +113,7 @@ const signUpUser = async()=>{
      
     },
     withCredentials: true,
-    url: "https://odin-book-api-production.up.railway.app/users/signup",
+    url: "https://friendface-api-production.up.railway.app/users/signup",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       alertBox.textContent='Sign up unsuccessful';
@@ -143,7 +143,7 @@ const signUpUser = async()=>{
 
   //fetch all post 
   const fetchRecentUser = async ()=>{
-    const url=`https://odin-book-api-production.up.railway.app/users/popular`;
+    const url=`https://friendface-api-production.up.railway.app/users/popular`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userPopular', JSON.stringify(data));
@@ -221,7 +221,7 @@ const validateWhenSignUp=()=>{
 
           {/*   sign up form */}
             <div className='form-sign' id='signup-wrap' 
-            /*  method='POST'  action='https://odin-book-api-production.up.railway.app/users/signup' */>
+            /*  method='POST'  action='https://friendface-api-production.up.railway.app/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'

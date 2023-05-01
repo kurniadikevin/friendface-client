@@ -81,7 +81,7 @@ export const refreshLoginSession=(user)=>{
       password: passDecipher,
     },
     withCredentials: true,
-    url: "https://odin-book-api-production.up.railway.app/users/login",
+    url: "https://friendface-api-production.up.railway.app/users/login",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       console.log('No User Exist');
@@ -180,7 +180,7 @@ export const handleKeyEnter=(event,action)=>{
  //get and assign messageNotification count to localStorage
  export const getAndAssignMessageNotifCount= async(userId)=>{
   try{
-    const url=`https://odin-book-api-production.up.railway.app/userChat/byUserId/${userId}`;
+    const url=`https://friendface-api-production.up.railway.app/userChat/byUserId/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));

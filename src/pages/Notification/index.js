@@ -20,7 +20,7 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
-        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
+        url : `https://friendface-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
@@ -48,7 +48,7 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
-        url : `https://odin-book-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
+        url : `https://friendface-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
       
       })
@@ -81,7 +81,7 @@ export function NotificationPage() {
   const seenNotificationForPostAndFriendRequest=(user,urlExt)=>{
     axios({
       method : "POST",
-      url : `https://odin-book-api-production.up.railway.app/users/${urlExt}/${user._id}`
+      url : `https://friendface-api-production.up.railway.app/users/${urlExt}/${user._id}`
   }).then(function (response) {
     console.log(urlExt)
    /* refreshLoginSession(currentUser); */
@@ -139,7 +139,7 @@ export function NotificationPage() {
           }
             return (
               <div className='friendReq-cont'>
-                    <img  src={data.sender._id ?  `https://odin-book-api-production.up.railway.app/users/profilePicture/${data.sender._id} `
+                    <img  src={data.sender._id ?  `https://friendface-api-production.up.railway.app/users/profilePicture/${data.sender._id} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' 
                      id='notif-image'/>
@@ -160,7 +160,7 @@ export function NotificationPage() {
            {(currentUser.postNotification).length > 0 ? ((currentUser.postNotification).reverse()).map((item,index)=>{
               return (
               <div className='likeAndComment-cont'>
-                <img  src={item.byUser._id ?  `https://odin-book-api-production.up.railway.app/users/profilePicture/${item.byUser._id} `
+                <img  src={item.byUser._id ?  `https://friendface-api-production.up.railway.app/users/profilePicture/${item.byUser._id} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage'
                      id='notif-image'/>

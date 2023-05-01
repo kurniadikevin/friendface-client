@@ -30,7 +30,7 @@ const ProfileForm = (props)=>{
              _id : currentUser._id
            },
            withCredentials: true,
-           url: `https://odin-book-api-production.up.railway.app/users/update/${currentUser._id}`,
+           url: `https://friendface-api-production.up.railway.app/users/update/${currentUser._id}`,
          }).then(function (response) {
              console.log(response);
             const form = document.querySelector('#profileForm');

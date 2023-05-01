@@ -17,7 +17,7 @@ const MessageDashboard=(props)=>{
 
   const fetchUserChatRoomList= async (userId)=>{
     try{
-      const url=`https://odin-book-api-production.up.railway.app/userChat/byUserId/${userId}`;
+      const url=`https://friendface-api-production.up.railway.app/userChat/byUserId/${userId}`;
       const response = await fetch(url);
       var data = await response.json();
       const listChat = sortChatRooms( data[0].chatRoomList);
@@ -53,7 +53,7 @@ const MessageDashboard=(props)=>{
           if(typeof i === 'object'){
               const resultArr=[];
               i.forEach(async(j)=>{
-              const data= (await fetch(`https://odin-book-api-production.up.railway.app/users/simplified/${j}`, {
+              const data= (await fetch(`https://friendface-api-production.up.railway.app/users/simplified/${j}`, {
               method: "GET",
               })).json();
               data.then((value)=>{
@@ -62,7 +62,7 @@ const MessageDashboard=(props)=>{
             })
           return resultArr;
           } else{
-            const result= (await fetch(`https://odin-book-api-production.up.railway.app/users/simplified/${i}`, {
+            const result= (await fetch(`https://friendface-api-production.up.railway.app/users/simplified/${i}`, {
             method: "GET",
           })).json()
           return result;
@@ -85,7 +85,7 @@ const MessageDashboard=(props)=>{
   axios({
     method: "POST",
     withCredentials: true,
-    url: `https://odin-book-api-production.up.railway.app/userChat/update/${userId}`,
+    url: `https://friendface-api-production.up.railway.app/userChat/update/${userId}`,
   }).then(function (response) {
       console.log(response);
     })
@@ -172,7 +172,7 @@ const MessageDashboard=(props)=>{
                 : 
                 <div className='member-info-cont'>
                   <img id='chat-dashboard-user-img'
-                    src={`https://odin-book-api-production.up.railway.app/users/profilePicture/${item._id}`} width={50} height={50}
+                    src={`https://friendface-api-production.up.railway.app/users/profilePicture/${item._id}`} width={50} height={50}
                     />
                   <div className='chatroom-info-wrap'>
                     <div className='chatRoom-cont-username'>
