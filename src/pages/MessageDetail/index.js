@@ -3,7 +3,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences,handleKeyEnter, removeLoaderChatRoom} from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter, toggleLoaderChatRoom} from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -16,6 +16,8 @@ export function MessageDetailPage() {
  // visited use chatRoomId parameter
  let {chatRoomId} = useParams(); 
 
+ const controller= new AbortController();
+
  const [chatRoomData,setChatRoomData]= useState({})
  const [chatData,setChatData]= useState([]);
  const [inputText,setInputText]= useState('');
@@ -27,7 +29,7 @@ export function MessageDetailPage() {
     var data = await response.json();
     setChatRoomData(data[0]);
     setChatData(data[0].messagesId);
-  
+    toggleLoaderChatRoom('none')
   } catch(err){
     console.log(err);
   }
@@ -110,17 +112,25 @@ export function MessageDetailPage() {
     fetchChatData(chatRoomId);
     toggleLoader();
     seenChatRoomToRemoveNotif();
-    removeLoaderChatRoom();
+    toggleLoaderChatRoom('inline');
+    setChatData([]);//**clear chat data when changed chatroom
+    setChatRoomData([]);//** clear chat room data when changed chat room */ 
 
     // toggle to bottom scroll chat after load messages
     setTimeout(scrollDefaulToBottom,1000);
+
+    //about all pending fetch
+    controller.abort();
 
     const interval = setInterval(() => {
       fetchChatData(chatRoomId);
       toggleLoader();
      
     }, 1000);
-    return () => clearInterval(interval);
+    return () =>{
+       clearInterval(interval);
+     
+      }
   }, [chatRoomId]);
 
 

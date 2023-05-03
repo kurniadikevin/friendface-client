@@ -211,11 +211,10 @@ export const handleKeyEnter=(event,action)=>{
 export const removeMessageLoader=()=>{
   const loader= document.querySelector('.loader-msg-cont');
   loader.style.display='none';
-  console.log('removed')
 }
 
 
-export const removeLoaderChatRoom=()=>{
+export const toggleLoaderChatRoom=(display)=>{
   const loader=document.querySelector('#loader-dash-chat');
-  loader.style.display='none';
+  loader.style.display=display;
 }
