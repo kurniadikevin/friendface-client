@@ -16,16 +16,28 @@ export function MessageDetailPage() {
  // visited use chatRoomId parameter
  let {chatRoomId} = useParams(); 
 
- const controller= new AbortController();
-
  const [chatRoomData,setChatRoomData]= useState({})
  const [chatData,setChatData]= useState([]);
  const [inputText,setInputText]= useState('');
 
+ const fetchWithTimeout= async(resource, options = {})=> {
+  const { timeout = 8000 } = options;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal  
+  });
+  clearTimeout(id);
+  return response;
+}
+
  const fetchChatData= async (chatRoomId)=>{
   try{
     const url=`http://localhost:5000/chatRoom/byId/${chatRoomId}`
-    const response = await fetch(url);
+    const response = await fetchWithTimeout(url, {
+      timeout: 6000
+    });
     var data = await response.json();
     setChatRoomData(data[0]);
     setChatData(data[0].messagesId);
@@ -70,7 +82,7 @@ export function MessageDetailPage() {
         withCredentials: true,
         url: `http://localhost:5000/message/new/${chatRoomId}`,
       }).then(function (response) {
-          console.log(response);
+          //console.log(response);
           setInputText('');
         })
         .catch(function (error) {
@@ -91,7 +103,6 @@ export function MessageDetailPage() {
     url: `http://localhost:5000/chatRoom/seen/${chatRoomId}`,
   }).then((response)=>{
     console.log(response);
-    console.log('chat room seened');
     //update on message detail
     //getAndAssignMessageNotifCount( currentUser._id);
   })
@@ -103,9 +114,7 @@ export function MessageDetailPage() {
  const scrollDefaulToBottom=()=>{
   const chatRoomBody= document.querySelector('.chat-container');
   chatRoomBody.scrollTop = chatRoomBody.scrollHeight;
- // console.log( chatRoomBody.scrollHeight);
  }
-
 
 // Livechat with set Interval 1 second
   useEffect(() => {
@@ -117,24 +126,21 @@ export function MessageDetailPage() {
     setChatRoomData([]);//** clear chat room data when changed chat room */ 
 
     // toggle to bottom scroll chat after load messages
-    setTimeout(scrollDefaulToBottom,1000);
+    setTimeout(scrollDefaulToBottom,500);
 
-    //about all pending fetch
-    controller.abort();
 
     const interval = setInterval(() => {
       fetchChatData(chatRoomId);
       toggleLoader();
      
-    }, 1000);
+    }, 2000);
     return () =>{
        clearInterval(interval);
-     
       }
   }, [chatRoomId]);
 
 
-  //without interval for developing to prevent infinite loop when hot reload
+  //without interval for development mode to prevent infinite loop when hot reload
  /*  useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();

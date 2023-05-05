@@ -87,7 +87,7 @@ const MessageDashboard=(props)=>{
     withCredentials: true,
     url: `http://localhost:5000/userChat/update/${userId}`,
   }).then(function (response) {
-      console.log(response);
+      //console.log(response);
     })
     .catch(function (error) {
       console.log(error);
@@ -122,7 +122,7 @@ const MessageDashboard=(props)=>{
       const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
-      }, 3000);
+      }, 5000);
       return () => clearInterval(interval);
      
     },[])
