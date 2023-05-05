@@ -103,8 +103,6 @@ export function MessageDetailPage() {
     url: `http://localhost:5000/chatRoom/seen/${chatRoomId}`,
   }).then((response)=>{
     console.log(response);
-    //update on message detail
-    //getAndAssignMessageNotifCount( currentUser._id);
   })
   .catch((error)=>{
     console.log(error);
