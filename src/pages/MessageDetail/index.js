@@ -34,7 +34,7 @@ export function MessageDetailPage() {
 
  const fetchChatData= async (chatRoomId)=>{
   try{
-    const url=`http://localhost:5000/chatRoom/byId/${chatRoomId}`
+    const url=`https://friendface-api-production.up.railway.app/chatRoom/byId/${chatRoomId}`
     const response = await fetchWithTimeout(url, {
       timeout: 6000
     });
