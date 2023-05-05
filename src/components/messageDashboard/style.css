@@ -36,7 +36,7 @@
     transition: 0.5s;
 }
 .chatRoom-container:hover {
-    background-color: var(--bg2OP);
+    background-color: var(--bg2OP)!important
 }
 
 .chatroom-info-wrap{
