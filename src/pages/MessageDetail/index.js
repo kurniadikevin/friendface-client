@@ -3,7 +3,7 @@ import Dashboard from '../../components/dashboard/dashboard';
 import MessageDashboard from '../../components/messageDashboard/messageDashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { toggleLoader } from '../../components/loader/loader-toggle';
-import { getUser,displayDateDifferences,handleKeyEnter, removeLoaderChatRoom} from '../../components/functions';
+import { getUser,displayDateDifferences,handleKeyEnter, toggleLoaderChatRoom} from '../../components/functions';
 import {useState, useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -20,14 +20,28 @@ export function MessageDetailPage() {
  const [chatData,setChatData]= useState([]);
  const [inputText,setInputText]= useState('');
 
+ const fetchWithTimeout= async(resource, options = {})=> {
+  const { timeout = 8000 } = options;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal  
+  });
+  clearTimeout(id);
+  return response;
+}
+
  const fetchChatData= async (chatRoomId)=>{
   try{
-    const url=`https://friendface-api-production.up.railway.app/chatRoom/byId/${chatRoomId}`
-    const response = await fetch(url);
+    const url=`http://localhost:5000/chatRoom/byId/${chatRoomId}`
+    const response = await fetchWithTimeout(url, {
+      timeout: 6000
+    });
     var data = await response.json();
     setChatRoomData(data[0]);
     setChatData(data[0].messagesId);
-  
+    toggleLoaderChatRoom('none')
   } catch(err){
     console.log(err);
   }
@@ -68,7 +82,7 @@ export function MessageDetailPage() {
         withCredentials: true,
         url: `https://friendface-api-production.up.railway.app/message/new/${chatRoomId}`,
       }).then(function (response) {
-          console.log(response);
+          //console.log(response);
           setInputText('');
         })
         .catch(function (error) {
@@ -89,9 +103,6 @@ export function MessageDetailPage() {
     url: `https://friendface-api-production.up.railway.app/chatRoom/seen/${chatRoomId}`,
   }).then((response)=>{
     console.log(response);
-    console.log('chat room seened');
-    //update on message detail
-    //getAndAssignMessageNotifCount( currentUser._id);
   })
   .catch((error)=>{
     console.log(error);
@@ -101,30 +112,33 @@ export function MessageDetailPage() {
  const scrollDefaulToBottom=()=>{
   const chatRoomBody= document.querySelector('.chat-container');
   chatRoomBody.scrollTop = chatRoomBody.scrollHeight;
- // console.log( chatRoomBody.scrollHeight);
  }
-
 
 // Livechat with set Interval 1 second
   useEffect(() => {
     fetchChatData(chatRoomId);
     toggleLoader();
     seenChatRoomToRemoveNotif();
-    removeLoaderChatRoom();
+    toggleLoaderChatRoom('inline');
+    setChatData([]);//**clear chat data when changed chatroom
+    setChatRoomData([]);//** clear chat room data when changed chat room */ 
 
     // toggle to bottom scroll chat after load messages
-    setTimeout(scrollDefaulToBottom,1000);
+    setTimeout(scrollDefaulToBottom,500);
+
 
     const interval = setInterval(() => {
       fetchChatData(chatRoomId);
       toggleLoader();
      
-    }, 1000);
-    return () => clearInterval(interval);
+    }, 2000);
+    return () =>{
+       clearInterval(interval);
+      }
   }, [chatRoomId]);
 
 
-  //without interval for developing to prevent infinite loop when hot reload
+  //without interval for development mode to prevent infinite loop when hot reload
  /*  useEffect(() => {
     fetchChatData(chatRoomId);
       toggleLoader();

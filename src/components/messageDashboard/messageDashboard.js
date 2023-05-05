@@ -87,7 +87,7 @@ const MessageDashboard=(props)=>{
     withCredentials: true,
     url: `https://friendface-api-production.up.railway.app/userChat/update/${userId}`,
   }).then(function (response) {
-      console.log(response);
+      //console.log(response);
     })
     .catch(function (error) {
       console.log(error);
@@ -122,7 +122,7 @@ const MessageDashboard=(props)=>{
       const interval = setInterval(() => {
         updateUserChatData(currentUser._id);
         fetchUserChatRoomList(currentUser._id);
-      }, 3000);
+      }, 5000);
       return () => clearInterval(interval);
      
     },[])
@@ -144,9 +144,8 @@ const MessageDashboard=(props)=>{
           {chatRoomUserInfoList.map((item,index)=>{
 
           return(
-            <div className='chatRoom-container'>
-              <Link  to={`/messagechat/${chatRoomList[index]._id}`}>
-               
+            <Link  to={`/messagechat/${chatRoomList[index]._id}`}>
+            <div className='chatRoom-container'>   
               <div className='chatRoom-member'>
                 { item.length > 1 ?
                  <div className='member-info-cont' >
@@ -195,8 +194,8 @@ const MessageDashboard=(props)=>{
                 }
                 </div>
              
-              </Link>
-          </div>
+             </div>
+          </Link>
           )
           })}
       </div>
