@@ -218,3 +218,11 @@ export const toggleLoaderChatRoom=(display)=>{
   const loader=document.querySelector('#loader-dash-chat');
   loader.style.display=display;
 }
+
+export const highlightCurrentChatRoom=(index)=>{
+  const chatRoomCont = document.querySelectorAll('.chatRoom-container');
+  for(let i=0; i< chatRoomCont.length; i++){
+    chatRoomCont[i].style.backgroundColor='transparent';
+  }
+  chatRoomCont[index].style.backgroundColor='var(--bg2OP)';
+}

@@ -1,4 +1,4 @@
-import { getUser } from '../functions';
+import { getUser, highlightCurrentChatRoom } from '../functions';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
@@ -145,7 +145,7 @@ const MessageDashboard=(props)=>{
 
           return(
             <Link  to={`/messagechat/${chatRoomList[index]._id}`}>
-            <div className='chatRoom-container'>   
+            <div className='chatRoom-container' onClick={()=>highlightCurrentChatRoom(index)}>   
               <div className='chatRoom-member'>
                 { item.length > 1 ?
                  <div className='member-info-cont' >
