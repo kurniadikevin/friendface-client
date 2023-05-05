@@ -48,7 +48,6 @@ function Dashboard(props){
     //dash link icon
     const linkIcon = document.querySelectorAll('#link-icon');    
     linkIcon[i].style.color='var(--pink)';
-    
   }
 
  const getUnSeenNotification=(data)=>{
