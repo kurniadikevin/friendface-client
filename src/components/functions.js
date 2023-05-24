@@ -87,7 +87,6 @@ export const refreshLoginSession=(user)=>{
       console.log('No User Exist');
     } else{
       localStorage.setItem("user", JSON.stringify(res.data.info));
-     // localStorage.setItem("token", JSON.stringify(res.data.token));
       getAndAssignMessageNotifCount(res.data._id);
     }    
   });
