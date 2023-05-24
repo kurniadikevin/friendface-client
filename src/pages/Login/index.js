@@ -69,7 +69,8 @@ export function LoginPage() {
         loader.style.display='none';
         removeAlert();
       } else{
-        localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data.info));
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("lastPassword",storeCipherPass(password));
         getAndAssignMessageNotifCount(res.data._id);
         history.push("/");
@@ -93,7 +94,8 @@ export function LoginPage() {
       if(res.data === 'No User Exists'){
         alert('Nosa User Exist')
       } else{
-        localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data.info));
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("lastPassword",storeCipherPass('password'));
         getAndAssignMessageNotifCount(res.data._id);
         history.push("/")
