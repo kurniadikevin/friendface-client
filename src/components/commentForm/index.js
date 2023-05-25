@@ -29,6 +29,7 @@ const CommentForm= (props)=>{
             commentBy : commentAuthor,
             text : comment
           },
+          headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
           withCredentials: true,
           url: `http://localhost:5000/comments/createComment/${post._id}`,
         }).then(function (response) {

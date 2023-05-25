@@ -61,6 +61,7 @@ export function UserProfilePage() {
             status : 'pending'
         }
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials : true,
       url : `http://localhost:5000/users/friendRequest/${userId}`
     }).then(function(response){

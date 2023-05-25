@@ -117,6 +117,7 @@ export function DisplayPost(props){
         likes:   post.likes,
         likeBy :  likeByAuthor   
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
       url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {  
@@ -203,6 +204,7 @@ export function DisplayPost(props){
         method: "POST",
         withCredentials: true,
         url: `http://localhost:5000/posts/delete/${postId}`,
+        headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       }).then(function (response) {  
           alertBox.textContent='Post deleted!'
           alertBox.style.display='inline';

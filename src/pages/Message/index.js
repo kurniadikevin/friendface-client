@@ -39,6 +39,7 @@ export function MessagePage() {
       method: "POST",
       withCredentials: true,
       url: `http://localhost:5000/userChat/${action}/${userId}`,
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     }).then(function (response) {
         console.log(response);
       })
@@ -77,6 +78,7 @@ export function MessagePage() {
         currentUser : currentUser._id,
       },
       withCredentials: true,
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       url: `http://localhost:5000/chatRoom/createPrivate/${item._id}`,
     }).then(function (response) {
         
@@ -126,6 +128,7 @@ export function MessagePage() {
         userIdArr : groupMemberArr,
         groupName : newGroupName
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
       url: `http://localhost:5000/chatRoom/createGroup`,
     }).then(function (response) {

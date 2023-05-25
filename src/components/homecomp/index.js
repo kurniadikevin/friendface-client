@@ -27,6 +27,7 @@ function HomeComp(props){
             text : postText,
             authorId : currentUser._id,
           },
+          headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
           withCredentials: true,
           url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
@@ -85,7 +86,8 @@ function HomeComp(props){
         formData.append('text',postText);
         axios.post('http://localhost:5000/postImages', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data',
+              Authorization : `Bearer ${localStorage.getItem("token")}`
             }
         })
         const alertBox = document.querySelector('#alert-box');

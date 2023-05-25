@@ -29,6 +29,7 @@ const ProfileForm = (props)=>{
              username : data,
              _id : currentUser._id
            },
+           headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
            withCredentials: true,
            url: `http://localhost:5000/users/update/${currentUser._id}`,
          }).then(function (response) {

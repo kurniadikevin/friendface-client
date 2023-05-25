@@ -85,6 +85,7 @@ const MessageDashboard=(props)=>{
   axios({
     method: "POST",
     withCredentials: true,
+    headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     url: `http://localhost:5000/userChat/update/${userId}`,
   }).then(function (response) {
       //console.log(response);

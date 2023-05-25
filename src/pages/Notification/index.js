@@ -20,6 +20,7 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
+        headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
         url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
@@ -48,6 +49,7 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
+        headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
         url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
       
@@ -81,7 +83,8 @@ export function NotificationPage() {
   const seenNotificationForPostAndFriendRequest=(user,urlExt)=>{
     axios({
       method : "POST",
-      url : `http://localhost:5000/users/${urlExt}/${user._id}`
+      url : `http://localhost:5000/users/${urlExt}/${user._id}`,
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
   }).then(function (response) {
     console.log(urlExt)
    /* refreshLoginSession(currentUser); */
