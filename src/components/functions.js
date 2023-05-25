@@ -219,10 +219,29 @@ export const toggleLoaderChatRoom=(display)=>{
   loader.style.display=display;
 }
 
+export const toggleLoaderMessageDashboard=(display)=>{
+  const loader=document.querySelector('#loader-msg-dash');
+  loader.style.display=display;
+}
+
 export const highlightCurrentChatRoom=(index)=>{
   const chatRoomCont = document.querySelectorAll('.chatRoom-container');
   for(let i=0; i< chatRoomCont.length; i++){
     chatRoomCont[i].style.backgroundColor='transparent';
   }
   chatRoomCont[index].style.backgroundColor='var(--bg2OP)';
+}
+
+export const alertForEmptyCallPost=(func)=>{
+  const alertBox = document.querySelector('#alert-box');
+  alertBox.textContent='No post available! Please be friend with other user or post something to see post'
+  alertBox.style.display='inline';
+  func()
+}
+
+export const alertForEmptyCallChatRoom=(func)=>{
+  const alertBox = document.querySelector('#alert-box');
+  alertBox.textContent='No chatroom available, please create one to start chatting.'
+  alertBox.style.display='inline';
+  func()
 }
