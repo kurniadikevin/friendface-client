@@ -84,7 +84,7 @@ export function LoginPage() {
     axios({
       method: "POST",
       data: {
-        email: 'guest@gmail.com',
+        email: 'bazinga@gmail.com',
         password: 'password',
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
