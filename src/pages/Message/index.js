@@ -38,12 +38,8 @@ export function MessagePage() {
     axios({
       method: "POST",
       withCredentials: true,
-<<<<<<< HEAD
       url: `https://friendface-api-production.up.railway.app/userChat/${action}/${userId}`,
-=======
-      url: `http://localhost:5000/userChat/${action}/${userId}`,
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
->>>>>>> localdev-bearer
     }).then(function (response) {
         console.log(response);
       })
@@ -82,12 +78,8 @@ export function MessagePage() {
         currentUser : currentUser._id,
       },
       withCredentials: true,
-<<<<<<< HEAD
-      url: `https://friendface-api-production.up.railway.app/chatRoom/createPrivate/${item._id}`,
-=======
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-      url: `http://localhost:5000/chatRoom/createPrivate/${item._id}`,
->>>>>>> localdev-bearer
+      url: `https://friendface-api-production.up.railway.app/chatRoom/createPrivate/${item._id}`,
     }).then(function (response) {
         
         alertBox.textContent=`New chat room with ${item.username ? item.username : item.email} created !`

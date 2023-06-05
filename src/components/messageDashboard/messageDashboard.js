@@ -87,7 +87,7 @@ const MessageDashboard=(props)=>{
     method: "POST",
     withCredentials: true,
     headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-    url: `http://localhost:5000/userChat/update/${userId}`,
+    url: `https://friendface-api-production.up.railway.app/userChat/update/${userId}`,
   }).then(function (response) {
     //console.log(response);
     })

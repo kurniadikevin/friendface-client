@@ -20,12 +20,8 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
-<<<<<<< HEAD
-        url : `https://friendface-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
-=======
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-        url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
->>>>>>> localdev-bearer
+        url : `https://friendface-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
@@ -53,12 +49,8 @@ export function NotificationPage() {
             newFriend : friendData,
             newFriendReceiver : currentUser
         },
-<<<<<<< HEAD
-        url : `https://friendface-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
-=======
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-        url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
->>>>>>> localdev-bearer
+        url : `https://friendface-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
       
       })
@@ -91,12 +83,8 @@ export function NotificationPage() {
   const seenNotificationForPostAndFriendRequest=(user,urlExt)=>{
     axios({
       method : "POST",
-<<<<<<< HEAD
-      url : `https://friendface-api-production.up.railway.app/users/${urlExt}/${user._id}`
-=======
-      url : `http://localhost:5000/users/${urlExt}/${user._id}`,
+      url : `https://friendface-api-production.up.railway.app/users/${urlExt}/${user._id}`,
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
->>>>>>> localdev-bearer
   }).then(function (response) {
     console.log(urlExt)
    /* refreshLoginSession(currentUser); */

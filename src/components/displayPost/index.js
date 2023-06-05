@@ -200,7 +200,7 @@ export function DisplayPost(props){
       axios({
         method: "POST",
         withCredentials: true,
-        url: `http://localhost:5000/posts/delete/${postId}`,
+        url: `https://friendface-api-production.up.railway.app/posts/delete/${postId}`,
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       }).then(function (response) {  
           alertBox.textContent='Post deleted!'
