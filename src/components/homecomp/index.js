@@ -141,7 +141,7 @@ function HomeComp(props){
                     <div className='newpost-main'>
                         <textarea id='newpost-text' name='text'
                         value={postText} onChange={(e)=> setPostText(e.target.value)}
-                        placeholder='Post something..'>
+                        placeholder='Post something...'>
                         </textarea>
                     </div>
                     <div className='newpost-button'>
@@ -155,11 +155,16 @@ function HomeComp(props){
                             </span>
                         </div>
                         <button id='newpost-submit'onClick={()=> {
-                            if (postText.length>0){
+                            if (postText.length>0 && imageFile.length === 0){
                                 createPostText();
                                 togglePostForm();
                                 window.location.reload(false);
-                            } else{
+                            } else if( imageFile.length > 0){
+                                createPostImage();
+                                togglePostForm();
+                                window.location.reload(false);
+                            }
+                            else{
                                 alertNullPostText();
                             }
                             }}>
@@ -185,12 +190,17 @@ function HomeComp(props){
                             </span>
                         </div>
                         <button id='newpost-submit'onClick={()=> {
-                            if(imageFile.length === 0){
-                            alertNullPostText();
-                            } else{
-                            createPostImage();
+                           if (postText.length>0 && imageFile.length === 0){
+                            createPostText();
                             togglePostForm();
                             window.location.reload(false);
+                            } else if( imageFile.length > 0){
+                                createPostImage();
+                                togglePostForm();
+                                window.location.reload(false);
+                            }
+                            else{
+                                alertNullPostText();
                             }
                             }}>Post</button>
                     </div>
