@@ -1,9 +1,9 @@
-import { getUser, highlightCurrentChatRoom } from '../functions';
+import { getUser, highlightCurrentChatRoom, toggleLoaderMessageDashboard } from '../functions';
 import {useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 import axios from 'axios';
-import { displayDateDifferences, removeMessageLoader } from '../functions';
+import { displayDateDifferences, removeMessageLoader, alertForEmptyCallChatRoom } from '../functions';
 import LoaderMessenger from '../loaderMessenger';
 
 
@@ -76,7 +76,8 @@ const MessageDashboard=(props)=>{
           return i;
         }
       })
-      setChatRoomUserInfoList(memberValue);
+      memberValue.length === 0 ? 
+      alertForEmptyCallChatRoom(()=>toggleLoaderMessageDashboard('none')) : setChatRoomUserInfoList(memberValue);
       removeMessageLoader();
   })
   }
@@ -85,9 +86,10 @@ const MessageDashboard=(props)=>{
   axios({
     method: "POST",
     withCredentials: true,
-    url: `https://friendface-api-production.up.railway.app/userChat/update/${userId}`,
+    headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
+    url: `http://localhost:5000/userChat/update/${userId}`,
   }).then(function (response) {
-      //console.log(response);
+    //console.log(response);
     })
     .catch(function (error) {
       console.log(error);

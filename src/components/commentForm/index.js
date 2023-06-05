@@ -29,6 +29,7 @@ const CommentForm= (props)=>{
             commentBy : commentAuthor,
             text : comment
           },
+          headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
           withCredentials: true,
           url: `https://friendface-api-production.up.railway.app/comments/createComment/${post._id}`,
         }).then(function (response) {

@@ -61,6 +61,7 @@ export function UserProfilePage() {
             status : 'pending'
         }
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials : true,
       url : `https://friendface-api-production.up.railway.app/users/friendRequest/${userId}`
     }).then(function(response){

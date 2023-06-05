@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { toggleLoader } from '../../components/loader/loader-toggle';
 import { formatDate,removeAlert,toggleCommentSection, 
-  displayDateDifferences, toggleCommentForm} from '../../components/functions';
+  displayDateDifferences, toggleCommentForm, alertForEmptyCallPost} from '../../components/functions';
 
 export function DisplayPost(props){
 
@@ -26,11 +26,7 @@ export function DisplayPost(props){
     } catch (error) {
       console.log(error)  
       if(page === 1){
-        const alertBox = document.querySelector('#alert-box');
-      alertBox.textContent='No post available! Please be friend with other user or post something to see profile'
-      alertBox.style.display='inline';
-      toggleLoader();
-      removeAlert();
+        alertForEmptyCallPost();
       }
     }
 
@@ -38,6 +34,7 @@ export function DisplayPost(props){
     if(data.length === 0){
       if(page === 1){
         setPostData([]);
+        alertForEmptyCallPost(toggleLoader);
       }
       setNullData(true);
     }
@@ -117,6 +114,7 @@ export function DisplayPost(props){
         likes:   post.likes,
         likeBy :  likeByAuthor   
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
       url: `https://friendface-api-production.up.railway.app/posts/likes/${post._id}`,
     }).then(function (response) {  
@@ -202,7 +200,8 @@ export function DisplayPost(props){
       axios({
         method: "POST",
         withCredentials: true,
-        url: `https://friendface-api-production.up.railway.app/posts/delete/${postId}`,
+        url: `http://localhost:5000/posts/delete/${postId}`,
+        headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       }).then(function (response) {  
           alertBox.textContent='Post deleted!'
           alertBox.style.display='inline';

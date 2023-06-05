@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './style.css';
 import axios from 'axios';
-import { refreshLoginSession,toggleBluredBg,toggleForm } from '../functions';
+import { refreshLoginSession,toggleBluredBg,toggleForm,handleKeyEnter } from '../functions';
 
 const ProfileForm = (props)=>{
 
@@ -29,6 +29,7 @@ const ProfileForm = (props)=>{
              username : data,
              _id : currentUser._id
            },
+           headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
            withCredentials: true,
            url: `https://friendface-api-production.up.railway.app/users/update/${currentUser._id}`,
          }).then(function (response) {
@@ -50,6 +51,7 @@ const ProfileForm = (props)=>{
         <div className="profile-username-form">
             <label>Username</label>
             <input placeholder={currentUser? currentUser.username : ''} onChange={(e)=> setData(e.target.value)}
+             onKeyDown={(event)=>{handleKeyEnter(event, updateUsername)}}
             ></input>
             <button id='confirmUser-btn' onClick={updateUsername}>Confirm change</button>
             <span id='close-box' class="material-symbols-outlined"

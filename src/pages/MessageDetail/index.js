@@ -79,6 +79,7 @@ export function MessageDetailPage() {
           text : inputText,
           currentUser : currentUser._id,
         },
+        headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
         withCredentials: true,
         url: `https://friendface-api-production.up.railway.app/message/new/${chatRoomId}`,
       }).then(function (response) {
@@ -99,6 +100,7 @@ export function MessageDetailPage() {
     data: {
       currentUser : currentUser._id,
     },
+    headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     withCredentials: true,
     url: `https://friendface-api-production.up.railway.app/chatRoom/seen/${chatRoomId}`,
   }).then((response)=>{

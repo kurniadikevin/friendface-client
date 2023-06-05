@@ -5,7 +5,7 @@ import {  useHistory } from "react-router-dom";
 import LoaderComponent from '../../components/loader/loader';
 import { toggleLoader,displayLoader } from '../../components/loader/loader-toggle';
 import AlertBox from '../../components/alertBox/index';
-import {removeAlert,storeCipherPass, getAndAssignMessageNotifCount} from '../../components/functions';
+import {removeAlert,storeCipherPass, getAndAssignMessageNotifCount, handleKeyEnter} from '../../components/functions';
 import validator from "validator";
 
 
@@ -56,8 +56,8 @@ export function LoginPage() {
       data: {
         email: email,
         password: password,
-       
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
       url: "https://friendface-api-production.up.railway.app/users/login",
     }).then((res) => {
@@ -69,7 +69,8 @@ export function LoginPage() {
         loader.style.display='none';
         removeAlert();
       } else{
-        localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data.info));
+        localStorage.setItem("token", (res.data.token));
         localStorage.setItem("lastPassword",storeCipherPass(password));
         getAndAssignMessageNotifCount(res.data._id);
         history.push("/");
@@ -85,15 +86,16 @@ export function LoginPage() {
       data: {
         email: 'guest@gmail.com',
         password: 'password',
-       
       },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
       url: "https://friendface-api-production.up.railway.app/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('Nosa User Exist')
       } else{
-        localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem("user", JSON.stringify(res.data.info));
+        localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("lastPassword",storeCipherPass('password'));
         getAndAssignMessageNotifCount(res.data._id);
         history.push("/")
@@ -110,8 +112,8 @@ const signUpUser = async()=>{
     data: {
       email: email,
       password: password,
-     
     },
+    headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     withCredentials: true,
     url: "https://friendface-api-production.up.railway.app/users/signup",
   }).then((res) => {
@@ -226,12 +228,14 @@ const validateWhenSignUp=()=>{
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'
                  value={email} onChange={(e)=> setEmail((e.target.value))}
+                 onKeyDown={(event)=>{handleKeyEnter(event, validateWhenSignUp)}}
                 id='signup-email'></input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
                 <input type='password' name='password' placeholder='password'
                  value={password} onChange={(e) => setPassword(e.target.value)}
+                 onKeyDown={(event)=>{handleKeyEnter(event, validateWhenSignUp)}}
                 id='signup-password'></input>
               </div>
               <button type='submit' className='submit-btn' onClick={validateWhenSignUp}>Sign Up</button>
@@ -243,13 +247,16 @@ const validateWhenSignUp=()=>{
                 <label for='email'>Email</label>
                 <input type='email'  placeholder='email' name='email' 
                  value={email} onChange={(e)=> setEmail((e.target.value))}
+                 onKeyDown={(event)=>{handleKeyEnter(event, loginUser)}}
                  id='login-email'>
                  </input>
               </div>
               <div className='pass-cont'>
                 <label for='password'>Password</label>
                 <input type='password' placeholder='password' name='password'  id='login-password'
-                  value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                  value={password} onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(event)=>{handleKeyEnter(event, loginUser)}}
+                  ></input>
               </div>
               <div>
               <button type='submit'  className='submit-btn'  onClick={loginUser} >Log in</button>
