@@ -11,14 +11,17 @@ export function NotificationPage() {
 
   let currentUser = getUser();
   const [notifState,  setNotifState]= useState('notification');
+  let {password, ...currentUserNoPass}= currentUser;
+  console.log(currentUserNoPass)
   
   const acceptFriendRequest = (friendReq,friendData,index)=>{
+  
     axios({
         method : "POST",
         data : {
             requestData : friendReq,
             newFriend : friendData,
-            newFriendReceiver : currentUser
+            newFriendReceiver : currentUserNoPass //change to currentUser without password
         },
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
         url : `http://localhost:5000/users/friendRequest/accept/${currentUser._id}`
@@ -47,7 +50,8 @@ export function NotificationPage() {
         data : {
             requestData : friendReq,
             newFriend : friendData,
-            newFriendReceiver : currentUser
+            newFriendReceiver : currentUserNoPass  //change to currentUser without password
+          
         },
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
         url : `http://localhost:5000/users/friendRequest/decline/${currentUser._id}`
@@ -131,11 +135,8 @@ export function NotificationPage() {
         <div className='friendReq-main'>
 
         {currentUser.friendRequest.length > 0 ? (currentUser.friendRequest).reverse().map((data,index)=>{
-            const senderInfo={
-              _id : data.sender._id,
-              username : data.sender.username,
-              email : data.sender.email
-            }
+
+            let {password, ...senderInfo}= data.sender;
            const requestData ={
               sender :  senderInfo,
               status : 'pending'

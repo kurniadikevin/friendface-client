@@ -84,7 +84,7 @@ export function LoginPage() {
     axios({
       method: "POST",
       data: {
-        email: 'guest@gmail.com',
+        email: 'bazinga@gmail.com',
         password: 'password',
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
@@ -92,7 +92,7 @@ export function LoginPage() {
       url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
-        alert('Nosa User Exist')
+        alert('No User Exist')
       } else{
         localStorage.setItem("user", JSON.stringify(res.data.info));
         localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -199,7 +199,6 @@ const validateWhenSignUp=()=>{
     if(email){
     validateEmail();
     }
-    console.log('val')
   },[email])
 
   return (
