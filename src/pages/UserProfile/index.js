@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DisplayPost } from '../../components/displayPost';
 import { toggleForm,getUser } from '../../components/functions';
+import MiniModal from '../../components/miniModal/miniModal';
 
 
 
@@ -27,16 +28,15 @@ export function UserProfilePage() {
         if(userId === currentUser._id){
           history.push("/profile");
         }
-       
+        const friendHtml='<div class="friendStatus"><span class="material-symbols-outlined">done</span><div id="friendcheck">Friend</div></div>'
         const url=`http://localhost:5000/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
         //check for friend status on user visit
-        checkFriendStatusAndRequest(data[0].friends,'Friend');
+        checkFriendStatusAndRequest(data[0].friends,friendHtml);
          //check for friend request  user visit
          checkFriendStatusAndRequest(data[0].friendRequest,'Friend request sent');
-
         }
 
   const fetchPostCount= async ()=>{
@@ -93,10 +93,43 @@ export function UserProfilePage() {
     })
     if(checkIncludeFriend.length > 0){
       const requestButton = document.querySelector('#friendReq-btn');
-      requestButton.textContent=textButton;
+      requestButton.innerHTML=textButton;
       requestButton.style.backgroundColor='var(--green)';
       requestButton.style.color='var(--background00)';
     }
+  }
+
+  const toggleRemoveBox=()=>{
+    const miniModal=document.querySelector('.mini-modal');
+    miniModal.style.display==='none' ?
+    miniModal.style.display='flex' :
+    miniModal.style.display='none'
+  }
+
+  const removeFriendList=()=>{
+    axios({
+      method : "POST",
+      data : {
+        targetUserId :  userId
+      },
+      headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
+      withCredentials : true,
+      url : `http://localhost:5000/users/removeFriendList/${currentUser._id}`
+    }).then(function(response){
+      const alertBox = document.querySelector('#alert-box');
+      alertBox.textContent='Friend removed!'
+      alertBox.style.display='inline';
+
+      //change button display when friend request send
+      const requestButton = document.querySelector('#friendReq-btn');
+      requestButton.textContent='Add friend request';
+      requestButton.style.backgroundColor='var(--green)';
+      requestButton.style.color='var(--background00)';
+      toggleRemoveBox();
+    })
+    .catch(function(error){
+      console.log(error);
+    })
   }
 
     useEffect(()=>{
@@ -159,14 +192,18 @@ export function UserProfilePage() {
             <div className='profile-row3'>
               <button id='friendReq-btn' /* onClick={sendFriendRequest} */
               onClick={(e)=>{
-                if(e.target.textContent==='Friend'|| e.target.textContent==='Friend request sent'){
+                if( e.target.textContent==='Friend request sent'){
                   return;
-                } else{
-                  sendFriendRequest();
+                }
+                else{
+                  const friendOn= document.querySelector('#friendcheck');
+                  friendOn ? toggleRemoveBox() : sendFriendRequest()
                 }
               }}>
                 Add Friend Request</button>
             </div>
+            <MiniModal text={`remove ${userData.email} as a friend`}
+              yes={removeFriendList}  no={toggleRemoveBox}/>
           </div>
         </div>
 

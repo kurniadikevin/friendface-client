@@ -1,0 +1,25 @@
+.mini-modal{
+    width: 350px;
+    height: 100px;
+    display: none;
+    position: absolute;
+    top: 140px;
+    left: 48%;
+    background-color: var(--bg2OP);
+    /* display: flex */
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+.mini-modal-r2{
+    display: flex;
+    gap: 20px;
+}
+
+.mini-modal-r2>button{
+    background-color: var(--bg2);
+    border: none;
+    padding: 5px 10px;
+    color: var(--white);
+}
