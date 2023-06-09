@@ -101,7 +101,7 @@ export function NotificationPage() {
   const styleUnSeenNotification=(data,element)=>{
     const notificationContainer= document.querySelectorAll(element);
    data.forEach((element,index)=>{
-    if(element.seenAt == null ){
+    if(!element.seenAt){
       notificationContainer[index].id='unseen-notif';   
     } 
    })
@@ -161,17 +161,19 @@ export function NotificationPage() {
         }): <div  className='friendReq-cont'> You have no friend request</div>}
         </div>
         {<div className='likeAndComment-main'>
-           {(currentUser.postNotification).length > 0 ? ((currentUser.postNotification).reverse()).map((item,index)=>{
+           {(currentUser.postNotification).length > 0   ? ((currentUser.postNotification).reverse()).map((item,index)=>{
               return (
               <div className='likeAndComment-cont'>
-                <img  src={item.byUser._id ?  `http://localhost:5000/users/profilePicture/${item.byUser._id} `
+                <img  src={item.byUser ?  `http://localhost:5000/users/profilePicture/${item.byUser._id} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage'
                      id='notif-image'/>
-               <Link  to={`/userProfile/${item.byUser._id}`}>
-                  <div className='likeAndComment-username'>{item.byUser?.username ? item.byUser.username : item.byUser._id}</div>
-                </Link>
-                <div id='notif-email'>{item.byUser.email}</div>  
+                       {item.byUser ?
+                    <Link  to={`/userProfile/${ item.byUser._id }`}>
+                  <div className='likeAndComment-username'>{item.byUser?.username ? item.byUser.username : item.byUser._id }</div>
+                  </Link>
+                  : ''}
+                <div id='notif-email'>{item.byUser?.email}</div>  
                
                 <Link  to={`/postDetail/${item.postId}`}>
                   <div id='notif-action'>{item.action} your post</div>
