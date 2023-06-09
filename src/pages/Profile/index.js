@@ -6,6 +6,7 @@ import ProfileForm from '../../components/profileForm';
 import ImageForm from '../../components/imageForm';
 import { useState, useEffect } from 'react';
 import { refreshLoginSession,toggleForm,toggleBluredBg } from '../../components/functions';
+import { Link } from 'react-router-dom';
 
 
 export function ProfilePage() {
@@ -90,13 +91,15 @@ export function ProfilePage() {
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
-                Friends list
+                Friend list
                   {(currentUser.friends).map((data)=>{
                       return(
+                        <Link to={`/userProfile/${data._id}`}>
                         <div className='friendList-cont'>
                           <div>{data.username}</div>
                           <div className='tag'>{data.email}</div>
                         </div>
+                        </Link>
                       )
                   })}
                 </div>

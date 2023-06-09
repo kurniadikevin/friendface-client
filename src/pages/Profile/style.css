@@ -82,9 +82,16 @@
     display: none;
     position: absolute;
     top: 150px;
-    background-color: var(--bg2);
-    padding: 30px 50px;
+    background-color: var(--currentLine);
+    flex-direction: column;
+    width: 200px;
+    padding: 20px;
 }
+
+#friend-list-title{
+    font-size: 22px;
+}
+
 .friends-count, .post-count-cont{
     display: grid;
     grid-template-columns: 100px 1fr;
@@ -94,4 +101,14 @@
 
 .friendList-cont{
     padding-top: 20px;
+}
+
+.friendList-cont{
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.friendList-cont:hover{
+ background-color: var(--background);
 }

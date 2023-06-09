@@ -1,5 +1,5 @@
 import './style.css';
-import {  useParams ,useHistory} from 'react-router-dom';
+import {  useParams ,useHistory, Link} from 'react-router-dom';
 import Dashboard from '../../components/dashboard/dashboard';
 import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
@@ -173,10 +173,12 @@ export function UserProfilePage() {
                   {userData.friends ?
                   (userData.friends).map((data)=>{
                       return(
+                        <Link to={`/userProfile/${data._id}`} onClick={()=> toggleForm('friends-list')}>
                         <div className='friendList-cont'>
                           <div>{data.username }</div>
                           <div className='tag'>{data.email }</div>
                         </div>
+                        </Link>
                       )
                   }) : <div className='friendList-cont'>
                         <div>No friends yet</div>
