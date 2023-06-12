@@ -10,11 +10,17 @@
     flex-direction: column;
     padding: 30px;
     gap: 10px;
-    border: 2px solid black;
+}
+
+.profile-username-form{
+    border-radius: 0px;
+    background: #282a36;
+    box-shadow:  5px 5px 0px #1a1b23,
+                 -5px -5px 0px #363949;
 }
 
 .profile-username-form>label{
-    color: var(--white);
+    color: var(--green);
     font-weight: 600;
 }
 

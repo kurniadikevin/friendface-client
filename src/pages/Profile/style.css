@@ -13,22 +13,33 @@
         -7px -7px 14px #171626;
     }
 
+
     .profile-detail{
         padding-top: 30px;
         display: grid;
         grid-template-rows: 2fr 2fr 2fr;
+        font-size: 12pt;
     }
 
+    
     #post-count, #friend-count{
-        color: var(--white)
+        color: var(--white);
+        font-size: 12pt;
     }
     
-    .profile-row1, .profile-row2{
-       
+    .profile-row1{
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
+
+    .profile-row2{
+        display: flex;
+        align-items: center;
+        
+    }
+
+    
     .profile-username{
         display: grid;
         grid-template-columns: 100px 150px 50px;
@@ -45,7 +56,6 @@
         }
 
         .profile-pic-cont{
-            
             display: flex;
             justify-content: flex-start;
             align-items:center;
@@ -100,7 +110,7 @@
 
 #friend-list-head{
 font-size: 15pt;
-
+color: var(--green);
 }
 .friendList-col1{
 
@@ -132,4 +142,10 @@ font-size: 15pt;
 
 .friendList-cont:hover{
  background-color: var(--currentLine);
+}
+
+#post-count, #friend-count{
+  
+    position: relative;
+    right: 30px;
 }

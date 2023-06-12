@@ -5,7 +5,7 @@ import Sidebar from '../../components/sidebar/sidebar';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DisplayPost } from '../../components/displayPost';
-import { toggleForm,getUser } from '../../components/functions';
+import { toggleForm,getUser,toggleBluredBg } from '../../components/functions';
 import MiniModal from '../../components/miniModal/miniModal';
 
 
@@ -163,13 +163,18 @@ export function UserProfilePage() {
             <div className='profile-row2'>
               <div className='friends-count'>
                 <div className='tag'>Friends :</div>
-                <div id='friend-count' onClick={()=>
-                   toggleForm('friends-list')}>
+                <div id='friend-count' onClick={()=> {toggleForm('friends-list'); toggleBluredBg(); }}>
                   {userData._id !== 'not set'? 
                   userData.friends?.length : '0'} </div>
               </div>
               <div id='friends-list'>
-                Friend list
+              <div className='friend-list-header'>
+                  <div id='friend-list-head'>Friend list</div>
+                  <span id='close-box' class="material-symbols-outlined" 
+                  onClick={()=> {toggleForm('friends-list'); toggleBluredBg(); }}>
+                    close
+                  </span>
+                </div>
                   {userData.friends ?
                   (userData.friends).map((data)=>{
                       return(

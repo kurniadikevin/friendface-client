@@ -85,14 +85,18 @@ export function ProfilePage() {
             </div>
             <div className='profile-row2'>
               <div>
-                <div className='friends-count' onClick={()=> toggleForm('friends-list')}>
+                <div className='friends-count' onClick={()=> {toggleForm('friends-list'); toggleBluredBg(); }}>
                   <div className='tag'>Friends : </div>
                   <div id='friend-count'> {currentUser._id !== 'not set'? 
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
-                <div id='friend-list-head'>
-                  Friend list
+                <div className='friend-list-header'>
+                  <div id='friend-list-head'>Friend list</div>
+                  <span id='close-box' class="material-symbols-outlined" 
+                  onClick={()=> {toggleForm('friends-list'); toggleBluredBg(); }}>
+                    close
+                  </span>
                 </div>
                   {(currentUser.friends).map((data)=>{
                       return(
@@ -113,7 +117,7 @@ export function ProfilePage() {
                 </div>
               </div>
               <div className='post-count-cont'>
-                <div>Posts : </div>
+                <div>Posts :</div>
                 <div id='post-count'>{postCount} </div>
               </div>
             </div>
