@@ -91,13 +91,21 @@ export function ProfilePage() {
                   currentUser.friends.length : '0'} </div>
                 </div>
                 <div id='friends-list'>
-                Friend list
+                <div id='friend-list-head'>
+                  Friend list
+                </div>
                   {(currentUser.friends).map((data)=>{
                       return(
                         <Link to={`/userProfile/${data._id}`}>
                         <div className='friendList-cont'>
+                          <div className='friendList-col1'>
+                          <img id='friendList-pic' src={`http://localhost:5000/users/profilePicture/${data._id}`}
+                          width={50} height={50}/>
+                          </div>
+                          <div className='friendList-col2'>
                           <div>{data.username}</div>
                           <div className='tag'>{data.email}</div>
+                          </div>
                         </div>
                         </Link>
                       )

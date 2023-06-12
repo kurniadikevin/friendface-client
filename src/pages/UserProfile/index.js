@@ -173,10 +173,16 @@ export function UserProfilePage() {
                   {userData.friends ?
                   (userData.friends).map((data)=>{
                       return(
-                        <Link to={`/userProfile/${data._id}`} onClick={()=> toggleForm('friends-list')}>
+                        <Link to={`/userProfile/${data._id}`}>
                         <div className='friendList-cont'>
-                          <div>{data.username }</div>
-                          <div className='tag'>{data.email }</div>
+                          <div className='friendList-col1'>
+                          <img id='friendList-pic' src={`http://localhost:5000/users/profilePicture/${data._id}`}
+                          width={50} height={50}/>
+                          </div>
+                          <div className='friendList-col2'>
+                          <div>{data.username}</div>
+                          <div className='tag'>{data.email}</div>
+                          </div>
                         </div>
                         </Link>
                       )

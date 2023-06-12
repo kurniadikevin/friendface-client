@@ -5,11 +5,19 @@
     position: absolute;
     top: 140px;
     left: 48%;
-    background-color: var(--bg2OP);
-    /* display: flex */
+/*     background-color: var(--bg2OP);
+ */    /* display: flex */
     flex-direction: column;
     padding: 20px;
     gap: 20px;
+}
+
+/* shadow */
+.mini-modal{
+    border-radius: 0px;
+    background: #282a36;
+    box-shadow:  5px 5px 0px #1a1b23,
+                 -5px -5px 0px #363949;
 }
 
 .mini-modal-r2{

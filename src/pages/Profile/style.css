@@ -82,10 +82,31 @@
     display: none;
     position: absolute;
     top: 150px;
-    background-color: var(--currentLine);
+    background-color: var(--background);
     flex-direction: column;
-    width: 200px;
+    width: 300px;
     padding: 20px;
+    overflow-y: scroll;
+    height: 400px;
+}
+
+/* shadow */
+#friends-list{
+    border-radius: 0px;
+    background: #282a36;
+    box-shadow:  5px 5px 0px #1a1b23,
+                 -5px -5px 0px #363949;
+}
+
+#friend-list-head{
+font-size: 15pt;
+
+}
+.friendList-col1{
+
+}
+.friendList-col2{
+
 }
 
 #friend-list-title{
@@ -99,16 +120,16 @@
     color: var(--purple);
 }
 
-.friendList-cont{
-    padding-top: 20px;
-}
+
 
 .friendList-cont{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 20px;
     cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
 }
 
 .friendList-cont:hover{
- background-color: var(--background);
+ background-color: var(--currentLine);
 }
