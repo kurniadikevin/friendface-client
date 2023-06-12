@@ -33,7 +33,7 @@ export function DisplayPost(props){
     // confirm data null 
     if(data.length === 0){
       if(page === 1){
-        setPostData([]);
+        handleNoPost()
         alertForEmptyCallPost(toggleLoader);
       }
       setNullData(true);
@@ -218,6 +218,17 @@ export function DisplayPost(props){
         });
     }
 
+    const handleNoPost=()=>{
+      setPostData([{
+        text: 'No Post Available',
+        date: Date.now()
+      }]);
+      const actionCont= document.querySelector('.action-cont');
+      const imageProfile=document.querySelector('#profileImg');
+      actionCont.style.display='none';
+      imageProfile.style.display='none';
+    }
+
 
   // fetch for post page change
   useEffect(()=>{ 
@@ -230,6 +241,7 @@ export function DisplayPost(props){
       setPostPage(1);
       fetchPostDataPage(postPage,`byUser/${userId}/`,true);
       }
+   
     },[userId])
     
 
