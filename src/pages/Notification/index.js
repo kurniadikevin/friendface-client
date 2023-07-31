@@ -21,7 +21,7 @@ export function NotificationPage() {
             newFriendReceiver : currentUser
         },
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-        url : `https://friendface-api-production.up.railway.app/users/friendRequest/accept/${currentUser._id}`
+        url : `https://encouraging-pig-cuff-links.cyclic.cloud/users/friendRequest/accept/${currentUser._id}`
     }).then(function (response) {
       const alertBox = document.querySelector('#alert-box');
       alertBox.style.display='inline';
@@ -50,7 +50,7 @@ export function NotificationPage() {
             newFriendReceiver : currentUser
         },
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-        url : `https://friendface-api-production.up.railway.app/users/friendRequest/decline/${currentUser._id}`
+        url : `https://encouraging-pig-cuff-links.cyclic.cloud/users/friendRequest/decline/${currentUser._id}`
     }).then(function (response) {
       
       })
@@ -83,7 +83,7 @@ export function NotificationPage() {
   const seenNotificationForPostAndFriendRequest=(user,urlExt)=>{
     axios({
       method : "POST",
-      url : `https://friendface-api-production.up.railway.app/users/${urlExt}/${user._id}`,
+      url : `https://encouraging-pig-cuff-links.cyclic.cloud/users/${urlExt}/${user._id}`,
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
   }).then(function (response) {
     console.log(urlExt)
@@ -142,7 +142,7 @@ export function NotificationPage() {
           }
             return (
               <div className='friendReq-cont'>
-                    <img  src={data.sender._id ?  `https://friendface-api-production.up.railway.app/users/profilePicture/${data.sender._id} `
+                    <img  src={data.sender._id ?  `https://encouraging-pig-cuff-links.cyclic.cloud/users/profilePicture/${data.sender._id} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' 
                      id='notif-image'/>
@@ -163,7 +163,7 @@ export function NotificationPage() {
            {(currentUser.postNotification).length > 0 ? ((currentUser.postNotification).reverse()).map((item,index)=>{
               return (
               <div className='likeAndComment-cont'>
-                <img  src={item.byUser._id ?  `https://friendface-api-production.up.railway.app/users/profilePicture/${item.byUser._id} `
+                <img  src={item.byUser._id ?  `https://encouraging-pig-cuff-links.cyclic.cloud/users/profilePicture/${item.byUser._id} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage'
                      id='notif-image'/>

@@ -127,7 +127,7 @@ function Dashboard(props){
                 <div className='profPic-cont'>
                     <img id='profileImgDash'
                      src= {userData.profilePicture ?
-                      `https://friendface-api-production.up.railway.app/${userData.profilePicture}` :
+                      `https://encouraging-pig-cuff-links.cyclic.cloud/${userData.profilePicture}` :
                       (require('../../assets/profilepicturesSmall.png'))
                      } 
                       alt='profilePicture'

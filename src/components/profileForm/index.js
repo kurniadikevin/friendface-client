@@ -31,7 +31,7 @@ const ProfileForm = (props)=>{
            },
            headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
            withCredentials: true,
-           url: `https://friendface-api-production.up.railway.app/users/update/${currentUser._id}`,
+           url: `https://encouraging-pig-cuff-links.cyclic.cloud/users/update/${currentUser._id}`,
          }).then(function (response) {
              console.log(response);
             const form = document.querySelector('#profileForm');

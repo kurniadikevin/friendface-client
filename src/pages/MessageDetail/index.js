@@ -34,7 +34,7 @@ export function MessageDetailPage() {
 
  const fetchChatData= async (chatRoomId)=>{
   try{
-    const url=`https://friendface-api-production.up.railway.app/chatRoom/byId/${chatRoomId}`
+    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/chatRoom/byId/${chatRoomId}`
     const response = await fetchWithTimeout(url, {
       timeout: 6000
     });
@@ -81,7 +81,7 @@ export function MessageDetailPage() {
         },
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
         withCredentials: true,
-        url: `https://friendface-api-production.up.railway.app/message/new/${chatRoomId}`,
+        url: `https://encouraging-pig-cuff-links.cyclic.cloud/message/new/${chatRoomId}`,
       }).then(function (response) {
           //console.log(response);
           setInputText('');
@@ -102,7 +102,7 @@ export function MessageDetailPage() {
     },
     headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     withCredentials: true,
-    url: `https://friendface-api-production.up.railway.app/chatRoom/seen/${chatRoomId}`,
+    url: `https://encouraging-pig-cuff-links.cyclic.cloud/chatRoom/seen/${chatRoomId}`,
   }).then((response)=>{
     console.log(response);
   })
@@ -159,7 +159,7 @@ export function MessageDetailPage() {
             {chatRoomData.membersId ? 
             <img id='chat-user-img' alt='user-profile-picture'
             src={showOnlyForeignUserInfo(chatRoomData,'profilePicture') 
-            ?  `https://friendface-api-production.up.railway.app/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
+            ?  `https://encouraging-pig-cuff-links.cyclic.cloud/${showOnlyForeignUserInfo(chatRoomData,'profilePicture')} `
             : (require('../../assets/profilepicturesSmall.png'))} width={50} height={50}
             /> : ''
             }

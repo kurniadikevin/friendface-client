@@ -26,7 +26,7 @@ const ImageForm = (props)=>{
 
     return (
         <div className="profile-image-form">
-            <form method='POST' action='https://friendface-api-production.up.railway.app/images/' enctype="multipart/form-data">
+            <form method='POST' action='https://encouraging-pig-cuff-links.cyclic.cloud/images/' enctype="multipart/form-data">
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         

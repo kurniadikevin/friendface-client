@@ -22,7 +22,7 @@ export function MessagePage() {
 
   const checkUserChatAvailability= async(userId)=>{
 
-    const url=`https://friendface-api-production.up.railway.app/userChat/byUserId/${userId}`
+    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/userChat/byUserId/${userId}`
     const response = await fetch(url);
     var data = await response.json();
     if(data.length===0){
@@ -38,7 +38,7 @@ export function MessagePage() {
     axios({
       method: "POST",
       withCredentials: true,
-      url: `https://friendface-api-production.up.railway.app/userChat/${action}/${userId}`,
+      url: `https://encouraging-pig-cuff-links.cyclic.cloud/userChat/${action}/${userId}`,
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     }).then(function (response) {
         console.log(response);
@@ -49,7 +49,7 @@ export function MessagePage() {
   }
 
   const userDataToQuery = async ()=>{
-    const url=`https://friendface-api-production.up.railway.app/users/search`;
+    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/users/search`;
     const response = await fetch(url);
     var data = await response.json();
     setUserData(data);
@@ -79,7 +79,7 @@ export function MessagePage() {
       },
       withCredentials: true,
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-      url: `https://friendface-api-production.up.railway.app/chatRoom/createPrivate/${item._id}`,
+      url: `https://encouraging-pig-cuff-links.cyclic.cloud/chatRoom/createPrivate/${item._id}`,
     }).then(function (response) {
         
         alertBox.textContent=`New chat room with ${item.username ? item.username : item.email} created !`
@@ -130,7 +130,7 @@ export function MessagePage() {
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
-      url: `https://friendface-api-production.up.railway.app/chatRoom/createGroup`,
+      url: `https://encouraging-pig-cuff-links.cyclic.cloud/chatRoom/createGroup`,
     }).then(function (response) {
         alertBox.textContent=`${newGroupName} group created!`
         alertBox.style.display='inline';
@@ -190,7 +190,7 @@ export function MessagePage() {
                       <div id='query-message' >
                         <img id='new-chat-img'
                           src={item.profilePicture
-                          ?  `https://friendface-api-production.up.railway.app/${item.profilePicture} `
+                          ?  `https://encouraging-pig-cuff-links.cyclic.cloud/${item.profilePicture} `
                           : (require('../../assets/profilepicturesSmall.png'))} width={55} height={55}
                           />
                         <div className='new-chat-user-info'>

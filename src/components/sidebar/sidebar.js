@@ -30,7 +30,7 @@ function Sidebar(){
                     return(
                         <div className='display-user'>
                          <div className='display-user-col1'>
-                         <img  id='profileImg' src={data?.profilePicture ?  `https://friendface-api-production.up.railway.app/${data.profilePicture} `
+                         <img  id='profileImg' src={data?.profilePicture ?  `https://encouraging-pig-cuff-links.cyclic.cloud/${data.profilePicture} `
                             : (require('../../assets/profilepicturesSmall.png'))}
                             alt='displayUser-profileImage' width={30} height={30}/> 
                          </div>

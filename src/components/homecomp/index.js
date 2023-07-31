@@ -29,7 +29,7 @@ function HomeComp(props){
           },
           headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
           withCredentials: true,
-          url: "https://friendface-api-production.up.railway.app/posts/newpost",
+          url: "https://encouraging-pig-cuff-links.cyclic.cloud/posts/newpost",
         }).then(function (response) {
             console.log(response);
           })
@@ -40,7 +40,7 @@ function HomeComp(props){
     }
 
     const userDataToQuery = async ()=>{
-        const url=`https://friendface-api-production.up.railway.app/users/search`;
+        const url=`https://encouraging-pig-cuff-links.cyclic.cloud/users/search`;
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
@@ -84,7 +84,7 @@ function HomeComp(props){
         formData.append("image", imageFile[0]);
         formData.append('authorId',currentUser._id);
         formData.append('text',postText);
-        axios.post('https://friendface-api-production.up.railway.app/postImages', formData, {
+        axios.post('https://encouraging-pig-cuff-links.cyclic.cloud/postImages', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               Authorization : `Bearer ${localStorage.getItem("token")}`

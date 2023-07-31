@@ -19,7 +19,7 @@ export function ProfilePage() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
-        profilePicture= `https://friendface-api-production.up.railway.app/${foundUser.profilePicture}`
+        profilePicture= `https://encouraging-pig-cuff-links.cyclic.cloud/${foundUser.profilePicture}`
       }
       return foundUser;
     }
@@ -34,7 +34,7 @@ export function ProfilePage() {
   
 
   const fetchPostCount= async ()=>{
-    const url=`https://friendface-api-production.up.railway.app/posts/${currentUser._id}/count`;
+    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/posts/${currentUser._id}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);
