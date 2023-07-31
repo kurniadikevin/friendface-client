@@ -15,10 +15,15 @@ const ImageForm = (props)=>{
       }
 
       const imageSubmitAlert= ()=>{
-        const alertBox = document.querySelector('#alert-box');
+       /*  const alertBox = document.querySelector('#alert-box');
         alertBox.textContent='Profile Image Changed!'
         alertBox.style.display='inline';
-        removeAlert();
+        removeAlert(); */
+
+        // temporary image upload maintenance
+        alert('Image feature currently unavailable')
+        toggleForm('imageForm');
+        toggleBluredBg();        
       }
   
 
@@ -26,14 +31,15 @@ const ImageForm = (props)=>{
 
     return (
         <div className="profile-image-form">
-            <form method='POST' action='https://encouraging-pig-cuff-links.cyclic.cloud/images/' enctype="multipart/form-data">
+          {/* changed form to div for maintenance */}
+            <div method='POST' action='https://encouraging-pig-cuff-links.cyclic.cloud/images/' enctype="multipart/form-data">
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         
             <input type='file' name='image'  ></input>
             <button type='submit' id='fileInput'onClick={imageSubmitAlert}>
               Confirm change</button>
-            </form>
+            </div>
             <span id='close-box' class="material-symbols-outlined"
              onClick={()=>{toggleForm('imageForm'); toggleBluredBg()}}>
               close

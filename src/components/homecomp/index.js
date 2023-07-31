@@ -100,8 +100,10 @@ function HomeComp(props){
             alertBox.style.display='inline';
             removeAlert();
     }).catch(function(error){
+        // temporary image upload maintenance
+        const errorForImageMaintenance='Image feature currently unavailable';
         console.log(error);
-        alertBox.textContent='There is a problem on endpoint!';
+        alertBox.textContent=errorForImageMaintenance;
         alertBox.style.display='inline';
         removeAlert();
     })  
@@ -173,7 +175,7 @@ function HomeComp(props){
                             } else if( imageFile.length > 0){
                                 createPostImage();
                                 togglePostForm();
-                               window.location.reload(false);
+                                toggleBluredBg();// temporary image upload maintenance
                             }
                             else{
                                 alertNullPostText();
@@ -208,7 +210,7 @@ function HomeComp(props){
                             } else if( imageFile.length > 0){
                                 createPostImage();
                                 togglePostForm();
-                             window.location.reload(false);
+                                toggleBluredBg();// temporary image upload maintenance
                             }
                             else{
                                 alertNullPostText();
