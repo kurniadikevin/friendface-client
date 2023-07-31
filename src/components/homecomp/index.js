@@ -17,10 +17,7 @@ function HomeComp(props){
 
     const createPostText = async()=> {  
         if(postText){
-        const alertBox = document.querySelector('#alert-box');
-        alertBox.textContent='Post created!';
-        alertBox.style.display='inline';
-        removeAlert();
+        const alertBox = document.querySelector('#alert-box');       
         axios({
           method: "POST",
           data: {
@@ -32,9 +29,15 @@ function HomeComp(props){
           url: "https://encouraging-pig-cuff-links.cyclic.cloud/posts/newpost",
         }).then(function (response) {
             console.log(response);
+            alertBox.textContent='Post created!';
+            alertBox.style.display='inline';
+            removeAlert();
           })
           .catch(function (error) {
             console.log(error);
+            alertBox.textContent='There is a problem on endpoint!';
+            alertBox.style.display='inline';
+            removeAlert();
           });  
         }  
     }
@@ -79,7 +82,8 @@ function HomeComp(props){
         setImageFile(event.target.files);
       }
 
-    const createPostImage= async()=> {  
+    const createPostImage= async()=> { 
+        const alertBox = document.querySelector('#alert-box');        
         const formData = new FormData();
         formData.append("image", imageFile[0]);
         formData.append('authorId',currentUser._id);
@@ -87,13 +91,20 @@ function HomeComp(props){
         axios.post('https://encouraging-pig-cuff-links.cyclic.cloud/postImages', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
-              Authorization : `Bearer ${localStorage.getItem("token")}`
+              'Authorization' : `Bearer ${localStorage.getItem("token")}`
             }
         })
-        const alertBox = document.querySelector('#alert-box');
-        alertBox.textContent='Image uploading!';
+        .then(function (response) {
+            console.log(response);
+            alertBox.textContent='Image uploaded!';
+            alertBox.style.display='inline';
+            removeAlert();
+    }).catch(function(error){
+        console.log(error);
+        alertBox.textContent='There is a problem on endpoint!';
         alertBox.style.display='inline';
         removeAlert();
+    })  
     }
     
     useEffect(()=>{
@@ -158,11 +169,11 @@ function HomeComp(props){
                             if (postText.length>0 && imageFile.length === 0){
                                 createPostText();
                                 togglePostForm();
-                                window.location.reload(false);
+                              window.location.reload(false);
                             } else if( imageFile.length > 0){
                                 createPostImage();
                                 togglePostForm();
-                                window.location.reload(false);
+                               window.location.reload(false);
                             }
                             else{
                                 alertNullPostText();
@@ -197,7 +208,7 @@ function HomeComp(props){
                             } else if( imageFile.length > 0){
                                 createPostImage();
                                 togglePostForm();
-                                window.location.reload(false);
+                             window.location.reload(false);
                             }
                             else{
                                 alertNullPostText();

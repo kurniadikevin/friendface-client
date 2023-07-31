@@ -95,7 +95,7 @@ export function LoginPage() {
         alert('Nosa User Exist')
       } else{
         localStorage.setItem("user", JSON.stringify(res.data.info));
-        localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("token", (res.data.token));
         localStorage.setItem("lastPassword",storeCipherPass('password'));
         getAndAssignMessageNotifCount(res.data._id);
         history.push("/")
