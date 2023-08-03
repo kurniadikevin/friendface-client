@@ -59,7 +59,7 @@ export function LoginPage() {
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
-      url: "https://encouraging-pig-cuff-links.cyclic.cloud/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         const alertBox = document.querySelector('#alert-box');
@@ -89,7 +89,7 @@ export function LoginPage() {
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
-      url: "https://encouraging-pig-cuff-links.cyclic.cloud/users/login",
+      url: "http://localhost:5000/users/login",
     }).then((res) => {
       if(res.data === 'No User Exists'){
         alert('Nosa User Exist')
@@ -115,7 +115,7 @@ const signUpUser = async()=>{
     },
     headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
     withCredentials: true,
-    url: "https://encouraging-pig-cuff-links.cyclic.cloud/users/signup",
+    url: "http://localhost:5000/users/signup",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       alertBox.textContent='Sign up unsuccessful';
@@ -145,7 +145,7 @@ const signUpUser = async()=>{
 
   //fetch all post 
   const fetchRecentUser = async ()=>{
-    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/users/popular`;
+    const url=`http://localhost:5000/users/popular`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userPopular', JSON.stringify(data));
@@ -223,7 +223,7 @@ const validateWhenSignUp=()=>{
 
           {/*   sign up form */}
             <div className='form-sign' id='signup-wrap' 
-            /*  method='POST'  action='https://encouraging-pig-cuff-links.cyclic.cloud/users/signup' */>
+            /*  method='POST'  action='http://localhost:5000/users/signup' */>
               <div className='email-cont'>
                 <label for='email'>Email</label>
                 <input type='text' name='email' placeholder='email'

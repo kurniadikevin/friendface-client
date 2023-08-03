@@ -31,7 +31,7 @@ const CommentForm= (props)=>{
           },
           headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
           withCredentials: true,
-          url: `https://encouraging-pig-cuff-links.cyclic.cloud/comments/createComment/${post._id}`,
+          url: `http://localhost:5000/comments/createComment/${post._id}`,
         }).then(function (response) {
             const lastComment= (JSON.parse(response.config.data));
             const alertBox = document.querySelector('#alert-box');

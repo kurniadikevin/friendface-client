@@ -26,7 +26,7 @@ function HomeComp(props){
           },
           headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
           withCredentials: true,
-          url: "https://encouraging-pig-cuff-links.cyclic.cloud/posts/newpost",
+          url: "http://localhost:5000/posts/newpost",
         }).then(function (response) {
             console.log(response);
             alertBox.textContent='Post created!';
@@ -43,7 +43,7 @@ function HomeComp(props){
     }
 
     const userDataToQuery = async ()=>{
-        const url=`https://encouraging-pig-cuff-links.cyclic.cloud/users/search`;
+        const url=`http://localhost:5000/users/search`;
         const response = await fetch(url);
         var data = await response.json();
         setQueryData(data);
@@ -88,7 +88,7 @@ function HomeComp(props){
         formData.append("image", imageFile[0]);
         formData.append('authorId',currentUser._id);
         formData.append('text',postText);
-        axios.post('https://encouraging-pig-cuff-links.cyclic.cloud/postImages', formData, {
+        axios.post('http://localhost:5000/posts/upload-test', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               'Authorization' : `Bearer ${localStorage.getItem("token")}`

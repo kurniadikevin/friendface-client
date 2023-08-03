@@ -17,7 +17,7 @@ const MessageDashboard=(props)=>{
 
   const fetchUserChatRoomList= async (userId)=>{
     try{
-      const url=`https://encouraging-pig-cuff-links.cyclic.cloud/userChat/byUserId/${userId}`;
+      const url=`http://localhost:5000/userChat/byUserId/${userId}`;
       const response = await fetch(url);
       var data = await response.json();
       const listChat = sortChatRooms( data[0].chatRoomList);
@@ -53,7 +53,7 @@ const MessageDashboard=(props)=>{
           if(typeof i === 'object'){
               const resultArr=[];
               i.forEach(async(j)=>{
-              const data= (await fetch(`https://encouraging-pig-cuff-links.cyclic.cloud/users/simplified/${j}`, {
+              const data= (await fetch(`http://localhost:5000/users/simplified/${j}`, {
               method: "GET",
               })).json();
               data.then((value)=>{
@@ -62,7 +62,7 @@ const MessageDashboard=(props)=>{
             })
           return resultArr;
           } else{
-            const result= (await fetch(`https://encouraging-pig-cuff-links.cyclic.cloud/users/simplified/${i}`, {
+            const result= (await fetch(`http://localhost:5000/users/simplified/${i}`, {
             method: "GET",
           })).json()
           return result;
@@ -87,7 +87,7 @@ const MessageDashboard=(props)=>{
     method: "POST",
     withCredentials: true,
     headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
-    url: `https://encouraging-pig-cuff-links.cyclic.cloud/userChat/update/${userId}`,
+    url: `http://localhost:5000/userChat/update/${userId}`,
   }).then(function (response) {
     //console.log(response);
     })
@@ -173,7 +173,7 @@ const MessageDashboard=(props)=>{
                 : 
                 <div className='member-info-cont'>
                   <img id='chat-dashboard-user-img'
-                    src={`https://encouraging-pig-cuff-links.cyclic.cloud/users/profilePicture/${item._id}`} width={50} height={50}
+                    src={`http://localhost:5000/users/profilePicture/${item._id}`} width={50} height={50}
                     />
                   <div className='chatroom-info-wrap'>
                     <div className='chatRoom-cont-username'>

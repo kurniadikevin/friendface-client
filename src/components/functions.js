@@ -81,7 +81,7 @@ export const refreshLoginSession=(user)=>{
       password: passDecipher,
     },
     withCredentials: true,
-    url: "https://encouraging-pig-cuff-links.cyclic.cloud/users/login",
+    url: "http://localhost:5000/users/login",
   }).then((res) => {
     if(res.data === 'No User Exists'){
       console.log('No User Exist');
@@ -180,7 +180,7 @@ export const handleKeyEnter=(event,action)=>{
  //get and assign messageNotification count to localStorage
  export const getAndAssignMessageNotifCount= async(userId)=>{
   try{
-    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/userChat/byUserId/${userId}`;
+    const url=`http://localhost:5000/userChat/byUserId/${userId}`;
     const response = await fetch(url);
     var data = await response.json();
     localStorage.setItem('userMessageNotification', JSON.stringify((data[0].messageNotification).length));

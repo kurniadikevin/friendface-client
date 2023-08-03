@@ -28,7 +28,7 @@ export function UserProfilePage() {
           history.push("/profile");
         }
        
-        const url=`https://encouraging-pig-cuff-links.cyclic.cloud/users/${userId}`;
+        const url=`http://localhost:5000/users/${userId}`;
         const response = await fetch(url);
         var data = await response.json();
         setUserData(data[0]);
@@ -40,7 +40,7 @@ export function UserProfilePage() {
         }
 
   const fetchPostCount= async ()=>{
-    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/posts/${userId}/count`;
+    const url=`http://localhost:5000/posts/${userId}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);
@@ -63,7 +63,7 @@ export function UserProfilePage() {
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials : true,
-      url : `https://encouraging-pig-cuff-links.cyclic.cloud/users/friendRequest/${userId}`
+      url : `http://localhost:5000/users/friendRequest/${userId}`
     }).then(function(response){
       const alertBox = document.querySelector('#alert-box');
       alertBox.textContent='Friend request sent!'
@@ -111,7 +111,7 @@ export function UserProfilePage() {
       <div className='main' id='profile-main'>
         <div className='profile-head'>
           <div className='profile-pic-cont'>
-            <img id='profileImgProfile' src= {userData?.profilePicture ? `https://encouraging-pig-cuff-links.cyclic.cloud/${userData.profilePicture} `
+            <img id='profileImgProfile' src= {userData?.profilePicture ? `http://localhost:5000/${userData.profilePicture} `
                      : (require('../../assets/profilepicturesSmall.png'))} alt='userPicture'
                       width={100} height={100}/>
           </div>

@@ -32,7 +32,7 @@ const ImageForm = (props)=>{
     return (
         <div className="profile-image-form">
           {/* changed form to div for maintenance */}
-            <div method='POST' action='https://encouraging-pig-cuff-links.cyclic.cloud/images/' enctype="multipart/form-data">
+            <div method='POST' action='http://localhost:5000/images/' enctype="multipart/form-data">
             <input type = "hidden" name = "byUser" value = {currentUser.email} />
             <input type = "hidden" name = "_id" value = {currentUser._id} />
             <label>Update Profile Image</label>         

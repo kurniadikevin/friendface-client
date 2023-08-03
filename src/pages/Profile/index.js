@@ -19,7 +19,7 @@ export function ProfilePage() {
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       if(foundUser.profilePicture){
-        profilePicture= `https://encouraging-pig-cuff-links.cyclic.cloud/${foundUser.profilePicture}`
+        profilePicture= `http://localhost:5000/${foundUser.profilePicture}`
       }
       return foundUser;
     }
@@ -34,7 +34,7 @@ export function ProfilePage() {
   
 
   const fetchPostCount= async ()=>{
-    const url=`https://encouraging-pig-cuff-links.cyclic.cloud/posts/${currentUser._id}/count`;
+    const url=`http://localhost:5000/posts/${currentUser._id}/count`;
     const response = await fetch(url);
     var data = await response.json();
     setPostCount(data.postCount);

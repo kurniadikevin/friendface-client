@@ -20,7 +20,7 @@ export function DisplayPost(props){
     //fetch post data pages
   const fetchPostDataPage = async (page,urlExtension,newProfile)=>{
     try {
-      const url=`https://encouraging-pig-cuff-links.cyclic.cloud/posts/${urlExtension}page/${page}`;
+      const url=`http://localhost:5000/posts/${urlExtension}page/${page}`;
     const response = await fetch(url);
     var data = await response.json();
     } catch (error) {
@@ -116,7 +116,7 @@ export function DisplayPost(props){
       },
       headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       withCredentials: true,
-      url: `https://encouraging-pig-cuff-links.cyclic.cloud/posts/likes/${post._id}`,
+      url: `http://localhost:5000/posts/likes/${post._id}`,
     }).then(function (response) {  
         alertBox.textContent='Post liked!'
         alertBox.style.display='inline';
@@ -200,7 +200,7 @@ export function DisplayPost(props){
       axios({
         method: "POST",
         withCredentials: true,
-        url: `https://encouraging-pig-cuff-links.cyclic.cloud/posts/delete/${postId}`,
+        url: `http://localhost:5000/posts/delete/${postId}`,
         headers : {  Authorization : `Bearer ${localStorage.getItem("token")}`},
       }).then(function (response) {  
           alertBox.textContent='Post deleted!'
@@ -242,7 +242,7 @@ export function DisplayPost(props){
           return(
             <div className='post-container'>
               <div className='post-sidebar'>  
-                <img  id='profileImg' src={item.author?.profilePicture ?  `https://encouraging-pig-cuff-links.cyclic.cloud/${item.author.profilePicture} `
+                <img  id='profileImg' src={item.author?.profilePicture ?  `http://localhost:5000/${item.author.profilePicture} `
                     : (require('../../assets/profilepicturesSmall.png'))}
                     alt='profileImage' width={50} height={50}/> 
               </div>
@@ -250,7 +250,7 @@ export function DisplayPost(props){
                { item.imageContent ?  
                 <Link to={`/postDetail/${item._id}`} >
                  <div className='post-image'>
-                  <img id='post-image' src={ `https://encouraging-pig-cuff-links.cyclic.cloud/${item.imageContent} `}
+                  <img id='post-image' src={ `http://localhost:5000/${item.imageContent} `}
                     height={200} >
                   </img>
                 </div>
